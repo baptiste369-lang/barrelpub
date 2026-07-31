@@ -54,8 +54,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 }
 .skip:focus{left:12px;top:12px}
 
-/* Focus visible */
-:focus-visible{outline:2px solid var(--bleu-clair);outline-offset:3px}
+/* Focus visible — doré épais (§6.2) */
+:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+
+/* text-wrap 2026 (§4) — plus de veuves sur les gros titres */
+h1,h2,h3,.wall,.ov-title,.neon,.foot-count,.infos-data .big{text-wrap:balance}
+p,.lede,.priv-card p,.infos-side p{text-wrap:pretty}
 
 /* ---------- BRAND SPRITE ---------- */
 .brand{display:inline-block;color:var(--or);transition:color .4s var(--ease)}
@@ -66,9 +70,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
    ===================================================================== */
 .grain{
   position:fixed;inset:0;z-index:210;pointer-events:none;
-  mix-blend-mode:overlay;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;opacity:.045;
+  background-image:url("../assets/grain.webp");
+  background-size:128px 128px;background-repeat:repeat;
+  animation:grainShift .8s steps(8) infinite;
 }
+@keyframes grainShift{to{background-position:128px 128px}}
 
 /* =====================================================================
    CURSEUR CUSTOM
@@ -85,6 +92,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
              border-color .3s var(--ease), background .3s var(--ease);
 }
 .cursor-ring.is-hover{width:64px;height:64px;border-color:var(--bleu-clair);mix-blend-mode:normal;background:rgba(0,163,255,.06)}
+.cursor-ring.is-magnet{width:64px;height:64px;border-color:var(--or);background:rgba(201,162,75,.08);mix-blend-mode:normal}
+.cursor-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--or);white-space:nowrap;opacity:0;transition:opacity .25s var(--ease)}
+.cursor-ring.is-magnet .cursor-label{opacity:1}
 body.has-cursor{cursor:none}
 body.has-cursor a, body.has-cursor button{cursor:none}
 @media (max-width:1023px), (pointer:coarse){
@@ -366,7 +376,7 @@ main{position:relative;z-index:2;background:var(--noir)}
 @media (min-width:680px){.stats{grid-template-columns:repeat(3,1fr)}}
 .stat{background:var(--noir);padding:clamp(28px,4vw,48px) clamp(20px,3vw,34px)}
 .stat b{display:block;font-family:var(--display);font-weight:400;line-height:.9;letter-spacing:-.02em;
-  font-size:clamp(46px,7vw,96px);color:var(--blanc)}
+  font-size:clamp(46px,7vw,96px);color:var(--blanc);font-variant-numeric:tabular-nums}
 .stat span{display:block;margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gris)}
 
 /* ---------- Feed Instagram (mouvement 11) ---------- */
@@ -523,17 +533,62 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 [data-reveal-stagger].is-in>*:nth-child(8){transition-delay:.42s}
 
 /* =====================================================================
+   V2.1 — effets d'ambiance (flicker, glitch, split, skew)
+   ===================================================================== */
+/* Split-text : mêmes .ov-line que le hero, réutilisées au scroll */
+[data-split] .ov-line{display:block;overflow:hidden}
+[data-split] .ov-line>span{display:block;transform:translateY(110%);transition:transform .9s var(--ease)}
+[data-split].is-in .ov-line>span{transform:translateY(0)}
+[data-split].is-in .ov-line:nth-child(2)>span{transition-delay:.07s}
+[data-split].is-in .ov-line:nth-child(3)>span{transition-delay:.14s}
+[data-split].is-in .ov-line:nth-child(4)>span{transition-delay:.21s}
+[data-split].is-in .ov-line:nth-child(5)>span{transition-delay:.28s}
+[data-split].is-in .ov-line:nth-child(6)>span{transition-delay:.35s}
+
+/* Skew de vélocité — l'élément est piloté en JS, on borne juste le rendu */
+[data-skew]{will-change:transform}
+
+/* Flicker néon (§3.7) — salve non-linéaire ~ toutes les 9 s, un seul élément */
+.neon.flicker{animation:neonFlicker 9s linear infinite}
+@keyframes neonFlicker{
+  0%,86%,100%{opacity:1}
+  87%{opacity:.35}88%{opacity:1}89%{opacity:.55}
+  90%{opacity:1}91%{opacity:.4}92%{opacity:.9}93%{opacity:.6}94%{opacity:1}
+}
+
+/* Glitch RGB à l'entrée de section (§3.8) — une seule salve */
+@keyframes glitchRGB{
+  0%{text-shadow:0 0 0 transparent}
+  20%{text-shadow:-3px 0 var(--bleu),3px 0 var(--or);clip-path:inset(0 0 62% 0)}
+  40%{text-shadow:3px 0 var(--bleu),-3px 0 var(--or);clip-path:inset(46% 0 0 0)}
+  60%{text-shadow:-2px 0 var(--bleu-clair),2px 0 var(--or);clip-path:inset(0 0 20% 0)}
+  80%{text-shadow:2px 0 var(--bleu),-2px 0 var(--or);clip-path:none}
+  100%{text-shadow:0 0 0 transparent}
+}
+.glitch-once{animation:glitchRGB .16s steps(2) 1}
+
+/* Container queries légères (§4) — la légende suit la largeur de sa case */
+.mosaic{container-type:inline-size}
+@container (max-width:240px){.tile figcaption{font-size:9px;letter-spacing:.12em}}
+
+/* =====================================================================
    REDUCED MOTION
    ===================================================================== */
 @media (prefers-reduced-motion:reduce){
-  .grain{display:none}
+  .grain{animation:none}
   .cursor-dot,.cursor-ring{display:none!important}
   body.has-cursor{cursor:auto}
   .scroll-cue .line::after{animation:none}
   [data-reveal],[data-reveal-stagger]>*{opacity:1!important;transform:none!important;transition:none!important}
   .wall .l span{transform:none!important;transition:none!important}
-  .ov-line>span{transform:none!important;transition:none!important}
+  .ov-line>span,[data-split] .ov-line>span{transform:none!important;transition:none!important}
   .ov-sub,.ov-subline,.ov-cta{opacity:1!important;transition:none!important}
   .cue{transition:opacity .3s linear}
+  /* §6.2 : on coupe skew, flicker, glitch, marquee, thumb flottante */
+  [data-skew]{transform:none!important;will-change:auto}
+  .neon.flicker{animation:none}
+  .glitch-once{animation:none!important}
+  .mq-track{transform:none!important}
+  .menu-thumb{display:none!important}
   *{scroll-behavior:auto!important}
 }
