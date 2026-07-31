@@ -472,6 +472,50 @@ main{position:relative;z-index:2;background:var(--noir)}
 .infos-data,.infos-side{position:relative;z-index:1}
 
 /* =====================================================================
+   §5.1 — CE SOIR (programme)
+   ===================================================================== */
+.program-block{margin:clamp(50px,8vh,100px) 0 clamp(20px,4vh,50px)}
+.program-block>.eyebrow{margin-bottom:22px}
+.program{list-style:none;border-top:1px solid rgba(237,232,224,.09)}
+.program li{display:flex;align-items:center;gap:16px;padding:clamp(12px,1.8vh,20px) 0;border-bottom:1px solid rgba(237,232,224,.09);
+  font-family:var(--mono);font-size:clamp(13px,1.6vw,17px);letter-spacing:.08em;text-transform:uppercase;color:rgba(237,232,224,.35);transition:color .4s var(--ease)}
+.program .pg-day{flex:0 0 clamp(90px,12vw,150px)}
+.program .pg-dot{width:8px;height:8px;border-radius:50%;background:rgba(237,232,224,.2);flex:0 0 auto}
+.program .pg-act{color:inherit}
+.program li.today{color:var(--bleu-lien)}
+.program li.today .pg-day{color:#fff;font-weight:500}
+.program li.today .pg-dot{background:var(--bleu-clair);box-shadow:0 0 0 0 rgba(0,163,255,.6);animation:pulseDot 2s var(--ease) infinite}
+
+/* =====================================================================
+   §5.2 — ILS Y ÉTAIENT (avis)
+   ===================================================================== */
+.reviews{margin-bottom:clamp(50px,8vh,110px)}
+.rev-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:10px}
+.rev-link{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--blanc)}
+.rev-pending{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--gris);margin-bottom:32px}
+.rev-list{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,48px)}
+@media (min-width:820px){.rev-list{grid-template-columns:repeat(3,1fr)}}
+.rev{border-top:1px solid rgba(201,162,75,.3);padding-top:22px}
+.rev .stars{display:flex;gap:4px;margin-bottom:18px}
+.rev .stars svg{width:16px;height:16px;fill:var(--or)}
+.rev p{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.2vw,24px);line-height:1.4;color:var(--blanc);margin-bottom:18px}
+.rev footer{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris)}
+
+/* =====================================================================
+   §5.3 — VENIR
+   ===================================================================== */
+.scene-venir{position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center;padding-block:clamp(90px,16vh,190px)}
+.venir-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.2;z-index:0}
+.scene-venir::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,transparent 20%,rgba(10,11,14,.7));z-index:1}
+.scene-venir .scene-inner{position:relative;z-index:2}
+.venir-gps{font-family:var(--mono);font-size:clamp(15px,2.4vw,28px);letter-spacing:.1em;color:var(--bleu-clair);margin:12px 0 20px;text-shadow:0 0 22px rgba(0,163,255,.35)}
+.venir-addr{font-family:var(--display);text-transform:uppercase;font-size:clamp(38px,8vw,110px);line-height:.88;letter-spacing:-.03em;color:var(--blanc)}
+.venir-addr .venir-city{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.venir-walk{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.4vw,28px);color:var(--or);margin:26px 0 34px}
+.venir-cta{display:flex;flex-wrap:wrap;gap:14px}
+.venir-cta .btn{margin-top:0}
+
+/* =====================================================================
    PAGE CONTACT
    ===================================================================== */
 .subpage{padding-top:clamp(110px,16vh,180px)}

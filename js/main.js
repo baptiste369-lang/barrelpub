@@ -154,7 +154,9 @@
     var rows = qa(".burger-row[data-thumb]");
     if (rows.length) {
       var thumb = document.createElement("div"); thumb.className = "menu-thumb";
-      var timg = document.createElement("img"); timg.alt = ""; thumb.appendChild(timg);
+      var timg = document.createElement("img"); timg.alt = "";
+      timg.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+      thumb.appendChild(timg);
       document.body.appendChild(thumb);
       var active = false, keyboard = false, ttx = 0, tty = 0, tcx = 0, tcy = 0;
       addEventListener("mousemove", function (e) { ttx = e.clientX + 150; tty = e.clientY; }, { passive: true });
@@ -308,6 +310,17 @@
       entries.forEach(function (e) { if (e.isIntersecting) { feed.setAttribute("data-loaded", "true"); iio.disconnect(); } });
     }, { rootMargin: "600px 0px" });
     iio.observe(feed);
+  })();
+
+  /* =====================================================================
+     ITINÉRAIRE — Apple Plans sur appareils Apple, Google Maps ailleurs
+     ===================================================================== */
+  (function () {
+    var a = q("#itineraire");
+    if (!a) return;
+    if (/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)) {
+      a.href = "https://maps.apple.com/?daddr=43.5513,7.0128&q=Barrel+Pub+Cannes";
+    }
   })();
 
   /* =====================================================================
