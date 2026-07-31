@@ -131,6 +131,10 @@
     <span class="leopard" aria-hidden="true"></span>
     <div class="scene-inner">
       <div class="marker"><span class="tag">02 / 05</span><span>Le seuil</span></div>
+      <figure class="estab-band" data-reveal>
+        <img src="assets/photos/facade-nuit.webp" width="1350" height="1600" alt="La façade verte du Barrel Pub, la nuit, rue du Docteur Gérard Monod" loading="lazy" decoding="async">
+        <figcaption>17 rue du Docteur Gérard Monod — il fait nuit, la porte est ouverte</figcaption>
+      </figure>
       <div class="seuil-grid">
         <div>
           <h2 class="wall" id="seuil-title" data-wall>
@@ -141,8 +145,8 @@
           <p class="lede seuil-copy" data-reveal>Dehors, la carte postale. Ici, le bois, le néon bleu et le tapis léopard du billard. <strong>Deux chiens veillent sur la maison</strong> — franchis la porte, tu es déjà dedans.</p>
         </div>
         <figure class="seuil-shot" data-reveal>
-          <img src="assets/photos/chien-billard-01.webp" width="1600" height="1581" alt="Le chien de la maison allongé sur le tapis léopard du billard, dans la lumière bleue du Barrel Pub" loading="lazy" decoding="async">
-          <figcaption class="seuil-cap">Sur le billard — comme d'habitude</figcaption>
+          <img class="dogs-parallax" src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens du Barrel assis sur le billard au tapis léopard" loading="lazy" decoding="async">
+          <figcaption class="seuil-cap">Les patrons — sur le billard, comme d'habitude</figcaption>
         </figure>
       </div>
 
@@ -166,33 +170,48 @@
         <p class="lede">Billard vintage au tapis léopard, fléchettes, babyfoot, arcade, photobooth <strong>« Ta Bobine »</strong>, DJ &amp; karaoké, 10 écrans sport. Et un tatoueur résident, sur demande.</p>
       </div>
 
+      <!-- Mouvement 4 — le jeu : mosaïque asymétrique, légendes mono -->
       <div class="mosaic" data-reveal-stagger>
-        <figure class="tile w4 h2"><img src="assets/photos/salle-billard-bleue.webp" width="1600" height="1067" alt="La salle de billard baignée de bleu néon" loading="lazy" decoding="async"><figcaption>Salle billard</figcaption></figure>
-        <figure class="tile"><img src="assets/photos/flechettes.webp" width="1200" height="1600" alt="Cible de fléchettes du pub" loading="lazy" decoding="async"><figcaption>Fléchettes</figcaption></figure>
-        <figure class="tile"><img src="assets/photos/photobooth-ta-bobine.webp" width="1200" height="1600" alt="Le photobooth Ta Bobine : quatre flashs pour trois euros" loading="lazy" decoding="async"><figcaption>Ta Bobine · 3€</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/billard-joueur.webp" width="1200" height="1600" alt="Un joueur penché sur le billard" loading="lazy" decoding="async"><figcaption>La revanche</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/foule-bleue.webp" width="1600" height="1067" alt="La foule dans la lumière bleue un soir de match" loading="lazy" decoding="async"><figcaption>Un soir de match</figcaption></figure>
-        <figure class="tile w2 h2"><img src="assets/photos/moto-rose-01.webp" width="1066" height="1600" alt="La moto rose garée à l'intérieur du bar, décor permanent" loading="lazy" decoding="async"><figcaption>La moto rose · à l'intérieur</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/ecrans-sport.webp" width="1600" height="1067" alt="Le mur d'écrans diffusant le sport" loading="lazy" decoding="async"><figcaption>10 écrans</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/barman-flair.webp" width="1600" height="1067" alt="Le barman en plein flair derrière le comptoir" loading="lazy" decoding="async"><figcaption>Le comptoir</figcaption></figure>
+        <figure class="tile w2 h2"><img src="assets/photos/salle-billard-bleue.webp" width="1200" height="1600" alt="La salle de billard du fond, baignée de bleu néon" loading="lazy" decoding="async"><figcaption>La salle du fond</figcaption></figure>
+        <figure class="tile w4"><img src="assets/photos/photobooth-ta-bobine.webp" width="1600" height="1067" alt="Le photobooth Ta Bobine : quatre flashs pour trois euros" loading="lazy" decoding="async"><figcaption>Ta Bobine — 4 flashs, 3€</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/flechettes.webp" width="1067" height="1600" alt="Cible de fléchettes du pub" loading="lazy" decoding="async"><figcaption>Fléchettes</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/chien-billard-01.webp" width="1600" height="1581" alt="Un chien de la maison qui surveille le billard" loading="lazy" decoding="async"><figcaption>Il surveille le jeu</figcaption></figure>
+        <figure class="tile w2 h2"><img src="assets/photos/billard-joueur.webp" width="1200" height="1600" alt="Un joueur penché sur le billard" loading="lazy" decoding="async"><figcaption>Black Ball live</figcaption></figure>
+        <figure class="tile w4"><img src="assets/photos/ecrans-sport.webp" width="1600" height="1067" alt="Le mur d'écrans diffusant le sport" loading="lazy" decoding="async"><figcaption>10 écrans</figcaption></figure>
       </div>
 
-      <div class="neon-block" data-reveal>
-        <p class="neon">You are exactly<br>where you need to be</p>
+      <!-- Mouvement 5 — le mur des néons : l'enseigne réelle floutée SOUS la typo nette -->
+      <div class="neon-wall" data-reveal>
+        <img class="neon-bg" src="assets/photos/neon-exactly-where.webp" width="1600" height="1066" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        <p class="neon flicker">You are exactly<br>where you need to be</p>
       </div>
 
-      <!-- Mouvement 6 — la nuit : DJ, karaoké, la foule, la moto rose -->
+      <!-- Mouvement 6 — la nuit : carrousel horizontal + la moto -->
       <div class="night-head" data-reveal>
         <span class="eyebrow">Quand la nuit prend le relais</span>
         <p class="neon small alexa">Fuck Alexa,<br>Siri me your play…</p>
       </div>
 
-      <div class="mosaic" data-reveal-stagger>
-        <figure class="tile w3"><img src="assets/photos/dj-booth.webp" width="1600" height="1067" alt="Le DJ booth du Barrel Pub" loading="lazy" decoding="async"><figcaption>DJ &amp; karaoké</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/interieur-bleu.webp" width="1199" height="1600" alt="La salle baignée de bleu un soir de foule" loading="lazy" decoding="async"><figcaption>La salle bleue</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/moto-comptoir.webp" width="1066" height="1600" alt="La moto rose contre le comptoir" loading="lazy" decoding="async"><figcaption>Contre le comptoir</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/foule-billard.webp" width="1067" height="1600" alt="La foule autour du billard" loading="lazy" decoding="async"><figcaption>Autour du billard</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/barrique-make-it-count.webp" width="1067" height="1600" alt="Un tonneau peint « Make it count »" loading="lazy" decoding="async"><figcaption>Make it count</figcaption></figure>
+      <div class="night-carousel" id="nightCarousel" aria-label="La nuit au Barrel, en images">
+        <ul class="nc-track" id="ncTrack">
+          <li class="nc-slide"><img src="assets/photos/foule-bleue.webp" width="1199" height="1600" alt="La foule dans la lumière bleue" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/dj-booth.webp" width="1199" height="1600" alt="Le DJ booth en pleine soirée" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-billard.webp" width="1067" height="1600" alt="La foule autour du billard" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-tonneau.webp" width="1003" height="1600" alt="La foule accoudée aux tonneaux" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/barman-flair.webp" width="1600" height="1067" alt="Le barman en plein flair" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-01.webp" width="1600" height="1067" alt="La salle pleine un soir de fête" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-nb.webp" width="1600" height="1067" alt="La foule, en noir et blanc, en fin de nuit" loading="lazy" decoding="async"></li>
+        </ul>
+        <div class="nc-count"><span id="ncNow">01</span> / <span>07</span></div>
+      </div>
+
+      <div class="moto-trip" data-reveal>
+        <span class="eyebrow">Et oui, elle est à l'intérieur.</span>
+        <div class="moto-grid" data-reveal-stagger>
+          <figure class="tile"><img src="assets/photos/moto-rose-01.webp" width="1066" height="1600" alt="La moto rose, décor permanent du bar" loading="lazy" decoding="async"><figcaption>La moto rose</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/moto-comptoir.webp" width="1066" height="1600" alt="La moto rose contre le comptoir" loading="lazy" decoding="async"><figcaption>Contre le comptoir</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/moto-portrait.webp" width="1066" height="1600" alt="Portrait de la moto rose" loading="lazy" decoding="async"><figcaption>La star du décor</figcaption></figure>
+        </div>
       </div>
 
       <ul class="feature-list" data-reveal-stagger>
@@ -209,58 +228,59 @@
   <section class="scene scene-carte" id="scene-carte" aria-labelledby="carte-title">
     <div class="scene-inner">
       <div class="marker"><span class="tag">04 / 05</span><span>La carte</span></div>
-      <div class="menu-grid">
-        <div>
-          <span class="eyebrow">À table, ou au comptoir</span>
-          <h2 id="carte-title" style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin:12px 0 40px">La carte.</h2>
-          <div class="menu-cols" data-reveal>
+      <span class="eyebrow">À table, ou au comptoir</span>
+      <h2 id="carte-title" style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin:12px 0 clamp(36px,5vh,56px)">La carte.</h2>
 
-            <div class="menu-cat">
-              <h3>Porn Burgers</h3>
-              <div class="sub">servis avec frites mégas sexy</div>
-              <div class="menu-item"><span class="n">Better than your ex</span><span class="dots"></span><span class="p">16€</span></div>
-              <div class="menu-item"><span class="n">Orgasmeat</span><span class="dots"></span><span class="p">18€</span></div>
-              <div class="menu-item"><span class="n">Maya l'abeille</span><span class="dots"></span><span class="p">16€</span></div>
-              <div class="menu-item"><span class="n">Chicken</span><span class="dots"></span><span class="p">16€</span></div>
-              <div class="menu-item"><span class="n">Black Barrel</span><span class="dots"></span><span class="p">15€ <span class="plus">+2,5€ steak</span></span></div>
-            </div>
-
-            <div class="menu-cat">
-              <h3>Tapas</h3>
-              <div class="sub">à picorer, à partager</div>
-              <div class="menu-item"><span class="n">Hot-Doggy</span><span class="dots"></span><span class="p">9€</span></div>
-              <div class="menu-item"><span class="n">Big oignons rings</span><span class="dots"></span><span class="p">8€</span></div>
-              <div class="menu-item"><span class="n">Mozza sticks</span><span class="dots"></span><span class="p">8€</span></div>
-              <div class="menu-item"><span class="n">Crispy potatoes cheddar</span><span class="dots"></span><span class="p">8€</span></div>
-              <div class="menu-item"><span class="n">Chicken Dynamite</span><span class="dots"></span><span class="p">8€</span></div>
-              <div class="menu-item"><span class="n">Mac &amp; Cheese Balls</span><span class="dots"></span><span class="p">8€</span></div>
-            </div>
-
-            <div class="menu-cat">
-              <h3>Planches</h3>
-              <div class="sub">pour ne pas choisir</div>
-              <div class="menu-item"><span class="n">Planche mixte pour 2</span><span class="dots"></span><span class="p">24€</span></div>
-              <div class="menu-item"><span class="n">Big Planche signature</span><span class="dots"></span><span class="p">40€</span></div>
-            </div>
-
-            <div class="menu-cat">
-              <h3>Chicken Buckets</h3>
-              <div class="sub">le seau, à plusieurs</div>
-              <div class="menu-item"><span class="n">Pour 2</span><span class="dots"></span><span class="p">17€</span></div>
-              <div class="menu-item"><span class="n">Pour 4</span><span class="dots"></span><span class="p">30€</span></div>
-            </div>
-
-          </div>
+      <div class="menu-cols" data-reveal>
+        <div class="menu-cat">
+          <h3>Porn Burgers</h3>
+          <div class="sub">servis avec frites mégas sexy</div>
+          <div class="menu-item burger-row" tabindex="0" data-thumb="assets/photos/burger-01.webp"><span class="n">Better than your ex</span><span class="dots"></span><span class="p">16€</span></div>
+          <div class="menu-item burger-row" tabindex="0" data-thumb="assets/photos/burger-plateau.webp"><span class="n">Orgasmeat</span><span class="dots"></span><span class="p">18€</span></div>
+          <div class="menu-item burger-row" tabindex="0" data-thumb="assets/photos/burger-02.webp"><span class="n">Maya l'abeille</span><span class="dots"></span><span class="p">16€</span></div>
+          <div class="menu-item burger-row" tabindex="0" data-thumb="assets/photos/burger-chicken.webp"><span class="n">Chicken</span><span class="dots"></span><span class="p">16€</span></div>
+          <div class="menu-item burger-row" tabindex="0" data-thumb="assets/photos/burger-black-barrel.webp"><span class="n">Black Barrel</span><span class="dots"></span><span class="p">15€ <span class="plus">+2,5€ steak</span></span></div>
         </div>
 
-        <div class="menu-media" data-reveal-stagger>
-          <figure class="shot tall"><img src="assets/photos/burger-01.webp" width="1200" height="1600" alt="Un burger signature du Barrel Pub" loading="lazy" decoding="async"></figure>
-          <figure class="shot"><img src="assets/photos/frites-curly-01.webp" width="900" height="1600" alt="Frites curly maison" loading="lazy" decoding="async"></figure>
-          <figure class="shot"><img src="assets/photos/cocktail-01.webp" width="1200" height="1600" alt="Un cocktail au comptoir" loading="lazy" decoding="async"></figure>
-          <figure class="shot"><img src="assets/photos/burger-black-barrel.webp" width="900" height="1600" alt="Le burger Black Barrel au pain noir" loading="lazy" decoding="async"></figure>
-          <figure class="shot"><img src="assets/photos/chicken-strips.webp" width="1200" height="1600" alt="Chicken strips croustillants" loading="lazy" decoding="async"></figure>
+        <div class="menu-cat">
+          <h3>Tapas</h3>
+          <div class="sub">à picorer, à partager</div>
+          <div class="menu-item"><span class="n">Hot-Doggy</span><span class="dots"></span><span class="p">9€</span></div>
+          <div class="menu-item"><span class="n">Big oignons rings</span><span class="dots"></span><span class="p">8€</span></div>
+          <div class="menu-item"><span class="n">Mozza sticks</span><span class="dots"></span><span class="p">8€</span></div>
+          <div class="menu-item"><span class="n">Crispy potatoes cheddar</span><span class="dots"></span><span class="p">8€</span></div>
+          <div class="menu-item"><span class="n">Chicken Dynamite</span><span class="dots"></span><span class="p">8€</span></div>
+          <div class="menu-item"><span class="n">Mac &amp; Cheese Balls</span><span class="dots"></span><span class="p">8€</span></div>
+        </div>
+
+        <div class="menu-cat">
+          <h3>Planches</h3>
+          <div class="sub">pour ne pas choisir</div>
+          <div class="menu-item"><span class="n">Planche mixte pour 2</span><span class="dots"></span><span class="p">24€</span></div>
+          <div class="menu-item"><span class="n">Big Planche signature</span><span class="dots"></span><span class="p">40€</span></div>
+        </div>
+
+        <div class="menu-cat">
+          <h3>Chicken Buckets</h3>
+          <div class="sub">le seau, à plusieurs</div>
+          <div class="menu-item"><span class="n">Pour 2</span><span class="dots"></span><span class="p">17€</span></div>
+          <div class="menu-item"><span class="n">Pour 4</span><span class="dots"></span><span class="p">30€</span></div>
         </div>
       </div>
+    </div>
+
+    <!-- Bandeau tapas — marquee à vélocité de scroll -->
+    <div class="marquee" data-marquee aria-hidden="true">
+      <ul class="mq-track" id="mqTrack">
+        <li class="mq-item"><img src="assets/photos/frites-curly-01.webp" width="900" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/chicken-strips.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/frites-curly-02.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/burger-pulled.webp" width="900" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/cocktail-01.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/cocktail-03.webp" width="1066" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/burger-04.webp" width="900" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/cocktail-02.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
+      </ul>
     </div>
   </section>
 
@@ -273,14 +293,20 @@
         <h2 id="sortie-title" style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin-top:12px">Deux terrasses,<br>une rue, la nuit.</h2>
       </div>
 
-      <!-- Mouvement 9 — les chiffres (count-up au scroll) -->
-      <div class="stats" data-reveal-stagger>
-        <div class="stat"><b data-count="2">2</b><span>terrasses</span></div>
-        <div class="stat"><b data-count="150">150</b><span>places extérieur</span></div>
-        <div class="stat"><b data-count="60">60</b><span>places intérieur</span></div>
-        <div class="stat"><b data-count="600" data-suffix="+">600+</b><span>de capacité</span></div>
-        <div class="stat"><b data-count="10">10</b><span>écrans sport</span></div>
-        <div class="stat"><b data-count="11" data-suffix="h">11h</b><span>d'ouverture / nuit</span></div>
+      <!-- Mouvement 9 — les chiffres (odomètre au scroll) + l'équipe -->
+      <div class="lieu-row">
+        <div class="stats" data-reveal-stagger>
+          <div class="stat"><b data-count="2">2</b><span>terrasses</span></div>
+          <div class="stat"><b data-count="150">150</b><span>places extérieur</span></div>
+          <div class="stat"><b data-count="60">60</b><span>places intérieur</span></div>
+          <div class="stat"><b data-count="600" data-suffix="+">600+</b><span>de capacité</span></div>
+          <div class="stat"><b data-count="10">10</b><span>écrans sport</span></div>
+          <div class="stat"><b data-count="11" data-suffix="h">11h</b><span>d'ouverture / nuit</span></div>
+        </div>
+        <figure class="team-card" data-reveal>
+          <img src="assets/photos/staff-futs.webp" width="1066" height="1600" alt="L'équipe du Barrel Pub derrière les fûts" loading="lazy" decoding="async">
+          <figcaption><span class="eyebrow">L'équipe</span><span class="tc-txt">Ceux qui te servent jusqu'à 5h.</span></figcaption>
+        </figure>
       </div>
 
       <div class="sortie-gallery" data-reveal-stagger>
@@ -299,7 +325,7 @@
           <a class="ig-handle ul" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener">@barrelpubcannes <span aria-hidden="true">↗</span></a>
         </div>
         <div class="ig-grid" id="igGrid">
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/foule-bleue.webp" width="1600" height="1067" alt="Ambiance du Barrel Pub sur Instagram" loading="lazy" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/foule-bleue.webp" width="1199" height="1600" alt="Ambiance du Barrel Pub sur Instagram" loading="lazy" decoding="async"></a>
           <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/cocktail-02.webp" width="1200" height="1600" alt="Cocktail du Barrel Pub" loading="lazy" decoding="async"></a>
           <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/burger-plateau.webp" width="1200" height="1600" alt="Plateau de burgers" loading="lazy" decoding="async"></a>
           <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens de la maison" loading="lazy" decoding="async"></a>
@@ -310,6 +336,7 @@
       </div>
 
       <div class="infos" data-reveal>
+        <img class="infos-bg" src="assets/photos/facade-crepuscule.webp" width="1204" height="1505" alt="" aria-hidden="true" loading="lazy" decoding="async">
         <div class="infos-data">
           <div class="big">Barrel Pub<br>Cannes</div>
           17 rue du Docteur Gérard Monod<br>
