@@ -345,7 +345,41 @@ main{position:relative;z-index:2;background:var(--noir)}
 .sortie-gallery .shot{position:relative;overflow:hidden;background:var(--noir-2);aspect-ratio:3/4}
 .sortie-gallery .shot.wide{grid-column:span 2;aspect-ratio:3/2}
 .sortie-gallery img{width:100%;height:100%;object-fit:cover}
+.sortie-gallery .shot figcaption{
+  position:absolute;left:14px;bottom:12px;z-index:2;font-family:var(--mono);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blanc);
+  text-shadow:0 1px 10px rgba(0,0,0,.9);
+}
+.sortie-gallery .shot::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(200deg,transparent 62%,rgba(10,11,14,.5));
+}
 @media (max-width:720px){.sortie-gallery{grid-template-columns:repeat(2,1fr)}.sortie-gallery .shot.wide{grid-column:span 2}}
+
+/* ---------- §3.3 / §3bis.6 — second temps du seuil : le lieu qui attend ---------- */
+.seuil-second{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,20px);
+  grid-auto-flow:dense;margin:clamp(40px,6vh,80px) 0 clamp(28px,4vh,52px);
+}
+.seuil-second .tile{grid-column:span 3;min-height:180px}
+.seuil-second .tile.w3{grid-column:span 3}
+.seuil-second .tile.h2{grid-row:span 2}
+.seuil-second .tile img{width:100%;height:100%;object-fit:cover}
+@media (max-width:720px){
+  .seuil-second{grid-template-columns:repeat(2,1fr)}
+  .seuil-second .tile,.seuil-second .tile.w3{grid-column:span 1}
+  .seuil-second .tile.h2{grid-row:span 1}
+}
+
+/* la bâche au logo — le moment où la mascotte devient réelle */
+.logo-live{position:relative;display:grid;gap:0;grid-template-columns:1fr;align-items:end;
+  border:1px solid rgba(237,232,224,.10);background:var(--noir-2);overflow:hidden}
+@media (min-width:760px){.logo-live{grid-template-columns:1fr 1fr}}
+.ll-shots{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.logo-live img{width:100%;height:100%;max-height:60vh;object-fit:cover;display:block}
+.logo-live figcaption{padding:clamp(26px,4vw,48px);display:flex;flex-direction:column;gap:12px}
+.ll-txt{font-size:clamp(15px,1.8vw,19px);line-height:1.6;color:rgba(237,232,224,.86);max-width:34ch}
+.logo-live.is-live{border-color:rgba(201,162,75,.45)}
 
 /* ---------- §2.3 — accroche cuisine, en tête du chapitre carte ---------- */
 .carte-lede{
@@ -356,6 +390,100 @@ main{position:relative;z-index:2;background:var(--noir)}
 .carte-lede::before{
   content:"";display:inline-block;width:26px;height:1px;vertical-align:middle;
   margin-right:14px;background:var(--bleu-clair);box-shadow:0 0 10px rgba(0,163,255,.7);
+}
+
+/* ---------- §3.4 — la mosaïque de la carte (20 images, formats mélangés) ---------- */
+.carte-mosaic{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,20px);
+  grid-auto-flow:dense;margin:clamp(46px,7vh,90px) 0 clamp(30px,5vh,60px);
+}
+.carte-mosaic .tile{grid-column:span 2;min-height:180px}
+.carte-mosaic .tile.w2{grid-column:span 2}
+.carte-mosaic .tile.w3{grid-column:span 3}
+.carte-mosaic .tile.h2{grid-row:span 2}
+.carte-mosaic .tile img{width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){
+  .carte-mosaic{grid-template-columns:repeat(4,1fr)}
+  .carte-mosaic .tile,.carte-mosaic .tile.w2,.carte-mosaic .tile.w3{grid-column:span 2}
+  .carte-mosaic .tile.h2{grid-row:span 1}
+}
+@media (max-width:560px){
+  .carte-mosaic{grid-template-columns:repeat(2,1fr);gap:10px}
+  .carte-mosaic .tile,.carte-mosaic .tile.w2,.carte-mosaic .tile.w3{grid-column:span 1}
+}
+
+/* la paire passion : même verre, deux cadrages — bascule au survol ET au focus */
+.swap-pair{
+  position:relative;max-width:min(100%,520px);aspect-ratio:3/4;overflow:hidden;
+  background:var(--noir-2);margin:0 0 clamp(46px,7vh,90px);
+}
+.swap-pair img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.swap-pair .sp-b{opacity:0;transition:opacity .5s var(--ease)}
+.swap-pair:hover .sp-b,.swap-pair:focus-visible .sp-b{opacity:1}
+.swap-pair figcaption{
+  position:absolute;left:14px;bottom:12px;z-index:2;font-family:var(--mono);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blanc);
+  text-shadow:0 1px 10px rgba(0,0,0,.9);
+}
+
+/* ---------- §3bis.3 / §3bis.4 — le bloc cocktails (texture chevron) ---------- */
+.cocktails{
+  position:relative;padding:clamp(34px,5vw,64px) clamp(22px,3.5vw,52px);
+  margin-bottom:clamp(46px,7vh,90px);
+  border:1px solid rgba(237,232,224,.10);background:var(--noir-2);
+}
+.ck-title{
+  font-family:var(--display);text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(26px,4vw,52px);line-height:.95;margin:12px 0 clamp(24px,3.5vh,40px);
+}
+.ck-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,18px);grid-auto-flow:dense}
+.ck-grid .tile{grid-column:span 2;min-height:170px}
+.ck-grid .tile img{width:100%;height:100%;object-fit:cover}
+.ck-grid .ck-lead{grid-column:span 4;grid-row:span 2}
+@media (max-width:900px){
+  .ck-grid{grid-template-columns:repeat(4,1fr)}
+  .ck-grid .ck-lead{grid-column:span 4;grid-row:span 1}
+}
+@media (max-width:560px){
+  .ck-grid{grid-template-columns:repeat(2,1fr)}
+  .ck-grid .tile,.ck-grid .ck-lead{grid-column:span 2}
+}
+
+/* ---------- §3bis.1 — LA BANDE DE PHOTOBOOTH (module signature) ---------- */
+.bande-signature{margin:0 0 clamp(46px,7vh,90px)}
+.bande-signature>.eyebrow{display:block;margin-bottom:18px}
+.bande{
+  position:relative;max-width:820px;margin:0;overflow:hidden;
+  background:#000;border:1px solid rgba(237,232,224,.10);
+}
+.bande img{width:100%;height:auto;display:block}
+
+/* Les volets ne sont posés QUE si le JS peut les retirer (.is-armed).
+   Sans JS, la bande s'affiche entière — aucun volet, aucun trou. */
+.bd-cell{position:absolute;background:var(--noir);opacity:0;pointer-events:none}
+.bande.is-armed .bd-cell{opacity:1}
+.bande.is-armed .bd-cell.is-open{opacity:0;transition:opacity .32s var(--ease)}
+/* les 4 vignettes occupent les 75 % hauts, le bandeau imprimé les 25 % bas */
+.bd-cell[data-cell="1"]{left:0;   width:25%;top:0;height:75%}
+.bd-cell[data-cell="2"]{left:25%; width:25%;top:0;height:75%}
+.bd-cell[data-cell="3"]{left:50%; width:25%;top:0;height:75%}
+.bd-cell[data-cell="4"]{left:75%; width:25%;top:0;height:75%}
+.bd-cell.bd-band{left:0;width:100%;top:75%;height:25%}
+
+/* flash blanc très court, avant chaque case */
+.bd-flash{
+  position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;
+  transition:opacity 90ms linear;
+}
+.bd-flash.on{opacity:.9}
+
+/* mode réduit : les 4 cases arrivent ensemble, en fondu de 200 ms, SANS flash */
+.bande.is-reduced .bd-cell.is-open{transition:opacity .2s linear}
+.bande.is-reduced .bd-flash{display:none}
+
+.bande-note{
+  margin-top:16px;max-width:46ch;font-family:var(--mono);font-size:12px;
+  line-height:1.9;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);
 }
 
 /* ---------- §2.4 — « Un seul endroit, tout dedans » ---------- */
@@ -469,11 +597,79 @@ main{position:relative;z-index:2;background:var(--noir)}
 .nc-count #ncNow{color:var(--blanc)}
 
 /* La moto — triptyque (ch.03) */
-.moto-trip{margin-top:clamp(18px,4vh,44px)}
-.moto-trip>.eyebrow{margin-bottom:20px}
-.moto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,18px)}
-.moto-grid .tile{grid-column:auto;aspect-ratio:2/3;min-height:0}
-@media (max-width:640px){.moto-grid{grid-template-columns:1fr}}
+/* §3.2 — la moto : une seule vignette ici (l'autre est moto-frites, chapitre carte).
+   L'ancienne .moto-grid à trois plans est supprimée : « on n'est pas un shop de moto ». */
+.moto-solo{
+  margin-top:clamp(18px,4vh,44px);display:grid;gap:16px;align-items:center;
+  grid-template-columns:1fr;max-width:520px;
+}
+@media (min-width:560px){.moto-solo{grid-template-columns:180px 1fr}}
+.moto-solo img{width:100%;aspect-ratio:2/3;object-fit:cover;background:var(--noir-2)}
+.moto-solo figcaption{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gris);
+}
+
+/* §3bis.7 — transition léopard, une seule fois, au basculement vers la nuit */
+.wipe-leopard{
+  position:relative;left:50%;width:100vw;transform:translateX(-50%);
+  height:clamp(120px,22vh,240px);overflow:hidden;margin:clamp(40px,7vh,90px) 0;
+}
+.wipe-leopard img{width:100%;height:100%;object-fit:cover;display:block}
+.wipe-leopard::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--noir),transparent 18%,transparent 82%,var(--noir)),
+             linear-gradient(180deg,var(--noir),transparent 30%,transparent 70%,var(--noir));
+}
+
+/* §3.5 — l'accroche de la nuit */
+.night-claim{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(26px,4.6vw,56px);line-height:.96;letter-spacing:-.02em;color:var(--blanc);
+}
+
+/* §3bis.2 — le mur des trois néons : chaque phrase sur son propre écran */
+.neon-run{
+  position:relative;left:50%;width:100vw;transform:translateX(-50%);
+  margin:clamp(30px,5vh,60px) 0;
+}
+.neon-run .neon-wall{margin:0;min-height:clamp(58vh,72vh,80vh);flex-direction:column;gap:26px}
+.neon-run .neon-wall + .neon-wall{border-top:1px solid rgba(237,232,224,.07)}
+.neon-step{
+  position:relative;z-index:2;font-family:var(--mono);font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gris);
+}
+/* le glow ne s'allume qu'à l'entrée dans le viewport — deux néons allumés au maximum */
+.neon-run .neon{opacity:.32;transition:opacity .9s var(--ease)}
+.neon-run .neon-wall.is-lit .neon{opacity:1}
+.neon-run .neon-wall.is-lit .neon{animation:neonFlicker 9s linear infinite}
+
+/* §3.5 — la bande de photos de néons qui ferme la séquence */
+.neon-strip{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1.1vw,14px);
+  padding:0 var(--pad) clamp(30px,5vh,60px);
+}
+.neon-strip .tile{grid-column:span 1;aspect-ratio:3/4;min-height:0}
+.neon-strip .tile img{width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){.neon-strip{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.neon-strip{grid-template-columns:repeat(2,1fr)}}
+
+/* §3bis.5 — les coulisses */
+.coulisses{margin-top:clamp(40px,7vh,90px)}
+.coulisses>.eyebrow{margin-bottom:20px;display:block}
+.coul-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,18px);grid-auto-flow:dense;
+}
+.coul-grid .tile{grid-column:span 2;min-height:170px}
+.coul-grid .tile img{width:100%;height:100%;object-fit:cover}
+@media (max-width:720px){
+  .coul-grid{grid-template-columns:repeat(2,1fr)}
+  .coul-grid .tile,.coul-grid .tile.w2,.coul-grid .tile.w3{grid-column:span 1}
+  .coul-grid .tile.h2{grid-row:span 1}
+}
+
+/* bandes de photobooth en petit format dans la mosaïque des jeux (format 1280x533) */
+.bande-mini img{object-fit:contain;background:#000}
 
 /* Bandeau marquee tapas (ch.04) */
 .marquee{position:relative;left:50%;width:100vw;transform:translateX(-50%);overflow:hidden;margin-top:clamp(50px,8vh,100px);border-top:1px solid rgba(237,232,224,.09);border-bottom:1px solid rgba(237,232,224,.09);padding:clamp(14px,2vw,24px) 0}
@@ -658,6 +854,11 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
    REDUCED MOTION
    ===================================================================== */
 @media (prefers-reduced-motion:reduce){
+  /* §3bis.1 — NON NÉGOCIABLE : un flash blanc répété est un déclencheur
+     photosensible. Le flash est coupé ici au niveau CSS, indépendamment du JS,
+     pour qu'aucune régression de script ne puisse le réactiver. */
+  .bd-flash{display:none!important;opacity:0!important;animation:none!important}
+  .bande .bd-cell.is-open{transition:opacity .2s linear!important}
   .grain{animation:none}
   .cursor-dot,.cursor-ring{display:none!important}
   body.has-cursor{cursor:auto}

@@ -226,12 +226,15 @@
   })();
 
   /* =====================================================================
-     CARROUSEL DE NUIT — compteur 01/07 (IntersectionObserver)
+     CARROUSEL DE NUIT — compteur (IntersectionObserver)
+     Le total est dérivé du DOM : ajouter ou retirer une slide ne peut plus
+     désynchroniser le compteur (il était figé à « 07 » en dur avant V2.2).
      ===================================================================== */
   (function () {
-    var track = q("#ncTrack"), now = q("#ncNow");
+    var track = q("#ncTrack"), now = q("#ncNow"), total = q("#ncTotal");
     if (!track || !now || !("IntersectionObserver" in window)) return;
     var slides = qa(".nc-slide", track);
+    if (total) total.textContent = ("0" + slides.length).slice(-2);
     var cio = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
@@ -241,6 +244,103 @@
       });
     }, { root: track, threshold: 0.6 });
     slides.forEach(function (s) { cio.observe(s); });
+  })();
+
+  /* =====================================================================
+     §3bis.2 — LE MUR DES TROIS NÉONS
+     Chaque néon s'allume en entrant dans le viewport. Contrainte du brief :
+     jamais plus de DEUX néons allumés en même temps — si un troisième entre,
+     on éteint le plus ancien. IntersectionObserver, aucun ScrollTrigger.
+     Sans JS (ou sans IO) : tout est allumé, la séquence reste lisible.
+     ===================================================================== */
+  (function () {
+    var walls = qa("#neonRun .neon-wall");
+    if (!walls.length) return;
+    if (!("IntersectionObserver" in window)) {
+      walls.forEach(function (w) { w.classList.add("is-lit"); });
+      return;
+    }
+    var lit = [];
+    var nio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = lit.indexOf(e.target);
+        if (e.isIntersecting) {
+          if (i === -1) lit.push(e.target);
+          e.target.classList.add("is-lit");
+        } else {
+          if (i !== -1) lit.splice(i, 1);
+          e.target.classList.remove("is-lit");
+        }
+      });
+      while (lit.length > 2) { lit.shift().classList.remove("is-lit"); }
+    }, { threshold: 0.35 });
+    walls.forEach(function (w) { nio.observe(w); });
+  })();
+
+  /* =====================================================================
+     §3bis.1 — LA BANDE DE PHOTOBOOTH
+     La bande se compose vignette par vignette : 4 cases décalées de 120 ms,
+     un flash blanc très court (0 → .9 → 0 en 90 ms) avant chaque case, puis le
+     bandeau BARREL PUB CANNES en dernier. Une seule bande animée à la fois.
+
+     SÉCURITÉ : sous prefers-reduced-motion le flash est DÉSACTIVÉ — un flash
+     blanc répété est un déclencheur photosensible. En mode réduit les quatre
+     cases apparaissent ensemble en fondu de 200 ms.
+     Sans JS : aucun volet n'est posé, la bande s'affiche entière.
+     ===================================================================== */
+  (function () {
+    var strip = q("[data-bande]");
+    if (!strip) return;
+    var shutters = qa(".bd-cell", strip);
+    if (!shutters.length) return;
+
+    // on n'arme les volets que si on peut les retirer ensuite
+    if (!("IntersectionObserver" in window)) return;
+    strip.classList.add("is-armed");
+
+    var flash = q(".bd-flash", strip);
+    var played = false;
+
+    function reveal(i) {
+      if (i >= shutters.length) return;
+      if (!REDUCE && flash) {
+        flash.classList.add("on");
+        setTimeout(function () { flash.classList.remove("on"); }, 90);
+      }
+      shutters[i].classList.add("is-open");
+      setTimeout(function () { reveal(i + 1); }, 120);
+    }
+
+    var bio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || played) return;
+        played = true;
+        bio.disconnect();
+        if (REDUCE) {
+          strip.classList.add("is-reduced");
+          shutters.forEach(function (s) { s.classList.add("is-open"); });
+        } else {
+          reveal(0);
+        }
+      });
+    }, { threshold: 0.45 });
+    bio.observe(strip);
+  })();
+
+  /* =====================================================================
+     §3.3 — la bâche au logo : on marque le bloc quand il est à l'écran,
+     au moment où le logo du header devient interactif.
+     ===================================================================== */
+  (function () {
+    var live = q(".logo-live"), brand = q(".site-head .brand");
+    if (!live || !("IntersectionObserver" in window)) return;
+    var lio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        live.classList.toggle("is-live", e.isIntersecting);
+        if (brand) brand.classList.toggle("is-live", e.isIntersecting);
+      });
+    }, { threshold: 0.4 });
+    lio.observe(live);
   })();
 
   /* =====================================================================
