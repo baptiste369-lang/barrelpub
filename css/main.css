@@ -347,6 +347,41 @@ main{position:relative;z-index:2;background:var(--noir)}
 .sortie-gallery img{width:100%;height:100%;object-fit:cover}
 @media (max-width:720px){.sortie-gallery{grid-template-columns:repeat(2,1fr)}.sortie-gallery .shot.wide{grid-column:span 2}}
 
+/* ---------- §2.3 — accroche cuisine, en tête du chapitre carte ---------- */
+.carte-lede{
+  max-width:52ch;margin:0 0 clamp(36px,5vh,56px);
+  font-family:var(--mono);font-size:clamp(13px,1.5vw,16px);
+  line-height:1.9;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);
+}
+.carte-lede::before{
+  content:"";display:inline-block;width:26px;height:1px;vertical-align:middle;
+  margin-right:14px;background:var(--bleu-clair);box-shadow:0 0 10px rgba(0,163,255,.7);
+}
+
+/* ---------- §2.4 — « Un seul endroit, tout dedans » ---------- */
+.tout-dedans{
+  position:relative;padding:clamp(40px,6vw,72px) clamp(26px,4vw,60px);
+  margin-bottom:clamp(32px,5vh,64px);
+  border:1px solid rgba(237,232,224,.10);background:var(--noir-2);
+}
+.tout-dedans::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,var(--bleu-clair),var(--bleu));
+  box-shadow:0 0 14px rgba(0,163,255,.55);
+}
+.td-wall{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(30px,5.2vw,64px);line-height:.92;letter-spacing:-.02em;
+  margin:14px 0 clamp(22px,3vh,34px);color:var(--blanc);
+}
+.td-wall .ov-line{display:block;overflow:hidden}
+.td-list{max-width:44ch;font-size:clamp(15px,1.7vw,19px);line-height:1.65;color:rgba(237,232,224,.88)}
+.td-prix{
+  margin-top:18px;font-family:var(--mono);font-size:clamp(12px,1.3vw,14px);
+  line-height:2;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);
+}
+@media (max-width:560px){.tout-dedans{padding:34px 22px}}
+
 .infos{display:grid;grid-template-columns:1fr;gap:0;background:var(--vert);border:1px solid rgba(237,232,224,.08)}
 @media (min-width:860px){.infos{grid-template-columns:1.15fr .85fr}}
 .infos-data{padding:clamp(38px,5vw,64px);font-family:var(--mono);font-size:clamp(13px,1.4vw,15px);line-height:2.1;letter-spacing:.04em}
@@ -372,7 +407,8 @@ main{position:relative;z-index:2;background:var(--noir)}
 
 /* ---------- Le mur des néons — « la nuit » (mouvement 6) ---------- */
 .night-head{margin:clamp(40px,6vh,80px) 0 clamp(28px,4vh,50px);display:flex;flex-direction:column;gap:20px}
-.neon.alexa{color:#ffdff2;text-shadow:0 0 8px rgba(255,90,170,.9),0 0 26px rgba(255,40,140,.7),0 0 54px rgba(226,40,120,.5)}
+/* .neon.playlist n'a plus d'override : le néon réel est blanc-bleu froid, pas rose.
+   Il hérite donc du bleu de .neon (vérifié sur neon-playlist-large.webp). */
 
 /* ---------- Les chiffres — count-up (mouvement 9) ---------- */
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(237,232,224,.09);border:1px solid rgba(237,232,224,.09);margin-bottom:clamp(50px,8vh,110px)}

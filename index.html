@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Barrel Pub Cannes — Le pub américain de la Croisette · 18h → 5h</title>
-<meta name="description" content="Barrel Pub, 17 rue du Docteur Gérard Monod, Cannes. Pub américain ouvert tous les jours de 18h à 5h. Burgers, bières, billard, DJ, karaoké, 10 écrans sport, deux terrasses. Le chien te fait entrer.">
+<meta name="description" content="Barrel Pub, 17 rue du Docteur Gérard Monod, Cannes. Pub américain et cuisine maison, ouvert 364 jours par an de 18h à 5h. Burgers, bières, billard, DJ, karaoké, 10 écrans sport, trois terrasses. Le chien te fait entrer.">
 <meta name="theme-color" content="#0A0B0E">
 <link rel="canonical" href="https://barrelpubcannes.fr/">
 <link rel="icon" href="assets/logo/barrel-logo.svg" type="image/svg+xml">
@@ -16,13 +16,13 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Barrel Pub Cannes">
 <meta property="og:title" content="Barrel Pub Cannes — Le chien te fait entrer">
-<meta property="og:description" content="Pub américain à Cannes, ouvert tous les jours 18h → 5h. Burgers, billard, DJ, 10 écrans sport, deux terrasses.">
+<meta property="og:description" content="Pub américain à Cannes, ouvert 364 jours par an 18h → 5h. Burgers maison, billard, DJ, 10 écrans sport, trois terrasses.">
 <meta property="og:url" content="https://barrelpubcannes.fr/">
 <meta property="og:image" content="https://barrelpubcannes.fr/assets/photos/facade-nuit.webp">
 <meta property="og:image:alt" content="La façade verte du Barrel Pub, la nuit, rue du Docteur Gérard Monod à Cannes">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Barrel Pub Cannes — Le chien te fait entrer">
-<meta name="twitter:description" content="Pub américain à Cannes, tous les jours 18h → 5h.">
+<meta name="twitter:description" content="Pub américain à Cannes, 364 jours par an, 18h → 5h.">
 <meta name="twitter:image" content="https://barrelpubcannes.fr/assets/photos/facade-nuit.webp">
 
 <link rel="preload" as="image" href="frames/desktop/f_001.webp" media="(min-width:768px)">
@@ -32,12 +32,20 @@
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/main.css?v=2">
 
+<!-- JSON-LD — deux points de vigilance (brief V2.2) :
+     · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
+       type et il n'existe pas de façon propre d'exprimer « sauf un jour par an ».
+       Le texte visible, lui, ne dit jamais « 7j/7 » : il dit « 364 jours par an ».
+     · BLOQUANT MISE EN LIGNE — le sameAs ci-dessous pointe vers un compte Instagram
+       NON VÉRIFIÉ (@barrelpubcannes). Un sameAs erroné associe l'établissement à un
+       compte tiers aux yeux de Google. Ne pas publier avant d'avoir le vrai compte
+       d'Eva (13 occurrences au total dans index.html + contact.html). -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"BarOrPub",
+  "@type":["BarOrPub","Restaurant"],
   "name":"Barrel Pub Cannes",
-  "description":"Pub américain à Cannes : burgers, bières, billard, fléchettes, DJ, karaoké, 10 écrans sport, deux terrasses.",
+  "description":"Pub américain et cuisine maison à Cannes : burgers, bières, billard, fléchettes, DJ, karaoké, 10 écrans sport, trois terrasses. Ouvert 364 jours par an, de 18h à 5h.",
   "url":"https://barrelpubcannes.fr/",
   "image":"https://barrelpubcannes.fr/assets/photos/facade-nuit.webp",
   "telephone":"+33687361110",
@@ -81,13 +89,13 @@
 <!-- ============ HEADER ============ -->
 <header class="site-head">
   <a class="brand" href="/" aria-label="Barrel Pub Cannes — accueil"><svg><use href="#brand"></use></svg></a>
-  <div class="head-meta">Cannes · 18h → 5h · 7/7</div>
+  <div class="head-meta">Cannes · 18h → 5h · 364 j/an</div>
   <a class="head-cta" href="contact.html" data-cursor="Réserver">Réserver</a>
 </header>
 
 <!-- ============ SCÈNE 01 — LA DESCENTE ============ -->
 <section id="hero" aria-label="Descente : de la mer à l'intérieur du Barrel Pub">
-  <h1 class="visually-hidden">Barrel Pub Cannes — le pub américain du Carré d'Or, ouvert tous les jours de 18h à 5h</h1>
+  <h1 class="visually-hidden">Barrel Pub Cannes — le pub américain et la cuisine maison du Carré d'Or, ouvert 364 jours par an de 18h à 5h</h1>
   <canvas id="hero-canvas" aria-label="Séquence filmée : on descend la Croisette, on passe la porte verte, on entre dans le pub"></canvas>
   <div class="hero-vignette" aria-hidden="true"></div>
   <div class="scene-num hero-num">01 / 05</div>
@@ -108,7 +116,7 @@
   <!-- 4 -->
   <div class="cue" id="ov-4" data-in="0.39" data-out="0.50">
     <p><span class="ov-line"><span>…il y a une porte qui ne</span></span><span class="ov-line"><span>ferme presque jamais.</span></span></p>
-    <span class="ov-subline">Ouvert 18h–5h, 7j/7</span>
+    <span class="ov-subline">Ouvert 18h–5h, 364 jours par an</span>
   </div>
   <!-- 5 -->
   <div class="cue" id="ov-5" data-in="0.56" data-out="0.66">
@@ -116,7 +124,7 @@
   </div>
   <!-- 6 -->
   <div class="cue" id="ov-6" data-in="0.72" data-out="0.82">
-    <p><span class="ov-line"><span>La première,</span></span><span class="ov-line"><span>c'est la meilleure.</span></span></p>
+    <p><span class="ov-line"><span>Le chien, lui,</span></span><span class="ov-line"><span>t'attendait.</span></span></p>
   </div>
   <!-- final -->
   <div class="cue cue--card cue--final" id="ov-final" data-in="0.88" data-out="1">
@@ -156,7 +164,7 @@
       <!-- Mouvement 3 — l'horloge live (JS ne fait que remplacer ; l'info reste juste sans JS) -->
       <div class="clock" data-reveal>
         <span class="clock-dot" id="clockDot" aria-hidden="true"></span>
-        <span class="clock-txt" id="clockTxt">Ouvert tous les jours — 18H → 05H</span>
+        <span class="clock-txt" id="clockTxt">Ouvert 364 jours par an — 18H → 05H</span>
         <span class="clock-city">Heure de Cannes</span>
       </div>
     </div>
@@ -168,15 +176,15 @@
     <div class="scene-inner">
       <div class="marker"><span class="tag">03 / 05</span><span>Le jeu &amp; les soirées</span></div>
       <div class="jeu-head" data-reveal>
-        <span class="eyebrow">Ce n'est pas un restaurant</span>
+        <span class="eyebrow">On mange ici, et on reste</span>
         <h2 id="jeu-title" data-split data-glitch><span class="ov-line"><span>On vient pour un verre.</span></span><span class="ov-line"><span>On repart à 5h.</span></span></h2>
-        <p class="lede">Billard vintage au tapis léopard, fléchettes, babyfoot, arcade, photobooth <strong>« Ta Bobine »</strong>, DJ &amp; karaoké, 10 écrans sport. Et un tatoueur résident, sur demande.</p>
+        <p class="lede">Pub, cuisine, terrasses, jeux, sport, nuit — tout au même endroit. Billard vintage au tapis léopard, fléchettes, babyfoot, arcade, photobooth <strong>« Ta Bobine »</strong>, DJ &amp; karaoké, 10 écrans sport. Et un tatoueur résident, sur demande.</p>
       </div>
 
       <!-- Mouvement 4 — le jeu : mosaïque asymétrique, légendes mono -->
       <div class="mosaic" data-reveal-stagger>
         <figure class="tile w2 h2"><img src="assets/photos/salle-billard-bleue.webp" width="1200" height="1600" alt="La salle de billard du fond, baignée de bleu néon" loading="lazy" decoding="async"><figcaption>La salle du fond</figcaption></figure>
-        <figure class="tile w4"><img src="assets/photos/photobooth-ta-bobine.webp" width="1600" height="1067" alt="Le photobooth Ta Bobine : quatre flashs pour trois euros" loading="lazy" decoding="async"><figcaption>Ta Bobine — 4 flashs, 3€</figcaption></figure>
+        <figure class="tile w4"><img src="assets/photos/photobooth-ta-bobine.webp" width="1600" height="1067" alt="Le photobooth Ta Bobine : quatre flashs pour quatre euros" loading="lazy" decoding="async"><figcaption>Ta Bobine — 4 flashs, 4€</figcaption></figure>
         <figure class="tile w2"><img src="assets/photos/flechettes.webp" width="1067" height="1600" alt="Cible de fléchettes du pub" loading="lazy" decoding="async"><figcaption>Fléchettes</figcaption></figure>
         <figure class="tile w2"><img src="assets/photos/chien-billard-01.webp" width="1600" height="1581" alt="Un chien de la maison qui surveille le billard" loading="lazy" decoding="async"><figcaption>Il surveille le jeu</figcaption></figure>
         <figure class="tile w2 h2"><img src="assets/photos/billard-joueur.webp" width="1200" height="1600" alt="Un joueur penché sur le billard" loading="lazy" decoding="async"><figcaption>Black Ball live</figcaption></figure>
@@ -192,7 +200,9 @@
       <!-- Mouvement 6 — la nuit : carrousel horizontal + la moto -->
       <div class="night-head" data-reveal>
         <span class="eyebrow">Quand la nuit prend le relais</span>
-        <p class="neon small alexa">Fuck Alexa,<br>Siri me your play…</p>
+        <!-- Transcription vérifiée sur neon-playlist-foule / -large / -nb : le néon réel
+             dit « FUCK NUDES SEND ME YOUR PLAYLIST », en blanc-bleu froid (pas rose). -->
+        <p class="neon small playlist">FUCK NUDES,<br>SEND ME YOUR PLAYLIST</p>
       </div>
 
       <div class="night-carousel" id="nightCarousel" aria-label="La nuit au Barrel, en images">
@@ -236,7 +246,7 @@
         <li><b>Billard · Fléchettes</b><span>Babyfoot, arcade, et le tapis léopard maison.</span></li>
         <li><b>DJ &amp; Karaoké</b><span>La cabine tourne tard, le micro est à toi.</span></li>
         <li><b>10 écrans sport</b><span>Toutes les retransmissions, jusqu'à la dernière minute.</span></li>
-        <li><b>Ta Bobine · 3€</b><span>Quatre flashs, une bande souvenir.</span></li>
+        <li><b>Ta Bobine · 4€</b><span>Quatre flashs, une bande souvenir.</span></li>
         <li><b>Tatoueur résident</b><span>Sur demande, quand la soirée le décide.</span></li>
       </ul>
     </div>
@@ -247,7 +257,10 @@
     <div class="scene-inner">
       <div class="marker"><span class="tag">04 / 05</span><span>La carte</span></div>
       <span class="eyebrow">À table, ou au comptoir</span>
-      <h2 id="carte-title" data-split data-glitch style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin:12px 0 clamp(36px,5vh,56px)"><span class="ov-line"><span>La carte.</span></span></h2>
+      <h2 id="carte-title" data-split data-glitch style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin:12px 0 clamp(24px,3vh,36px)"><span class="ov-line"><span>La carte.</span></span></h2>
+      <!-- À FAIRE VALIDER PAR EVA — détails de production non vérifiés (pain brioché,
+           viande fraîche). Ne rien ajouter d'autre sans confirmation de sa part. -->
+      <p class="carte-lede" data-reveal>Burgers maison, pain brioché, viande fraîche. Service dès 18h.</p>
 
       <div class="menu-cols" data-reveal>
         <div class="menu-cat">
@@ -308,14 +321,14 @@
       <div class="marker"><span class="tag">05 / 05</span><span>La terrasse &amp; les infos</span></div>
       <div style="max-width:70ch;margin-bottom:clamp(40px,6vh,80px)" data-reveal>
         <span class="eyebrow">On ressort — mais de nuit</span>
-        <h2 id="sortie-title" data-split data-glitch style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin-top:12px"><span class="ov-line"><span>Deux terrasses,</span></span><span class="ov-line"><span>une rue, la nuit.</span></span></h2>
+        <h2 id="sortie-title" data-split data-glitch style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin-top:12px"><span class="ov-line"><span>Trois terrasses,</span></span><span class="ov-line"><span>une rue piétonne,</span></span><span class="ov-line"><span>la nuit.</span></span></h2>
       </div>
 
       <!-- Mouvement 9 — les chiffres (odomètre au scroll) + l'équipe -->
       <div class="lieu-row">
         <div class="stats" data-reveal-stagger>
-          <div class="stat"><b data-count="2">2</b><span>terrasses</span></div>
-          <div class="stat"><b data-count="150">150</b><span>places extérieur</span></div>
+          <div class="stat"><b data-count="3">3</b><span>terrasses</span></div>
+          <div class="stat"><b data-count="170">170</b><span>places extérieur</span></div>
           <div class="stat"><b data-count="60">60</b><span>places intérieur</span></div>
           <div class="stat"><b data-count="600" data-suffix="+">600+</b><span>de capacité</span></div>
           <div class="stat"><b data-count="10">10</b><span>écrans sport</span></div>
@@ -398,6 +411,17 @@
         <a class="btn ghost ig-cta" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener">Suivre sur Instagram</a>
       </div>
 
+      <!-- §2.4 — l'argument « tout au même endroit, accessible à tous ».
+           Aucun chiffre de prix tant qu'Eva ne les a pas donnés.
+           Formulation « un des seuls » (pas « le seul ») : c'est sa formulation,
+           et c'est la seule qui soit vérifiable. -->
+      <div class="tout-dedans" data-reveal>
+        <span class="eyebrow">Un des seuls endroits à Cannes à tout réunir</span>
+        <h3 class="td-wall"><span class="ov-line"><span>Un seul endroit.</span></span><span class="ov-line"><span>Tout dedans.</span></span></h3>
+        <p class="td-list">Cuisine, billard, fléchettes, babyfoot, arcade, photobooth, DJ, karaoké, 10&nbsp;écrans sport, trois terrasses.</p>
+        <p class="td-prix">Des marques premium au prix du quartier.<br>Ouvert 364 jours par an, de 18h à 5h.</p>
+      </div>
+
       <div class="infos" data-reveal>
         <img class="infos-bg" src="assets/photos/facade-crepuscule.webp" width="1204" height="1505" alt="" aria-hidden="true" loading="lazy" decoding="async">
         <div class="infos-data">
@@ -405,13 +429,13 @@
           17 rue du Docteur Gérard Monod<br>
           06400 CANNES<br>
           <span class="k" data-scramble>43.5513°N / 7.0128°E</span><br><br>
-          TOUS LES JOURS — 18H00 → 05H00<br>
+          364 JOURS PAR AN — 18H00 → 05H00<br>
           <a href="tel:+33687361110">06 87 36 11 10</a><br>
           <a href="mailto:lebarrelpubcannes@gmail.com">lebarrelpubcannes@gmail.com</a><br>
           <a href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener">@barrelpubcannes</a><br><br>
-          <span class="k">2 terrasses · 150 places extérieur · 60 intérieur</span><br>
+          <span class="k">3 terrasses · 170 places extérieur · 60 intérieur</span><br>
           <span class="k">Capacité 600+ · 1000+ avec la rue</span><br>
-          <span class="k">Privatisations sur demande</span>
+          <span class="k">Privatisation partielle ou intégrale — de 10 à 600 personnes</span>
         </div>
         <div class="infos-side">
           <h3>Une soirée, un anniversaire, une équipe entière ?</h3>
@@ -444,7 +468,10 @@
   <!-- ============ FOOTER ============ -->
   <footer class="site-foot">
     <a class="foot-brand brand" href="/" aria-label="Barrel Pub Cannes"><svg><use href="#brand"></use></svg></a>
-    <div class="foot-count">Make it count</div>
+    <!-- « Make it count » était en réalité le slogan déposé imprimé sur le fût
+         publicitaire Jack Daniel's du bar — pas une phrase du Barrel. Remplacé par un
+         vrai néon de la maison (photo : neon-exactly-biblio). -->
+    <div class="foot-count">You are exactly where you need to be</div>
     <nav class="foot-links" aria-label="Pied de page">
       <a href="contact.html">Contact &amp; réservation</a>
       <a href="tel:+33687361110">06 87 36 11 10</a>
@@ -452,7 +479,7 @@
       <a href="https://www.google.com/maps/search/?api=1&query=Barrel+Pub+Cannes" target="_blank" rel="noopener">17 rue du Dr Gérard Monod, Cannes</a>
       <a href="#hero">Retour en haut</a>
     </nav>
-    <div class="foot-legal">Tous les jours 18h → 5h · Site <a href="https://azzagency.fr" target="_blank" rel="noopener">AZZAGENCY</a></div>
+    <div class="foot-legal">364 jours par an, 18h → 5h · Site <a href="https://azzagency.fr" target="_blank" rel="noopener">AZZAGENCY</a></div>
   </footer>
 </main>
 
