@@ -300,6 +300,44 @@ main{position:relative;z-index:2;background:var(--noir)}
    unobserve ou en ajustant contain-intrinsic-size : content-visibility ne se marie
    pas avec une révélation au scroll qui désabonne ses cibles. Si le gain est
    souhaité un jour, ce sera un lot dédié avec vérification chapitre par chapitre. */
+/* ---------- V2.5 §2 — ZONES TACTILES, sans bouger la mise en page ----------
+   Un pseudo-élément centré déborde de l'élément et capte le toucher : la taille
+   visible ne change pas, rien ne se décale. Réservé à pointer:coarse pour ne pas
+   créer de zones fantômes à la souris.
+   On utilise ::before car ::after est déjà pris par le soulignement animé de .ul.
+
+   LES 44 PX NE SONT PAS APPLICABLES PARTOUT — mesuré, pas supposé :
+   · .foot-links a : 33 px centre à centre. Un carré de 44 px ferait chevaucher
+     deux liens voisins de 11 px. Plafonné à 32 px.
+   · .infos-data a : 27 px centre à centre (lignes séparées par <br>).
+     Plafonné à 26 px.
+   Monter ces deux groupes à 44 px imposerait d'écarter les lignes, donc de bouger
+   la mise en page d'un site validé — ce que ce lot interdit. Le gain reste réel :
+   19→32 px et 17→26 px, sans aucun chevauchement. */
+@media (pointer:coarse){
+  .skip,.site-head .brand,.head-cta,
+  .rev-link,.ig-handle,
+  .foot-links a,.infos-data a,.foot-legal a{position:relative}
+
+  .skip::before,.site-head .brand::before,.head-cta::before,
+  .rev-link::before,.ig-handle::before,
+  .foot-links a::before,.infos-data a::before,.foot-legal a::before{
+    content:"";position:absolute;left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    pointer-events:auto;
+  }
+
+  /* isolés verticalement : 44 px pleins */
+  .skip::before,.site-head .brand::before,.head-cta::before,
+  .rev-link::before,.ig-handle::before{
+    width:max(100%,44px);height:max(100%,44px);
+  }
+  /* voisins rapprochés : plafonnés à l'espacement mesuré */
+  .foot-links a::before{width:max(100%,44px);height:max(100%,32px)}
+  .infos-data a::before{width:max(100%,44px);height:max(100%,26px)}
+  .foot-legal a::before{width:max(100%,44px);height:max(100%,30px)}
+}
+
 .scene-inner{max-width:1320px;margin:0 auto;position:relative;z-index:2}
 .marker{
   font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--gris);
