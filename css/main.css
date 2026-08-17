@@ -290,21 +290,16 @@ body.has-cursor a, body.has-cursor button{cursor:none}
 main{position:relative;z-index:2;background:var(--noir)}
 .scene{position:relative;padding:clamp(90px,15vh,190px) var(--pad);overflow:hidden}
 
-/* V2.4 §3 / §5.1 — content-visibility sur les sections situées sous le premier
-   écran : le navigateur ne calcule plus la mise en page de ce qui n'est pas visible.
-   VOLONTAIREMENT EXCLUS :
-   · #hero — section pinnée par ScrollTrigger, toute mesure faussée casse le scrub ;
-   · #scene-seuil — cible d'ancre (lien d'évitement + CTA du hero), sauter dessus
-     exigerait une hauteur déjà calculée.
-   contain-intrinsic-size = hauteur réellement mesurée, pour que la barre de scroll
-   ne bouge pas quand la section se matérialise. */
-#scene-jeu,#scene-carte,#scene-sortie,#venir{
-  content-visibility:auto;
-}
-#scene-jeu{contain-intrinsic-size:auto 8862px}
-#scene-carte{contain-intrinsic-size:auto 9400px}
-#scene-sortie{contain-intrinsic-size:auto 4397px}
-#venir{contain-intrinsic-size:auto 793px}
+/* V2.5 §1 — le bloc content-visibility du lot V2.4 est SUPPRIMÉ.
+   Il rendait invisibles toutes les images à partir du chapitre carte : un sous-arbre
+   en content-visibility:auto non rendu ne produit pas de rectangles valides, donc
+   l'IntersectionObserver des [data-reveal] mesurait faux, se déclenchait au mauvais
+   moment — et comme il désabonne ses cibles (unobserve) après le premier
+   déclenchement, les éléments restaient à opacity:0 définitivement.
+   Ne pas le réintroduire en le limitant à certaines sections, en retirant le
+   unobserve ou en ajustant contain-intrinsic-size : content-visibility ne se marie
+   pas avec une révélation au scroll qui désabonne ses cibles. Si le gain est
+   souhaité un jour, ce sera un lot dédié avec vérification chapitre par chapitre. */
 .scene-inner{max-width:1320px;margin:0 auto;position:relative;z-index:2}
 .marker{
   font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--gris);
