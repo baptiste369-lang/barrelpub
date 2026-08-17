@@ -1,37 +1,169 @@
+# ============================================================
+#  BARREL PUB CANNES — configuration de déploiement Netlify
+#  Site statique, aucun build step, aucune dépendance.
+#  Une seule source de vérité : ce fichier. Pas de _headers,
+#  pas de _redirects — deux fichiers qui disent la même chose
+#  finissent toujours par se contredire.
+# ============================================================
+
 [build]
   publish = "."
+  command = ""
 
-# Assets versionnés et lourds : cache long, immuable
+# ------------------------------------------------------------
+#  Post-traitement
+#  On coupe la minification et le bundling : le CSS et le JS
+#  sont écrits et ordonnés à la main, on ne laisse personne y
+#  toucher. On coupe la compression d'images : les WebP sont
+#  déjà calibrés (≤1600 px, q80) et les 454 frames du hero
+#  doivent rester bit-à-bit identiques entre desktop et mobile.
+#  On garde le post-traitement actif globalement : c'est lui
+#  qui détecte le formulaire de contact.
+# ------------------------------------------------------------
+[build.processing]
+  skip_processing = false
+
+# pretty_urls désactivé volontairement : les liens internes, le
+# sitemap et les canonical pointent tous vers /contact.html.
+# Activé, Netlify redirigerait chaque clic en 301 vers /contact
+# — un aller-retour réseau gratuit sur chaque navigation, et
+# deux URL pour une même page. Les URL courtes sont quand même
+# servies, en réécriture 200, plus bas.
+[build.processing.html]
+  pretty_urls = false
+
+[build.processing.css]
+  bundle = false
+  minify = false
+
+[build.processing.js]
+  bundle = false
+  minify = false
+
+[build.processing.images]
+  compress = false
+
+# ------------------------------------------------------------
+#  CACHE
+#  Règle : tout ce dont le nom de fichier ne change jamais mais
+#  dont le contenu peut changer se revalide. Tout ce qui est
+#  figé pour toujours part en immutable un an.
+#  Netlify applique toutes les règles qui matchent, la plus
+#  spécifique gagne sur un même en-tête.
+# ------------------------------------------------------------
+
+# Défaut : on revalide. S'applique au HTML, qui doit toujours
+# être frais sinon une mise à jour de contenu n'arrive jamais.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Les 454 frames du hero. Un nom = une image, pour toujours.
 [[headers]]
   for = "/frames/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Photos, fontes, logo, grain.
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Les fontes ont besoin de CORS : elles sont chargées en
+# crossorigin depuis le CSS.
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Access-Control-Allow-Origin = "*"
+
+# GSAP, ScrollTrigger, CustomEase, Lenis — versions figées,
+# vendorisées. Jamais de CDN.
 [[headers]]
   for = "/vendor/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# HTML : toujours revalider
+# CSS et JS sont appelés avec ?v=N. On revalide quand même :
+# un ETag coûte une requête à 304, un CSS périmé coûte un site
+# cassé chez un visiteur qui revient.
 [[headers]]
-  for = "/*.html"
+  for = "/css/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Headers de sécurité de base
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# ------------------------------------------------------------
+#  SÉCURITÉ
+#  Le site ne charge rien d'externe : aucun CDN, aucun script
+#  tiers, aucune iframe. La CSP peut donc être stricte.
+#  'unsafe-inline' reste nécessaire pour le JSON-LD et les
+#  quelques styles inline du SVG de marque.
+#  media-src ajouté en V2.4 avec la vidéo du chien : elle
+#  passerait déjà par la retombée sur default-src, mais une
+#  directive explicite évite qu'un futur durcissement de
+#  default-src ne casse la vidéo sans qu'on comprenne pourquoi.
+# ------------------------------------------------------------
 [[headers]]
   for = "/*"
   [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), camera=(), microphone=()"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
 
+# ------------------------------------------------------------
+#  REDIRECTIONS
+#  Rien avant le 404 : une règle catch-all placée trop haut
+#  avale tout le site.
+# ------------------------------------------------------------
+
+# URL courtes servies en réécriture (200), sans redirection :
+# /contact affiche la page, l'URL canonique reste /contact.html.
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/reservation"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/menu"
+  to = "/#scene-carte"
+  status = 301
+
+# Anciennes URL éventuelles de la v1.
+[[redirects]]
+  from = "/accueil"
+  to = "/"
+  status = 301
+  force = true
+
+# Filet final. Netlify sert déjà 404.html tout seul, cette
+# ligne garantit le bon code de statut.
 [[redirects]]
   from = "/*"
   to = "/404.html"
