@@ -42,6 +42,163 @@
   }
 
   /* =====================================================================
+     V2.4 §2 — L'ÉCRAN D'ENTRÉE
+     Habillage du préchargeur existant. UN SEUL mécanisme de verrouillage dans la
+     page : la classe is-locked, posée par le HTML et retirée par reveal() de
+     hero.js. Ce bloc ne pose JAMAIS is-locked et ne touche à aucun état de hero.js.
+
+     Les trois conditions du cahier des charges, tenues ici :
+     1. La libération à 4 s n'a lieu QUE si le ScrollTrigger du hero existe déjà —
+        sinon on libérerait le scroll avant que le pin existe, et la page saute.
+        Si le trigger n'est pas là, on attend ; le failsafe 7 s de hero.js reprend
+        la main. Le bouton PASSER, lui, est une action explicite de l'utilisateur :
+        il libère tout de suite (§2.4, « personne ne doit être prisonnier »).
+     2. Les 60 premières frames sont comptées DE L'EXTÉRIEUR, via un
+        PerformanceObserver sur les entrées `resource` contenant `frames/`.
+        On observe, on ne pilote pas : hero.js reste seul maître de son
+        préchargement et continue de charger les 227 frames derrière.
+     3. Le point de sortie retire is-locked et marque le préchargeur terminé.
+        Rien d'autre.
+     ===================================================================== */
+  (function () {
+    var loader = q("#loader");
+    if (!loader) return;
+
+    var bar   = q("#entryBar");
+    var pct   = q("#entryPct");
+    var fill  = q("#entryFill");
+    var ready = q("#entryReady");
+    var copy  = q("#entryCopy");
+    var skip  = q("#entrySkip");
+
+    var HARD_CAP = 4000;      // §2.4 — plafond dur
+    var FRAMES_TARGET = 60;   // §2.3 — 60 frames suffisent pour démarrer
+
+    // §2.4 — « une seule fois par session », sans sessionStorage (interdit par le
+    // projet) et sans variable mémoire (elle serait remise à zéro au rechargement).
+    // On regarde d'où vient le visiteur : s'il arrive d'une autre page du site, il
+    // a déjà vu l'accueil complet. On garde le verrou et la progression — seul le
+    // texte de bienvenue saute, et le voile part vite puisque tout est en cache.
+    var fromSite = false;
+    try {
+      fromSite = !!document.referrer &&
+                 new URL(document.referrer).origin === location.origin;
+    } catch (e) {}
+    if (fromSite && copy) copy.hidden = true;
+
+    /* ---------- progression pondérée (§2.3) : 60 / 20 / 20 ---------- */
+    var wFrames = 0, wFonts = 0, wImgs = 0, shown = -1, released = false;
+
+    function paint() {
+      var p = Math.round(wFrames * 60 + wFonts * 20 + wImgs * 20);
+      if (p > 100) p = 100;
+      if (p === shown) return;
+      shown = p;
+      if (bar)  bar.style.width = p + "%";
+      if (pct)  pct.textContent = (p < 10 ? "0" : "") + p;
+      if (fill) fill.style.clipPath = "inset(" + (100 - p) + "% 0 0 0)";
+      if (p >= 100) finish();
+    }
+
+    // (2) on OBSERVE les frames, on ne les pilote pas
+    var seen = 0;
+    if ("PerformanceObserver" in window) {
+      try {
+        var po = new PerformanceObserver(function (list) {
+          list.getEntries().forEach(function (en) {
+            if (en.name && en.name.indexOf("frames/") !== -1) seen++;
+          });
+          wFrames = clamp(seen / FRAMES_TARGET, 0, 1);
+          paint();
+          if (wFrames >= 1) { try { po.disconnect(); } catch (e) {} }
+        });
+        po.observe({ type: "resource", buffered: true });
+      } catch (e) { wFrames = 1; }
+    } else { wFrames = 1; }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { wFonts = 1; paint(); });
+    } else { wFonts = 1; }
+
+    // images du premier écran après le hero
+    var firstImgs = qa("#scene-seuil img");
+    if (!firstImgs.length) { wImgs = 1; }
+    else {
+      var done = 0;
+      firstImgs.forEach(function (im) {
+        if (im.complete) { done++; return; }
+        var bump = function () { done++; wImgs = done / firstImgs.length; paint(); };
+        im.addEventListener("load", bump, { once: true });
+        im.addEventListener("error", bump, { once: true });
+      });
+      wImgs = done / firstImgs.length;
+    }
+    paint();
+
+    /* ---------- (3) le point de sortie : deux gestes, pas un de plus ---------- */
+    function release() {
+      if (released) return;                       // idempotent
+      released = true;
+      document.documentElement.classList.remove("is-locked");
+      loader.classList.add("gone");
+      // §2.4 — on rend un vrai focus au document
+      var target = q("#hero h1") || document.body;
+      if (target) {
+        target.setAttribute("tabindex", "-1");
+        try { target.focus({ preventScroll: true }); } catch (e) {}
+      }
+    }
+
+    // (1) le pin du hero existe-t-il déjà ?
+    function heroPinReady() {
+      if (!window.ScrollTrigger || !ScrollTrigger.getAll) return false;
+      return ScrollTrigger.getAll().some(function (t) {
+        return t.trigger && t.trigger.id === "hero";
+      });
+    }
+
+    function finish() {
+      if (ready && copy && !fromSite) { copy.hidden = true; ready.hidden = false; }
+      else if (ready) { ready.hidden = false; }
+      if (heroPinReady()) release();
+      // sinon : on ne force rien, la boucle du plafond ci-dessous s'en charge
+    }
+
+    // §2.4 — plafond dur à 4 s, mais jamais avant que le pin existe.
+    // Entre 4 s et 7 s on sonde ; passé 7 s le failsafe de hero.js a déjà rendu
+    // la main de toute façon, donc on cesse de sonder.
+    setTimeout(function () {
+      if (released) return;
+      if (heroPinReady()) { release(); return; }
+      var poll = setInterval(function () {
+        if (released || heroPinReady()) { clearInterval(poll); release(); }
+      }, 100);
+      setTimeout(function () { clearInterval(poll); }, 3200);
+    }, HARD_CAP);
+
+    // §2.4 — PASSER : action explicite, libère immédiatement
+    if (skip) skip.addEventListener("click", release);
+
+    // Le compteur doit atteindre 100 %, quel que soit le chemin qui a rendu la main.
+    // Sans ça il plafonne : au rechargement, les frames servies depuis le cache
+    // mémoire ne produisent plus d'entrées `resource`, le PerformanceObserver n'en
+    // voit qu'une partie (mesuré : 45 sur 60, soit 85 %) et « Prêt » ne s'affiche
+    // jamais — exactement le compteur menteur que le §6.3 interdit.
+    // On OBSERVE donc la levée du verrou (par reveal() de hero.js ou par nous) et
+    // on complète l'affichage à ce moment : le 100 % correspond alors à un site
+    // réellement prêt. On observe, on ne pilote pas.
+    if ("MutationObserver" in window) {
+      var lockObs = new MutationObserver(function () {
+        if (document.documentElement.classList.contains("is-locked")) return;
+        lockObs.disconnect();
+        wFrames = wFonts = wImgs = 1;
+        paint();
+      });
+      lockObs.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    }
+  })();
+
+  /* =====================================================================
      V2.4 §3 — ignoreMobileResize
      Sur mobile, la barre d'URL qui se rétracte déclenche un resize et ScrollTrigger
      recalcule tout en plein scroll. On le lui interdit. Appelé ici et non dans

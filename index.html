@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=6">
+<link rel="stylesheet" href="css/main.css?v=7">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -77,13 +77,35 @@
 <div class="cursor-dot" aria-hidden="true"></div>
 
 <!-- ============ LOADER ============ -->
-<div id="loader" role="status" aria-live="polite" aria-label="Chargement de la descente">
+<!-- ============ V2.4 §2 — L'ÉCRAN D'ENTRÉE ============
+     C'est un HABILLAGE du préchargeur existant, pas un remplaçant : on garde le
+     même #loader et la même classe is-locked. Il n'y a donc qu'UN SEUL mécanisme
+     de verrouillage dans la page, et reveal() de hero.js reste le point de sortie
+     principal (plus son failsafe 7 s, intouché).
+
+     Les ids que pilotait hero.js (lmFill, lbar, lpct) ont volontairement disparu :
+     hero.js les cherche avec getElementById et les protège par `if (lbar)`, donc
+     ses écritures de progression deviennent de simples no-op. Aucune ligne de
+     hero.js n'est modifiée. La progression affichée est désormais la progression
+     pondérée du §2.3 (60 frames / fontes / images du premier écran), pilotée par
+     main.js, ce qui évite d'avoir deux progressions différentes à l'écran. -->
+<div id="loader" role="status" aria-live="polite" aria-label="Chargement de l'expérience">
   <div class="loader-mark">
     <span class="lm-base brand"><svg><use href="#brand"></use></svg></span>
-    <span class="lm-fill brand" id="lmFill"><svg><use href="#brand"></use></svg></span>
+    <span class="lm-fill brand" id="entryFill"><svg><use href="#brand"></use></svg></span>
   </div>
-  <div class="load-bar"><i id="lbar"></i></div>
-  <div class="load-pct"><b id="lpct">0</b>% — on descend</div>
+
+  <div class="entry-copy" id="entryCopy">
+    <p class="entry-kicker">Bienvenue dans l'expérience</p>
+    <p class="entry-line">Ceci est un site immersif.</p>
+    <p class="entry-line entry-line--dim">Laissez-le charger — quelques secondes, et il est à vous.</p>
+  </div>
+  <p class="entry-ready" id="entryReady" hidden>Prêt — faites défiler</p>
+
+  <div class="load-bar"><i id="entryBar"></i></div>
+  <div class="load-pct"><b id="entryPct">00</b>&nbsp;%</div>
+
+  <button type="button" class="entry-skip" id="entrySkip">Passer</button>
 </div>
 
 <!-- ============ HEADER ============ -->
@@ -730,6 +752,6 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=6"></script>
+<script src="js/main.js?v=8"></script>
 </body>
 </html>

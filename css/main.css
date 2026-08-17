@@ -127,6 +127,52 @@ body.has-cursor a, body.has-cursor button{cursor:none}
 .load-pct{font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--gris)}
 .load-pct b{font-weight:500;color:var(--blanc)}
 
+/* ---------- V2.4 §2 — l'écran d'entrée (habillage du préchargeur) ---------- */
+#loader{gap:clamp(22px,3.4vh,34px);padding:var(--pad);text-align:center}
+/* §2.1 — le voile se lève en 0,9 s avec l'easing du site */
+#loader{transition:opacity .9s var(--ease)}
+
+.entry-copy{display:flex;flex-direction:column;gap:10px;max-width:46ch}
+.entry-kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--bleu-clair);text-shadow:0 0 12px rgba(0,163,255,.55);
+}
+.entry-line{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(19px,2.7vw,30px);line-height:1.35;color:var(--blanc);
+}
+.entry-line--dim{
+  font-family:var(--sans);font-style:normal;
+  font-size:clamp(13px,1.5vw,15px);line-height:1.6;color:var(--gris);
+}
+.entry-ready{
+  font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+  color:#dfeeff;text-shadow:0 0 10px rgba(0,163,255,.85),0 0 30px rgba(43,92,255,.6);
+}
+.entry-ready[hidden]{display:none}
+
+/* §2.4 — bouton PASSER : personne n'est prisonnier d'une animation */
+.entry-skip{
+  position:absolute;right:var(--pad);bottom:var(--pad);
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gris);border:1px solid rgba(237,232,224,.28);
+  padding:12px 20px;min-height:44px;                 /* zone tactile 44 px (§4) */
+  transition:color .3s var(--ease),border-color .3s var(--ease);
+}
+.entry-skip:hover,.entry-skip:focus-visible{color:var(--blanc);border-color:var(--blanc)}
+
+@media (max-width:560px){
+  .entry-skip{right:50%;transform:translateX(50%);bottom:24px}
+}
+
+/* §2.4 — mouvement réduit : le texte s'affiche, le voile part en 200 ms,
+   aucune animation de barre ni de remplissage du logo. */
+@media (prefers-reduced-motion:reduce){
+  #loader{transition:opacity .2s linear}
+  .load-bar{display:none}
+  .loader-mark .lm-fill{transition:none;clip-path:inset(0 0 0 0)}
+}
+
 /* =====================================================================
    HEADER
    ===================================================================== */
