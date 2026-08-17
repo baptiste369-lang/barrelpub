@@ -42,6 +42,35 @@
   }
 
   /* =====================================================================
+     V2.4 §3 — ignoreMobileResize
+     Sur mobile, la barre d'URL qui se rétracte déclenche un resize et ScrollTrigger
+     recalcule tout en plein scroll. On le lui interdit. Appelé ici et non dans
+     hero.js (intouchable) : ScrollTrigger est global et main.js est parsé bien avant
+     que hero.js ne crée son trigger — la config est donc en place à temps.
+     ===================================================================== */
+  if (window.ScrollTrigger && ScrollTrigger.config) {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+  }
+
+  /* =====================================================================
+     V2.4 §3 — will-change UNIQUEMENT pendant l'animation
+     Il était permanent sur [data-skew] (des dizaines d'éléments), .mq-track et
+     .seuil-shot img : autant de couches de composition maintenues en permanence.
+     On le pose à l'entrée dans le viewport, on le retire à la sortie.
+     ===================================================================== */
+  if (!REDUCE && "IntersectionObserver" in window) {
+    var wcEls = qa("[data-skew], .mq-track, .seuil-shot img");
+    if (wcEls.length) {
+      var wio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          e.target.classList.toggle("is-anim", e.isIntersecting);
+        });
+      }, { rootMargin: "120px 0px" });
+      wcEls.forEach(function (el) { wio.observe(el); });
+    }
+  }
+
+  /* =====================================================================
      RÉVÉLATIONS · SPLIT-TEXT · GLITCH  (IntersectionObserver)
      ===================================================================== */
   var revealTargets = qa("[data-reveal],[data-reveal-stagger],[data-wall],[data-split]");

@@ -25,12 +25,12 @@
 <meta name="twitter:description" content="Pub américain à Cannes, 364 jours par an, 18h → 5h.">
 <meta name="twitter:image" content="https://barrelpubcannes.fr/assets/photos/facade-nuit.webp">
 
-<link rel="preload" as="image" href="frames/desktop/f_001.webp" media="(min-width:768px)">
-<link rel="preload" as="image" href="frames/mobile/f_001.webp" media="(max-width:767px)">
+<link rel="preload" as="image" href="frames/desktop/f_001.webp" fetchpriority="high" media="(min-width:768px)">
+<link rel="preload" as="image" href="frames/mobile/f_001.webp" fetchpriority="high" media="(max-width:767px)">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=5">
+<link rel="stylesheet" href="css/main.css?v=6">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -147,7 +147,7 @@
     <div class="scene-inner">
       <div class="marker"><span class="tag">02 / 05</span><span>Le seuil</span></div>
       <figure class="estab-band" data-reveal>
-        <img src="assets/photos/facade-nuit.webp" width="1350" height="1600" alt="La façade verte du Barrel Pub, la nuit, rue du Docteur Gérard Monod" loading="lazy" decoding="async">
+        <img src="assets/photos/facade-nuit.webp" width="1350" height="1600" alt="La façade verte du Barrel Pub, la nuit, rue du Docteur Gérard Monod" loading="lazy" fetchpriority="low" decoding="async">
         <figcaption>17 rue du Docteur Gérard Monod — il fait nuit, la porte est ouverte</figcaption>
       </figure>
       <div class="seuil-grid">
@@ -160,7 +160,7 @@
           <p class="lede seuil-copy" data-reveal>Dehors, la carte postale. Ici, le bois, le néon bleu et le tapis léopard du billard. <strong>Deux chiens veillent sur la maison</strong> — franchis la porte, tu es déjà dedans.</p>
         </div>
         <figure class="seuil-shot" data-reveal>
-          <img class="dogs-parallax" src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens du Barrel assis sur le billard au tapis léopard" loading="lazy" decoding="async">
+          <img class="dogs-parallax" src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens du Barrel assis sur le billard au tapis léopard" loading="lazy" fetchpriority="low" decoding="async">
           <figcaption class="seuil-cap">Les patrons — sur le billard, comme d'habitude</figcaption>
         </figure>
       </div>
@@ -190,7 +190,7 @@
           <source src="assets/video/chien-oeil.mp4"  type="video/mp4">
           <img src="assets/photos/chien-billard-debout.webp" width="1362" height="1600"
                alt="Le chien du Barrel, assis sur le billard au tapis léopard"
-               loading="lazy" decoding="async">
+               loading="lazy" fetchpriority="low" decoding="async">
         </video>
         <figcaption>Il te regarde depuis le billard.</figcaption>
       </figure>
@@ -199,15 +199,15 @@
            Le site n'avait que des plans peuplés. -->
       <div class="seuil-second" data-reveal-stagger>
         <figure class="tile w3">
-          <img src="assets/photos/salle-lanterne.webp" width="1600" height="1066" alt="Une lanterne allumée devant le papier peint baroque rouge de la salle" loading="lazy" decoding="async">
+          <img src="assets/photos/salle-lanterne.webp" width="1600" height="1066" alt="Une lanterne allumée devant le papier peint baroque rouge de la salle" loading="lazy" fetchpriority="low" decoding="async">
           <figcaption>La lanterne, avant l'ouverture</figcaption>
         </figure>
         <figure class="tile">
-          <img src="assets/photos/salle-bleue-vide.webp" width="1200" height="1600" alt="La salle bleue encore vide, avant l'arrivée du monde" loading="lazy" decoding="async">
+          <img src="assets/photos/salle-bleue-vide.webp" width="1200" height="1600" alt="La salle bleue encore vide, avant l'arrivée du monde" loading="lazy" fetchpriority="low" decoding="async">
           <figcaption>La salle bleue, vide</figcaption>
         </figure>
         <figure class="tile">
-          <img src="assets/photos/salle-violette-vide.webp" width="1200" height="1600" alt="La salle violette déserte, les banquettes encore rangées" loading="lazy" decoding="async">
+          <img src="assets/photos/salle-violette-vide.webp" width="1200" height="1600" alt="La salle violette déserte, les banquettes encore rangées" loading="lazy" fetchpriority="low" decoding="async">
           <figcaption>Le lieu qui attend</figcaption>
         </figure>
       </div>
@@ -217,8 +217,8 @@
            logo du header devient interactif (voir .logo-live dans main.js). -->
       <figure class="logo-live" data-reveal>
         <span class="ll-shots">
-          <img src="assets/photos/terrasse-couverte-logo.webp" width="1200" height="1600" alt="La bâche de la terrasse couverte, imprimée de la tête de chien du logo du Barrel" loading="lazy" decoding="async">
-          <img src="assets/photos/terrasse-logo-chien.webp" width="900" height="1600" alt="La tête de chien du logo, imprimée en grand sur la bâche de la terrasse" loading="lazy" decoding="async">
+          <img src="assets/photos/terrasse-couverte-logo.webp" width="1200" height="1600" alt="La bâche de la terrasse couverte, imprimée de la tête de chien du logo du Barrel" loading="lazy" fetchpriority="low" decoding="async">
+          <img src="assets/photos/terrasse-logo-chien.webp" width="900" height="1600" alt="La tête de chien du logo, imprimée en grand sur la bâche de la terrasse" loading="lazy" fetchpriority="low" decoding="async">
         </span>
         <figcaption><span class="eyebrow">Le logo</span><span class="ll-txt">Il n'est pas que sur le site — il est sur la bâche, rue du Docteur Gérard Monod.</span></figcaption>
       </figure>
@@ -253,22 +253,22 @@
            photobooth-equipe reste en PETIT format : le panneau « 3 € » y est encore
            lisible et le tarif est passé à 4 € (§2.1). -->
       <div class="mosaic" data-reveal-stagger>
-        <figure class="tile w2 h2"><img src="assets/photos/salle-billard-bleue.webp" width="1200" height="1600" alt="La salle de billard du fond, baignée de bleu néon" loading="lazy" decoding="async"><figcaption>La salle du fond</figcaption></figure>
-        <figure class="tile w4"><img src="assets/photos/photobooth-ta-bobine.webp" width="1600" height="1067" alt="Le photobooth Ta Bobine : quatre flashs pour quatre euros" loading="lazy" decoding="async"><figcaption>Ta Bobine — 4 flashs, 4€</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/flechettes-02.webp" width="1067" height="1600" alt="La cible de fléchettes du pub, éclairée dans la pénombre" loading="lazy" decoding="async"><figcaption>Fléchettes</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/chien-billard-01.webp" width="1600" height="1581" alt="Un chien de la maison qui surveille le billard" loading="lazy" decoding="async"><figcaption>Il surveille le jeu</figcaption></figure>
-        <figure class="tile w2 h2"><img src="assets/photos/photobooth-cabine.webp" width="1200" height="1600" alt="La cabine du photobooth Ta Bobine, installée dans la salle bleue" loading="lazy" decoding="async"><figcaption>La cabine</figcaption></figure>
-        <figure class="tile w4"><img src="assets/photos/ecrans-sport.webp" width="1600" height="1067" alt="Le mur d'écrans diffusant le sport" loading="lazy" decoding="async"><figcaption>10 écrans</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/fille-lunettes-ecrans.webp" width="1200" height="1600" alt="Une cliente en lunettes de soleil devant les écrans sport, en pleine soirée" loading="lazy" decoding="async"><figcaption>Soir de match</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/photobooth-equipe.webp" width="1600" height="1067" alt="L'équipe serrée dans le photobooth du bar" loading="lazy" decoding="async"><figcaption>Tout le monde dedans</figcaption></figure>
-        <figure class="tile w2 bande-mini"><img src="assets/photos/photobooth-bande-02.webp" width="1280" height="533" alt="Une bande souvenir Ta Bobine, quatre vignettes et le bandeau Barrel Pub Cannes" loading="lazy" decoding="async"><figcaption>Bande souvenir</figcaption></figure>
-        <figure class="tile w2 bande-mini"><img src="assets/photos/photobooth-bande-03.webp" width="1280" height="533" alt="Une autre bande souvenir Ta Bobine, quatre vignettes au flash" loading="lazy" decoding="async"><figcaption>4 flashs, 4€</figcaption></figure>
+        <figure class="tile w2 h2"><img src="assets/photos/salle-billard-bleue.webp" width="1200" height="1600" alt="La salle de billard du fond, baignée de bleu néon" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La salle du fond</figcaption></figure>
+        <figure class="tile w4"><img src="assets/photos/photobooth-ta-bobine.webp" width="1600" height="1067" alt="Le photobooth Ta Bobine : quatre flashs pour quatre euros" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Ta Bobine — 4 flashs, 4€</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/flechettes-02.webp" width="1067" height="1600" alt="La cible de fléchettes du pub, éclairée dans la pénombre" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Fléchettes</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/chien-billard-01.webp" width="1600" height="1581" alt="Un chien de la maison qui surveille le billard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Il surveille le jeu</figcaption></figure>
+        <figure class="tile w2 h2"><img src="assets/photos/photobooth-cabine.webp" width="1200" height="1600" alt="La cabine du photobooth Ta Bobine, installée dans la salle bleue" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La cabine</figcaption></figure>
+        <figure class="tile w4"><img src="assets/photos/ecrans-sport.webp" width="1600" height="1067" alt="Le mur d'écrans diffusant le sport" loading="lazy" fetchpriority="low" decoding="async"><figcaption>10 écrans</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/fille-lunettes-ecrans.webp" width="1200" height="1600" alt="Une cliente en lunettes de soleil devant les écrans sport, en pleine soirée" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Soir de match</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/photobooth-equipe.webp" width="1600" height="1067" alt="L'équipe serrée dans le photobooth du bar" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Tout le monde dedans</figcaption></figure>
+        <figure class="tile w2 bande-mini"><img src="assets/photos/photobooth-bande-02.webp" width="1280" height="533" alt="Une bande souvenir Ta Bobine, quatre vignettes et le bandeau Barrel Pub Cannes" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Bande souvenir</figcaption></figure>
+        <figure class="tile w2 bande-mini"><img src="assets/photos/photobooth-bande-03.webp" width="1280" height="533" alt="Une autre bande souvenir Ta Bobine, quatre vignettes au flash" loading="lazy" fetchpriority="low" decoding="async"><figcaption>4 flashs, 4€</figcaption></figure>
       </div>
 
       <!-- §3bis.7 — flou-leopard : filé de mouvement sur imprimé léopard, utilisé
            UNE SEULE FOIS, en transition pleine largeur, au basculement vers la nuit. -->
       <div class="wipe-leopard" aria-hidden="true">
-        <img src="assets/photos/flou-leopard.webp" width="1600" height="1066" alt="" loading="lazy" decoding="async">
+        <img src="assets/photos/flou-leopard.webp" width="1600" height="1066" alt="" loading="lazy" fetchpriority="low" decoding="async">
       </div>
 
       <!-- Mouvement 6 — la nuit -->
@@ -286,17 +286,17 @@
            allumés en même temps (voir .neon-wall.is-lit dans main.js). -->
       <div class="neon-run" id="neonRun">
         <div class="neon-wall" data-neon>
-          <img class="neon-bg" src="assets/photos/neon-exactly-biblio.webp" width="1600" height="1066" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img class="neon-bg" src="assets/photos/neon-exactly-biblio.webp" width="1600" height="1066" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
           <p class="neon">You are exactly<br>where you need to be</p>
           <span class="neon-step">01 — l'accueil</span>
         </div>
         <div class="neon-wall" data-neon>
-          <img class="neon-bg" src="assets/photos/neon-tequila.webp" width="735" height="1456" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img class="neon-bg" src="assets/photos/neon-tequila.webp" width="735" height="1456" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
           <p class="neon">I didn't text you,<br>tequila did</p>
           <span class="neon-step">02 — le milieu de soirée</span>
         </div>
         <div class="neon-wall" data-neon>
-          <img class="neon-bg" src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img class="neon-bg" src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
           <!-- V2.3 §2 — « Fuck nudes… » est un vrai néon du bar, mais écrit en 86 px
                sur toute la largeur il cesse d'être un clin d'œil au mur du fond pour
                devenir le slogan de l'établissement. Refusé par la cliente.
@@ -311,32 +311,32 @@
              répété trois fois par les reflets d'étagère) est gardé pour le fond du
              bloc, comme demandé ; on ferme en noir et blanc sur neon-playlist-nb. -->
         <div class="neon-strip" data-reveal-stagger>
-          <figure class="tile"><img src="assets/photos/neon-exactly-triptyque.webp" width="900" height="1600" alt="Le néon « You are exactly where you need to be » répété trois fois par les reflets des étagères" loading="lazy" decoding="async"><figcaption>Trois fois, par les reflets</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-exactly-where-02.webp" width="1600" height="1066" alt="Le néon « You are exactly where you need to be » seul, devant la bibliothèque" loading="lazy" decoding="async"><figcaption>Net, sur la bibliothèque</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-foule-02.webp" width="1600" height="1066" alt="Le néon de la playlist au-dessus de la salle pleine" loading="lazy" decoding="async"><figcaption>Au-dessus de la foule</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-portrait.webp" width="1066" height="1600" alt="Le néon de la playlist, cadré à la verticale" loading="lazy" decoding="async"><figcaption>À la verticale</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-large.webp" width="1600" height="1067" alt="Le néon de la playlist dominant la piste bondée" loading="lazy" decoding="async"><figcaption>Plein cadre</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-nb.webp" width="1067" height="1600" alt="Le néon de la playlist, en noir et blanc, en fin de soirée" loading="lazy" decoding="async"><figcaption>Fin de séquence</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/neon-exactly-triptyque.webp" width="900" height="1600" alt="Le néon « You are exactly where you need to be » répété trois fois par les reflets des étagères" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Trois fois, par les reflets</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/neon-exactly-where-02.webp" width="1600" height="1066" alt="Le néon « You are exactly where you need to be » seul, devant la bibliothèque" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Net, sur la bibliothèque</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/neon-playlist-foule-02.webp" width="1600" height="1066" alt="Le néon de la playlist au-dessus de la salle pleine" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Au-dessus de la foule</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/neon-playlist-portrait.webp" width="1066" height="1600" alt="Le néon de la playlist, cadré à la verticale" loading="lazy" fetchpriority="low" decoding="async"><figcaption>À la verticale</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/neon-playlist-large.webp" width="1600" height="1067" alt="Le néon de la playlist dominant la piste bondée" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Plein cadre</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/neon-playlist-nb.webp" width="1067" height="1600" alt="Le néon de la playlist, en noir et blanc, en fin de soirée" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Fin de séquence</figcaption></figure>
         </div>
       </div>
 
       <!-- §3.5 — carrousel de nuit : ouverture sur la foule bleue, fin en noir et blanc -->
       <div class="night-carousel" id="nightCarousel" aria-label="La nuit au Barrel, en images">
         <ul class="nc-track" id="ncTrack">
-          <li class="nc-slide"><img src="assets/photos/foule-large-bleue.webp" width="1199" height="1600" alt="La salle pleine, baignée de bleu" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bleue-02.webp" width="1199" height="1600" alt="La foule serrée dans la lumière bleue" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bras-leves.webp" width="1600" height="1067" alt="Les bras levés au milieu de la piste" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bleue-03.webp" width="1199" height="1600" alt="La foule au plus fort de la soirée" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/groupe-tonneau.webp" width="1003" height="1600" alt="Un groupe accoudé à un tonneau" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/trio-filles-tonneau.webp" width="1200" height="1600" alt="Trois filles autour d'un tonneau, verres en main" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/trio-filles-rouge.webp" width="1200" height="1600" alt="Trois filles dans la lumière rouge de la salle" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/groupe-filles-tonneau-02.webp" width="1002" height="1600" alt="Un groupe de filles autour d'un tonneau, en pleine soirée" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bar-bleue.webp" width="1199" height="1600" alt="La foule massée devant le bar, dans le bleu" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-rouge.webp" width="1600" height="1066" alt="La salle basculée dans la lumière rouge" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/couple-danse.webp" width="1067" height="1600" alt="Un couple qui danse au milieu de la salle" loading="lazy" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/dj-platines.webp" width="1199" height="1600" alt="Le DJ aux platines en pleine soirée" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-large-bleue.webp" width="1199" height="1600" alt="La salle pleine, baignée de bleu" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-bleue-02.webp" width="1199" height="1600" alt="La foule serrée dans la lumière bleue" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-bras-leves.webp" width="1600" height="1067" alt="Les bras levés au milieu de la piste" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-bleue-03.webp" width="1199" height="1600" alt="La foule au plus fort de la soirée" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/groupe-tonneau.webp" width="1003" height="1600" alt="Un groupe accoudé à un tonneau" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/trio-filles-tonneau.webp" width="1200" height="1600" alt="Trois filles autour d'un tonneau, verres en main" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/trio-filles-rouge.webp" width="1200" height="1600" alt="Trois filles dans la lumière rouge de la salle" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/groupe-filles-tonneau-02.webp" width="1002" height="1600" alt="Un groupe de filles autour d'un tonneau, en pleine soirée" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-bar-bleue.webp" width="1199" height="1600" alt="La foule massée devant le bar, dans le bleu" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-rouge.webp" width="1600" height="1066" alt="La salle basculée dans la lumière rouge" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/couple-danse.webp" width="1067" height="1600" alt="Un couple qui danse au milieu de la salle" loading="lazy" fetchpriority="low" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/dj-platines.webp" width="1199" height="1600" alt="Le DJ aux platines en pleine soirée" loading="lazy" fetchpriority="low" decoding="async"></li>
           <!-- §3.5 — la séquence se ferme en noir et blanc -->
-          <li class="nc-slide"><img src="assets/photos/foule-nb-02.webp" width="1600" height="1067" alt="La foule en noir et blanc, en fin de nuit" loading="lazy" decoding="async"></li>
+          <li class="nc-slide"><img src="assets/photos/foule-nb-02.webp" width="1600" height="1067" alt="La foule en noir et blanc, en fin de nuit" loading="lazy" fetchpriority="low" decoding="async"></li>
         </ul>
         <div class="nc-count"><span id="ncNow">01</span> / <span id="ncTotal">10</span></div>
       </div>
@@ -346,15 +346,15 @@
       <div class="coulisses" data-reveal>
         <span class="eyebrow">Le bar ne tourne pas tout seul</span>
         <div class="coul-grid" data-reveal-stagger>
-          <figure class="tile w2 h2"><img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, en noir et blanc" loading="lazy" decoding="async"><figcaption>Le DJ</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/staff-glacons.webp" width="1066" height="1600" alt="Un bac à glaçons porté à bout de bras au-dessus du comptoir" loading="lazy" decoding="async"><figcaption>La glace arrive</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/barman-flair-03.webp" width="1600" height="1066" alt="Le barman qui verse deux bouteilles en même temps" loading="lazy" decoding="async"><figcaption>Deux bouteilles, une main</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/barman-flair-02.webp" width="1600" height="1067" alt="Le barman en plein flair derrière le comptoir" loading="lazy" decoding="async"><figcaption>Flair</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/barman-shot.webp" width="1600" height="1067" alt="Une tournée de shots alignée sur le comptoir" loading="lazy" decoding="async"><figcaption>La tournée</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/patron-enseigne.webp" width="1024" height="1536" alt="Le patron du Barrel, bras croisés sous l'enseigne" loading="lazy" decoding="async"><figcaption>Le patron</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/dj-bandeau.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, derrière ses platines" loading="lazy" decoding="async"><figcaption>Le bandeau</figcaption></figure>
-          <figure class="tile w3"><img src="assets/photos/cave-futs.webp" width="900" height="1600" alt="La cave, les fûts alignés le long du mur" loading="lazy" decoding="async"><figcaption>La cave</figcaption></figure>
-          <figure class="tile w3"><img src="assets/photos/cave-futs-02.webp" width="1066" height="1600" alt="Les fûts prêts à remonter au bar" loading="lazy" decoding="async"><figcaption>Prêts à monter</figcaption></figure>
+          <figure class="tile w2 h2"><img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, en noir et blanc" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le DJ</figcaption></figure>
+          <figure class="tile w2"><img src="assets/photos/staff-glacons.webp" width="1066" height="1600" alt="Un bac à glaçons porté à bout de bras au-dessus du comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La glace arrive</figcaption></figure>
+          <figure class="tile w2"><img src="assets/photos/barman-flair-03.webp" width="1600" height="1066" alt="Le barman qui verse deux bouteilles en même temps" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Deux bouteilles, une main</figcaption></figure>
+          <figure class="tile w2"><img src="assets/photos/barman-flair-02.webp" width="1600" height="1067" alt="Le barman en plein flair derrière le comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Flair</figcaption></figure>
+          <figure class="tile w2"><img src="assets/photos/barman-shot.webp" width="1600" height="1067" alt="Une tournée de shots alignée sur le comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La tournée</figcaption></figure>
+          <figure class="tile w2"><img src="assets/photos/patron-enseigne.webp" width="1024" height="1536" alt="Le patron du Barrel, bras croisés sous l'enseigne" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le patron</figcaption></figure>
+          <figure class="tile w2"><img src="assets/photos/dj-bandeau.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, derrière ses platines" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le bandeau</figcaption></figure>
+          <figure class="tile w3"><img src="assets/photos/cave-futs.webp" width="900" height="1600" alt="La cave, les fûts alignés le long du mur" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La cave</figcaption></figure>
+          <figure class="tile w3"><img src="assets/photos/cave-futs-02.webp" width="1066" height="1600" alt="Les fûts prêts à remonter au bar" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Prêts à monter</figcaption></figure>
         </div>
       </div>
 
@@ -364,7 +364,7 @@
            Retirées : moto-rose-01, moto-comptoir, moto-portrait (grille Instagram).
            « On n'est pas un shop de moto. » -->
       <figure class="moto-solo" data-reveal>
-        <img src="assets/photos/moto-portrait-02.webp" width="1066" height="1600" alt="Portrait au bar, bouteille à la main, devant la moto rose" loading="lazy" decoding="async">
+        <img src="assets/photos/moto-portrait-02.webp" width="1066" height="1600" alt="Portrait au bar, bouteille à la main, devant la moto rose" loading="lazy" fetchpriority="low" decoding="async">
         <figcaption>Et oui, elle est à l'intérieur.</figcaption>
       </figure>
 
@@ -446,32 +446,32 @@
            au chapitre son unité visuelle. Ne pas désaturer, ne pas recadrer pour
            l'éliminer. Formats mélangés, mosaïque. -->
       <div class="carte-mosaic" data-reveal-stagger>
-        <figure class="tile w3 h2"><img src="assets/photos/burgers-trio-leopard.webp" width="1200" height="1600" alt="Trois burgers alignés sur le tapis léopard" loading="lazy" decoding="async"><figcaption>Le trio</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-stack-leopard.webp" width="1200" height="1600" alt="Un burger monté haut, posé sur le tapis léopard" loading="lazy" decoding="async"><figcaption>Monté haut</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-oeuf-bacon.webp" width="1200" height="1600" alt="Burger œuf-bacon, jaune coulant" loading="lazy" decoding="async"><figcaption>Œuf, bacon</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burger-oeuf-plateau.webp" width="900" height="1600" alt="Le burger à l'œuf servi sur son plateau" loading="lazy" decoding="async"><figcaption>Sur le plateau</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burgers-duo-leopard.webp" width="1200" height="1600" alt="Deux burgers côte à côte sur le léopard" loading="lazy" decoding="async"><figcaption>À deux</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burgers-plateau-leopard.webp" width="1200" height="1600" alt="Un plateau de burgers posé sur le tapis léopard" loading="lazy" decoding="async"><figcaption>La tournée</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-pulled-plateau.webp" width="1200" height="1600" alt="Burger au porc effiloché sur son plateau" loading="lazy" decoding="async"><figcaption>Pulled pork</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-chicken-fondant.webp" width="900" height="1600" alt="Burger au poulet pané, cheddar fondant" loading="lazy" decoding="async"><figcaption>Chicken</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/sandwich-pulled-vert.webp" width="900" height="1600" alt="Sandwich au porc effiloché sur fond vert" loading="lazy" decoding="async"><figcaption>Le sandwich</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/sandwiches-plateau-vert.webp" width="900" height="1600" alt="Un plateau de sandwiches à partager" loading="lazy" decoding="async"><figcaption>À partager</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burger-bun-noir.webp" width="900" height="1600" alt="Le burger au pain noir, Black Barrel" loading="lazy" decoding="async"><figcaption>Black Barrel</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/frites-curly-cornet.webp" width="1200" height="1600" alt="Un cornet de frites curly" loading="lazy" decoding="async"><figcaption>Curly</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/chips-maison.webp" width="900" height="1600" alt="Des chips maison servies en corbeille" loading="lazy" decoding="async"><figcaption>Chips maison</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/tenders-assiette.webp" width="1200" height="1600" alt="Une assiette de tenders de poulet" loading="lazy" decoding="async"><figcaption>Tenders</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burgers-duo-plateau.webp" width="1200" height="1600" alt="Deux burgers servis sur un plateau métal" loading="lazy" decoding="async"><figcaption>Service</figcaption></figure>
+        <figure class="tile w3 h2"><img src="assets/photos/burgers-trio-leopard.webp" width="1200" height="1600" alt="Trois burgers alignés sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le trio</figcaption></figure>
+        <figure class="tile w3"><img src="assets/photos/burger-stack-leopard.webp" width="1200" height="1600" alt="Un burger monté haut, posé sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Monté haut</figcaption></figure>
+        <figure class="tile w3"><img src="assets/photos/burger-oeuf-bacon.webp" width="1200" height="1600" alt="Burger œuf-bacon, jaune coulant" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Œuf, bacon</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/burger-oeuf-plateau.webp" width="900" height="1600" alt="Le burger à l'œuf servi sur son plateau" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Sur le plateau</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/burgers-duo-leopard.webp" width="1200" height="1600" alt="Deux burgers côte à côte sur le léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>À deux</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/burgers-plateau-leopard.webp" width="1200" height="1600" alt="Un plateau de burgers posé sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La tournée</figcaption></figure>
+        <figure class="tile w3"><img src="assets/photos/burger-pulled-plateau.webp" width="1200" height="1600" alt="Burger au porc effiloché sur son plateau" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Pulled pork</figcaption></figure>
+        <figure class="tile w3"><img src="assets/photos/burger-chicken-fondant.webp" width="900" height="1600" alt="Burger au poulet pané, cheddar fondant" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Chicken</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/sandwich-pulled-vert.webp" width="900" height="1600" alt="Sandwich au porc effiloché sur fond vert" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le sandwich</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/sandwiches-plateau-vert.webp" width="900" height="1600" alt="Un plateau de sandwiches à partager" loading="lazy" fetchpriority="low" decoding="async"><figcaption>À partager</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/burger-bun-noir.webp" width="900" height="1600" alt="Le burger au pain noir, Black Barrel" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Black Barrel</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/frites-curly-cornet.webp" width="1200" height="1600" alt="Un cornet de frites curly" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Curly</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/chips-maison.webp" width="900" height="1600" alt="Des chips maison servies en corbeille" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Chips maison</figcaption></figure>
+        <figure class="tile w2"><img src="assets/photos/tenders-assiette.webp" width="1200" height="1600" alt="Une assiette de tenders de poulet" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Tenders</figcaption></figure>
+        <figure class="tile w3"><img src="assets/photos/burgers-duo-plateau.webp" width="1200" height="1600" alt="Deux burgers servis sur un plateau métal" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Service</figcaption></figure>
         <!-- §3.2 — la moto, occurrence 2/2 : elle est ici parce qu'elle raccroche
              la moto à la bouffe, qui est le nouveau sujet du site. -->
-        <figure class="tile w3"><img src="assets/photos/moto-frites.webp" width="1066" height="1600" alt="Une cliente assise sur la moto rose, en train de manger des frites" loading="lazy" decoding="async"><figcaption>Frites, sur la moto</figcaption></figure>
+        <figure class="tile w3"><img src="assets/photos/moto-frites.webp" width="1066" height="1600" alt="Une cliente assise sur la moto rose, en train de manger des frites" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Frites, sur la moto</figcaption></figure>
       </div>
 
       <!-- §3.4 — la paire de cocktails passion : même verre, deux cadrages.
            Le hover bascule de l'un à l'autre. Sans JS et au clavier, les deux
            images restent accessibles (la seconde est en <figure> visible au focus). -->
       <figure class="swap-pair" data-reveal tabindex="0">
-        <img class="sp-a" src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" decoding="async">
-        <img class="sp-b" src="assets/photos/cocktail-passion-table.webp" width="1200" height="1600" alt="Le même cocktail passion, posé sur la table" loading="lazy" decoding="async">
+        <img class="sp-a" src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" fetchpriority="low" decoding="async">
+        <img class="sp-b" src="assets/photos/cocktail-passion-table.webp" width="1200" height="1600" alt="Le même cocktail passion, posé sur la table" loading="lazy" fetchpriority="low" decoding="async">
         <figcaption>Le même verre, deux fois</figcaption>
       </figure>
 
@@ -484,13 +484,13 @@
         <span class="eyebrow">Au comptoir</span>
         <h3 class="ck-title">Les cocktails</h3>
         <div class="ck-grid" data-reveal-stagger>
-          <figure class="tile ck-lead"><img src="assets/photos/cocktail-bleu-tonneau.webp" width="1200" height="1600" alt="Une cliente penchée sur un tonneau, cocktail bleu à deux pailles, sous l'enseigne Power &amp; Son Irish Whiskey" loading="lazy" decoding="async"><figcaption>Deux pailles, un tonneau</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktails-bleus-trinque.webp" width="1200" height="1600" alt="Deux cocktails bleus qui trinquent au-dessus du tapis de comptoir à chevrons rouge et jaune" loading="lazy" decoding="async"><figcaption>Chevron rouge et jaune</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-bleu-comptoir.webp" width="917" height="1600" alt="Un cocktail bleu posé sur le comptoir à chevrons" loading="lazy" decoding="async"><figcaption>Sur le comptoir</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/longdrinks-trio.webp" width="1200" height="1600" alt="Trois long drinks alignés sur le comptoir" loading="lazy" decoding="async"><figcaption>Long drinks</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-passion-mains-02.webp" width="1200" height="1600" alt="Un cocktail passion tenu au-dessus du comptoir" loading="lazy" decoding="async"><figcaption>Passion</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-violet-paille.webp" width="1066" height="1600" alt="Un grand cocktail violet servi avec une paille" loading="lazy" decoding="async"><figcaption>Le grand format</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-orange-assise.webp" width="1200" height="1600" alt="Une cliente assise, cocktail orange à la main" loading="lazy" decoding="async"><figcaption>Orange</figcaption></figure>
+          <figure class="tile ck-lead"><img src="assets/photos/cocktail-bleu-tonneau.webp" width="1200" height="1600" alt="Une cliente penchée sur un tonneau, cocktail bleu à deux pailles, sous l'enseigne Power &amp; Son Irish Whiskey" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Deux pailles, un tonneau</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/cocktails-bleus-trinque.webp" width="1200" height="1600" alt="Deux cocktails bleus qui trinquent au-dessus du tapis de comptoir à chevrons rouge et jaune" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Chevron rouge et jaune</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/cocktail-bleu-comptoir.webp" width="917" height="1600" alt="Un cocktail bleu posé sur le comptoir à chevrons" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Sur le comptoir</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/longdrinks-trio.webp" width="1200" height="1600" alt="Trois long drinks alignés sur le comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Long drinks</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/cocktail-passion-mains-02.webp" width="1200" height="1600" alt="Un cocktail passion tenu au-dessus du comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Passion</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/cocktail-violet-paille.webp" width="1066" height="1600" alt="Un grand cocktail violet servi avec une paille" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le grand format</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/cocktail-orange-assise.webp" width="1200" height="1600" alt="Une cliente assise, cocktail orange à la main" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Orange</figcaption></figure>
         </div>
         <!-- EN ATTENTE D'EVA — les « cocktails citernes ».
              Aucune photo des deux dossiers ne montre un contenant de type citerne.
@@ -509,7 +509,7 @@
       <div class="bande-signature" data-reveal>
         <span class="eyebrow">Ton souvenir — Ta Bobine</span>
         <figure class="bande" data-bande>
-          <img src="assets/photos/photobooth-bande-01.webp" width="1280" height="533" alt="Bande souvenir du photobooth Ta Bobine : quatre vignettes d'une cliente qui mange un burger, et le bandeau imprimé Barrel Pub Cannes daté du 08-03-2026 à 22:07" loading="lazy" decoding="async">
+          <img src="assets/photos/photobooth-bande-01.webp" width="1280" height="533" alt="Bande souvenir du photobooth Ta Bobine : quatre vignettes d'une cliente qui mange un burger, et le bandeau imprimé Barrel Pub Cannes daté du 08-03-2026 à 22:07" loading="lazy" fetchpriority="low" decoding="async">
           <span class="bd-cell" data-cell="1" aria-hidden="true"></span>
           <span class="bd-cell" data-cell="2" aria-hidden="true"></span>
           <span class="bd-cell" data-cell="3" aria-hidden="true"></span>
@@ -524,14 +524,14 @@
     <!-- Bandeau tapas — marquee à vélocité de scroll -->
     <div class="marquee" data-marquee aria-hidden="true">
       <ul class="mq-track" id="mqTrack">
-        <li class="mq-item"><img src="assets/photos/frites-curly-01.webp" width="900" height="1600" alt="" loading="lazy" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/chicken-strips.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/frites-curly-02.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/burger-pulled.webp" width="900" height="1600" alt="" loading="lazy" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/cocktail-01.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/cocktail-03.webp" width="1066" height="1600" alt="" loading="lazy" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/burger-04.webp" width="900" height="1600" alt="" loading="lazy" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/cocktail-02.webp" width="1200" height="1600" alt="" loading="lazy" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/frites-curly-01.webp" width="900" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/chicken-strips.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/frites-curly-02.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/burger-pulled.webp" width="900" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/cocktail-01.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/cocktail-03.webp" width="1066" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/burger-04.webp" width="900" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
+        <li class="mq-item"><img src="assets/photos/cocktail-02.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
       </ul>
     </div>
   </section>
@@ -556,7 +556,7 @@
           <div class="stat"><b data-count="11" data-suffix="h">11h</b><span>d'ouverture / nuit</span></div>
         </div>
         <figure class="team-card" data-reveal>
-          <img src="assets/photos/staff-futs.webp" width="1066" height="1600" alt="L'équipe du Barrel Pub derrière les fûts" loading="lazy" decoding="async">
+          <img src="assets/photos/staff-futs.webp" width="1066" height="1600" alt="L'équipe du Barrel Pub derrière les fûts" loading="lazy" fetchpriority="low" decoding="async">
           <figcaption><span class="eyebrow">L'équipe</span><span class="tc-txt">Ceux qui te servent jusqu'à 5h.</span></figcaption>
         </figure>
       </div>
@@ -568,24 +568,24 @@
            exactement ce qui fait la respiration du site. Aucun filtre ajouté. -->
       <div class="sortie-gallery" data-reveal-stagger>
         <!-- la rue vide, plein jour : c'est l'image qui prouve le mot « piétonne » -->
-        <figure class="shot wide"><img src="assets/photos/terrasse-rue-pietonne.webp" width="1205" height="1431" alt="La rue piétonne au petit matin, les tonneaux et les tabourets alignés devant la façade du Barrel Pub" loading="lazy" decoding="async"><figcaption>La rue piétonne, au réveil</figcaption></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-ciel.webp" width="1205" height="1389" alt="La terrasse en plein jour, ciel dégagé au-dessus des tables" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-alignee.webp" width="1205" height="1541" alt="Les tables de la terrasse alignées le long de la façade" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-store.webp" width="900" height="1600" alt="Le store déployé au-dessus de la terrasse" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-store-bleu.webp" width="1205" height="1541" alt="Le store bleu de la seconde terrasse" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-barrieres.webp" width="1204" height="1505" alt="Les barrières qui délimitent la terrasse sur la rue" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-tonneaux.webp" width="900" height="1600" alt="Les tonneaux en chêne qui servent de tables en terrasse" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-rue.webp" width="1205" height="1431" alt="La terrasse vue depuis le milieu de la rue piétonne" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-ciel-02.webp" width="1205" height="1389" alt="La troisième terrasse, en plein soleil" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-jour-stores.webp" width="900" height="1600" alt="Les stores alignés au-dessus des trois terrasses" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-veranda.webp" width="900" height="1600" alt="La terrasse couverte en véranda" loading="lazy" decoding="async"></figure>
+        <figure class="shot wide"><img src="assets/photos/terrasse-rue-pietonne.webp" width="1205" height="1431" alt="La rue piétonne au petit matin, les tonneaux et les tabourets alignés devant la façade du Barrel Pub" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La rue piétonne, au réveil</figcaption></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-ciel.webp" width="1205" height="1389" alt="La terrasse en plein jour, ciel dégagé au-dessus des tables" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-alignee.webp" width="1205" height="1541" alt="Les tables de la terrasse alignées le long de la façade" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-store.webp" width="900" height="1600" alt="Le store déployé au-dessus de la terrasse" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-store-bleu.webp" width="1205" height="1541" alt="Le store bleu de la seconde terrasse" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-barrieres.webp" width="1204" height="1505" alt="Les barrières qui délimitent la terrasse sur la rue" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-tonneaux.webp" width="900" height="1600" alt="Les tonneaux en chêne qui servent de tables en terrasse" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-rue.webp" width="1205" height="1431" alt="La terrasse vue depuis le milieu de la rue piétonne" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-ciel-02.webp" width="1205" height="1389" alt="La troisième terrasse, en plein soleil" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-jour-stores.webp" width="900" height="1600" alt="Les stores alignés au-dessus des trois terrasses" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-veranda.webp" width="900" height="1600" alt="La terrasse couverte en véranda" loading="lazy" fetchpriority="low" decoding="async"></figure>
         <!-- bascule jour → nuit -->
-        <figure class="shot wide"><img src="assets/photos/terrasse-crepuscule.webp" width="1200" height="1600" alt="La terrasse au crépuscule, les lumières qui s'allument" loading="lazy" decoding="async"><figcaption>Le crépuscule</figcaption></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-nuit-chaude.webp" width="1350" height="1600" alt="La terrasse la nuit, dans une lumière chaude" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-nuit-tonneaux.webp" width="1204" height="1505" alt="Les tonneaux de la terrasse, la nuit" loading="lazy" decoding="async"></figure>
-        <figure class="shot wide"><img src="assets/photos/terrasse-nuit-enseigne.webp" width="1258" height="1600" alt="L'enseigne « Barrel Pub » en néon script, allumée au-dessus de la terrasse" loading="lazy" decoding="async"><figcaption>L'enseigne, à la nuit tombée</figcaption></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-nuit-couloir.webp" width="1240" height="1600" alt="Le couloir de la terrasse entre les tables, la nuit" loading="lazy" decoding="async"></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-nuit-facade.webp" width="1362" height="1600" alt="La façade du Barrel Pub illuminée, vue de la rue, la nuit" loading="lazy" decoding="async"></figure>
+        <figure class="shot wide"><img src="assets/photos/terrasse-crepuscule.webp" width="1200" height="1600" alt="La terrasse au crépuscule, les lumières qui s'allument" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le crépuscule</figcaption></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-nuit-chaude.webp" width="1350" height="1600" alt="La terrasse la nuit, dans une lumière chaude" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-nuit-tonneaux.webp" width="1204" height="1505" alt="Les tonneaux de la terrasse, la nuit" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot wide"><img src="assets/photos/terrasse-nuit-enseigne.webp" width="1258" height="1600" alt="L'enseigne « Barrel Pub » en néon script, allumée au-dessus de la terrasse" loading="lazy" fetchpriority="low" decoding="async"><figcaption>L'enseigne, à la nuit tombée</figcaption></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-nuit-couloir.webp" width="1240" height="1600" alt="Le couloir de la terrasse entre les tables, la nuit" loading="lazy" fetchpriority="low" decoding="async"></figure>
+        <figure class="shot"><img src="assets/photos/terrasse-nuit-facade.webp" width="1362" height="1600" alt="La façade du Barrel Pub illuminée, vue de la rue, la nuit" loading="lazy" fetchpriority="low" decoding="async"></figure>
       </div>
 
       <!-- §5.2 — ILS Y ÉTAIENT -->
@@ -642,12 +642,12 @@
         <!-- §3.8 — grille reconstituée : aucune moto, aucun billard vert.
              BLOQUANT : les href pointent encore vers un compte Instagram non vérifié. -->
         <div class="ig-grid" id="igGrid">
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/burgers-trio-leopard.webp" width="1200" height="1600" alt="Trois burgers alignés sur le tapis léopard" loading="lazy" decoding="async"></a>
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="Un néon bleu allumé au-dessus de la foule, un soir d'affluence" loading="lazy" decoding="async"></a>
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens de la maison" loading="lazy" decoding="async"></a>
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/terrasse-nuit-enseigne.webp" width="1258" height="1600" alt="L'enseigne Barrel Pub en néon script, la nuit" loading="lazy" decoding="async"></a>
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" decoding="async"></a>
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/foule-bleue-02.webp" width="1199" height="1600" alt="La foule serrée dans la lumière bleue" loading="lazy" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/burgers-trio-leopard.webp" width="1200" height="1600" alt="Trois burgers alignés sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="Un néon bleu allumé au-dessus de la foule, un soir d'affluence" loading="lazy" fetchpriority="low" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens de la maison" loading="lazy" fetchpriority="low" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/terrasse-nuit-enseigne.webp" width="1258" height="1600" alt="L'enseigne Barrel Pub en néon script, la nuit" loading="lazy" fetchpriority="low" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" fetchpriority="low" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/foule-bleue-02.webp" width="1199" height="1600" alt="La foule serrée dans la lumière bleue" loading="lazy" fetchpriority="low" decoding="async"></a>
         </div>
         <a class="btn ghost ig-cta" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener">Suivre sur Instagram</a>
       </div>
@@ -664,7 +664,7 @@
       </div>
 
       <div class="infos" data-reveal>
-        <img class="infos-bg" src="assets/photos/facade-crepuscule.webp" width="1204" height="1505" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        <img class="infos-bg" src="assets/photos/facade-crepuscule.webp" width="1204" height="1505" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
         <div class="infos-data">
           <div class="big">Barrel Pub<br>Cannes</div>
           17 rue du Docteur Gérard Monod<br>
@@ -692,7 +692,7 @@
 
   <!-- ============ §5.3 — VENIR ============ -->
   <section class="scene scene-venir" id="venir" aria-labelledby="venir-title">
-    <img class="venir-bg" src="assets/photos/facade-nuit.webp" width="1350" height="1600" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <img class="venir-bg" src="assets/photos/facade-nuit.webp" width="1350" height="1600" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
     <div class="scene-inner">
       <span class="eyebrow">Venir</span>
       <p class="venir-gps" data-scramble>43.5513° N / 7.0128° E</p>
@@ -730,6 +730,6 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=5"></script>
+<script src="js/main.js?v=6"></script>
 </body>
 </html>

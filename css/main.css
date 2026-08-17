@@ -83,6 +83,11 @@ p,.lede,.priv-card p,.infos-side p{text-wrap:pretty}
 /* =====================================================================
    CURSEUR CUSTOM
    ===================================================================== */
+/* V2.4 §3 — seul will-change permanent conservé du site, et c'est justifié :
+   le curseur est transformé à CHAQUE frame tant qu'il est affiché, et il est
+   déjà display:none sous 1024px et sur pointeur grossier — donc jamais de couche
+   de composition inutile sur téléphone. Les trois autres (data-skew, .mq-track,
+   .seuil-shot img) sont passés en .is-anim, posé/retiré par IntersectionObserver. */
 .cursor-dot, .cursor-ring{
   position:fixed;top:0;left:0;z-index:260;pointer-events:none;
   border-radius:50%;transform:translate(-50%,-50%);
@@ -142,6 +147,14 @@ body.has-cursor a, body.has-cursor button{cursor:none}
 /* =====================================================================
    SCÈNE 01 — LE HERO (canvas scrubbé)
    ===================================================================== */
+/* V2.4 §3 — #hero reste en 100vh, VOLONTAIREMENT, et c'est le seul endroit du site.
+   Le §3 demande 100dvh partout, mais dvh est l'unité DYNAMIQUE : elle suit la barre
+   d'URL qui se rétracte. Sur un élément pinné par ScrollTrigger, cela redimensionne
+   le pin en plein scroll — soit exactement le saut qu'on cherche à supprimer.
+   100vh, lui, vaut le grand viewport et ne bouge jamais pendant le scroll.
+   Les deux autres occurrences (.scene-seuil, .page404) sont bien passées en dvh :
+   elles ne sont pas pinnées. main.js ajoute ScrollTrigger.config({ignoreMobileResize})
+   pour couvrir le redimensionnement mobile sans toucher hero.js. */
 #hero{position:relative;height:100vh;width:100%;overflow:hidden;background:var(--noir)}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hero-vignette{
@@ -230,6 +243,22 @@ body.has-cursor a, body.has-cursor button{cursor:none}
    ===================================================================== */
 main{position:relative;z-index:2;background:var(--noir)}
 .scene{position:relative;padding:clamp(90px,15vh,190px) var(--pad);overflow:hidden}
+
+/* V2.4 §3 / §5.1 — content-visibility sur les sections situées sous le premier
+   écran : le navigateur ne calcule plus la mise en page de ce qui n'est pas visible.
+   VOLONTAIREMENT EXCLUS :
+   · #hero — section pinnée par ScrollTrigger, toute mesure faussée casse le scrub ;
+   · #scene-seuil — cible d'ancre (lien d'évitement + CTA du hero), sauter dessus
+     exigerait une hauteur déjà calculée.
+   contain-intrinsic-size = hauteur réellement mesurée, pour que la barre de scroll
+   ne bouge pas quand la section se matérialise. */
+#scene-jeu,#scene-carte,#scene-sortie,#venir{
+  content-visibility:auto;
+}
+#scene-jeu{contain-intrinsic-size:auto 8862px}
+#scene-carte{contain-intrinsic-size:auto 9400px}
+#scene-sortie{contain-intrinsic-size:auto 4397px}
+#venir{contain-intrinsic-size:auto 793px}
 .scene-inner{max-width:1320px;margin:0 auto;position:relative;z-index:2}
 .marker{
   font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--gris);
@@ -270,7 +299,7 @@ main{position:relative;z-index:2;background:var(--noir)}
 /* =====================================================================
    SCÈNE 02 — LE SEUIL / LE CHIEN
    ===================================================================== */
-.scene-seuil{background:var(--noir);min-height:100vh;display:flex;align-items:center}
+.scene-seuil{background:var(--noir);min-height:100dvh;display:flex;align-items:center}
 .seuil-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,6vw,80px);align-items:center;width:100%}
 @media (min-width:960px){.seuil-grid{grid-template-columns:1.05fr .95fr}}
 .wall{font-family:var(--display);text-transform:uppercase;line-height:.85;letter-spacing:-.03em;
@@ -284,7 +313,7 @@ main{position:relative;z-index:2;background:var(--noir)}
 .wall em{font-style:normal;background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
 .seuil-copy{margin-top:38px;max-width:44ch}
 .seuil-shot{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--noir-2)}
-.seuil-shot img{width:100%;height:112%;object-fit:cover;object-position:center 38%;will-change:transform}
+.seuil-shot img{width:100%;height:112%;object-fit:cover;object-position:center 38%}
 .seuil-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 55%,rgba(10,11,14,.6))}
 .seuil-cap{position:absolute;left:18px;bottom:16px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--blanc);text-transform:uppercase;text-shadow:0 1px 12px rgba(0,0,0,.9)}
 
@@ -716,7 +745,7 @@ main{position:relative;z-index:2;background:var(--noir)}
 
 /* Bandeau marquee tapas (ch.04) */
 .marquee{position:relative;left:50%;width:100vw;transform:translateX(-50%);overflow:hidden;margin-top:clamp(50px,8vh,100px);border-top:1px solid rgba(237,232,224,.09);border-bottom:1px solid rgba(237,232,224,.09);padding:clamp(14px,2vw,24px) 0}
-.mq-track{list-style:none;display:flex;gap:clamp(10px,1.4vw,18px);width:max-content;will-change:transform}
+.mq-track{list-style:none;display:flex;gap:clamp(10px,1.4vw,18px);width:max-content}
 .mq-item{flex:0 0 auto;width:clamp(140px,15vw,180px);aspect-ratio:1;overflow:hidden;background:var(--noir-2)}
 .mq-item img{width:100%;height:100%;object-fit:cover;filter:grayscale(.1)}
 
@@ -834,7 +863,7 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 /* =====================================================================
    404
    ===================================================================== */
-.page404{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--pad);gap:6px}
+.page404{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--pad);gap:6px}
 .page404 .b{width:clamp(80px,14vw,120px);height:clamp(80px,14vw,120px);color:var(--or);margin-bottom:26px}
 .page404 .code{font-family:var(--display);font-size:clamp(70px,18vw,220px);line-height:.9;letter-spacing:-.03em;background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
 .page404 p{font-family:var(--serif);font-style:italic;font-size:clamp(20px,3vw,30px);color:var(--blanc);margin:16px 0 30px;max-width:30ch}
@@ -868,7 +897,14 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 [data-split].is-in .ov-line:nth-child(6)>span{transition-delay:.35s}
 
 /* Skew de vélocité — l'élément est piloté en JS, on borne juste le rendu */
-[data-skew]{will-change:transform}
+/* V2.4 §3 — will-change SEULEMENT pendant l'animation.
+   Il était permanent sur [data-skew] (des dizaines d'éléments), .mq-track et
+   .seuil-shot img : autant de couches de composition créées en permanence, cause
+   classique de saccade sur téléphone milieu de gamme. main.js pose maintenant
+   .is-anim à l'entrée dans le viewport et le retire à la sortie. */
+[data-skew].is-anim,
+.mq-track.is-anim,
+.seuil-shot img.is-anim{will-change:transform}
 
 /* Flicker néon (§3.7) — salve non-linéaire ~ toutes les 9 s, un seul élément */
 .neon.flicker{animation:neonFlicker 9s linear infinite}
