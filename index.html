@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=3">
+<link rel="stylesheet" href="css/main.css?v=4">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -124,7 +124,11 @@
   </div>
   <!-- 6 -->
   <div class="cue" id="ov-6" data-in="0.72" data-out="0.82">
-    <p><span class="ov-line"><span>Le chien, lui,</span></span><span class="ov-line"><span>t'attendait.</span></span></p>
+    <!-- V2.3 §4 — le chien n'est pas encore apparu à ce moment du récit : la phrase
+         arrivait sans référent. Ici le texte nomme ce que la frame montre déjà —
+         le néon « YOU ARE EXACTLY WHERE YOU NEED TO BE » sur le mur de gauche —
+         et il annonce le mur de néons plus bas. Deux lignes, même rythme. -->
+    <p><span class="ov-line"><span>Tu es exactement</span></span><span class="ov-line"><span>là où il faut.</span></span></p>
   </div>
   <!-- final -->
   <div class="cue cue--card cue--final" id="ov-final" data-in="0.88" data-out="1">
@@ -210,7 +214,10 @@
       <div class="jeu-head" data-reveal>
         <span class="eyebrow">On mange ici, et on reste</span>
         <h2 id="jeu-title" data-split data-glitch><span class="ov-line"><span>On vient pour un verre.</span></span><span class="ov-line"><span>On repart à 5h.</span></span></h2>
-        <p class="lede">Pub, cuisine, terrasses, jeux, sport, nuit — tout au même endroit. Billard vintage au tapis léopard, fléchettes, babyfoot, arcade, photobooth <strong>« Ta Bobine »</strong>, DJ &amp; karaoké, 10 écrans sport. Et un tatoueur résident, sur demande.</p>
+        <p class="lede">Pub, cuisine, terrasses, jeux, sport, nuit — tout au même endroit. Billard vintage au tapis léopard, fléchettes, babyfoot, arcade, photobooth <strong>« Ta Bobine »</strong>, DJ &amp; karaoké, 10 écrans sport.</p>
+        <!-- V2.3 §5 — mention « tatoueur résident » retirée ici ET de la feature-list :
+             « résident » affirme une récurrence non vérifiée. À remettre uniquement
+             sur confirmation écrite d'Eva (cf. tatoueur-soiree.webp, toujours inutilisée). -->
       </div>
 
       <!-- Mouvement 4 — le jeu : mosaïque asymétrique, légendes mono -->
@@ -239,9 +246,11 @@
       </div>
 
       <!-- Mouvement 6 — la nuit -->
+      <!-- V2.3 §2 — le .night-claim est supprimé : « This place is hotter than your ex »
+           part en fin de séquence néon, où elle est plus forte qu'en accroche.
+           La phrase n'apparaît qu'une seule fois dans la page. -->
       <div class="night-head" data-reveal>
         <span class="eyebrow">Quand la nuit prend le relais</span>
-        <p class="night-claim">THIS PLACE IS HOTTER<br>THAN YOUR EX</p>
       </div>
 
       <!-- §3bis.2 — LE MUR DES TROIS NÉONS.
@@ -262,9 +271,12 @@
         </div>
         <div class="neon-wall" data-neon>
           <img class="neon-bg" src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="" aria-hidden="true" loading="lazy" decoding="async">
-          <!-- Transcription vérifiée sur neon-playlist-foule / -large / -nb : le néon réel
-               dit « FUCK NUDES SEND ME YOUR PLAYLIST », en blanc-bleu froid (pas rose). -->
-          <p class="neon playlist">Fuck nudes,<br>send me your playlist</p>
+          <!-- V2.3 §2 — « Fuck nudes… » est un vrai néon du bar, mais écrit en 86 px
+               sur toute la largeur il cesse d'être un clin d'œil au mur du fond pour
+               devenir le slogan de l'établissement. Refusé par la cliente.
+               L'image de fond reste : le néon y est petit, flou, au fond du cadre,
+               à sa place documentaire (opacity .22 sous le dégradé). -->
+          <p class="neon">This place is hotter<br>than your ex</p>
           <span class="neon-step">03 — la fin</span>
         </div>
 
@@ -350,7 +362,6 @@
         <li><b>DJ &amp; Karaoké</b><span>La cabine tourne tard, le micro est à toi.</span></li>
         <li><b>10 écrans sport</b><span>Toutes les retransmissions, jusqu'à la dernière minute.</span></li>
         <li><b>Ta Bobine · 4€</b><span>Quatre flashs, une bande souvenir.</span></li>
-        <li><b>Tatoueur résident</b><span>Sur demande, quand la soirée le décide.</span></li>
       </ul>
     </div>
   </section>
@@ -606,7 +617,7 @@
              BLOQUANT : les href pointent encore vers un compte Instagram non vérifié. -->
         <div class="ig-grid" id="igGrid">
           <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/burgers-trio-leopard.webp" width="1200" height="1600" alt="Trois burgers alignés sur le tapis léopard" loading="lazy" decoding="async"></a>
-          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="Le néon « Fuck nudes, send me your playlist » au-dessus de la foule" loading="lazy" decoding="async"></a>
+          <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="Un néon bleu allumé au-dessus de la foule, un soir d'affluence" loading="lazy" decoding="async"></a>
           <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens de la maison" loading="lazy" decoding="async"></a>
           <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/terrasse-nuit-enseigne.webp" width="1258" height="1600" alt="L'enseigne Barrel Pub en néon script, la nuit" loading="lazy" decoding="async"></a>
           <a class="ig-cell" href="https://www.instagram.com/barrelpubcannes" target="_blank" rel="noopener"><img src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" decoding="async"></a>

@@ -156,10 +156,25 @@ body.has-cursor a, body.has-cursor button{cursor:none}
   transition:opacity .6s var(--ease);
 }
 .cue.on{opacity:1}
+/* V2.3 §3 — le hero passe en néon bleu. Modification purement CSS, hero.js intact.
+   On garde la Fraunces italique : les vrais néons du bar sont en cursive
+   (neon-tequila, l'enseigne de façade). Une italique qui brille en bleu, c'est
+   exactement un néon du Barrel.
+   · text-shadow, JAMAIS filter:drop-shadow() — le hero est pinné et scrubbé sur
+     un canvas, un filtre forcerait une nouvelle couche de composition par frame.
+   · aucun scintillement ici : neonFlicker reste réservé aux murs de néons. Le
+     texte apparaît et disparaît déjà, un second mouvement serait un de trop.
+   · la dernière ombre noire n'est pas décorative : les premières frames sont la
+     Croisette en plein jour, un bleu clair sans ombre y devient illisible. */
 .cue p{
   font-family:var(--serif);font-style:italic;font-weight:400;
   font-size:clamp(30px,5.6vw,82px);line-height:1.12;letter-spacing:-.01em;
-  color:var(--blanc);text-shadow:0 2px 50px rgba(0,0,0,.85);
+  color:#dfeeff;
+  text-shadow:
+    0 0 10px rgba(0,163,255,.85),
+    0 0 30px rgba(43,92,255,.65),
+    0 0 62px rgba(43,92,255,.42),
+    0 2px 40px rgba(0,0,0,.9);
 }
 .ov-line{display:block;overflow:hidden}
 .ov-line>span{display:block;transform:translateY(112%);transition:transform .7s var(--ease)}
@@ -599,13 +614,23 @@ main{position:relative;z-index:2;background:var(--noir)}
 /* La moto — triptyque (ch.03) */
 /* §3.2 — la moto : une seule vignette ici (l'autre est moto-frites, chapitre carte).
    L'ancienne .moto-grid à trois plans est supprimée : « on n'est pas un shop de moto ». */
+/* V2.3 §1 — l'écran noir venait d'ici. L'attribut HTML height="1600" restait
+   la hauteur utilisée (aspect-ratio est ignoré quand les deux dimensions sont
+   définies), donc l'image faisait 180 × 1600 : un liseré vertical à gauche et
+   une figure de 1600 px de haut, soit plus de deux écrans de vide.
+   height:auto rend la main à aspect-ratio ; la grille deux colonnes disparaît. */
 .moto-solo{
-  margin-top:clamp(18px,4vh,44px);display:grid;gap:16px;align-items:center;
-  grid-template-columns:1fr;max-width:520px;
+  margin:clamp(30px,6vh,70px) auto;
+  display:block;
+  max-width:380px;
 }
-@media (min-width:560px){.moto-solo{grid-template-columns:180px 1fr}}
-.moto-solo img{width:100%;aspect-ratio:2/3;object-fit:cover;background:var(--noir-2)}
+.moto-solo img{
+  width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+  object-position:center 30%;  /* on cadre le visage, pas le réservoir */
+  background:var(--noir-2);
+}
 .moto-solo figcaption{
+  margin-top:12px;text-align:left;
   font-family:var(--mono);font-size:11px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--gris);
 }
