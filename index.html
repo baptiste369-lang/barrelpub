@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=4">
+<link rel="stylesheet" href="css/main.css?v=5">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -165,13 +165,39 @@
         </figure>
       </div>
 
-      <!-- §3.3 — second temps du seuil : le chien sur le tapis léopard, puis le lieu
-           vide qui attend (§3bis.6). Le site n'avait que des plans peuplés. -->
+      <!-- V2.4 §1 — LA VIDÉO DU CHIEN. Elle prend la place de chien-billard-debout.webp :
+           même image, animée. Le plan part du billard entier et avance jusqu'à l'œil.
+           Pilotée par le scroll (currentTime), jamais en lecture automatique : c'est le
+           visiteur qui entre dans le chien.
+           Les keyframes sont à 12 frames (une demi-seconde) dans les deux encodages —
+           c'est ce qui permet de scruber sans à-coups. Ne pas ré-encoder par défaut.
+           Le <img> interne sert de repli aux navigateurs sans <video> ; main.js
+           bascule aussi sur la photo en reduced-motion, saveData et erreur de chargement.
+           preload="none" et NON "metadata" comme écrit au §1.3 : avec "metadata" le
+           navigateur va chercher les métadonnées des deux sources dès le parsing, donc
+           AVANT que le JS ait pu décider de ne rien charger — ce qui viole le §1.5
+           (« en reduced-motion on ne charge pas la vidéo du tout »). main.js passe le
+           preload à "metadata" quand la section entre dans la marge de 600 px, ce qui
+           donne exactement le comportement décrit au §1.3. -->
+      <figure class="chien-video" data-reveal data-chien-video>
+        <video
+          id="chienVideo"
+          poster="assets/photos/chien-oeil-poster.webp"
+          width="720" height="846"
+          muted playsinline preload="none"
+          disablepictureinpicture>
+          <source src="assets/video/chien-oeil.webm" type="video/webm">
+          <source src="assets/video/chien-oeil.mp4"  type="video/mp4">
+          <img src="assets/photos/chien-billard-debout.webp" width="1362" height="1600"
+               alt="Le chien du Barrel, assis sur le billard au tapis léopard"
+               loading="lazy" decoding="async">
+        </video>
+        <figcaption>Il te regarde depuis le billard.</figcaption>
+      </figure>
+
+      <!-- §3.3 — second temps du seuil : le lieu vide qui attend (§3bis.6).
+           Le site n'avait que des plans peuplés. -->
       <div class="seuil-second" data-reveal-stagger>
-        <figure class="tile w3 h2">
-          <img src="assets/photos/chien-billard-debout.webp" width="1362" height="1600" alt="Un staffie assis au milieu du billard au tapis léopard, sous la lumière bleue" loading="lazy" decoding="async">
-          <figcaption>Sur le tapis, sous le bleu</figcaption>
-        </figure>
         <figure class="tile w3">
           <img src="assets/photos/salle-lanterne.webp" width="1600" height="1066" alt="Une lanterne allumée devant le papier peint baroque rouge de la salle" loading="lazy" decoding="async">
           <figcaption>La lanterne, avant l'ouverture</figcaption>
@@ -704,6 +730,6 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=3"></script>
+<script src="js/main.js?v=5"></script>
 </body>
 </html>

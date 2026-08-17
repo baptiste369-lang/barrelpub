@@ -371,6 +371,24 @@ main{position:relative;z-index:2;background:var(--noir)}
 }
 @media (max-width:720px){.sortie-gallery{grid-template-columns:repeat(2,1fr)}.sortie-gallery .shot.wide{grid-column:span 2}}
 
+/* ---------- V2.4 §1 — la vidéo du chien, scrubée au scroll ---------- */
+.chien-video{position:relative;max-width:520px;margin:clamp(30px,6vh,70px) auto}
+.chien-video video,
+.chien-video>img{width:100%;height:auto;display:block;background:var(--noir-2)}
+/* §1.4 — le plan ne finit pas sur du noir : le voile termine le geste.
+   Le JS ne met à jour QUE --fade. Aucune autre propriété animée. */
+.chien-video::after{
+  content:"";position:absolute;inset:0;background:var(--noir);
+  opacity:var(--fade,0);pointer-events:none;
+}
+.chien-video figcaption{
+  margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gris);
+}
+/* repli photo (reduced-motion, saveData, erreur de chargement) */
+.chien-video.is-photo video{display:none}
+.chien-video.is-photo::after{display:none}
+
 /* ---------- §3.3 / §3bis.6 — second temps du seuil : le lieu qui attend ---------- */
 .seuil-second{
   display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,20px);

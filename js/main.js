@@ -344,6 +344,107 @@
   })();
 
   /* =====================================================================
+     V2.4 §1 — LA VIDÉO DU CHIEN, SCRUBÉE AU SCROLL
+     On déplace currentTime selon la progression de la figure dans le viewport :
+     le visiteur avance vers l'œil en scrollant, c'est lui qui entre dans le chien.
+
+     Règles du §1.3, toutes tenues ici :
+     · IntersectionObserver + boucle bornée, JAMAIS de ScrollTrigger — le hero est
+       pinné au-dessus, tout ScrollTrigger placé en dessous mesure faux.
+     · La boucle ne tourne QUE quand la figure est visible : on s'abonne au
+       gsap.ticker à l'entrée, on se désabonne (return false) à la sortie. C'est
+       aussi ce qui garde UN SEUL requestAnimationFrame dans tout le fichier.
+       runFrame() coupe déjà sur document.hidden.
+     · Seuil de repositionnement d'une frame (1/24 s) : sans lui on repositionne la
+       vidéo à chaque frame pour rien, le décodeur sature et l'image se fige. C'est
+       la première cause de saccade sur ce type d'effet.
+     · §1.4 — sur les 15 derniers pour cent, un voile noir monte de 0 à 1. Le JS ne
+       met à jour QUE la variable --fade ; aucune autre propriété n'est animée.
+     ===================================================================== */
+  (function () {
+    var fig = q("[data-chien-video]");
+    if (!fig) return;
+    var video = q("video", fig);
+    if (!video) return;
+
+    var FRAME = 1 / 24;          // seuil de repositionnement = une frame
+    var FADE_FROM = 0.85;        // §1.4 — le voile démarre à 85 %
+
+    // --- §1.5 · les portes de sortie : on affiche la photo, pas une vidéo figée ---
+    var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    var saveData = !!(conn && conn.saveData);
+    function fallbackPhoto() {
+      fig.classList.add("is-photo");
+      try { video.removeAttribute("src"); video.load(); } catch (e) {}
+    }
+    if (REDUCE || saveData) { fallbackPhoto(); return; }
+    video.addEventListener("error", fallbackPhoto);
+    // une source illisible remonte sur le <source>, pas sur le <video>
+    qa("source", video).forEach(function (s) {
+      s.addEventListener("error", function () {
+        if (video.networkState === 3 /* NETWORK_NO_SOURCE */) fallbackPhoto();
+      });
+    });
+
+    // --- progression de la figure dans le viewport, bornée 0..1 ---
+    function progress() {
+      var r = fig.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      return clamp((vh - r.top) / (vh + r.height), 0, 1);
+    }
+
+    // écrit l'état pour une progression donnée
+    function update(p) {
+      if (video.readyState >= 1 && video.duration) {
+        var target = p * video.duration;
+        // seuil d'une frame : en dessous, on ne touche pas au décodeur
+        if (Math.abs(target - video.currentTime) > FRAME) {
+          try { video.currentTime = target; } catch (e) {}
+        }
+      }
+      var fade = p <= FADE_FROM ? 0 : (p - FADE_FROM) / (1 - FADE_FROM);
+      fig.style.setProperty("--fade", clamp(fade, 0, 1).toFixed(3));
+    }
+
+    var subscribed = false;
+    function tick() {
+      if (!subscribed) return false;          // désabonnement propre
+      update(progress());
+    }
+
+    // --- §1.3 · chargement seulement quand la section approche (marge 600 px) ---
+    var armed = false;
+    var loadIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || armed) return;
+        armed = true;
+        loadIO.disconnect();
+        video.preload = "metadata";
+        try { video.load(); } catch (err) {}
+      });
+    }, { rootMargin: "600px 0px" });
+    loadIO.observe(fig);
+
+    // --- la boucle ne vit que dans le viewport ---
+    var runIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (!subscribed) { subscribed = true; onFrame(tick); }
+        } else {
+          subscribed = false;                  // tick() se retirera au prochain passage
+          // On écrit une dernière fois l'état terminal AVANT de lâcher la boucle.
+          // Sans ça, la figure sort du viewport pendant que le voile est à ~0,34 et
+          // il y reste : le §1.4 (fondu au noir complet) ne se produit jamais, et la
+          // vidéo se fige à ~4,5 s au lieu d'aller au bout. Hors viewport la
+          // progression vaut exactement 0 ou 1, donc cet appel borne proprement.
+          update(progress());
+        }
+      });
+    }, { threshold: 0 });
+    runIO.observe(fig);
+  })();
+
+  /* =====================================================================
      HORLOGE LIVE — le JS ne fait que remplacer (info statique sinon)
      ===================================================================== */
   (function () {
