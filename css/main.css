@@ -346,6 +346,14 @@ main{position:relative;z-index:2;background:var(--noir)}
    SCÈNE 02 — LE SEUIL / LE CHIEN
    ===================================================================== */
 .scene-seuil{background:var(--noir);min-height:100dvh;display:flex;align-items:center}
+/* V2.4 §4 — trouvé au balayage 320→1920. .scene-seuil est le seul chapitre en
+   display:flex, donc son .scene-inner est un ÉLÉMENT FLEX : avec min-width:auto il
+   refuse de descendre sous sa largeur min-content et déborde du padding du parent.
+   Mesuré à 320 px : inner de 320 px au lieu de 276, soit 22 px de contenu coupés à
+   droite sur tout le chapitre 02 — masqués par le overflow:hidden de .scene, donc
+   invisibles à l'audit du scroll horizontal. Les autres chapitres, non flex,
+   étaient corrects (276 px). */
+.scene-seuil>.scene-inner{min-width:0;width:100%}
 .seuil-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,6vw,80px);align-items:center;width:100%}
 @media (min-width:960px){.seuil-grid{grid-template-columns:1.05fr .95fr}}
 .wall{font-family:var(--display);text-transform:uppercase;line-height:.85;letter-spacing:-.03em;

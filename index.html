@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=7">
+<link rel="stylesheet" href="css/main.css?v=9">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -68,6 +68,26 @@
   "sameAs":["https://www.instagram.com/barrelpubcannes"]
 }
 </script>
+<noscript><style>
+  /* V2.4 §4 — sans JavaScript, rien ne retire is-locked ni n'ajoute .is-in :
+     index.html restait un écran noir non défilable, préchargeur figé, et les
+     blocs [data-reveal] invisibles. Ces règles ne s'appliquent QUE sans JS et ne
+     touchent aucune règle du chemin normal. */
+  html.is-locked, html.is-locked body{overflow:auto!important;height:auto!important;touch-action:auto!important}
+  #loader{display:none!important}
+  [data-reveal],[data-reveal-stagger]>*{opacity:1!important;transform:none!important}
+  /* les lignes sont décalées de 112% dans un conteneur en overflow:hidden :
+     sans le JS qui pose .on / .is-in, elles restent hors cadre. */
+  .ov-line>span,.wall .l span{transform:none!important;opacity:1!important}
+  .ov-sub,.ov-subline,.ov-cta{opacity:1!important;transform:none!important}
+  /* le hero est une séquence sur canvas : sans JS il ne peut rien montrer.
+     On le réduit et on ne garde que la carte finale, qui porte le CTA. */
+  #hero{height:auto!important;min-height:auto!important;padding:22vh 0 12vh}
+  #hero-canvas,.hero-vignette,.scroll-cue,.hero-num{display:none!important}
+  .cue{display:none!important}
+  .cue--final{display:block!important;position:static!important;opacity:1!important;
+              transform:none!important;width:auto;margin:0 auto}
+</style></noscript>
 </head>
 <body>
 <a class="skip" href="#scene-seuil">Aller au contenu</a>
