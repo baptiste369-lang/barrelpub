@@ -4,3 +4,8 @@ _source.css
 *.zip
 .claude/
 .DS_Store
+*.md
+*.zip
+.claude/
+.DS_Store
+_to_delete/
