@@ -1,2 +1,6 @@
 .DS_Store
 _source.css
+*.md
+*.zip
+.claude/
+.DS_Store
