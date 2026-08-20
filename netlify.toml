@@ -146,6 +146,16 @@
   status = 200
 
 [[redirects]]
+  from = "/galerie"
+  to = "/galerie.html"
+  status = 200
+
+[[redirects]]
+  from = "/photos"
+  to = "/galerie.html"
+  status = 200
+
+[[redirects]]
   from = "/reservation"
   to = "/contact.html"
   status = 200
