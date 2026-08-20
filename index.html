@@ -401,11 +401,27 @@
   <section class="scene scene-carte" id="scene-carte" aria-labelledby="carte-title">
     <div class="scene-inner">
       <div class="marker"><span class="tag">04 / 05</span><span>La carte</span></div>
-      <span class="eyebrow">À table, ou au comptoir</span>
-      <h2 id="carte-title" data-split data-glitch style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin:12px 0 clamp(24px,3vh,36px)"><span class="ov-line"><span>La carte.</span></span></h2>
-      <!-- À FAIRE VALIDER PAR EVA — détails de production non vérifiés (pain brioché,
-           viande fraîche). Ne rien ajouter d'autre sans confirmation de sa part. -->
-      <p class="carte-lede" data-reveal>Burgers maison, pain brioché, viande fraîche. Service dès 18h.</p>
+      <!-- V3.0 §2.3 — L'OUVERTURE DU CHAPITRE : un seul grand plan de bouffe, et
+           le titre à côté. Le plan reste en portrait — ces photos sont cadrées à
+           la verticale, les passer en bandeau couperait les burgers en deux.
+           Attention en relisant ce chapitre : c'est celui du virage restaurant,
+           il ne doit pas maigrir au point de ne plus donner faim. C'est pour ça
+           que les vignettes des lignes de menu restent (voir data-thumb plus
+           bas) : elles illustrent un plat nommé et son prix, elles ne décorent
+           pas. -->
+      <div class="carte-open" data-reveal>
+        <figure class="plat-lead">
+          <img src="assets/photos/burgers-trio-leopard.webp" width="1200" height="1600" alt="Trois burgers alignés sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async">
+          <figcaption>Le trio — sur le tapis léopard</figcaption>
+        </figure>
+        <div>
+          <span class="eyebrow">À table, ou au comptoir</span>
+          <h2 id="carte-title" data-split data-glitch style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin:12px 0 clamp(24px,3vh,36px)"><span class="ov-line"><span>La carte.</span></span></h2>
+          <!-- À FAIRE VALIDER PAR EVA — détails de production non vérifiés (pain brioché,
+               viande fraîche). Ne rien ajouter d'autre sans confirmation de sa part. -->
+          <p class="carte-lede">Burgers maison, pain brioché, viande fraîche. Service dès 18h.</p>
+        </div>
+      </div>
 
       <div class="menu-cols" data-reveal>
         <div class="menu-cat">
@@ -446,39 +462,12 @@
     </div>
 
     <div class="scene-inner">
-      <!-- §3.4 — LE GROS DU LOT. Le chapitre passe de 12 à 20 images.
-           Le tapis léopard revient dans presque tous ces plans : c'est ce qui donne
-           au chapitre son unité visuelle. Ne pas désaturer, ne pas recadrer pour
-           l'éliminer. Formats mélangés, mosaïque. -->
-      <div class="carte-mosaic" data-reveal-stagger>
-        <figure class="tile w3 h2"><img src="assets/photos/burgers-trio-leopard.webp" width="1200" height="1600" alt="Trois burgers alignés sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le trio</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-stack-leopard.webp" width="1200" height="1600" alt="Un burger monté haut, posé sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Monté haut</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-oeuf-bacon.webp" width="1200" height="1600" alt="Burger œuf-bacon, jaune coulant" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Œuf, bacon</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burger-oeuf-plateau.webp" width="900" height="1600" alt="Le burger à l'œuf servi sur son plateau" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Sur le plateau</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burgers-duo-leopard.webp" width="1200" height="1600" alt="Deux burgers côte à côte sur le léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>À deux</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burgers-plateau-leopard.webp" width="1200" height="1600" alt="Un plateau de burgers posé sur le tapis léopard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La tournée</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-pulled-plateau.webp" width="1200" height="1600" alt="Burger au porc effiloché sur son plateau" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Pulled pork</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burger-chicken-fondant.webp" width="900" height="1600" alt="Burger au poulet pané, cheddar fondant" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Chicken</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/sandwich-pulled-vert.webp" width="900" height="1600" alt="Sandwich au porc effiloché sur fond vert" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le sandwich</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/sandwiches-plateau-vert.webp" width="900" height="1600" alt="Un plateau de sandwiches à partager" loading="lazy" fetchpriority="low" decoding="async"><figcaption>À partager</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/burger-bun-noir.webp" width="900" height="1600" alt="Le burger au pain noir, Black Barrel" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Black Barrel</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/frites-curly-cornet.webp" width="1200" height="1600" alt="Un cornet de frites curly" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Curly</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/chips-maison.webp" width="900" height="1600" alt="Des chips maison servies en corbeille" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Chips maison</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/tenders-assiette.webp" width="1200" height="1600" alt="Une assiette de tenders de poulet" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Tenders</figcaption></figure>
-        <figure class="tile w3"><img src="assets/photos/burgers-duo-plateau.webp" width="1200" height="1600" alt="Deux burgers servis sur un plateau métal" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Service</figcaption></figure>
-        <!-- §3.2 — la moto, occurrence 2/2 : elle est ici parce qu'elle raccroche
-             la moto à la bouffe, qui est le nouveau sujet du site. -->
-        <figure class="tile w3"><img src="assets/photos/moto-frites.webp" width="1066" height="1600" alt="Une cliente assise sur la moto rose, en train de manger des frites" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Frites, sur la moto</figcaption></figure>
-      </div>
-
-      <!-- §3.4 — la paire de cocktails passion : même verre, deux cadrages.
-           Le hover bascule de l'un à l'autre. Sans JS et au clavier, les deux
-           images restent accessibles (la seconde est en <figure> visible au focus). -->
-      <figure class="swap-pair" data-reveal tabindex="0">
-        <img class="sp-a" src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" fetchpriority="low" decoding="async">
-        <img class="sp-b" src="assets/photos/cocktail-passion-table.webp" width="1200" height="1600" alt="Le même cocktail passion, posé sur la table" loading="lazy" fetchpriority="low" decoding="async">
-        <figcaption>Le même verre, deux fois</figcaption>
-      </figure>
+      <!-- V3.0 §2.3 — sont partis en galerie, catégorie LA CUISINE :
+           · la mosaïque .carte-mosaic (16 plans, dont moto-frites) ;
+           · la paire .swap-pair (cocktail-passion-table ; cocktail-passion-mains
+             reste, dans le duo de cocktails ci-dessous).
+           Le chapitre garde un grand plan, deux cocktails et les cinq vignettes
+           des lignes de menu. -->
 
       <!-- §3bis.3 / §3bis.4 — LE BLOC COCKTAILS, sur la texture CHEVRON du comptoir.
            Le chevron rouge et jaune est le contrepoint exact du léopard :
@@ -488,56 +477,27 @@
       <div class="cocktails" data-reveal>
         <span class="eyebrow">Au comptoir</span>
         <h3 class="ck-title">Les cocktails</h3>
-        <div class="ck-grid" data-reveal-stagger>
-          <figure class="tile ck-lead"><img src="assets/photos/cocktail-bleu-tonneau.webp" width="1200" height="1600" alt="Une cliente penchée sur un tonneau, cocktail bleu à deux pailles, sous l'enseigne Power &amp; Son Irish Whiskey" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Deux pailles, un tonneau</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktails-bleus-trinque.webp" width="1200" height="1600" alt="Deux cocktails bleus qui trinquent au-dessus du tapis de comptoir à chevrons rouge et jaune" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Chevron rouge et jaune</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-bleu-comptoir.webp" width="917" height="1600" alt="Un cocktail bleu posé sur le comptoir à chevrons" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Sur le comptoir</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/longdrinks-trio.webp" width="1200" height="1600" alt="Trois long drinks alignés sur le comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Long drinks</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-passion-mains-02.webp" width="1200" height="1600" alt="Un cocktail passion tenu au-dessus du comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Passion</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-violet-paille.webp" width="1066" height="1600" alt="Un grand cocktail violet servi avec une paille" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le grand format</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/cocktail-orange-assise.webp" width="1200" height="1600" alt="Une cliente assise, cocktail orange à la main" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Orange</figcaption></figure>
+        <!-- V3.0 §2.3 — deux cocktails, pas six. Le bleu sur le tonneau et le
+             passion à deux mains : un plan d'ambiance, un plan de verre. Les
+             cinq autres sont en galerie, LA CUISINE. -->
+        <div class="ck-duo" data-reveal-stagger>
+          <figure class="tile"><img src="assets/photos/cocktail-bleu-tonneau.webp" width="1200" height="1600" alt="Une cliente penchée sur un tonneau, cocktail bleu à deux pailles, sous l'enseigne Power &amp; Son Irish Whiskey" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Deux pailles, un tonneau</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Passion, à deux mains</figcaption></figure>
         </div>
         <!-- EN ATTENTE D'EVA — les « cocktails citernes ».
              Aucune photo des deux dossiers ne montre un contenant de type citerne.
-             cocktail-violet-paille est le plus gros verre du lot, sans plus : il est
-             donc légendé « le grand format » et NON « citerne ».
-             Il faut soit la photo, soit renoncer à l'argument. Ne pas illustrer un
-             cocktail citerne avec un verre normal. -->
+             Le plus gros verre du lot est cocktail-violet-paille, maintenant en
+             galerie et légendé « le grand format » — jamais « citerne ».
+             Il faut soit la photo, soit renoncer à l'argument. -->
       </div>
 
-      <!-- ============ §3bis.1 — LA BANDE DE PHOTOBOOTH · module signature ============
-           Le meilleur objet du dossier client : format natif du lieu, il raconte le
-           photobooth ET la bouffe dans la même image, et il est déjà marqué au nom de
-           l'établissement. La bande se compose vignette par vignette au scroll.
-           Les deux autres bandes restent statiques, en petit format, dans la
-           mosaïque des jeux (chapitre 03). -->
-      <div class="bande-signature" data-reveal>
-        <span class="eyebrow">Ton souvenir — Ta Bobine</span>
-        <figure class="bande" data-bande>
-          <img src="assets/photos/photobooth-bande-01.webp" width="1280" height="533" alt="Bande souvenir du photobooth Ta Bobine : quatre vignettes d'une cliente qui mange un burger, et le bandeau imprimé Barrel Pub Cannes daté du 08-03-2026 à 22:07" loading="lazy" fetchpriority="low" decoding="async">
-          <span class="bd-cell" data-cell="1" aria-hidden="true"></span>
-          <span class="bd-cell" data-cell="2" aria-hidden="true"></span>
-          <span class="bd-cell" data-cell="3" aria-hidden="true"></span>
-          <span class="bd-cell" data-cell="4" aria-hidden="true"></span>
-          <span class="bd-cell bd-band" data-cell="5" aria-hidden="true"></span>
-          <span class="bd-flash" aria-hidden="true"></span>
-        </figure>
-        <p class="bande-note">Quatre flashs, 4€. La bande sort en trente secondes, elle repart avec toi.</p>
-      </div>
-    </div>
-
-    <!-- Bandeau tapas — marquee à vélocité de scroll -->
-    <div class="marquee" data-marquee aria-hidden="true">
-      <ul class="mq-track" id="mqTrack">
-        <li class="mq-item"><img src="assets/photos/frites-curly-01.webp" width="900" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/chicken-strips.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/frites-curly-02.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/burger-pulled.webp" width="900" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/cocktail-01.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/cocktail-03.webp" width="1066" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/burger-04.webp" width="900" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-        <li class="mq-item"><img src="assets/photos/cocktail-02.webp" width="1200" height="1600" alt="" loading="lazy" fetchpriority="low" decoding="async"></li>
-      </ul>
+      <!-- V3.0 §2.3 — sont partis en galerie :
+           · .bande-signature (photobooth-bande-01) → LE LIEU, avec les deux
+             autres bandes ;
+           · le .marquee des tapas, huit vignettes qui défilaient sans être
+             nommées → LA CUISINE.
+           Le module de composition de la bande ([data-bande] dans main.js) est
+           gardé par `if (!strip) return`. -->
     </div>
   </section>
 
