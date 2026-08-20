@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=22">
+<link rel="stylesheet" href="css/main.css?v=23">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -206,7 +206,7 @@
   <div class="head-meta">Cannes · 18h → 5h · 364 j/an</div>
   <div class="head-right">
     <a class="head-link" href="galerie.html">Galerie</a>
-    <a class="head-cta" href="contact.html" data-cursor="Réserver">Réserver</a>
+    <a class="head-cta" href="contact.html" data-rsv data-cursor="Réserver">Réserver</a>
   </div>
 </header>
 
@@ -826,7 +826,7 @@
           <h3>Une soirée, un anniversaire, une équipe entière ?</h3>
           <p>On privatise les terrasses et la salle. Dis-nous la date, on s'occupe du reste.</p>
           <div style="display:flex;flex-wrap:wrap;gap:14px">
-            <a class="btn" href="contact.html">Réserver / Privatiser</a>
+            <a class="btn" href="contact.html" data-rsv>Réserver / Privatiser</a>
             <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Barrel+Pub+17+rue+du+Docteur+G%C3%A9rard+Monod+Cannes" target="_blank" rel="noopener">Ouvrir dans Maps</a>
           </div>
         </div>
@@ -869,12 +869,106 @@
   </footer>
 </main>
 
+<!-- ============ V3.1 §4 — LA RÉSERVATION EN MODALE ============
+     Le visiteur décide de réserver au moment où il lit la page ; l'envoyer sur
+     contact.html à cet instant précis, c'est le perdre. Le formulaire vient à
+     lui, la page ne bouge pas.
+
+     <dialog> natif : showModal() donne le piège de focus, le fond inerte et la
+     fermeture à Échap sans une ligne de JS. L'ouverture est animée en CSS pur
+     (@starting-style + transition-behavior:allow-discrete).
+
+     NETLIFY — le formulaire doit être dans le HTML STATIQUE pour être détecté au
+     déploiement. Il l'est : un <dialog> fermé reste dans le document. Il porte
+     le MÊME name que celui de contact.html (« reservation ») et les mêmes noms
+     de champs, donc les deux pages alimentent la même boîte de réception.
+     À VÉRIFIER APRÈS LE PREMIER DÉPLOIEMENT : que « reservation » apparaît bien
+     dans l'onglet Forms et qu'un envoi depuis la modale y arrive.
+
+     SANS JS : rien de tout ça n'existe. Le bouton RÉSERVER garde son href vers
+     contact.html, la page complète prend le relais. C'est aussi elle qu'on
+     partage en lien direct. -->
+<dialog id="rsvDialog" aria-labelledby="rsvTitle">
+  <button type="button" class="rsv-close" id="rsvClose" aria-label="Fermer">Fermer <span aria-hidden="true">&#10005;</span></button>
+
+  <div class="rsv-inner" id="rsvInner">
+    <span class="eyebrow">Réserver</span>
+    <h2 class="rsv-title" id="rsvTitle">On te garde une place.</h2>
+    <p class="rsv-lede">Table, grande tablée, anniversaire ou privatisation — dis-nous, on te rappelle.</p>
+
+    <form class="barrel-form" id="rsvForm" name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
+      <input type="hidden" name="form-name" value="reservation">
+      <p class="hp"><label>Ne remplissez pas ceci : <input name="bot-field"></label></p>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="rsv-nom">Nom <span class="req">*</span></label>
+          <input id="rsv-nom" name="nom" type="text" required autocomplete="name" placeholder="Ton nom">
+          <span class="err">Indique ton nom.</span>
+        </div>
+        <div class="field">
+          <label for="rsv-tel">Téléphone <span class="req">*</span></label>
+          <input id="rsv-tel" name="telephone" type="tel" required autocomplete="tel" pattern="[0-9 +\-\(\)\.]{6,}" placeholder="06 00 00 00 00">
+          <span class="err">Numéro à joindre valide requis.</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rsv-email">Email <span class="req">*</span></label>
+        <input id="rsv-email" name="email" type="email" required autocomplete="email" placeholder="toi@email.com">
+        <span class="err">Adresse email valide requise.</span>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="rsv-date">Date souhaitée</label>
+          <input id="rsv-date" name="date" type="date">
+        </div>
+        <div class="field">
+          <label for="rsv-type">Type de demande</label>
+          <select id="rsv-type" name="type">
+            <option value="table">Réserver une table</option>
+            <option value="groupe">Grande tablée / groupe</option>
+            <option value="privatisation">Privatisation</option>
+            <option value="anniversaire">Anniversaire / événement</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Champ conditionnel (§4). Il part masqué par le JS au chargement : sans
+           JS il reste visible, ce qui est le bon repli — un champ de plus vaut
+           mieux qu'un champ qu'on ne peut jamais remplir. -->
+      <div class="field" id="rsvPersWrap">
+        <label for="rsv-pers">Nombre de personnes</label>
+        <input id="rsv-pers" name="personnes" type="number" min="1" max="600" inputmode="numeric" placeholder="Ex. 8">
+      </div>
+
+      <div class="field">
+        <label for="rsv-msg">Message</label>
+        <textarea id="rsv-msg" name="message" placeholder="Occasion, horaire, envies…"></textarea>
+      </div>
+
+      <button class="btn" type="submit" id="rsvSubmit">Envoyer la demande</button>
+      <p class="form-note">* champs obligatoires — réponse par téléphone ou email.<br>
+        Tu préfères la page complète ? <a class="ul" href="contact.html">Ouvrir contact</a></p>
+    </form>
+  </div>
+
+  <!-- État de succès. Masqué tant que l'envoi n'a pas abouti. -->
+  <div class="rsv-done" id="rsvDone" hidden>
+    <span class="rsv-tick" aria-hidden="true"></span>
+    <p class="rsv-done-line">C'est parti.<br>On te répond dans la journée.</p>
+    <p class="rsv-sign">— L'équipe du Barrel</p>
+    <button type="button" class="btn ghost" id="rsvDoneClose">Fermer</button>
+  </div>
+</dialog>
+
 <!-- Librairies servies en local — aucune dépendance CDN -->
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=11"></script>
+<script src="js/main.js?v=14"></script>
 </body>
 </html>

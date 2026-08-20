@@ -1373,3 +1373,70 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   .menu-tab::after{transition:none}
   .menu-cols.is-fading{transition:none}
 }
+
+/* =====================================================================
+   V3.1 §4 — LA MODALE DE RÉSERVATION
+   <dialog> natif. Ouverture animée en CSS pur : @starting-style pour l'état
+   d'entrée, transition-behavior:allow-discrete pour que display et overlay
+   participent à la transition. Aucune bibliothèque.
+   ===================================================================== */
+#rsvDialog{
+  width:min(640px,92vw);max-height:88dvh;
+  margin:auto;padding:clamp(26px,4vw,48px);
+  border:1px solid rgba(237,232,224,.12);
+  background:var(--noir-2);color:var(--blanc);
+  overflow:auto;position:relative;
+  opacity:0;transform:translateY(18px) scale(.985);
+  transition:opacity .45s var(--ease),transform .45s var(--ease),
+             overlay .45s var(--ease),display .45s var(--ease);
+  transition-behavior:allow-discrete;
+}
+#rsvDialog[open]{opacity:1;transform:none}
+@starting-style{ #rsvDialog[open]{opacity:0;transform:translateY(18px) scale(.985)} }
+#rsvDialog::backdrop{
+  background:rgba(6,7,9,.86);
+  opacity:0;transition:opacity .45s var(--ease),overlay .45s var(--ease),display .45s var(--ease);
+  transition-behavior:allow-discrete;
+}
+#rsvDialog[open]::backdrop{opacity:1}
+@starting-style{ #rsvDialog[open]::backdrop{opacity:0} }
+
+.rsv-close{
+  position:absolute;top:clamp(14px,2vw,20px);right:clamp(14px,2vw,20px);z-index:2;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gris);border:1px solid rgba(237,232,224,.24);
+  padding:10px 14px;min-height:44px;
+  transition:color .3s var(--ease),border-color .3s var(--ease);
+}
+.rsv-close:hover,.rsv-close:focus-visible{color:var(--blanc);border-color:var(--blanc)}
+.rsv-title{
+  font-family:var(--display);text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(26px,4.4vw,46px);line-height:.95;margin:12px 0 14px;
+}
+.rsv-lede{color:var(--gris);font-size:clamp(14px,1.5vw,16px);margin-bottom:clamp(22px,3vh,32px);max-width:46ch}
+#rsvDialog .form-note a{color:var(--bleu-lien)}
+#rsvPersWrap[hidden]{display:none}
+
+/* l'état de succès */
+.rsv-done{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:clamp(16px,3vh,34px) 0}
+.rsv-done[hidden]{display:none}
+.rsv-tick{
+  width:44px;height:44px;border-radius:50%;flex:0 0 auto;
+  border:1px solid var(--bleu);position:relative;
+  box-shadow:0 0 30px rgba(43,92,255,.35);
+}
+.rsv-tick::after{
+  content:"";position:absolute;left:15px;top:12px;width:9px;height:17px;
+  border:solid var(--bleu-clair);border-width:0 1.5px 1.5px 0;transform:rotate(45deg);
+}
+.rsv-done-line{font-family:var(--display);text-transform:uppercase;letter-spacing:-.01em;
+  font-size:clamp(22px,3.4vw,36px);line-height:1.02;color:var(--blanc)}
+.rsv-sign{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2vw,21px);color:var(--or)}
+.rsv-done .btn{margin-top:6px}
+.rsv-err{font-family:var(--mono);font-size:11px;color:#ff8080;letter-spacing:.05em}
+.rsv-err[hidden]{display:none}
+
+@media (prefers-reduced-motion:reduce){
+  #rsvDialog,#rsvDialog::backdrop{transition:none}
+  #rsvDialog{transform:none}
+}

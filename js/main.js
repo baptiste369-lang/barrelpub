@@ -655,6 +655,136 @@
   })();
 
   /* =====================================================================
+     V3.1 §4 — LA MODALE DE RÉSERVATION
+     · <dialog>.showModal() : piège de focus, fond inerte et fermeture à Échap
+       sont natifs. On n'écrit ni l'un ni l'autre.
+     · Sans JS, ce bloc ne tourne pas : les déclencheurs restent des liens vers
+       contact.html. C'est le repli prévu au §4, et c'est aussi la page qu'on
+       partage en lien direct.
+     · L'envoi passe par fetch vers Netlify pour rester dans la modale. Si le
+       fetch échoue (hors ligne, environnement local sans Netlify), on rend la
+       main au navigateur : soumission classique vers /merci.html. Personne ne
+       reste bloqué avec une demande dans les mains.
+     ===================================================================== */
+  (function () {
+    var dlg = q("#rsvDialog");
+    if (!dlg || typeof dlg.showModal !== "function") return;
+
+    var form   = q("#rsvForm");
+    var inner  = q("#rsvInner");
+    var done   = q("#rsvDone");
+    var type   = q("#rsv-type");
+    var pers   = q("#rsvPersWrap");
+    var closeB = q("#rsvClose");
+    var doneB  = q("#rsvDoneClose");
+    var last   = null;
+
+    /* --- ouverture --- */
+    qa("[data-rsv]").forEach(function (t) {
+      t.addEventListener("click", function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        last = t;
+        // si la modale a déjà servi, on la remet à l'état formulaire : rouvrir
+        // sur l'écran de confirmation d'une demande précédente n'aurait pas de
+        // sens. On réinitialise à l'ouverture, pas à la fermeture, pour ne pas
+        // faire clignoter le contenu pendant l'animation de sortie.
+        if (done && !done.hidden) {
+          done.hidden = true;
+          if (inner) inner.hidden = false;
+          if (form) form.reset();
+          var b = q("#rsvSubmit");
+          if (b) { b.disabled = false; b.textContent = "Envoyer la demande"; }
+          var e2 = q(".rsv-err", form);
+          if (e2) e2.remove();
+          syncPers();
+        }
+        dlg.showModal();
+        var first = q("#rsv-nom");
+        if (first) first.focus({ preventScroll: true });
+      });
+    });
+
+    function close() { if (dlg.open) dlg.close(); }
+    if (closeB) closeB.addEventListener("click", close);
+    if (doneB)  doneB.addEventListener("click", close);
+
+    /* --- Échap ---
+       showModal() ferme nativement à Échap. Certains navigateurs embarqués
+       (webviews, navigateurs intégrés à une application) reçoivent bien la
+       touche sans déclencher la fermeture — c'est le cas du volet de prévisu
+       de ce projet, mesuré. Le filet est conditionné à « la modale est
+       ouverte » : là où le navigateur fait son travail, il ne fait rien. */
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" && e.key !== "Esc") return;
+      if (!dlg.open) return;
+      close();
+    });
+
+    /* --- clic sur le fond ---
+       Un clic sur ::backdrop a pour cible le <dialog> lui-même : il suffit de
+       vérifier que le point cliqué tombe hors de sa boîte. Comparer
+       e.target === dlg seul fermerait aussi sur un clic dans le padding. */
+    dlg.addEventListener("click", function (e) {
+      if (e.target !== dlg) return;
+      var r = dlg.getBoundingClientRect();
+      var dedans = e.clientX >= r.left && e.clientX <= r.right &&
+                   e.clientY >= r.top  && e.clientY <= r.bottom;
+      if (!dedans) close();
+    });
+
+    /* --- le focus revient au bouton d'où l'on vient --- */
+    dlg.addEventListener("close", function () {
+      if (last) { last.focus({ preventScroll: true }); last = null; }
+    });
+
+    /* --- champ conditionnel ---
+       Une demande de groupe, d'anniversaire ou de privatisation sans nombre de
+       personnes est inexploitable ; une réservation de table n'en a pas besoin.
+       Le brief cite « anniversaire » et « groupe » : privatisation est ajoutée,
+       c'est le cas où le nombre compte le plus. */
+    var AVEC_NOMBRE = { groupe: 1, anniversaire: 1, privatisation: 1 };
+    function syncPers() {
+      if (!pers || !type) return;
+      pers.hidden = !AVEC_NOMBRE[type.value];
+    }
+    if (type) type.addEventListener("change", syncPers);
+    syncPers();
+
+    /* --- envoi --- */
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        var btn = q("#rsvSubmit");
+        if (btn) { btn.disabled = true; btn.textContent = "Envoi…"; }
+        var old = q(".rsv-err", form);
+        if (old) old.remove();
+
+        var data = new URLSearchParams(new FormData(form)).toString();
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: data
+        }).then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          if (inner) inner.hidden = true;
+          if (done) { done.hidden = false; if (doneB) doneB.focus({ preventScroll: true }); }
+        }).catch(function () {
+          // dernier recours : on laisse le navigateur poster vers /merci.html
+          if (btn) { btn.disabled = false; btn.textContent = "Envoyer la demande"; }
+          var msg = document.createElement("p");
+          msg.className = "rsv-err";
+          msg.textContent = "L'envoi direct n'a pas abouti — on bascule sur la page complète.";
+          form.appendChild(msg);
+          setTimeout(function () { form.submit(); }, 900);
+        });
+      });
+    }
+  })();
+
+  /* =====================================================================
      V3.1 §2 — LA CARTE EN ONGLETS
      Le chapitre carte tenait sur cinq écrans dépliés ; il en tient un.
      · Aucune dépendance : View Transitions same-document quand le navigateur
