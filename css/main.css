@@ -1206,6 +1206,19 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 .plan-large--nuit{margin:clamp(30px,5vh,60px) 0 clamp(48px,7vh,90px)}
 .plan-large--nuit img{object-position:center 38%}
 
+/* ch. 03 — la mosaïque du jeu, réduite à trois tuiles.
+   Sans variante, trois tuiles simples dans une grille à 6 colonnes tomberaient
+   sur la hauteur plancher de .tile (180 px) : une frise de vignettes, pas trois
+   plans. Le ratio fixe leur rend leur format. */
+.mosaic.is-trio{grid-template-columns:repeat(3,1fr)}
+.mosaic.is-trio .tile,
+.mosaic.is-trio .tile.w2{grid-column:span 1;grid-row:span 1;aspect-ratio:3/4;min-height:0}
+@media (max-width:860px){.mosaic.is-trio{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){
+  .mosaic.is-trio{grid-template-columns:1fr}
+  .mosaic.is-trio .tile,.mosaic.is-trio .tile.w2{aspect-ratio:4/3}
+}
+
 /* ch. 03 — le seul plan de coulisses qui reste */
 .coul-solo{position:relative;overflow:hidden;background:var(--noir-2);max-width:min(100%,560px);margin-top:22px}
 .coul-solo img{width:100%;height:auto;display:block}

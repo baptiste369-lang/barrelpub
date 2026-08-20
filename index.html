@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=14">
+<link rel="stylesheet" href="css/main.css?v=15">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -284,17 +284,16 @@
            §3.7 — flechettes-02 et photobooth-cabine remplacent les deux plans précédents.
            photobooth-equipe reste en PETIT format : le panneau « 3 € » y est encore
            lisible et le tarif est passé à 4 € (§2.1). -->
-      <div class="mosaic" data-reveal-stagger>
-        <figure class="tile w2 h2"><img src="assets/photos/salle-billard-bleue.webp" width="1200" height="1600" alt="La salle de billard du fond, baignée de bleu néon" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La salle du fond</figcaption></figure>
-        <figure class="tile w4"><img src="assets/photos/photobooth-ta-bobine.webp" width="1600" height="1067" alt="Le photobooth Ta Bobine : quatre flashs pour quatre euros" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Ta Bobine — 4 flashs, 4€</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/flechettes-02.webp" width="1067" height="1600" alt="La cible de fléchettes du pub, éclairée dans la pénombre" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Fléchettes</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/chien-billard-01.webp" width="1600" height="1581" alt="Un chien de la maison qui surveille le billard" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Il surveille le jeu</figcaption></figure>
-        <figure class="tile w2 h2"><img src="assets/photos/photobooth-cabine.webp" width="1200" height="1600" alt="La cabine du photobooth Ta Bobine, installée dans la salle bleue" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La cabine</figcaption></figure>
-        <figure class="tile w4"><img src="assets/photos/ecrans-sport.webp" width="1600" height="1067" alt="Le mur d'écrans diffusant le sport" loading="lazy" fetchpriority="low" decoding="async"><figcaption>10 écrans</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/fille-lunettes-ecrans.webp" width="1200" height="1600" alt="Une cliente en lunettes de soleil devant les écrans sport, en pleine soirée" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Soir de match</figcaption></figure>
-        <figure class="tile w2"><img src="assets/photos/photobooth-equipe.webp" width="1600" height="1067" alt="L'équipe serrée dans le photobooth du bar" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Tout le monde dedans</figcaption></figure>
-        <figure class="tile w2 bande-mini"><img src="assets/photos/photobooth-bande-02.webp" width="1280" height="533" alt="Une bande souvenir Ta Bobine, quatre vignettes et le bandeau Barrel Pub Cannes" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Bande souvenir</figcaption></figure>
-        <figure class="tile w2 bande-mini"><img src="assets/photos/photobooth-bande-03.webp" width="1280" height="533" alt="Une autre bande souvenir Ta Bobine, quatre vignettes au flash" loading="lazy" fetchpriority="low" decoding="async"><figcaption>4 flashs, 4€</figcaption></figure>
+      <!-- V3.0 §2.2 — la mosaïque passe de 10 tuiles à 3 : le billard, le
+           photobooth, les fléchettes. Une idée, une image. Les sept autres
+           (chien-billard-01, photobooth-cabine, ecrans-sport,
+           fille-lunettes-ecrans, photobooth-equipe, photobooth-bande-02 et -03)
+           sont en galerie, LE LIEU et LES SOIRS. La liste .feature-list plus bas
+           dit déjà les écrans, le babyfoot et l'arcade — en toutes lettres. -->
+      <div class="mosaic is-trio" data-reveal-stagger>
+        <figure class="tile"><img src="assets/photos/salle-billard-bleue.webp" width="1200" height="1600" alt="La salle de billard du fond, baignée de bleu néon" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le billard, tapis léopard</figcaption></figure>
+        <figure class="tile"><img src="assets/photos/photobooth-ta-bobine.webp" width="1600" height="1067" alt="Le photobooth Ta Bobine : quatre flashs pour quatre euros" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Ta Bobine — 4 flashs, 4€</figcaption></figure>
+        <figure class="tile"><img src="assets/photos/flechettes-02.webp" width="1067" height="1600" alt="La cible de fléchettes du pub, éclairée dans la pénombre" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Fléchettes</figcaption></figure>
       </div>
 
       <!-- §3bis.7 — flou-leopard : filé de mouvement sur imprimé léopard, utilisé
@@ -338,56 +337,30 @@
           <span class="neon-step">03 — la fin</span>
         </div>
 
-        <!-- §3.5 — les néons tels qu'ils sont réellement vus dans la salle, en bande
-             serrée pour fermer la séquence. neon-exactly-triptyque (le même néon
-             répété trois fois par les reflets d'étagère) est gardé pour le fond du
-             bloc, comme demandé ; on ferme en noir et blanc sur neon-playlist-nb. -->
-        <div class="neon-strip" data-reveal-stagger>
-          <figure class="tile"><img src="assets/photos/neon-exactly-triptyque.webp" width="900" height="1600" alt="Le néon « You are exactly where you need to be » répété trois fois par les reflets des étagères" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Trois fois, par les reflets</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-exactly-where-02.webp" width="1600" height="1066" alt="Le néon « You are exactly where you need to be » seul, devant la bibliothèque" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Net, sur la bibliothèque</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-foule-02.webp" width="1600" height="1066" alt="Le néon de la playlist au-dessus de la salle pleine" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Au-dessus de la foule</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-portrait.webp" width="1066" height="1600" alt="Le néon de la playlist, cadré à la verticale" loading="lazy" fetchpriority="low" decoding="async"><figcaption>À la verticale</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-large.webp" width="1600" height="1067" alt="Le néon de la playlist dominant la piste bondée" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Plein cadre</figcaption></figure>
-          <figure class="tile"><img src="assets/photos/neon-playlist-nb.webp" width="1067" height="1600" alt="Le néon de la playlist, en noir et blanc, en fin de soirée" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Fin de séquence</figcaption></figure>
-        </div>
+        <!-- V3.0 §2.2 — la bande .neon-strip (six photos de néons) part en
+             galerie, LE LIEU. Le mur de trois néons ci-dessus est intact : trois
+             murs, trois phrases, dans l'ordre d'une soirée. La bande le répétait
+             en petit, juste en dessous — elle affaiblissait ce qu'elle citait. -->
       </div>
 
-      <!-- §3.5 — carrousel de nuit : ouverture sur la foule bleue, fin en noir et blanc -->
-      <div class="night-carousel" id="nightCarousel" aria-label="La nuit au Barrel, en images">
-        <ul class="nc-track" id="ncTrack">
-          <li class="nc-slide"><img src="assets/photos/foule-large-bleue.webp" width="1199" height="1600" alt="La salle pleine, baignée de bleu" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bleue-02.webp" width="1199" height="1600" alt="La foule serrée dans la lumière bleue" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bras-leves.webp" width="1600" height="1067" alt="Les bras levés au milieu de la piste" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bleue-03.webp" width="1199" height="1600" alt="La foule au plus fort de la soirée" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/groupe-tonneau.webp" width="1003" height="1600" alt="Un groupe accoudé à un tonneau" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/trio-filles-tonneau.webp" width="1200" height="1600" alt="Trois filles autour d'un tonneau, verres en main" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/trio-filles-rouge.webp" width="1200" height="1600" alt="Trois filles dans la lumière rouge de la salle" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/groupe-filles-tonneau-02.webp" width="1002" height="1600" alt="Un groupe de filles autour d'un tonneau, en pleine soirée" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-bar-bleue.webp" width="1199" height="1600" alt="La foule massée devant le bar, dans le bleu" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/foule-rouge.webp" width="1600" height="1066" alt="La salle basculée dans la lumière rouge" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/couple-danse.webp" width="1067" height="1600" alt="Un couple qui danse au milieu de la salle" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <li class="nc-slide"><img src="assets/photos/dj-platines.webp" width="1199" height="1600" alt="Le DJ aux platines en pleine soirée" loading="lazy" fetchpriority="low" decoding="async"></li>
-          <!-- §3.5 — la séquence se ferme en noir et blanc -->
-          <li class="nc-slide"><img src="assets/photos/foule-nb-02.webp" width="1600" height="1067" alt="La foule en noir et blanc, en fin de nuit" loading="lazy" fetchpriority="low" decoding="async"></li>
-        </ul>
-        <div class="nc-count"><span id="ncNow">01</span> / <span id="ncTotal">10</span></div>
-      </div>
+      <!-- V3.0 §2.2 — LE PLAN PRINCIPAL DE LA NUIT.
+           Le carrousel de treize plans est parti en galerie, LES SOIRS. Il
+           demandait au visiteur de faire défiler treize fois pour comprendre une
+           chose qu'une seule image dit mieux : la salle est pleine. -->
+      <figure class="plan-large plan-large--nuit" data-reveal>
+        <img src="assets/photos/foule-large-bleue.webp" width="1199" height="1600" alt="La salle pleine, baignée de bleu" loading="lazy" fetchpriority="low" decoding="async">
+        <figcaption>Un vendredi, vers une heure</figcaption>
+      </figure>
 
       <!-- §3bis.5 — LES COULISSES. Le site n'avait presque personne qui travaille :
            c'est aussi ce qui rend crédible le virage restaurant. -->
       <div class="coulisses" data-reveal>
         <span class="eyebrow">Le bar ne tourne pas tout seul</span>
-        <div class="coul-grid" data-reveal-stagger>
-          <figure class="tile w2 h2"><img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, en noir et blanc" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le DJ</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/staff-glacons.webp" width="1066" height="1600" alt="Un bac à glaçons porté à bout de bras au-dessus du comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La glace arrive</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/barman-flair-03.webp" width="1600" height="1066" alt="Le barman qui verse deux bouteilles en même temps" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Deux bouteilles, une main</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/barman-flair-02.webp" width="1600" height="1067" alt="Le barman en plein flair derrière le comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Flair</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/barman-shot.webp" width="1600" height="1067" alt="Une tournée de shots alignée sur le comptoir" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La tournée</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/patron-enseigne.webp" width="1024" height="1536" alt="Le patron du Barrel, bras croisés sous l'enseigne" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le patron</figcaption></figure>
-          <figure class="tile w2"><img src="assets/photos/dj-bandeau.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, derrière ses platines" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le bandeau</figcaption></figure>
-          <figure class="tile w3"><img src="assets/photos/cave-futs.webp" width="900" height="1600" alt="La cave, les fûts alignés le long du mur" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La cave</figcaption></figure>
-          <figure class="tile w3"><img src="assets/photos/cave-futs-02.webp" width="1066" height="1600" alt="Les fûts prêts à remonter au bar" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Prêts à monter</figcaption></figure>
-        </div>
+        <!-- V3.0 §2.2 — un seul plan de coulisses, le plus beau du lot. Les huit
+             autres (staff-glacons, barman-flair-02 et -03, barman-shot,
+             patron-enseigne, dj-bandeau, cave-futs, cave-futs-02) sont en
+             galerie, LES SOIRS. -->
+        <figure class="coul-solo"><img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, en noir et blanc" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le DJ</figcaption></figure>
       </div>
 
       <!-- §3.2 — LA MOTO : deux occurrences sur tout le site, pas une de plus.
