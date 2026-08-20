@@ -61,8 +61,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 :focus-visible{outline:2px solid var(--or);outline-offset:3px}
 
 /* text-wrap 2026 (§4) — plus de veuves sur les gros titres */
-h1,h2,h3,.wall,.ov-title,.neon,.foot-count,.infos-data .big{text-wrap:balance}
-p,.lede,.priv-card p,.infos-side p{text-wrap:pretty}
+h1,h2,h3,h4,.wall,.ov-title,.neon,.foot-count,.infos-data .big,
+.gal-claim,.faq summary,.rsv-title{text-wrap:balance}
+p,li,dd,.lede,.priv-card p,.infos-side p,.faq-a,figcaption{text-wrap:pretty}
 
 /* ---------- BRAND SPRITE ---------- */
 /* V3.0 §3 — le logo est en BLANC, plus en or. C'est le seul changement possible
@@ -283,7 +284,16 @@ body.has-cursor a, body.has-cursor button{cursor:none}
   transition:opacity .5s var(--ease);
 }
 .scroll-cue.hide{opacity:0}
-.scroll-cue span{font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris)}
+/* Le hero passe par des frames très claires (la mer en plein jour) : sans ombre
+   portée l'amorce disparaît sur la moitié de la séquence. Même traitement que
+   les légendes posées sur photo ailleurs dans le site. */
+.scroll-cue span{font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);
+  max-width:min(92vw,420px);text-align:center;line-height:1.9;text-wrap:balance;
+  text-shadow:0 1px 10px rgba(0,0,0,.85),0 0 22px rgba(0,0,0,.6)}
+/* V3.1 §5 — respiration lente. 3,6 s, opacité seulement : aucune propriété qui
+   déclenche une mise en page, et ça reste sous le seuil de ce qui distrait. */
+.scroll-cue span{animation:cueBreathe 3.6s var(--ease) infinite}
+@keyframes cueBreathe{0%,100%{opacity:.62}50%{opacity:1}}
 .scroll-cue .line{width:1px;height:40px;background:linear-gradient(var(--gris),transparent);position:relative;overflow:hidden}
 .scroll-cue .line::after{content:"";position:absolute;top:0;left:0;width:100%;height:40%;background:var(--bleu-clair);animation:cueDrop 1.8s var(--ease) infinite}
 @keyframes cueDrop{0%{transform:translateY(-100%)}60%,100%{transform:translateY(320%)}}
@@ -360,6 +370,13 @@ main{position:relative;z-index:2;background:var(--noir)}
 .ul::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:1px;
   background:var(--neon);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .ul:hover::after{transform:scaleX(1)}
+
+/* V3.1 §5 — chiffres à chasse fixe : les prix de la carte s'alignent
+   verticalement, les compteurs ne tressautent plus d'un chiffre à l'autre.
+   IBM Plex Mono a déjà des chiffres tabulaires, mais Instrument Sans non — et
+   c'est elle qui écrit les jours du programme et les libellés des statistiques. */
+.menu-item .p,.gal-filter i,.gal-status,.load-pct,.nc-count,
+.program .pg-day,.infos-data,.faq-a,.stat span{font-variant-numeric:tabular-nums}
 
 /* CTA */
 .btn{
@@ -1028,7 +1045,7 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   .grain{animation:none}
   .cursor-dot,.cursor-ring{display:none!important}
   body.has-cursor{cursor:auto}
-  .scroll-cue .line::after{animation:none}
+  .scroll-cue .line::after,.scroll-cue span{animation:none;opacity:1}
   [data-reveal],[data-reveal-stagger]>*{opacity:1!important;transform:none!important;transition:none!important}
   .wall .l span{transform:none!important;transition:none!important}
   .ov-line>span,[data-split] .ov-line>span{transform:none!important;transition:none!important}

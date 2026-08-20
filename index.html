@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=18">
+<link rel="stylesheet" href="css/main.css?v=20">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -182,7 +182,10 @@
     <a class="ov-cta" href="#scene-seuil" data-cursor="Au bar">Descendre au bar <span aria-hidden="true">↓</span></a>
   </div>
 
-  <div class="scroll-cue" id="scrollCue"><span>Scroller pour descendre</span><span class="line"></span></div>
+  <!-- V3.1 §5 — l'amorce de scroll. Elle dit ce qu'il faut faire ET pourquoi.
+       Elle disparaît au premier geste : hero.js pose déjà .hide dès 2 % de
+       progression (ligne 76), on ne touche pas à ce fichier. -->
+  <div class="scroll-cue" id="scrollCue"><span>Faites défiler — le chien vous attend</span><span class="line"></span></div>
 </section>
 
 <main>
