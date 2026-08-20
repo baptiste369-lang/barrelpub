@@ -191,7 +191,12 @@
     <span class="leopard" aria-hidden="true"></span>
     <div class="scene-inner">
       <div class="marker"><span class="tag">02 / 05</span><span>Le seuil</span></div>
-      <figure class="estab-band" data-reveal>
+      <!-- V3.0 §2.1 — LE PLAN PRINCIPAL DU CHAPITRE.
+           Même photo qu'avant, mais plus en bande : .estab-band faisait 150 à
+           300 px de haut, trop bas pour être un plan et assez haut pour occuper
+           l'écran sans rien montrer. En plan large, la façade fait son travail :
+           elle situe le lieu une fois, et on passe à autre chose. -->
+      <figure class="plan-large" data-reveal>
         <img src="assets/photos/facade-nuit.webp" width="1350" height="1600" alt="La façade verte du Barrel Pub, la nuit, rue du Docteur Gérard Monod" loading="lazy" fetchpriority="low" decoding="async">
         <figcaption>17 rue du Docteur Gérard Monod — il fait nuit, la porte est ouverte</figcaption>
       </figure>
@@ -204,9 +209,12 @@
           </h2>
           <p class="lede seuil-copy" data-reveal>Dehors, la carte postale. Ici, le bois, le néon bleu et le tapis léopard du billard. <strong>Deux chiens veillent sur la maison</strong> — franchis la porte, tu es déjà dedans.</p>
         </div>
+        <!-- V3.0 §2.1 — chiens-duo part en galerie (LES PATRONS) : la vidéo qui
+             suit montre déjà le chien, et mieux. À sa place, la seule salle vide
+             qui reste du chapitre — c'est la respiration avant le plan fort. -->
         <figure class="seuil-shot" data-reveal>
-          <img class="dogs-parallax" src="assets/photos/chiens-duo.webp" width="1408" height="1600" alt="Les deux chiens du Barrel assis sur le billard au tapis léopard" loading="lazy" fetchpriority="low" decoding="async">
-          <figcaption class="seuil-cap">Les patrons — sur le billard, comme d'habitude</figcaption>
+          <img src="assets/photos/salle-bleue-vide.webp" width="1200" height="1600" alt="La salle bleue encore vide, avant l'arrivée du monde" loading="lazy" fetchpriority="low" decoding="async">
+          <figcaption class="seuil-cap">La salle bleue, avant que le monde arrive</figcaption>
         </figure>
       </div>
 
@@ -240,34 +248,13 @@
         <figcaption>Il te regarde depuis le billard.</figcaption>
       </figure>
 
-      <!-- §3.3 — second temps du seuil : le lieu vide qui attend (§3bis.6).
-           Le site n'avait que des plans peuplés. -->
-      <div class="seuil-second" data-reveal-stagger>
-        <figure class="tile w3">
-          <img src="assets/photos/salle-lanterne.webp" width="1600" height="1066" alt="Une lanterne allumée devant le papier peint baroque rouge de la salle" loading="lazy" fetchpriority="low" decoding="async">
-          <figcaption>La lanterne, avant l'ouverture</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="assets/photos/salle-bleue-vide.webp" width="1200" height="1600" alt="La salle bleue encore vide, avant l'arrivée du monde" loading="lazy" fetchpriority="low" decoding="async">
-          <figcaption>La salle bleue, vide</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="assets/photos/salle-violette-vide.webp" width="1200" height="1600" alt="La salle violette déserte, les banquettes encore rangées" loading="lazy" fetchpriority="low" decoding="async">
-          <figcaption>Le lieu qui attend</figcaption>
-        </figure>
-      </div>
-
-      <!-- §3.3 — la bâche de terrasse imprimée de la tête de chien du logo :
-           la mascotte existe pour de vrai, dans la rue. Placée au moment où le
-           logo du header devient interactif (voir .logo-live dans main.js). -->
-      <figure class="logo-live" data-reveal>
-        <span class="ll-shots">
-          <img src="assets/photos/terrasse-couverte-logo.webp" width="1200" height="1600" alt="La bâche de la terrasse couverte, imprimée de la tête de chien du logo du Barrel" loading="lazy" fetchpriority="low" decoding="async">
-          <img src="assets/photos/terrasse-logo-chien.webp" width="900" height="1600" alt="La tête de chien du logo, imprimée en grand sur la bâche de la terrasse" loading="lazy" fetchpriority="low" decoding="async">
-        </span>
-        <figcaption><span class="eyebrow">Le logo</span><span class="ll-txt">Il n'est pas que sur le site — il est sur la bâche, rue du Docteur Gérard Monod.</span></figcaption>
-      </figure>
-
+      <!-- V3.0 §2.1 — sont partis en galerie :
+           · la grille .seuil-second (salle-lanterne, salle-violette-vide) → LE LIEU
+           · le bloc .logo-live (terrasse-couverte-logo, terrasse-logo-chien) → LES PATRONS
+           Le chapitre passe de 9 images à 3 : la façade, la salle vide, le chien.
+           Le bloc .logo-live portait aussi l'IntersectionObserver qui allumait le
+           logo du header (.logo-live dans main.js) ; cet observateur sort de
+           lui-même quand le bloc n'est plus là, il est gardé par `if (!live)`. -->
       <!-- Mouvement 3 — l'horloge live (JS ne fait que remplacer ; l'info reste juste sans JS) -->
       <div class="clock" data-reveal>
         <span class="clock-dot" id="clockDot" aria-hidden="true"></span>
@@ -783,6 +770,6 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=9"></script>
+<script src="js/main.js?v=10"></script>
 </body>
 </html>

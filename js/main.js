@@ -398,10 +398,13 @@
   }
 
   /* =====================================================================
-     PARALLAXE INVERSÉE — la photo des chiens (0,88×, ±60px)
+     PARALLAXE INVERSÉE — la photo du seuil (0,88×, ±60px)
+     V3.0 §2.1 : le crochet était .dogs-parallax, posé sur chiens-duo. La photo
+     a changé (chiens-duo est parti en galerie), l'effet reste — il compense le
+     height:112% de .seuil-shot img, qui existe précisément pour lui.
      ===================================================================== */
   (function () {
-    var img = q(".dogs-parallax"), fig = img ? img.closest(".seuil-shot") : null;
+    var fig = q(".seuil-shot"), img = fig ? fig.querySelector("img") : null;
     if (!img || !fig || REDUCE) return;
     onFrame(function () {
       var r = fig.getBoundingClientRect();
