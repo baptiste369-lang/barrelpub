@@ -65,7 +65,11 @@ h1,h2,h3,.wall,.ov-title,.neon,.foot-count,.infos-data .big{text-wrap:balance}
 p,.lede,.priv-card p,.infos-side p{text-wrap:pretty}
 
 /* ---------- BRAND SPRITE ---------- */
-.brand{display:inline-block;color:var(--or);transition:color .4s var(--ease)}
+/* V3.0 §3 — le logo est en BLANC, plus en or. C'est le seul changement possible
+   sans le fichier d'origine de la cliente : le symbole #brand reste un tracé
+   détouré à la main, on ne fait que le décolorer. Le reste de l'or dans le site
+   (prix de la carte, sous-titres de catégorie, étoiles des avis) ne bouge pas. */
+.brand{display:inline-block;color:var(--blanc);transition:color .4s var(--ease)}
 .brand svg{width:100%;height:100%;display:block;fill:currentColor}
 
 /* =====================================================================
@@ -119,9 +123,9 @@ body.has-cursor a, body.has-cursor button{cursor:none}
 }
 #loader.gone{opacity:0;pointer-events:none}
 .loader-mark{position:relative;width:clamp(84px,14vw,132px);height:clamp(84px,14vw,132px)}
-/* couche grise = fond ; couche or clippée par la hauteur du chargement */
+/* couche grise = fond ; couche blanche clippée par la hauteur du chargement */
 .loader-mark .lm-base{position:absolute;inset:0;color:rgba(237,232,224,.10)}
-.loader-mark .lm-fill{position:absolute;inset:0;color:var(--or);clip-path:inset(100% 0 0 0);transition:clip-path .3s linear}
+.loader-mark .lm-fill{position:absolute;inset:0;color:var(--blanc);clip-path:inset(100% 0 0 0);transition:clip-path .3s linear}
 .load-bar{width:min(240px,54vw);height:1px;background:rgba(237,232,224,.14);overflow:hidden}
 .load-bar i{display:block;height:100%;width:0;background:var(--bleu-clair);box-shadow:0 0 12px var(--bleu-clair)}
 .load-pct{font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--gris)}
@@ -182,7 +186,7 @@ body.has-cursor a, body.has-cursor button{cursor:none}
   padding:clamp(16px,2.4vw,26px) var(--pad);
   mix-blend-mode:difference;
 }
-.site-head .brand{width:clamp(38px,4vw,52px);height:clamp(38px,4vw,52px);color:var(--or)}
+.site-head .brand{width:clamp(38px,4vw,52px);height:clamp(38px,4vw,52px);color:var(--blanc)}
 .head-meta{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--blanc);text-transform:uppercase}
 .head-cta{
   font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
@@ -711,8 +715,8 @@ main{position:relative;z-index:2;background:var(--noir)}
    FOOTER
    ===================================================================== */
 .site-foot{padding:clamp(70px,11vh,140px) var(--pad) 50px;border-top:1px solid rgba(237,232,224,.08);text-align:center;background:var(--noir)}
-.foot-brand{width:clamp(90px,16vw,150px);height:clamp(90px,16vw,150px);margin:0 auto 26px;color:var(--or);transition:color .5s var(--ease),filter .5s var(--ease)}
-.foot-brand:hover{color:var(--or);filter:drop-shadow(0 0 26px rgba(43,92,255,.7))}
+.foot-brand{width:clamp(90px,16vw,150px);height:clamp(90px,16vw,150px);margin:0 auto 26px;color:var(--blanc);transition:color .5s var(--ease),filter .5s var(--ease)}
+.foot-brand:hover{color:var(--blanc);filter:drop-shadow(0 0 26px rgba(43,92,255,.7))}
 .foot-count{font-family:var(--display);text-transform:uppercase;font-size:clamp(38px,10vw,120px);line-height:.9;letter-spacing:-.02em;
   background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:36px}
 .foot-links{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:center;font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--gris);margin-bottom:30px}
@@ -951,7 +955,7 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
    404
    ===================================================================== */
 .page404{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--pad);gap:6px}
-.page404 .b{width:clamp(80px,14vw,120px);height:clamp(80px,14vw,120px);color:var(--or);margin-bottom:26px}
+.page404 .b{width:clamp(80px,14vw,120px);height:clamp(80px,14vw,120px);color:var(--blanc);margin-bottom:26px}
 .page404 .code{font-family:var(--display);font-size:clamp(70px,18vw,220px);line-height:.9;letter-spacing:-.03em;background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
 .page404 p{font-family:var(--serif);font-style:italic;font-size:clamp(20px,3vw,30px);color:var(--blanc);margin:16px 0 30px;max-width:30ch}
 
