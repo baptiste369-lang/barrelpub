@@ -1516,3 +1516,15 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blanc);
   text-shadow:0 1px 10px rgba(0,0,0,.9);
 }
+
+/* =====================================================================
+   V3.1 — DÉFAUT TROUVÉ PENDANT LA VÉRIFICATION 320 → 1920
+   À 320 px, .infos-data et .infos-side débordaient de 24 px hors de leur
+   conteneur (masqués par le overflow-x:hidden du body, donc invisibles au
+   scroll mais bel et bien coupés). Cause : un élément de grille a
+   min-width:auto par défaut et refuse de descendre sous la largeur
+   min-content de son contenu — ici l'adresse email, qui ne se coupe pas.
+   Antérieur à ce lot ; corrigé ici parce que la checklist du §7 le demande.
+   ===================================================================== */
+.infos-data,.infos-side{min-width:0}
+.infos-data a{overflow-wrap:anywhere}
