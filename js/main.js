@@ -655,6 +655,87 @@
   })();
 
   /* =====================================================================
+     V3.1 §2 — LA CARTE EN ONGLETS
+     Le chapitre carte tenait sur cinq écrans dépliés ; il en tient un.
+     · Aucune dépendance : View Transitions same-document quand le navigateur
+       sait faire, sinon un fondu de 200 ms. Rien à charger dans /vendor.
+     · Les catégories sont LUES DANS LE DOM : ajouter un bloc .menu-cat avec
+       son data-cat et un bouton dans le tablist suffit, il n'y a pas de liste
+       à tenir à jour ici.
+     · Motif « onglets à panneau unique » : les cinq onglets pilotent le même
+       #menuCols, dont le contenu change. aria-selected suit, le tabindex est
+       mobile (0 sur l'onglet actif, -1 sur les autres), les flèches déplacent
+       le focus ET sélectionnent — activation automatique, c'est la convention
+       pour des onglets sans contenu coûteux.
+     · Sans JS ce bloc ne tourne pas, la barre est masquée par le <noscript> et
+       la carte reste entière.
+     ===================================================================== */
+  (function () {
+    var tablist = q("#menuTabs"), cols = q("#menuCols");
+    if (!tablist || !cols) return;
+    var tabs = qa(".menu-tab", tablist);
+    var cats = qa(".menu-cat", cols);
+    if (!tabs.length || !cats.length) return;
+
+    var current = "tout";
+
+    function paint() {
+      for (var i = 0; i < cats.length; i++) {
+        var on = current === "tout" || cats[i].getAttribute("data-cat") === current;
+        if (on === !cats[i].hidden) continue;
+        cats[i].hidden = !on;
+      }
+    }
+
+    function select(tab, focus) {
+      var cat = tab.getAttribute("data-cat");
+      tabs.forEach(function (t) {
+        var sel = t === tab;
+        t.setAttribute("aria-selected", String(sel));
+        t.tabIndex = sel ? 0 : -1;
+      });
+      if (focus) tab.focus();
+      if (cat === current) return;
+      current = cat;
+
+      if (REDUCE) { paint(); return; }
+      if (document.startViewTransition) {
+        var vt = document.startViewTransition(paint);
+        var hush = function () {};
+        // une transition annulée (deux clics coup sur coup) rejette ses
+        // promesses ; le DOM est déjà à jour, il n'y a rien à rattraper.
+        if (vt) {
+          if (vt.ready) vt.ready.catch(hush);
+          if (vt.finished) vt.finished.catch(hush);
+          if (vt.updateCallbackDone) vt.updateCallbackDone.catch(hush);
+        }
+        return;
+      }
+      cols.classList.add("is-fading");
+      setTimeout(function () { paint(); cols.classList.remove("is-fading"); }, 200);
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () { select(tab, false); });
+    });
+
+    tablist.addEventListener("keydown", function (e) {
+      var i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      var n = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") n = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") n = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") n = 0;
+      else if (e.key === "End") n = tabs.length - 1;
+      if (n === null) return;
+      e.preventDefault();
+      select(tabs[n], true);
+    });
+
+    paint();
+  })();
+
+  /* =====================================================================
      PROGRAMME « CE SOIR » — surligne le jour courant
      ===================================================================== */
   (function () {

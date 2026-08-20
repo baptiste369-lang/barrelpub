@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=21">
+<link rel="stylesheet" href="css/main.css?v=22">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -143,6 +143,11 @@
   html.is-locked, html.is-locked body{overflow:auto!important;height:auto!important;touch-action:auto!important}
   #loader{display:none!important}
   [data-reveal],[data-reveal-stagger]>*{opacity:1!important;transform:none!important}
+  /* V3.1 §2 — sans JS les onglets de la carte ne filtrent rien : on les masque
+     et la carte reste entière. Une carte de restaurant doit rester lisible même
+     si tout casse. */
+  .menu-tabs{display:none!important}
+  .menu-cat[hidden]{display:block!important}
   /* les lignes sont décalées de 112% dans un conteneur en overflow:hidden :
      sans le JS qui pose .on / .is-in, elles restent hors cadre. */
   .ov-line>span,.wall .l span{transform:none!important;opacity:1!important}
@@ -487,8 +492,33 @@
         </div>
       </div>
 
-      <div class="menu-cols" data-reveal>
-        <div class="menu-cat">
+      <!-- ============ V3.1 §2 — LA CARTE EN ONGLETS ============
+           Le filtrage porte sur les BLOCS .menu-cat et non sur chaque ligne :
+           chaque ligne appartient déjà à exactement une catégorie, celle de son
+           bloc. Filtrer ligne par ligne obligerait en plus à masquer les titres
+           devenus vides — même résultat, plus de code.
+
+           ONGLETS ABSENTS, ET POURQUOI : le brief prévoyait COCKTAILS, BIÈRES et
+           SANS ALCOOL. La carte du site ne contient aucune de ces lignes — ni
+           nom, ni prix, nulle part dans le dossier. Les créer reviendrait à
+           inventer des tarifs. Dès qu'Eva donne sa carte boissons, il suffit
+           d'ajouter un bloc .menu-cat[data-cat="cocktails"] et un bouton dans le
+           tablist : le JS lit les catégories depuis le DOM, il n'y a rien à
+           déclarer ailleurs.
+
+           Sans JS, la barre d'onglets est masquée (voir le <noscript> du head)
+           et la carte reste entière. C'est la règle la plus importante ici :
+           la carte d'un restaurant doit rester lisible même si tout casse. -->
+      <div class="menu-tabs" role="tablist" aria-label="Filtrer la carte" id="menuTabs">
+        <button type="button" role="tab" class="menu-tab" data-cat="tout"     aria-selected="true"  aria-controls="menuCols" tabindex="0">Tout</button>
+        <button type="button" role="tab" class="menu-tab" data-cat="burgers"  aria-selected="false" aria-controls="menuCols" tabindex="-1">Burgers</button>
+        <button type="button" role="tab" class="menu-tab" data-cat="tapas"    aria-selected="false" aria-controls="menuCols" tabindex="-1">Tapas</button>
+        <button type="button" role="tab" class="menu-tab" data-cat="planches" aria-selected="false" aria-controls="menuCols" tabindex="-1">Planches</button>
+        <button type="button" role="tab" class="menu-tab" data-cat="buckets"  aria-selected="false" aria-controls="menuCols" tabindex="-1">Buckets</button>
+      </div>
+
+      <div class="menu-cols" id="menuCols" role="tabpanel" tabindex="0" data-reveal>
+        <div class="menu-cat" data-cat="burgers">
           <h3>Porn Burgers</h3>
           <div class="sub">servis avec frites mégas sexy</div>
           <div class="menu-item burger-row" tabindex="0" data-thumb="assets/photos/burger-01.webp"><span class="n">Better than your ex</span><span class="dots"></span><span class="p">16€</span></div>
@@ -498,7 +528,7 @@
           <div class="menu-item burger-row" tabindex="0" data-thumb="assets/photos/burger-black-barrel.webp"><span class="n">Black Barrel</span><span class="dots"></span><span class="p">15€ <span class="plus">+2,5€ steak</span></span></div>
         </div>
 
-        <div class="menu-cat">
+        <div class="menu-cat" data-cat="tapas">
           <h3>Tapas</h3>
           <div class="sub">à picorer, à partager</div>
           <div class="menu-item"><span class="n">Hot-Doggy</span><span class="dots"></span><span class="p">9€</span></div>
@@ -509,14 +539,14 @@
           <div class="menu-item"><span class="n">Mac &amp; Cheese Balls</span><span class="dots"></span><span class="p">8€</span></div>
         </div>
 
-        <div class="menu-cat">
+        <div class="menu-cat" data-cat="planches">
           <h3>Planches</h3>
           <div class="sub">pour ne pas choisir</div>
           <div class="menu-item"><span class="n">Planche mixte pour 2</span><span class="dots"></span><span class="p">24€</span></div>
           <div class="menu-item"><span class="n">Big Planche signature</span><span class="dots"></span><span class="p">40€</span></div>
         </div>
 
-        <div class="menu-cat">
+        <div class="menu-cat" data-cat="buckets">
           <h3>Chicken Buckets</h3>
           <div class="sub">le seau, à plusieurs</div>
           <div class="menu-item"><span class="n">Pour 2</span><span class="dots"></span><span class="p">17€</span></div>
@@ -845,6 +875,6 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=10"></script>
+<script src="js/main.js?v=11"></script>
 </body>
 </html>
