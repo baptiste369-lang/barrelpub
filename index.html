@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=23">
+<link rel="stylesheet" href="css/main.css?v=24">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -147,6 +147,10 @@
      et la carte reste entière. Une carte de restaurant doit rester lisible même
      si tout casse. */
   .menu-tabs{display:none!important}
+  /* V3.1 §1 — sans JS le comparateur ne peut pas se piloter : on montre la
+     photo de nuit, entière, et on retire la poignée. */
+  .dn-frame{--x:0%!important}
+  .dn-range,.dn-line,.dn-cap{display:none!important}
   .menu-cat[hidden]{display:block!important}
   /* les lignes sont décalées de 112% dans un conteneur en overflow:hidden :
      sans le JS qui pose .on / .is-in, elles restent hors cadre. */
@@ -604,6 +608,41 @@
         <h2 id="sortie-title" data-split data-glitch style="font-family:var(--display);text-transform:uppercase;font-size:clamp(34px,6vw,72px);line-height:.9;letter-spacing:-.02em;margin-top:12px"><span class="ov-line"><span>Trois terrasses,</span></span><span class="ov-line"><span>une rue piétonne,</span></span><span class="ov-line"><span>la nuit.</span></span></h2>
       </div>
 
+      <!-- ============ V3.1 §1 — LE JOUR ET LA NUIT ============
+           facade-jour et facade-nuit sont le même cadrage depuis le même point.
+           Vérifié image contre image : corrélation croisée centrée sur la
+           magnitude du gradient, pic net à l'échelle 1 avec 4,5 px d'écart
+           vertical. Les deux fichiers servis ici sont donc des recadrages,
+           facade-duo-jour et facade-duo-nuit, tous deux en 1350 × 1590 : on a
+           rogné une dizaine de pixels de part et d'autre plutôt que de combler
+           du vide. Superposition vérifiée au damier — l'auvent, les lettres
+           BARREL, le montant de la porte et les pavés se poursuivent sans
+           décrochement d'un carreau à l'autre. Les originaux ne sont pas touchés.
+
+           La poignée est un vrai <input type="range"> : le clavier, le tactile
+           et le lecteur d'écran viennent avec. Pas de Draggable, pas de gestion
+           de pointeur à écrire. Le pointermove ne fait qu'ajouter le confort à
+           la souris, et il écrit dans le ticker du site, pas à chaque événement.
+
+           --x = 42 % de position, donc 58 % de nuit à l'écran : le brief demande
+           « un peu plus de nuit » et c'est ce qu'on vend. Le jour est dessous et
+           à gauche, la nuit par-dessus et à droite — le temps va vers la droite.
+
+           Sans JS : le <noscript> du head force --x à 0, la nuit couvre tout, et
+           la poignée disparaît. -->
+      <figure class="daynight" data-reveal>
+        <div class="dn-frame" id="dnFrame" style="--x:42%">
+          <img class="dn-img dn-jour" src="assets/photos/facade-duo-jour.webp" width="1350" height="1590" alt="La rue piétonne devant le Barrel Pub en plein jour : les tonneaux et les tabourets alignés sous l'auvent, la rue vide" loading="lazy" fetchpriority="low" decoding="async">
+          <img class="dn-img dn-nuit" src="assets/photos/facade-duo-nuit.webp" width="1350" height="1590" alt="La même rue à la nuit tombée : l'enseigne Barrel et les néons de la porte allumés" loading="lazy" fetchpriority="low" decoding="async">
+          <input class="dn-range" id="dnRange" type="range" min="0" max="100" step="1" value="42"
+                 aria-label="Faire glisser pour passer du jour à la nuit sur la même photo">
+          <span class="dn-line" aria-hidden="true"><span class="dn-grip"></span></span>
+          <span class="dn-cap dn-cap--jour" aria-hidden="true">15h — la rue</span>
+          <span class="dn-cap dn-cap--nuit" aria-hidden="true">23h — la même rue</span>
+        </div>
+        <figcaption>La même rue, à huit heures d'intervalle. Tire la poignée.</figcaption>
+      </figure>
+
       <!-- Mouvement 9 — les chiffres (odomètre au scroll) + l'équipe -->
       <div class="lieu-row">
         <div class="stats" data-reveal-stagger>
@@ -620,19 +659,16 @@
         </figure>
       </div>
 
-      <!-- V3.0 §2.4 — TROIS TERRASSES, TROIS PLANS. La séquence jour → nuit est
-           gardée, mais elle tient en trois images au lieu de dix-sept : la rue
-           piétonne en plein jour (c'est elle qui prouve le mot « piétonne »), la
-           façade au crépuscule, l'enseigne de nuit. Les quatorze autres sont en
-           galerie, catégorie LA RUE, dans le même ordre jour → nuit.
-           §3.9 tient toujours : aucun filtre, aucune uniformisation des
-           températures — l'écart entre le plein jour et le flash bleu est ce qui
-           fait respirer le site. -->
-      <div class="sortie-gallery is-trio" data-reveal-stagger>
-        <figure class="shot"><img src="assets/photos/terrasse-rue-pietonne.webp" width="1205" height="1431" alt="La rue piétonne au petit matin, les tonneaux et les tabourets alignés devant la façade du Barrel Pub" loading="lazy" fetchpriority="low" decoding="async"><figcaption>La rue piétonne, au réveil</figcaption></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-crepuscule.webp" width="1200" height="1600" alt="La terrasse au crépuscule, les lumières qui s'allument" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le crépuscule</figcaption></figure>
-        <figure class="shot"><img src="assets/photos/terrasse-nuit-enseigne.webp" width="1258" height="1600" alt="L'enseigne « Barrel Pub » en néon script, allumée au-dessus de la terrasse" loading="lazy" fetchpriority="low" decoding="async"><figcaption>L'enseigne, à la nuit tombée</figcaption></figure>
-      </div>
+      <!-- V3.1 §1 — il ne reste qu'un plan de terrasse : le crépuscule.
+           La rue piétonne en plein jour et l'enseigne de nuit sont maintenant
+           dans le comparateur, plus haut, où elles disent la même chose en un
+           geste. Le crépuscule reste parce qu'il est le seul moment que le
+           comparateur ne peut pas montrer : l'entre-deux. Les deux plans
+           retirés sont en galerie, catégorie LA RUE. -->
+      <figure class="shot-solo" data-reveal>
+        <img src="assets/photos/terrasse-crepuscule.webp" width="1200" height="1600" alt="La terrasse au crépuscule, les lumières qui s'allument" loading="lazy" fetchpriority="low" decoding="async">
+        <figcaption>Entre les deux — le crépuscule</figcaption>
+      </figure>
 
       <!-- §5.2 — ILS Y ÉTAIENT -->
       <!-- AVIS À REMPLACER PAR LES VRAIS — aucun faux avis n'est publié : ces trois blocs sont des gabarits à connecter à la fiche Google -->
@@ -969,6 +1005,6 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=14"></script>
+<script src="js/main.js?v=16"></script>
 </body>
 </html>

@@ -655,6 +655,67 @@
   })();
 
   /* =====================================================================
+     V3.1 §1 — LE JOUR ET LA NUIT
+     Tout le travail est fait par un <input type="range"> réel : le clavier, le
+     tactile et le lecteur d'écran viennent avec, sans une ligne à écrire. Ce
+     bloc n'ajoute que le confort à la souris — la poignée suit le pointeur sans
+     qu'on ait à cliquer.
+
+     POURQUOI --x N'EST PAS ÉCRIT DANS LE TICKER, contrairement à tous les
+     autres effets de ce fichier : runFrame() commence par `if (document.hidden)
+     return`, et la boucle est de toute façon suspendue quand la page ne peint
+     pas. C'est la bonne règle pour une animation continue ; c'en est une
+     mauvaise pour une commande qu'on manipule au doigt, qui doit répondre au
+     geste et pas à la frame suivante. On écrit donc directement, une fois par
+     événement, avec un garde-fou sur la valeur déjà posée. Aucun
+     requestAnimationFrame n'est créé ici : le budget du §6 est tenu.
+
+     Le rectangle du cadre est mis en cache : le relire à chaque pointermove
+     juste après avoir écrit --x forcerait un recalcul de mise en page par
+     événement. Il est rafraîchi à l'entrée du pointeur, au scroll et au
+     redimensionnement — les trois seuls moments où il peut bouger.
+
+     Aucune transition n'est posée sur clip-path : le curseur doit coller au
+     doigt. C'est aussi ce qui rend ce module correct en mouvement réduit —
+     c'est un geste, pas une animation.
+     ===================================================================== */
+  (function () {
+    var frame = q("#dnFrame"), range = q("#dnRange");
+    if (!frame || !range) return;
+
+    var applied = null, box = null;
+
+    function apply(v) {
+      v = clamp(v, 0, 100);
+      if (applied !== null && Math.abs(applied - v) < 0.05) return;
+      applied = v;
+      frame.style.setProperty("--x", v.toFixed(2) + "%");
+    }
+
+    range.addEventListener("input", function () {
+      apply(parseFloat(range.value) || 0);
+    });
+
+    if (!COARSE) {
+      var refresh = function () { box = frame.getBoundingClientRect(); };
+      frame.addEventListener("pointerenter", refresh);
+      addEventListener("scroll", function () { box = null; }, { passive: true });
+      addEventListener("resize", function () { box = null; });
+
+      frame.addEventListener("pointermove", function (e) {
+        if (e.pointerType !== "mouse") return;
+        if (!box) refresh();
+        if (!box.width) return;
+        var v = clamp(((e.clientX - box.left) / box.width) * 100, 0, 100);
+        range.value = String(Math.round(v));
+        apply(v);
+      }, { passive: true });
+    }
+
+    apply(parseFloat(range.value) || 0);
+  })();
+
+  /* =====================================================================
      V3.1 §4 — LA MODALE DE RÉSERVATION
      · <dialog>.showModal() : piège de focus, fond inerte et fermeture à Échap
        sont natifs. On n'écrit ni l'un ni l'autre.

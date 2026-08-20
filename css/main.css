@@ -1440,3 +1440,79 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   #rsvDialog,#rsvDialog::backdrop{transition:none}
   #rsvDialog{transform:none}
 }
+
+/* =====================================================================
+   V3.1 §1 — LE JOUR ET LA NUIT
+   Deux photos du même cadre, superposées ; celle de nuit au-dessus, révélée
+   par clip-path. La poignée est un <input type="range"> réel, rendu invisible
+   et étalé sur toute la boîte : c'est lui qui porte le clavier, le tactile et
+   le lecteur d'écran, et c'est .dn-line qui donne le repère visuel — les deux
+   sont pilotés par la même variable, ils ne peuvent pas se désaccorder.
+   ===================================================================== */
+.daynight{margin:clamp(30px,5vh,60px) 0 clamp(46px,7vh,90px)}
+.dn-frame{
+  position:relative;overflow:hidden;background:var(--noir-2);
+  width:min(100%,680px);margin-inline:auto;
+  aspect-ratio:1350/1590;
+  touch-action:pan-y;                    /* le glissement horizontal est à nous, le scroll vertical reste à la page */
+}
+.dn-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.dn-nuit{clip-path:inset(0 0 0 var(--x))}
+
+.dn-line{
+  position:absolute;top:0;bottom:0;left:var(--x);width:1px;z-index:3;
+  background:rgba(237,232,224,.92);box-shadow:0 0 18px rgba(0,0,0,.75);
+  pointer-events:none;
+}
+.dn-grip{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(237,232,224,.9);background:rgba(10,11,14,.45);
+  box-shadow:0 6px 26px rgba(0,0,0,.55);
+}
+/* les deux flèches, en CSS, sans image */
+.dn-grip::before,.dn-grip::after{
+  content:"";position:absolute;top:50%;width:0;height:0;
+  border-block:5px solid transparent;
+}
+.dn-grip::before{left:11px;transform:translateY(-50%);border-right:6px solid var(--blanc)}
+.dn-grip::after{right:11px;transform:translateY(-50%);border-left:6px solid var(--blanc)}
+
+.dn-cap{
+  position:absolute;bottom:14px;z-index:4;pointer-events:none;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--blanc);text-shadow:0 1px 10px rgba(0,0,0,.95);
+}
+.dn-cap--jour{left:14px}
+.dn-cap--nuit{right:14px}
+
+/* La poignée réelle. Le pouce fait 2 px de large : la valeur du range et la
+   position de .dn-line coïncident alors sur toute la course (un pouce de 44 px
+   décalerait la valeur de 22 px aux extrémités). La zone tactile n'y perd
+   rien — c'est toute l'image qui est saisissable. */
+.dn-range{
+  position:absolute;inset:0;z-index:5;width:100%;height:100%;
+  margin:0;padding:0;border:0;background:none;cursor:ew-resize;
+  -webkit-appearance:none;appearance:none;
+}
+.dn-range::-webkit-slider-runnable-track{height:100%;background:none;border:0}
+.dn-range::-moz-range-track{height:100%;background:none;border:0}
+.dn-range::-webkit-slider-thumb{-webkit-appearance:none;width:2px;height:100%;background:transparent;border:0;cursor:ew-resize}
+.dn-range::-moz-range-thumb{width:2px;height:100%;background:transparent;border:0;border-radius:0;cursor:ew-resize}
+.dn-range:focus{outline:none}
+.dn-frame:has(.dn-range:focus-visible) .dn-grip{box-shadow:0 0 0 3px var(--or),0 6px 26px rgba(0,0,0,.55)}
+
+.daynight figcaption{
+  margin-top:16px;text-align:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris);
+}
+
+/* V3.1 §1 — le plan seul qui reste du trio de terrasses */
+.shot-solo{position:relative;overflow:hidden;background:var(--noir-2);width:min(100%,520px);margin:0 0 clamp(46px,7vh,90px)}
+.shot-solo img{width:100%;height:auto;display:block}
+.shot-solo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(200deg,transparent 60%,rgba(10,11,14,.55))}
+.shot-solo figcaption{
+  position:absolute;left:14px;bottom:12px;z-index:2;font-family:var(--mono);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--blanc);
+  text-shadow:0 1px 10px rgba(0,0,0,.9);
+}
