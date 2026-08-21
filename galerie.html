@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=25">
+<link rel="stylesheet" href="css/main.css?v=26">
 
 <!-- V3.0 §1.1 — AUCUN hero sur cette page : ni preload de frames, ni js/hero.js.
      La page s'ouvre directement sur le titre et la grille. -->
@@ -815,9 +815,9 @@
   <button type="button" class="rsv-close" id="rsvClose" aria-label="Fermer">Fermer <span aria-hidden="true">&#10005;</span></button>
 
   <div class="rsv-inner" id="rsvInner">
-    <span class="eyebrow">Réserver</span>
+    <span class="eyebrow" id="rsvEyebrow">Réserver</span>
     <h2 class="rsv-title" id="rsvTitle">On te garde une place.</h2>
-    <p class="rsv-lede">Table, grande tablée, anniversaire ou privatisation — dis-nous, on te rappelle.</p>
+    <p class="rsv-lede" id="rsvLede">Table, grande tablée, anniversaire ou privatisation — dis-nous, on te rappelle.</p>
 
     <form class="barrel-form" id="rsvForm" name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
       <input type="hidden" name="form-name" value="reservation">
@@ -854,6 +854,7 @@
             <option value="groupe">Grande tablée / groupe</option>
             <option value="privatisation">Privatisation</option>
             <option value="anniversaire">Anniversaire / événement</option>
+            <option value="retour">Retour d'expérience</option>
           </select>
         </div>
       </div>
@@ -886,7 +887,7 @@
   </div>
 </dialog>
 
-<script src="js/main.js?v=16"></script>
+<script src="js/main.js?v=19"></script>
 <script src="js/galerie.js?v=3"></script>
 </body>
 </html>

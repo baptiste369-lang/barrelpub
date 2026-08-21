@@ -900,17 +900,44 @@ main{position:relative;z-index:2;background:var(--noir)}
 /* =====================================================================
    §5.2 — ILS Y ÉTAIENT (avis)
    ===================================================================== */
+/* ---------- V3.2 §1 — CE QU'ILS EN DISENT ----------
+   Bande horizontale à défilement natif : overflow-x + scroll-snap. Le
+   conteneur .rev-band est focusable et porte role="region", ce qui donne le
+   défilement aux flèches du clavier sans une ligne de JavaScript. */
 .reviews{margin-bottom:clamp(50px,8vh,110px)}
-.rev-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:10px}
-.rev-link{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--blanc)}
-.rev-pending{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--gris);margin-bottom:32px}
-.rev-list{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,48px)}
-@media (min-width:820px){.rev-list{grid-template-columns:repeat(3,1fr)}}
-.rev{border-top:1px solid rgba(201,162,75,.3);padding-top:22px}
-.rev .stars{display:flex;gap:4px;margin-bottom:18px}
-.rev .stars svg{width:16px;height:16px;fill:var(--or)}
-.rev p{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.2vw,24px);line-height:1.4;color:var(--blanc);margin-bottom:18px}
-.rev footer{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris)}
+.rev-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:clamp(24px,3.5vh,40px)}
+.rev-sub{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris);margin-top:10px}
+.rev-link{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--blanc);white-space:nowrap}
+
+.rev-band{
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  padding-bottom:16px;
+  scrollbar-width:thin;scrollbar-color:rgba(201,162,75,.5) transparent;
+}
+.rev-band::-webkit-scrollbar{height:3px}
+.rev-band::-webkit-scrollbar-track{background:rgba(237,232,224,.07)}
+.rev-band::-webkit-scrollbar-thumb{background:rgba(201,162,75,.5)}
+.rev-track{list-style:none;display:flex;gap:clamp(14px,2vw,26px);align-items:stretch}
+.rev-track>li{flex:0 0 auto;width:min(84vw,360px);scroll-snap-align:start;display:flex}
+
+.rev{
+  display:flex;flex-direction:column;
+  border-top:1px solid rgba(201,162,75,.3);padding-top:20px;
+}
+.rev .stars{display:flex;gap:4px;margin-bottom:16px}
+.rev .stars svg{width:15px;height:15px;fill:var(--or);flex:0 0 auto}
+.rev p{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.9vw,21px);line-height:1.45;color:var(--blanc);margin-bottom:18px}
+.rev footer{margin-top:auto;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.rev .rev-who{color:var(--blanc)}
+.rev .rev-src{color:var(--gris)}
+
+/* ---------- V3.2 §2.1 — les deux boutons ---------- */
+.rev-cta{margin-top:clamp(28px,4vh,44px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.4vw,30px)}
+.rev-ask{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gris)}
+.rev-btns{display:flex;flex-wrap:wrap;gap:14px}
+.rev-btns .btn{margin-top:0}
 
 /* =====================================================================
    §5.3 — VENIR

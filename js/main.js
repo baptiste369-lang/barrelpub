@@ -655,6 +655,40 @@
   })();
 
   /* =====================================================================
+     V3.2 §1 — LA BANDE D'AVIS, AUX FLÈCHES DU CLAVIER
+     Le défilement lui-même est natif : overflow-x + scroll-snap. Le doigt, la
+     molette et la barre de défilement n'ont besoin de personne, et ce bloc ne
+     les touche pas. Ce n'est pas un carrousel : ni lecture automatique, ni
+     état, ni pin — juste le clavier.
+
+     POURQUOI IL FAUT CES DOUZE LIGNES : un conteneur défilant focusable est
+     censé répondre aux flèches tout seul. Mesuré ici, il ne le fait pas —
+     l'événement arrive bien (isTrusted, non annulé, focus sur la bande) et
+     scrollLeft ne bouge pas, avec mandatory comme avec proximity. Le §4 exige
+     que les flèches fonctionnent ; on ne parie pas là-dessus.
+     ===================================================================== */
+  (function () {
+    var band = q(".rev-band");
+    if (!band) return;
+    band.addEventListener("keydown", function (e) {
+      var carte = band.querySelector(".rev-track > li");
+      var pas = carte ? carte.getBoundingClientRect().width + 20 : 320;
+      var dx = 0, abs = null;
+      if (e.key === "ArrowRight") dx = pas;
+      else if (e.key === "ArrowLeft") dx = -pas;
+      else if (e.key === "Home") abs = 0;
+      else if (e.key === "End") abs = band.scrollWidth;
+      else return;
+      e.preventDefault();
+      // Défilement INSTANTANÉ, volontairement : en "smooth", trois appuis
+      // rapides se calculent tous à partir d'un scrollLeft encore en vol et
+      // n'avancent que d'une carte au lieu de trois (mesuré). Le scroll-snap
+      // du CSS fait l'atterrissage propre, et le clavier reste prévisible.
+      band.scrollTo({ left: abs !== null ? abs : band.scrollLeft + dx, behavior: "auto" });
+    });
+  })();
+
+  /* =====================================================================
      V3.1 §1 — LE JOUR ET LA NUIT
      Tout le travail est fait par un <input type="range"> réel : le clavier, le
      tactile et le lecteur d'écran viennent avec, sans une ligne à écrire. Ce
@@ -738,7 +772,35 @@
     var pers   = q("#rsvPersWrap");
     var closeB = q("#rsvClose");
     var doneB  = q("#rsvDoneClose");
+    var eyeb   = q("#rsvEyebrow");
+    var titre  = q("#rsvTitle");
+    var lede   = q("#rsvLede");
     var last   = null;
+
+    /* V3.2 §2.1 — la modale sert aussi de soupape : « nous écrire en privé »,
+       depuis le bloc avis, l'ouvre avec le motif « retour d'expérience »
+       présélectionné. Ouvrir une boîte titrée « On te garde une place » à
+       quelqu'un qui vient raconter sa soirée serait à côté de la plaque, donc
+       l'en-tête change avec le motif. Les libellés par défaut sont lus dans le
+       DOM : les modifier dans le HTML suffit, il n'y a rien à répéter ici. */
+    var DEFAUT = {
+      eyebrow: eyeb  ? eyeb.textContent  : "",
+      titre:   titre ? titre.textContent : "",
+      lede:    lede  ? lede.textContent  : ""
+    };
+    var VARIANTES = {
+      retour: {
+        eyebrow: "Nous écrire",
+        titre:   "Dis-nous tout.",
+        lede:    "Un mot sur ta soirée, un reproche, une idée. Ça arrive directement à l'équipe, et ce n'est pas publié sur le site."
+      }
+    };
+    function habiller(motif) {
+      var v = VARIANTES[motif] || DEFAUT;
+      if (eyeb)  eyeb.textContent  = v.eyebrow;
+      if (titre) titre.textContent = v.titre;
+      if (lede)  lede.textContent  = v.lede;
+    }
 
     /* --- ouverture --- */
     qa("[data-rsv]").forEach(function (t) {
@@ -760,6 +822,9 @@
           if (e2) e2.remove();
           syncPers();
         }
+        var motif = t.getAttribute("data-rsv-type");
+        if (type) { type.value = motif || "table"; syncPers(); }
+        habiller(motif);
         dlg.showModal();
         var first = q("#rsv-nom");
         if (first) first.focus({ preventScroll: true });
@@ -809,7 +874,10 @@
       if (!pers || !type) return;
       pers.hidden = !AVEC_NOMBRE[type.value];
     }
-    if (type) type.addEventListener("change", syncPers);
+    if (type) type.addEventListener("change", function () {
+      syncPers();
+      habiller(type.value);
+    });
     syncPers();
 
     /* --- envoi --- */
