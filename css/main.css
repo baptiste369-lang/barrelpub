@@ -1698,3 +1698,39 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   letter-spacing:.08em;text-transform:uppercase;color:var(--gris);
   pointer-events:none;
 }
+
+/* ---- CURSEUR BIÈRE — V3.5 ---------------------------------------------
+   Aucune requête réseau : les deux visuels sont des data-URI SVG.
+   Le # des couleurs est encodé %23 — un # brut coupe la data-URI. ---- */
+.curseur-biere,
+.curseur-biere *{
+  cursor:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%20width=%2232%22%20height=%2232%22%3E%20%3Cpath%20d=%22M9.6%2011.4%2011.3%2027.8c.1%201%20.9%201.7%201.9%201.7h5.6c1%200%201.8-.7%201.9-1.7l1.7-16.4Z%22%20fill=%22%232B5CFF%22%20stroke=%22%23EDE8E0%22%20stroke-width=%222.1%22%20stroke-linejoin=%22round%22/%3E%20%3Cpath%20d=%22M9.5%2011.5c-.7-2.9%201.4-4.9%203.4-4%20.9-1.7%203.8-1.9%205-.2%202.4-.4%204.3%201.5%203.9%204.2Z%22%20fill=%22%23EDE8E0%22%20stroke=%22%23EDE8E0%22%20stroke-width=%222.1%22%20stroke-linejoin=%22round%22/%3E%20%3C/svg%3E") 10 8, auto;
+}
+.curseur-biere a,
+.curseur-biere button,
+.curseur-biere summary,
+.curseur-biere [role="button"],
+.curseur-biere label,
+.curseur-biere input,
+.curseur-biere select,
+.curseur-biere textarea{
+  cursor:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%20width=%2232%22%20height=%2232%22%3E%20%3Cpath%20d=%22M9.6%2011.4%2011.3%2027.8c.1%201%20.9%201.7%201.9%201.7h5.6c1%200%201.8-.7%201.9-1.7l1.7-16.4Z%22%20fill=%22%2300A3FF%22%20stroke=%22%23C9A24B%22%20stroke-width=%222.1%22%20stroke-linejoin=%22round%22/%3E%20%3Cpath%20d=%22M9.5%2011.5c-.7-2.9%201.4-4.9%203.4-4%20.9-1.7%203.8-1.9%205-.2%202.4-.4%204.3%201.5%203.9%204.2Z%22%20fill=%22%23EDE8E0%22%20stroke=%22%23C9A24B%22%20stroke-width=%222.1%22%20stroke-linejoin=%22round%22/%3E%20%3C/svg%3E") 10 8, pointer;
+}
+@media (pointer:coarse){
+  .curseur-biere,.curseur-biere *{cursor:auto}
+  /* V3.5 — AJOUT à curseur.css, mesuré au navigateur : la ligne ci-dessus ne
+     suffit pas. `.curseur-biere *` pèse (0,1,0) et perd contre
+     `.curseur-biere a` (0,1,1) — au doigt, les liens, boutons, summary et
+     champs gardaient le curseur or, ce que la checklist §4 interdit. On répète
+     ici la MÊME liste de sélecteurs : à spécificité égale, c'est l'ordre du
+     fichier qui tranche, et celle-ci vient après. Rien n'est retiré : les
+     replis `, auto` et `, pointer` et le bloc coarse d'origine sont intacts. */
+  .curseur-biere a,
+  .curseur-biere button,
+  .curseur-biere summary,
+  .curseur-biere [role="button"],
+  .curseur-biere label,
+  .curseur-biere input,
+  .curseur-biere select,
+  .curseur-biere textarea{cursor:auto}
+}
