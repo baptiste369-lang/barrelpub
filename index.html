@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=26">
+<link rel="stylesheet" href="css/main.css?v=27">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -1043,6 +1043,30 @@
   </footer>
 </main>
 
+<!-- ============ V3.3 §4.2 — LA BARRE D'ACTION COLLANTE (MOBILE) ============
+     Le bouton RÉSERVER de l'en-tête disparaît au scroll, et la page fait plus de
+     25 000 px de haut : un visiteur qui décide au chapitre 04 devait remonter
+     tout en haut ou descendre tout en bas. Trois cibles, toujours à portée de
+     pouce.
+
+     MOBILE UNIQUEMENT — la règle est dans css/main.css, @media (max-width:860px)
+     ET (pointer:coarse). Sur desktop la barre n'existe pas visuellement : elle
+     est en display:none, pas seulement transparente.
+
+     APPARITION / DISPARITION (js/main.js, bloc « BARRE D'ACTION COLLANTE ») :
+     elle arrive quand le chapitre 02 entre dans le viewport — c'est-à-dire une
+     fois le hero traversé — et elle repart quand le bloc « VENIR » entre à son
+     tour, parce qu'il porte déjà les trois mêmes actions en grand. Elle
+     s'efface aussi pendant que la modale de réservation est ouverte.
+
+     Le premier bouton ouvre la modale (data-rsv, même mécanique que l'en-tête)
+     et retombe sur contact.html si JS est absent. -->
+<nav class="dock" id="dock" aria-label="Actions rapides" hidden>
+  <a class="dock-btn dock-btn--go" href="contact.html" data-rsv>Réserver</a>
+  <a class="dock-btn" href="tel:+33687361110">Appeler</a>
+  <a class="dock-btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=43.5513,7.0128" target="_blank" rel="noopener">Itinéraire</a>
+</nav>
+
 <!-- ============ V3.1 §4 — LA RÉSERVATION EN MODALE ============
      Le visiteur décide de réserver au moment où il lit la page ; l'envoyer sur
      contact.html à cet instant précis, c'est le perdre. Le formulaire vient à
@@ -1144,6 +1168,6 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=19"></script>
+<script src="js/main.js?v=20"></script>
 </body>
 </html>

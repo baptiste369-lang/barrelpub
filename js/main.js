@@ -1054,6 +1054,61 @@
   })();
 
   /* =====================================================================
+     V3.3 §4.2 — BARRE D'ACTION COLLANTE (MOBILE)
+     Trois cibles — Réserver, Appeler, Itinéraire — qui suivent le visiteur
+     sur les 25 000 px de la page, parce que le bouton RÉSERVER de l'en-tête
+     part au premier scroll.
+
+     Deux IntersectionObserver, aucun listener de scroll : l'un allume la
+     barre quand le chapitre 02 entre dans le viewport (le hero est traversé),
+     l'autre l'éteint quand le bloc VENIR entre à son tour — il porte déjà les
+     trois mêmes actions en grand, les répéter par-dessus serait un doublon.
+     La sortie du bloc VENIR par le haut (remontée) rallume la barre.
+
+     Le gabarit mobile est décidé en CSS (@media max-width:860px et
+     pointer:coarse) : ici on ne fait que poser des classes, donc rien ne
+     bouge sur desktop même si le JS tourne.
+     ===================================================================== */
+  (function () {
+    var dock = q("#dock");
+    if (!dock || !("IntersectionObserver" in window)) return;
+
+    var apres = q("#scene-seuil");   // le hero est derrière nous
+    var venir = q("#venir");         // le bloc qui porte déjà les trois actions
+    if (!apres) return;
+
+    var passeHero = false, dansVenir = false, modaleOuverte = false;
+
+    function paint() {
+      var visible = passeHero && !dansVenir && !modaleOuverte;
+      if (visible && dock.hidden) dock.hidden = false;   // premier affichage
+      dock.classList.toggle("is-up", visible);
+    }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) passeHero = true; });
+      paint();
+    }, { rootMargin: "0px 0px -25% 0px" }).observe(apres);
+
+    if (venir) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { dansVenir = e.isIntersecting; });
+        paint();
+      }, { threshold: 0 }).observe(venir);
+    }
+
+    /* la modale de réservation prend tout l'écran : la barre s'efface le temps
+       qu'elle est ouverte, et revient à la fermeture. */
+    var dlg = q("#rsvDialog");
+    if (dlg && "MutationObserver" in window) {
+      new MutationObserver(function () {
+        modaleOuverte = dlg.open;
+        paint();
+      }).observe(dlg, { attributes: true, attributeFilter: ["open"] });
+    }
+  })();
+
+  /* =====================================================================
      ANCRES — smooth via Lenis si présent
      ===================================================================== */
   document.addEventListener("click", function (e) {

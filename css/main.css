@@ -1555,3 +1555,49 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
    ===================================================================== */
 .infos-data,.infos-side{min-width:0}
 .infos-data a{overflow-wrap:anywhere}
+
+/* =====================================================================
+   V3.3 §4.2 — LA BARRE D'ACTION COLLANTE (MOBILE UNIQUEMENT)
+   Le bouton RÉSERVER vit dans une en-tête qui disparaît au scroll, sur une
+   page de plus de 25 000 px. Trois cibles de 44 px minimum, toujours là.
+   · display:none par défaut : sur desktop la barre n'existe pas.
+   · [hidden] est respecté (le JS le retire à la première apparition), et
+     l'état visible/caché passe ensuite par .is-up — une transform, donc
+     rien qui déclenche de mise en page pendant le scroll.
+   · env(safe-area-inset-bottom) pour la barre d'accueil des iPhone.
+   ===================================================================== */
+.dock{display:none}
+@media (max-width:860px) and (pointer:coarse){
+  .dock{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:rgba(10,11,14,.92);
+    border-top:1px solid rgba(237,232,224,.12);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    transform:translateY(110%);
+    transition:transform .45s var(--ease);
+    will-change:transform;
+  }
+  @supports (backdrop-filter:blur(10px)){
+    .dock{backdrop-filter:blur(14px) saturate(140%)}
+  }
+  .dock[hidden]{display:none}
+  .dock.is-up{transform:translateY(0)}
+  .dock-btn{
+    display:flex;align-items:center;justify-content:center;
+    min-height:52px;padding:0 6px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--blanc);text-decoration:none;
+    border-left:1px solid rgba(237,232,224,.12);
+  }
+  .dock-btn:first-child{border-left:0}
+  .dock-btn:active{background:rgba(237,232,224,.08)}
+  .dock-btn--go{background:var(--bleu-lien);color:#0A0B0E;font-weight:500}
+  .dock-btn--go:active{background:var(--bleu-clair,var(--bleu-lien))}
+  /* le pied de page ne passe pas sous la barre : elle est déjà partie au
+     bloc VENIR, mais la marge évite tout recouvrement pendant la sortie */
+  .site-foot{padding-bottom:calc(50px + 56px + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion:reduce){
+  .dock{transition:none}
+}
