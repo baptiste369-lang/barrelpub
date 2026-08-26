@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=28">
+<link rel="stylesheet" href="css/main.css?v=29">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -68,10 +68,12 @@
   "sameAs":["https://www.instagram.com/barrelpubcannes"]
 }
 </script>
-<!-- V3.1 §3 — JSON-LD FAQPage. SIX questions sur les sept affichées :
-     « Qu'est-ce qu'il se passe le soir ? » en est volontairement absente,
-     son programme hebdomadaire n'a jamais été confirmé par la cliente et on
-     ne pousse pas une information non vérifiée vers un moteur.
+<!-- V3.1 §3 — JSON-LD FAQPage. Les SIX questions affichées, toutes balisées.
+     V3.3 §4.1 — il y en avait sept : « Qu'est-ce qu'il se passe le soir ? » est
+     partie avec son programme, remonté en fin de chapitre 03 pour être visible
+     sans clic. Elle n'a jamais figuré dans ce balisage (programme non confirmé
+     par la cliente) : la liste ci-dessous est donc inchangée, et elle couvre
+     maintenant l'intégralité de la FAQ visible.
      À SAVOIR AVANT D'EN ATTENDRE DES RÉSULTATS ENRICHIS : depuis août 2023,
      Google réserve l'affichage des FAQ enrichies aux sites gouvernementaux
      et de santé. Ce balisage reste valide, utile aux autres consommateurs de
@@ -460,16 +462,36 @@
         <figure class="coul-solo"><img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, en noir et blanc" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le DJ</figcaption></figure>
       </div>
 
-      <!-- V3.1 §3 — le programme de la semaine a quitté ce chapitre : il est
-           devenu la réponse « Qu'est-ce qu'il se passe le soir ? » de la FAQ, en
-           bas du chapitre 05. Sept lignes de moins ici, zéro information perdue,
-           et le chapitre 03 — le plus long de la page — raccourcit d'autant. -->
       <ul class="feature-list" data-reveal-stagger>
         <li><b>Billard · Fléchettes</b><span>Babyfoot, arcade, et le tapis léopard maison.</span></li>
         <li><b>DJ &amp; Karaoké</b><span>La cabine tourne tard, le micro est à toi.</span></li>
         <li><b>10 écrans sport</b><span>Toutes les retransmissions, jusqu'à la dernière minute.</span></li>
         <li><b>Ta Bobine · 4€</b><span>Quatre flashs, une bande souvenir.</span></li>
       </ul>
+
+      <!-- V3.3 §4.1 — LE PROGRAMME REVIENT ICI, VISIBLE SANS CLIC.
+           La V3.1 l'avait replié dans la FAQ (« Qu'est-ce qu'il se passe le
+           soir ? »). C'est le seul contenu de la page qui donne une raison de
+           venir CE SOIR plutôt qu'un jour indéterminé : personne n'ouvre un
+           accordéon pour savoir où sortir vendredi. Il retrouve donc sa place,
+           en fin de chapitre 03, le jour courant surligné par main.js (#program).
+           PROGRAMME TOUJOURS À CONFIRMER PAR EVA — et pour cette raison il reste
+           absent du JSON-LD FAQPage : on ne pousse pas dans les résultats de
+           recherche un programme qu'on n'a pas fait valider. -->
+      <div class="program-block" data-reveal>
+        <span class="eyebrow">Ce soir, et tous les soirs</span>
+        <h3 class="program-title">La semaine au Barrel</h3>
+        <p class="program-lede">Il y a quelque chose tous les soirs. Le jour courant est surligné.</p>
+        <ul class="program" id="program" aria-label="Programme de la semaine">
+          <li><span class="pg-day">Lundi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Karaoké</span></li>
+          <li><span class="pg-day">Mardi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Black Ball — tournoi billard</span></li>
+          <li><span class="pg-day">Mercredi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set</span></li>
+          <li><span class="pg-day">Jeudi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Live</span></li>
+          <li><span class="pg-day">Vendredi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set — jusqu'à 5h</span></li>
+          <li><span class="pg-day">Samedi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set — jusqu'à 5h</span></li>
+          <li><span class="pg-day">Dimanche</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Sport sur les 10 écrans</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -945,25 +967,11 @@
           <div class="faq-a"><p>364 jours par an. Il n'y a qu'un seul jour de fermeture dans l'année — tous les autres soirs, la porte est ouverte de 18h à 5h.</p></div>
         </details>
 
-        <details name="faq">
-          <summary>Qu'est-ce qu'il se passe le soir ?</summary>
-          <!-- PROGRAMME À CONFIRMER PAR LE CLIENT (hérité de la V2.1).
-               Pour cette raison, cette question est la seule des sept à NE PAS
-               figurer dans le JSON-LD : on ne pousse pas un programme non
-               confirmé dans les résultats de recherche. -->
-          <div class="faq-a">
-            <p>Il y a quelque chose tous les soirs. Le jour courant est surligné.</p>
-            <ul class="program" id="program" aria-label="Programme de la semaine">
-              <li><span class="pg-day">Lundi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Karaoké</span></li>
-              <li><span class="pg-day">Mardi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Black Ball — tournoi billard</span></li>
-              <li><span class="pg-day">Mercredi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set</span></li>
-              <li><span class="pg-day">Jeudi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Live</span></li>
-              <li><span class="pg-day">Vendredi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set — jusqu'à 5h</span></li>
-              <li><span class="pg-day">Samedi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set — jusqu'à 5h</span></li>
-              <li><span class="pg-day">Dimanche</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Sport sur les 10 écrans</span></li>
-            </ul>
-          </div>
-        </details>
+        <!-- V3.3 §4.1 — la question « Qu'est-ce qu'il se passe le soir ? » n'est
+             plus ici : le programme de la semaine est remonté en fin de chapitre
+             03, visible sans clic. Le laisser aux deux endroits aurait été le
+             dire deux fois. Le JSON-LD FAQPage n'a pas bougé : il ne l'a jamais
+             contenue. -->
 
         <details name="faq">
           <summary>Qu'est-ce qu'il y a comme jeux ?</summary>
