@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=27">
+<link rel="stylesheet" href="css/main.css?v=28">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -381,6 +381,8 @@
         <figure class="tile"><img src="assets/photos/flechettes-02.webp" width="1067" height="1600" alt="La cible de fléchettes du pub, éclairée dans la pénombre" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Fléchettes</figcaption></figure>
       </div>
 
+      
+
       <!-- §3bis.7 — flou-leopard : filé de mouvement sur imprimé léopard, utilisé
            UNE SEULE FOIS, en transition pleine largeur, au basculement vers la nuit. -->
       <div class="wipe-leopard" aria-hidden="true">
@@ -440,23 +442,23 @@
       <!-- §3bis.5 — LES COULISSES. Le site n'avait presque personne qui travaille :
            c'est aussi ce qui rend crédible le virage restaurant. -->
       <div class="coulisses" data-reveal>
-        <span class="eyebrow">Le bar ne tourne pas tout seul</span>
+        <span class="eyebrow">Ceux qui font la soirée</span>
+        <h3 class="coul-title">Le bar ne tourne pas tout seul.</h3>
+        <!-- V3.3 §2 — LES PRÉNOMS SONT VÉRIFIABLES SUR CETTE PAGE MÊME.
+             Lucas et Hamza sont les deux prénoms cités nommément dans les treize
+             avis Google affichés plus bas (« le barman Hamza », « le serveur
+             Lucas »). Le brief en proposait quatre de plus (Amin, Amine,
+             Giuseppe, Clara) : ils viennent d'avis qui ne sont PAS sur le site,
+             donc invérifiables ici. On ne cite que ce que le visiteur peut
+             recouper deux écrans plus bas. À rallonger si Eva confirme les
+             autres, et seulement dans ce cas. -->
+        <p class="coul-lede">Lucas au shaker, Hamza au comptoir. Dans les avis, ce sont les prénoms qu'on retient — pas la déco.</p>
         <!-- V3.0 §2.2 — un seul plan de coulisses, le plus beau du lot. Les huit
              autres (staff-glacons, barman-flair-02 et -03, barman-shot,
              patron-enseigne, dj-bandeau, cave-futs, cave-futs-02) sont en
              galerie, LES SOIRS. -->
         <figure class="coul-solo"><img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, en noir et blanc" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le DJ</figcaption></figure>
       </div>
-
-      <!-- §3.2 — LA MOTO : deux occurrences sur tout le site, pas une de plus.
-           Ici moto-portrait-02, en petit format, dans la nuit.
-           L'autre est moto-frites, dans le chapitre carte.
-           Retirées : moto-rose-01, moto-comptoir, moto-portrait (grille Instagram).
-           « On n'est pas un shop de moto. » -->
-      <figure class="moto-solo" data-reveal>
-        <img src="assets/photos/moto-portrait-02.webp" width="1066" height="1600" alt="Portrait au bar, bouteille à la main, devant la moto rose" loading="lazy" fetchpriority="low" decoding="async">
-        <figcaption>Et oui, elle est à l'intérieur.</figcaption>
-      </figure>
 
       <!-- V3.1 §3 — le programme de la semaine a quitté ce chapitre : il est
            devenu la réponse « Qu'est-ce qu'il se passe le soir ? » de la FAQ, en
@@ -666,10 +668,28 @@
            geste. Le crépuscule reste parce qu'il est le seul moment que le
            comparateur ne peut pas montrer : l'entre-deux. Les deux plans
            retirés sont en galerie, catégorie LA RUE. -->
-      <figure class="shot-solo" data-reveal>
-        <img src="assets/photos/terrasse-crepuscule.webp" width="1200" height="1600" alt="La terrasse au crépuscule, les lumières qui s'allument" loading="lazy" fetchpriority="low" decoding="async">
-        <figcaption>Entre les deux — le crépuscule</figcaption>
-      </figure>
+      <!-- Demandé par le client le 20/08 : la moto quitte le chapitre 03 et vient
+           se poser à droite du crépuscule. Les deux plans se répondent — la rue
+           qui s'allume dehors, la salle qui s'allume dedans. -->
+      <div class="duo-fin">
+        <figure class="shot-solo" data-reveal>
+          <img src="assets/photos/terrasse-crepuscule.webp" width="1200" height="1600" alt="La terrasse au crépuscule, les lumières qui s'allument" loading="lazy" fetchpriority="low" decoding="async">
+          <figcaption>Entre les deux — le crépuscule</figcaption>
+        </figure>
+        <!-- V3.3 §2 — LA MOTO REMONTE ICI, collée à la mosaïque des jeux.
+             Elle était en bas du bloc « coulisses », où sa légende isolée
+             (« Et oui, elle est à l'intérieur. ») ne se rattachait à rien : le
+             visiteur y voyait une photo de l'équipe. Elle parle du décor du bar,
+             donc elle est à sa place au milieu du décor du bar.
+             §3.2 — LA MOTO : deux occurrences sur tout le site, pas une de plus.
+             L'autre est moto-frites, dans le chapitre carte.
+             Retirées : moto-rose-01, moto-comptoir, moto-portrait (grille Instagram).
+             « On n'est pas un shop de moto. » -->
+        <figure class="moto-solo" data-reveal>
+          <img src="assets/photos/moto-portrait-02.webp" width="1066" height="1600" alt="Portrait au bar, bouteille à la main, devant la moto rose" loading="lazy" fetchpriority="low" decoding="async">
+          <figcaption>Et oui, elle est à l'intérieur — la moto est dans la salle.</figcaption>
+        </figure>
+      </div>
 
       <!-- ============ V3.2 §1 — CE QU'ILS EN DISENT ============
            Treize avis Google réels, en clair dans le HTML : lisibles sans JS et

@@ -1557,6 +1557,29 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 .infos-data a{overflow-wrap:anywhere}
 
 /* =====================================================================
+   V3.3 §2 — LE BLOC ÉQUIPE : UN TITRE ET UNE PHRASE
+   Il n'avait qu'un eyebrow de six mots et une photo. Une photo seule à
+   l'écran avec une légende de trois mots n'est pas du contenu, c'est une
+   étiquette : le visiteur ne savait pas ce qu'il regardait. Même gabarit
+   que les autres moments de la page — eyebrow, h3, phrase.
+   ===================================================================== */
+.coul-title{
+  font-family:var(--display);text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(24px,3.4vw,44px);line-height:.98;margin:10px 0 14px;
+}
+.coul-lede{max-width:46ch;font-size:clamp(15px,1.5vw,18px);line-height:1.7;color:var(--gris);margin:0}
+/* la photo se recolle à sa phrase : 22px, pas un demi-écran */
+.coulisses .coul-solo{margin-top:clamp(18px,2.4vh,26px)}
+
+/* V3.3 §2 — RESSERRAGE DU CHAPITRE 03.
+   Entre le grand plan de la nuit, le bloc équipe et la moto, il y avait
+   près d'un écran de noir entre deux figures. On revient aux marges des
+   autres chapitres. */
+.plan-large--nuit{margin-block:clamp(26px,4vh,48px) clamp(30px,4.5vh,56px)}
+.coulisses{margin-top:clamp(32px,4.5vh,60px)}
+.moto-solo{margin-block:clamp(24px,3.5vh,48px)}
+
+/* =====================================================================
    V3.3 §4.2 — LA BARRE D'ACTION COLLANTE (MOBILE UNIQUEMENT)
    Le bouton RÉSERVER vit dans une en-tête qui disparaît au scroll, sur une
    page de plus de 25 000 px. Trois cibles de 44 px minimum, toujours là.
@@ -1601,3 +1624,27 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 @media (prefers-reduced-motion:reduce){
   .dock{transition:none}
 }
+
+/* =====================================================================
+   DUO DE FIN — le crépuscule et la moto, côte à côte
+   Demandé par le client le 20/08. Les deux plans ont le même rapport 3/4,
+   donc ils s'alignent en haut ET en bas sans recadrage.
+   Sous 720 px on repasse en colonne : deux photos de 3/4 côte à côte sur
+   un téléphone, ce sont deux vignettes illisibles.
+   ===================================================================== */
+.duo-fin{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(14px,2vw,24px);
+  align-items:start;
+  margin:0 0 clamp(46px,7vh,90px);
+  max-width:1080px;
+}
+@media (min-width:720px){
+  .duo-fin{grid-template-columns:1fr 1fr}
+}
+/* dans le duo, chaque figure remplit sa colonne : les largeurs propres à
+   .shot-solo (520 px) et .moto-solo (380 px) ne valent que hors duo. */
+.duo-fin .shot-solo,
+.duo-fin .moto-solo{width:100%;max-width:none;margin:0}
+.duo-fin .moto-solo img{aspect-ratio:3/4}
