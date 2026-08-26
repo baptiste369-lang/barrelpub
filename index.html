@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=31">
+<link rel="stylesheet" href="css/main.css?v=32">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -291,6 +291,17 @@
         </figure>
       </div>
 
+      <!-- §3bis.2 — NÉON 01 / 03 — L'ACCUEIL.
+           V3.6 §2 — déplacé ici depuis le mur du chapitre 03 : la phrase dit
+           l'accueil, elle arrive donc juste après la descente du hero et la
+           salle bleue, avant que le chien ne prenne le relais. Texte, image de
+           fond et .neon-step inchangés. -->
+      <div class="neon-wall neon-solo" data-neon data-reveal>
+        <img class="neon-bg" src="assets/photos/neon-exactly-biblio.webp" width="1600" height="1066" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
+        <p class="neon">You are exactly<br>where you need to be</p>
+        <span class="neon-step">01 — l'accueil</span>
+      </div>
+
       <!-- V2.4 §1 — LA VIDÉO DU CHIEN. Elle prend la place de chien-billard-debout.webp :
            même image, animée. Le plan part du billard entier et avance jusqu'à l'œil.
            Pilotée par le scroll (currentTime), jamais en lecture automatique : c'est le
@@ -402,38 +413,25 @@
         <span class="eyebrow">Quand la nuit prend le relais</span>
       </div>
 
-      <!-- §3bis.2 — LE MUR DES TROIS NÉONS.
-           Trois phrases réellement présentes dans le bar, chacune sur son écran,
-           lues dans l'ordre d'une soirée : l'accueil, le milieu, la fin.
-           Le glow bleu ne s'applique qu'ici, et jamais plus de deux néons
-           allumés en même temps (voir .neon-wall.is-lit dans main.js). -->
-      <div class="neon-run" id="neonRun">
-        <div class="neon-wall" data-neon>
-          <img class="neon-bg" src="assets/photos/neon-exactly-biblio.webp" width="1600" height="1066" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
-          <p class="neon">You are exactly<br>where you need to be</p>
-          <span class="neon-step">01 — l'accueil</span>
-        </div>
-        <div class="neon-wall" data-neon>
-          <img class="neon-bg" src="assets/photos/neon-tequila.webp" width="735" height="1456" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
-          <p class="neon">I didn't text you,<br>tequila did</p>
-          <span class="neon-step">02 — le milieu de soirée</span>
-        </div>
-        <div class="neon-wall" data-neon>
-          <img class="neon-bg" src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
-          <!-- V2.3 §2 — « Fuck nudes… » est un vrai néon du bar, mais écrit en 86 px
-               sur toute la largeur il cesse d'être un clin d'œil au mur du fond pour
-               devenir le slogan de l'établissement. Refusé par la cliente.
-               L'image de fond reste : le néon y est petit, flou, au fond du cadre,
-               à sa place documentaire (opacity .22 sous le dégradé). -->
-          <p class="neon">This place is hotter<br>than your ex</p>
-          <span class="neon-step">03 — la fin</span>
-        </div>
-
-        <!-- V3.0 §2.2 — la bande .neon-strip (six photos de néons) part en
-             galerie, LE LIEU. Le mur de trois néons ci-dessus est intact : trois
-             murs, trois phrases, dans l'ordre d'une soirée. La bande le répétait
-             en petit, juste en dessous — elle affaiblissait ce qu'elle citait. -->
+      <!-- §3bis.2 — NÉON 02 / 03 — LE MILIEU DE SOIRÉE.
+           V3.6 §2 — les trois phrases étaient empilées ici, trois écrans
+           d'affilée au même endroit : un mur, pas une respiration. Elles sont
+           maintenant réparties dans l'ordre qu'elles portent déjà — le 01 au
+           seuil, le 02 ici, le 03 après les coulisses. Le conteneur .neon-run
+           a disparu, chaque phrase est autonome (.neon-solo).
+           V3.6 §1 — elles ne bougent plus : plus de skew de vélocité (.neon est
+           sorti de skewEls), plus de mise en veille à 32 %, plus de
+           neonFlicker. Une entrée en fondu data-reveal, comme tout le reste de
+           la page, et plus rien ensuite. Les textes sont inchangés. -->
+      <div class="neon-wall neon-solo" data-neon data-reveal>
+        <img class="neon-bg" src="assets/photos/neon-tequila.webp" width="735" height="1456" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
+        <p class="neon">I didn't text you,<br>tequila did</p>
+        <span class="neon-step">02 — le milieu de soirée</span>
       </div>
+
+      <!-- V3.0 §2.2 — la bande .neon-strip (six photos de néons) est partie en
+           galerie, LE LIEU. Elle répétait en petit les phrases ci-dessus, juste
+           en dessous — elle affaiblissait ce qu'elle citait. -->
 
       <!-- V3.0 §2.2 — LE PLAN PRINCIPAL DE LA NUIT.
            Le carrousel de treize plans est parti en galerie, LES SOIRS. Il
@@ -487,6 +485,21 @@
             <span class="dj-viz__label">124 BPM · LA CABINE TOURNE</span>
           </div>
         </div>
+      </div>
+
+      <!-- §3bis.2 — NÉON 03 / 03 — LA FIN.
+           V3.6 §2 — déplacé ici : la phrase ferme la soirée, elle arrive après
+           la photo du DJ et son spectre, avant la liste des équipements. Texte,
+           image de fond et .neon-step inchangés. -->
+      <div class="neon-wall neon-solo" data-neon data-reveal>
+        <img class="neon-bg" src="assets/photos/neon-playlist-foule.webp" width="1067" height="1600" alt="" aria-hidden="true" loading="lazy" fetchpriority="low" decoding="async">
+        <!-- V2.3 §2 — « Fuck nudes… » est un vrai néon du bar, mais écrit en 86 px
+             sur toute la largeur il cesse d'être un clin d'œil au mur du fond pour
+             devenir le slogan de l'établissement. Refusé par la cliente.
+             L'image de fond reste : le néon y est petit, flou, au fond du cadre,
+             à sa place documentaire (opacity .22 sous le dégradé). -->
+        <p class="neon">This place is hotter<br>than your ex</p>
+        <span class="neon-step">03 — la fin</span>
       </div>
 
       <ul class="feature-list" data-reveal-stagger>
@@ -1223,7 +1236,7 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=20"></script>
+<script src="js/main.js?v=21"></script>
 <!-- V3.4 — le spectre du chapitre 03. index.html UNIQUEMENT : les quatre autres
      pages n'ont pas ce bloc. Il sort en silence s'il ne le trouve pas. -->
 <script defer src="js/dj-viz.js?v=1"></script>

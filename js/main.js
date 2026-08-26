@@ -387,7 +387,7 @@
      SKEW de vélocité — sur les gros titres uniquement (±3,5°)
      ===================================================================== */
   if (!REDUCE) {
-    var skewEls = qa(".wall, .neon, #jeu-title, #carte-title, #sortie-title");
+    var skewEls = qa(".wall, #jeu-title, #carte-title, #sortie-title");
     skewEls.forEach(function (el) { el.setAttribute("data-skew", ""); });
     if (skewEls.length) {
       onFrame(function () {
@@ -433,37 +433,6 @@
       });
     }, { root: track, threshold: 0.6 });
     slides.forEach(function (s) { cio.observe(s); });
-  })();
-
-  /* =====================================================================
-     §3bis.2 — LE MUR DES TROIS NÉONS
-     Chaque néon s'allume en entrant dans le viewport. Contrainte du brief :
-     jamais plus de DEUX néons allumés en même temps — si un troisième entre,
-     on éteint le plus ancien. IntersectionObserver, aucun ScrollTrigger.
-     Sans JS (ou sans IO) : tout est allumé, la séquence reste lisible.
-     ===================================================================== */
-  (function () {
-    var walls = qa("#neonRun .neon-wall");
-    if (!walls.length) return;
-    if (!("IntersectionObserver" in window)) {
-      walls.forEach(function (w) { w.classList.add("is-lit"); });
-      return;
-    }
-    var lit = [];
-    var nio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        var i = lit.indexOf(e.target);
-        if (e.isIntersecting) {
-          if (i === -1) lit.push(e.target);
-          e.target.classList.add("is-lit");
-        } else {
-          if (i !== -1) lit.splice(i, 1);
-          e.target.classList.remove("is-lit");
-        }
-      });
-      while (lit.length > 2) { lit.shift().classList.remove("is-lit"); }
-    }, { threshold: 0.35 });
-    walls.forEach(function (w) { nio.observe(w); });
   })();
 
   /* =====================================================================

@@ -226,8 +226,9 @@ body.has-cursor a, body.has-cursor button{cursor:none}
    exactement un néon du Barrel.
    · text-shadow, JAMAIS filter:drop-shadow() — le hero est pinné et scrubbé sur
      un canvas, un filtre forcerait une nouvelle couche de composition par frame.
-   · aucun scintillement ici : neonFlicker reste réservé aux murs de néons. Le
-     texte apparaît et disparaît déjà, un second mouvement serait un de trop.
+   · aucun scintillement ici : le texte apparaît et disparaît déjà, un second
+     mouvement serait un de trop. (V3.6 — il n'y a plus de scintillement nulle
+     part : neonFlicker est sorti du fichier avec les murs de néons.)
    · la dernière ombre noire n'est pas décorative : les premières frames sont la
      Croisette en plein jour, un bleu clair sans ombre y devient illisible. */
 .cue p{
@@ -804,22 +805,13 @@ main{position:relative;z-index:2;background:var(--noir)}
   font-size:clamp(26px,4.6vw,56px);line-height:.96;letter-spacing:-.02em;color:var(--blanc);
 }
 
-/* §3bis.2 — le mur des trois néons : chaque phrase sur son propre écran */
-.neon-run{
-  position:relative;left:50%;width:100vw;transform:translateX(-50%);
-  margin:clamp(30px,5vh,60px) 0;
-}
-.neon-run .neon-wall{margin:0;min-height:clamp(58vh,72vh,80vh);flex-direction:column;gap:26px}
-.neon-run .neon-wall + .neon-wall{border-top:1px solid rgba(237,232,224,.07)}
+/* §3bis.2 — le pas de la séquence, sous chaque phrase.
+   V3.6 — le conteneur .neon-run a disparu : les trois néons sont autonomes et
+   répartis dans la page, et .neon-solo (fin de fichier) reprend son débord. */
 .neon-step{
   position:relative;z-index:2;font-family:var(--mono);font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--gris);
 }
-/* le glow ne s'allume qu'à l'entrée dans le viewport — deux néons allumés au maximum */
-.neon-run .neon{opacity:.32;transition:opacity .9s var(--ease)}
-.neon-run .neon-wall.is-lit .neon{opacity:1}
-.neon-run .neon-wall.is-lit .neon{animation:neonFlicker 9s linear infinite}
-
 /* §3.5 — la bande de photos de néons qui ferme la séquence */
 .neon-strip{
   display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1.1vw,14px);
@@ -1037,14 +1029,6 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 .mq-track.is-anim,
 .seuil-shot img.is-anim{will-change:transform}
 
-/* Flicker néon (§3.7) — salve non-linéaire ~ toutes les 9 s, un seul élément */
-.neon.flicker{animation:neonFlicker 9s linear infinite}
-@keyframes neonFlicker{
-  0%,86%,100%{opacity:1}
-  87%{opacity:.35}88%{opacity:1}89%{opacity:.55}
-  90%{opacity:1}91%{opacity:.4}92%{opacity:.9}93%{opacity:.6}94%{opacity:1}
-}
-
 /* Glitch RGB à l'entrée de section (§3.8) — une seule salve */
 @keyframes glitchRGB{
   0%{text-shadow:0 0 0 transparent}
@@ -1078,9 +1062,8 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   .ov-line>span,[data-split] .ov-line>span{transform:none!important;transition:none!important}
   .ov-sub,.ov-subline,.ov-cta{opacity:1!important;transition:none!important}
   .cue{transition:opacity .3s linear}
-  /* §6.2 : on coupe skew, flicker, glitch, marquee, thumb flottante */
+  /* §6.2 : on coupe skew, glitch, marquee, thumb flottante */
   [data-skew]{transform:none!important;will-change:auto}
-  .neon.flicker{animation:none}
   .glitch-once{animation:none!important}
   .mq-track{transform:none!important}
   .menu-thumb{display:none!important}
@@ -1733,4 +1716,26 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   .curseur-biere input,
   .curseur-biere select,
   .curseur-biere textarea{cursor:auto}
+}
+
+/* =====================================================================
+   V3.6 — LES TROIS NÉONS SONT AUTONOMES ET RÉPARTIS
+   .neon-run est supprimé ; .neon-solo reprend son débord pleine largeur.
+
+   PAS DE transform:translateX(-50%) ICI, ET CE N'EST PAS UN OUBLI.
+   Le brief le demandait, mais ces blocs portent désormais data-reveal, et
+   `[data-reveal].is-in{transform:none}` pèse (0,2,0) — une classe (0,1,0) ne
+   peut pas le battre. Le translateX serait effacé à la révélation et les trois
+   néons partiraient d'un demi-écran vers la droite. C'est exactement le défaut
+   qu'avaient .estab-band puis .plan-large. margin-inline négatif fait le même
+   travail et laisse transform à l'animation d'entrée.
+   ===================================================================== */
+.neon-solo{
+  position:relative;width:100vw;
+  margin-inline:calc(50% - 50vw);
+  margin-block:clamp(60px,10vh,140px);
+  min-height:clamp(52vh,64vh,72vh);
+  flex-direction:column;
+  gap:26px;
+  border-top:0;
 }
