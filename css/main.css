@@ -1657,3 +1657,44 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 .duo-fin .shot-solo,
 .duo-fin .moto-solo{width:100%;max-width:none;margin:0}
 .duo-fin .moto-solo img{aspect-ratio:3/4}
+
+/* =====================================================================
+   V3.4 — LE SPECTRE À DROITE DU DJ
+   La photo du DJ tient dans 560 px, calée à gauche : au-dessus de 900 px il
+   restait 400 à 520 px de noir vide sur toute la hauteur de la figure.
+   Le canvas prend cette place, à la hauteur EXACTE de la photo — c'est tout
+   l'intérêt du lot, d'où aspect-ratio:auto + height:100% au-dessus de 900 px.
+   En dessous, il passe sous la photo en 3/4 et reste lisible.
+   Sans JavaScript, .dj-viz est un rectangle --noir-2 avec son label en bas :
+   c'est propre et volontaire, il n'y a rien à ajouter dans les <noscript>.
+   ===================================================================== */
+.coul-duo{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(14px,2vw,24px);
+  align-items:stretch;
+  margin-top:clamp(18px,2.4vh,26px);
+  max-width:1080px;
+}
+@media (min-width:900px){
+  .coul-duo{grid-template-columns:minmax(0,560px) minmax(0,1fr)}
+}
+.coul-duo .coul-solo{max-width:none;margin-top:0}
+
+.dj-viz{
+  position:relative;
+  background:var(--noir-2);
+  overflow:hidden;
+  min-height:220px;
+  aspect-ratio:3/4;
+}
+@media (min-width:900px){
+  .dj-viz{aspect-ratio:auto;height:100%}
+}
+.dj-viz__c{display:block;width:100%;height:100%}
+.dj-viz__label{
+  position:absolute;left:14px;bottom:12px;
+  font:500 11px/1 'IBM Plex Mono',monospace;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--gris);
+  pointer-events:none;
+}

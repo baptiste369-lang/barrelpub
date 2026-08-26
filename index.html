@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=29">
+<link rel="stylesheet" href="css/main.css?v=30">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -462,7 +462,31 @@
              autres (staff-glacons, barman-flair-02 et -03, barman-shot,
              patron-enseigne, dj-bandeau, cave-futs, cave-futs-02) sont en
              galerie, LES SOIRS. -->
-        <figure class="coul-solo"><img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600" alt="Le DJ au bandeau lumineux, en noir et blanc" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Le DJ</figcaption></figure>
+        <!-- V3.4 — LE VIDE À DROITE DU DJ.
+             La photo est calée à gauche, en 560 px : sur grand écran il restait
+             400 à 520 px de noir sur toute la hauteur de la figure. On ne le
+             comble pas avec une photo de plus — le reproche de départ était
+             « trop chargé » — mais avec un spectre dessiné au canvas, sans une
+             image, sans une dépendance (js/dj-viz.js).
+             Le <canvas> est aria-hidden : c'est de la décoration, il n'a rien à
+             dire à un lecteur d'écran. Le label, lui, est du vrai texte, lisible
+             sans JS.
+             PAS de data-reveal sur .dj-viz : le parent .coulisses en porte déjà
+             un, et en remettre un ici, c'est le piège de l'observateur qui
+             unobserve un sous-arbre resté à opacity:0. -->
+        <div class="coul-duo">
+          <figure class="coul-solo">
+            <img src="assets/photos/dj-bandeau-nb.webp" width="1066" height="1600"
+                 alt="Le DJ au bandeau lumineux, en noir et blanc"
+                 loading="lazy" fetchpriority="low" decoding="async">
+            <figcaption>Le DJ</figcaption>
+          </figure>
+
+          <div class="dj-viz" data-dj-viz>
+            <canvas class="dj-viz__c" aria-hidden="true"></canvas>
+            <span class="dj-viz__label">124 BPM · LA CABINE TOURNE</span>
+          </div>
+        </div>
       </div>
 
       <ul class="feature-list" data-reveal-stagger>
@@ -1200,5 +1224,8 @@
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
 <script src="js/main.js?v=20"></script>
+<!-- V3.4 — le spectre du chapitre 03. index.html UNIQUEMENT : les quatre autres
+     pages n'ont pas ce bloc. Il sort en silence s'il ne le trouve pas. -->
+<script defer src="js/dj-viz.js?v=1"></script>
 </body>
 </html>
