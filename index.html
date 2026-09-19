@@ -65,6 +65,10 @@
     "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
     "opens":"18:00","closes":"05:00"
   }],
+  "specialOpeningHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","opens":"00:00","closes":"00:00","validFrom":"2026-12-25","validThrough":"2026-12-25"},
+    {"@type":"OpeningHoursSpecification","opens":"00:00","closes":"00:00","validFrom":"2027-12-25","validThrough":"2027-12-25"}
+  ],
   "sameAs":["https://www.instagram.com/barrelcannespub"]
 }
 </script>
@@ -98,7 +102,7 @@
       "name": "Le Barrel Pub est-il ouvert tous les jours ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "364 jours par an. Il n'y a qu'un seul jour de fermeture dans l'année — tous les autres soirs, la porte est ouverte de 18h à 5h."
+        "text": "364 jours par an. Le seul jour de fermeture est le 25 décembre — tous les autres soirs, la porte est ouverte de 18h à 5h."
       }
     },
     {
@@ -1001,10 +1005,8 @@
 
         <details name="faq">
           <summary>Vous êtes ouverts tous les jours ?</summary>
-          <!-- À COMPLÉTER PAR EVA — le site dit « 364 jours par an » depuis la
-               V2, mais le jour de fermeture n'a jamais été nommé. Tant qu'il ne
-               l'est pas, on ne l'invente pas : la réponse dit ce qui est vrai. -->
-          <div class="faq-a"><p>364 jours par an. Il n'y a qu'un seul jour de fermeture dans l'année — tous les autres soirs, la porte est ouverte de 18h à 5h.</p></div>
+          <!-- V4.1 §5 — la cliente a confirmé : fermé le 25 décembre. -->
+          <div class="faq-a"><p>364 jours par an. Le seul jour de fermeture est le 25 décembre — tous les autres soirs, la porte est ouverte de 18h à 5h.</p></div>
         </details>
 
         <!-- V3.3 §4.1 — la question « Qu'est-ce qu'il se passe le soir ? » n'est
@@ -1056,7 +1058,8 @@
           17 rue du Docteur Gérard Monod<br>
           06400 CANNES<br>
           <span class="k" data-scramble>43.5513°N / 7.0128°E</span><br><br>
-          364 JOURS PAR AN — 18H00 → 05H00<br>
+          364 JOURS PAR AN — FERMÉ LE 25 DÉCEMBRE<br>
+          18H00 → 05H00<br>
           <a href="tel:+33687361110">06 87 36 11 10</a><br>
           <a href="mailto:lebarrelpubcannes@gmail.com">lebarrelpubcannes@gmail.com</a><br>
           <a href="https://www.instagram.com/barrelcannespub" target="_blank" rel="noopener">@barrelcannespub</a><br><br>
