@@ -187,7 +187,7 @@ body.has-cursor a, body.has-cursor button{cursor:none}
   padding:clamp(16px,2.4vw,26px) var(--pad);
   mix-blend-mode:difference;
 }
-.site-head .brand{width:clamp(38px,4vw,52px);height:clamp(38px,4vw,52px);color:var(--blanc)}
+.site-head .brand{width:clamp(52px,5.4vw,72px);height:clamp(52px,5.4vw,72px);color:var(--blanc)}
 .head-meta{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--blanc);text-transform:uppercase}
 .head-cta{
   font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
