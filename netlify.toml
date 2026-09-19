@@ -172,6 +172,14 @@
   status = 301
   force = true
 
+# V4.3 §1 — tools/ (serveur de dev) n'a rien à faire en ligne. force = true :
+# sans lui le fichier existant serait servi. Placée AVANT /* (première règle gagnante).
+[[redirects]]
+  from = "/tools/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Filet final. Netlify sert déjà 404.html tout seul, cette
 # ligne garantit le bon code de statut.
 [[redirects]]
