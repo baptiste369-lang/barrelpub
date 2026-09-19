@@ -1548,8 +1548,10 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
    que les autres moments de la page — eyebrow, h3, phrase.
    ===================================================================== */
 .coul-title{
-  font-family:var(--display);text-transform:uppercase;letter-spacing:-.02em;
-  font-size:clamp(24px,3.4vw,44px);line-height:.98;margin:10px 0 14px;
+  /* V4.2 — cursive. La regle du brief disait six mots, ce titre en fait sept :
+     c'est un titre fixe, pas une phrase generee, donc la regle passe a sept. */
+  font-family:var(--script);font-weight:400;text-transform:none;letter-spacing:0;
+  font-size:clamp(28px,3.8vw,50px);line-height:1.12;margin:10px 0 16px;
 }
 .coul-lede{max-width:46ch;font-size:clamp(15px,1.5vw,18px);line-height:1.7;color:var(--gris);margin:0}
 /* la photo se recolle à sa phrase : 22px, pas un demi-écran */
