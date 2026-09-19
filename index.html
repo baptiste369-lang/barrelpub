@@ -199,7 +199,7 @@
   </div>
 
   <div class="entry-copy" id="entryCopy">
-    <p class="entry-kicker">Bienvenue dans l'expérience</p>
+    <p class="entry-name" aria-hidden="true">Barrel Pub</p>
     <p class="entry-line">Ceci est un site immersif.</p>
     <p class="entry-line entry-line--dim">Laissez-le charger — quelques secondes, et il est à vous.</p>
   </div>
@@ -213,7 +213,10 @@
 
 <!-- ============ HEADER ============ -->
 <header class="site-head">
-  <a class="brand" href="/" aria-label="Barrel Pub Cannes — accueil"><svg><use href="#brand"></use></svg></a>
+  <a class="brand-lock" href="/" aria-label="Barrel Pub Cannes — accueil">
+    <span class="brand"><svg><use href="#brand"></use></svg></span>
+    <span class="brand-word" aria-hidden="true">Barrel Pub</span>
+  </a>
   <div class="head-meta">Cannes · 18h → 5h · 364 j/an</div>
   <div class="head-right">
     <a class="head-link" href="galerie.html">Galerie</a>
@@ -1098,6 +1101,7 @@
   <!-- ============ FOOTER ============ -->
   <footer class="site-foot">
     <a class="foot-brand brand" href="/" aria-label="Barrel Pub Cannes"><svg><use href="#brand"></use></svg></a>
+    <p class="foot-script" aria-hidden="true">Barrel Pub</p>
     <!-- « Make it count » était en réalité le slogan déposé imprimé sur le fût
          publicitaire Jack Daniel's du bar — pas une phrase du Barrel. Remplacé par un
          vrai néon de la maison (photo : neon-exactly-biblio). -->

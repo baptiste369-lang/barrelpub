@@ -1744,3 +1744,31 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   gap:26px;
   border-top:0;
 }
+
+/* ---- V4.1 §2 — LA CURSIVE (Arizonia) ------------------------------------
+   Le nom de la maison et les respirations courtes : six mots maximum, jamais
+   sous 26 px (les déliés disparaissent sur fond noir). Ne PAS étendre aux
+   .wall, .neon, .eyebrow, prix/horaires (mono), avis (Fraunces), corps, boutons,
+   ni au hero. Un h3 qui dépasse six mots retombe sur la grotesque, c'est voulu. */
+.brand-lock{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-word{
+  font-family:var(--script);font-size:clamp(26px,2.8vw,32px);
+  line-height:1;color:var(--blanc);padding-bottom:4px;white-space:nowrap;
+}
+@media (max-width:560px){.brand-word{display:none}}
+.foot-script{
+  font-family:var(--script);font-size:clamp(34px,6vw,58px);line-height:1.1;
+  color:var(--blanc);margin:-6px 0 clamp(14px,2vh,22px);text-align:center;
+}
+.entry-name{
+  font-family:var(--script);font-size:clamp(30px,5vw,48px);line-height:1.1;
+  color:var(--blanc);margin:0 0 4px;
+}
+.program-title,.td-wall,.contact-hero h1{
+  font-family:var(--script);font-weight:400;text-transform:none;letter-spacing:0;
+}
+.program-title{font-size:clamp(30px,4.2vw,52px);line-height:1.1}
+.td-wall{font-size:clamp(32px,5vw,62px);line-height:1.1}
+.td-wall .ov-line{padding:.06em .1em .14em;margin:0 -.1em}
+.contact-hero h1{font-size:clamp(52px,9vw,112px);line-height:1.02;margin:14px 0 20px}
+.contact-hero h1 em{padding:0 .12em .12em 0}
