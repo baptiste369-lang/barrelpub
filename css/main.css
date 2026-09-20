@@ -413,7 +413,7 @@ main{position:relative;z-index:2;background:var(--noir)}
 .seuil-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,6vw,80px);align-items:center;width:100%}
 @media (min-width:960px){.seuil-grid{grid-template-columns:1.05fr .95fr}}
 .wall{font-family:var(--script);font-weight:400;text-transform:none;line-height:.64;letter-spacing:0;
-  font-size:min(24.3vw,243px);color:var(--blanc)}
+  font-size:min(17vw,200px);color:var(--blanc)}
 .wall .l{display:block;overflow:hidden}
 .wall .l span{display:block;transform:translateY(105%);transition:transform 1s var(--ease)}
 .wall.is-in .l:nth-child(1) span{transition-delay:0ms}
@@ -433,7 +433,7 @@ main{position:relative;z-index:2;background:var(--noir)}
 .scene-jeu{background:var(--noir)}
 .jeu-head{max-width:70ch;margin-bottom:clamp(48px,7vh,90px)}
 .jeu-head h2{font-family:var(--script);font-weight:400;text-transform:none;line-height:1;letter-spacing:0;
-  font-size:clamp(66px,13.2vw,181px);margin:14px 0 24px}
+  font-size:clamp(48px,9.6vw,128px);margin:14px 0 24px}
 
 /* Néon signature */
 .neon{
@@ -1792,3 +1792,8 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 #jeu-title:not(.is-in) .ov-line>span,
 #carte-title:not(.is-in) .ov-line>span,
 #sortie-title:not(.is-in) .ov-line>span{transform:translateY(calc(110% + .55em))}
+/* V4.3b — mesuré à 1440 px : l'ascendante du L de « Le chien » (.671 em) dépasse de
+   3 px le masque .wall .l (interligne .64). Un peu plus de marge en haut. Les marges
+   négatives de blocs frères ne s'additionnent pas (elles fusionnent) : la marge du
+   bas passe à -.26em pour que le pas entre lignes reste celui de la règle V4.3. */
+.wall .l{padding-top:.12em;margin-top:-.12em;margin-bottom:-.26em}
