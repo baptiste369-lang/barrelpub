@@ -1813,9 +1813,16 @@ body::before{
   z-index:219;
   background:linear-gradient(
     to bottom,
-    rgba(10,11,14,.62)  0%,
+    rgba(10,11,14,.55)  0%,
     rgba(10,11,14,.42) 32%,
     rgba(10,11,14,.18) 66%,
     rgba(10,11,14,0)  100%
   );
 }
+
+/* V4.6 — l'en-tête fait 124 px depuis que le logo a grandi (V4.1 §3), et le
+   retrait haut des chapitres valait 119 px sur une fenêtre de 794 px : le
+   compteur de chapitre arrivait cinq pixels trop haut et passait sous le logo.
+   On ne touche qu'au retrait HAUT ; bas, gauche et droite gardent la valeur
+   du raccourci `padding` d'origine. */
+.scene{padding-top:clamp(148px,16vh,200px)}
