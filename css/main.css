@@ -186,7 +186,6 @@ body.has-cursor a, body.has-cursor button{cursor:none}
   position:fixed;top:0;left:0;width:100%;z-index:220;
   display:flex;align-items:center;justify-content:space-between;
   padding:clamp(16px,2.4vw,26px) var(--pad);
-  mix-blend-mode:difference;
 }
 .site-head .brand{width:clamp(52px,5.4vw,72px);height:clamp(52px,5.4vw,72px);color:var(--blanc)}
 .head-meta{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--blanc);text-transform:uppercase}
@@ -1801,11 +1800,10 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 /* V4.4 — l'en-tête est fixe, permanent et sans fond : tout ce qui défile
    passait en transparence derrière lui. Un voile dégradé le détache du
    contenu, sans le refermer en barre opaque.
-   Le voile est sur <body>, PAS dans .site-head : .site-head porte
-   mix-blend-mode:difference, sous lequel un voile quasi noir est un no-op
-   (|fond − noir| ≈ fond) et le contenu qui passe dessous n'est pas masqué.
-   Placé juste sous l'en-tête (z 219 < 220), il est dans le fond de la
-   différence : le texte de l'en-tête ressort en clair sur le voile. */
+   Le voile est sur <body>, sous l'en-tête (z 219 < 220).
+   V4.5 — .site-head n'a plus mix-blend-mode:difference : ce mode créait une
+   zone morte (texte invisible quand le fond approche la moitié de sa luminance)
+   qui forçait le voile à .80. En mode normal le texte reste blanc net. */
 body::before{
   content:"";
   position:fixed;
@@ -1815,9 +1813,9 @@ body::before{
   z-index:219;
   background:linear-gradient(
     to bottom,
-    rgba(10,11,14,.80) 0%,
-    rgba(10,11,14,.78) 38%,
-    rgba(10,11,14,.42) 70%,
+    rgba(10,11,14,.62)  0%,
+    rgba(10,11,14,.42) 32%,
+    rgba(10,11,14,.18) 66%,
     rgba(10,11,14,0)  100%
   );
 }
