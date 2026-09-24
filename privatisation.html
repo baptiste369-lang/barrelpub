@@ -3,18 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Contact &amp; réservation — Barrel Pub Cannes</title>
-<meta name="description" content="Réserver une table ou privatiser le Barrel Pub à Cannes. 17 rue du Docteur Gérard Monod, ouvert 364 jours par an 18h → 5h. Privatisation de 10 à 600 personnes. 06 87 36 11 10.">
+<title>Privatiser le Barrel Pub — Cannes — Barrel Pub Cannes</title>
+<meta name="description" content="Privatiser le Barrel Pub à Cannes, dans le Carré d'Or : anniversaire, pot de départ, afterwork, soirée de match. Découvrez les espaces et demandez un devis.">
 <meta name="theme-color" content="#0A0B0E">
-<link rel="canonical" href="https://barrelpubcannes.fr/contact.html">
+<link rel="canonical" href="https://barrelpubcannes.fr/privatisation.html">
 <link rel="icon" href="assets/logo/barrel-logo.svg" type="image/svg+xml">
 <link rel="icon" href="assets/logo/barrel-logo-gold.png" sizes="any">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact &amp; réservation — Barrel Pub Cannes">
-<meta property="og:description" content="Réserver ou privatiser le Barrel Pub à Cannes. 364 jours par an, 18h → 5h.">
+<meta property="og:title" content="Privatiser le Barrel Pub — Cannes">
+<meta property="og:description" content="Anniversaire, entreprise, soirée de match : le Barrel Pub, rien que pour vous, dans le Carré d'Or à Cannes.">
 <meta property="og:image" content="https://barrelpubcannes.fr/assets/photos/facade-nuit.webp">
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/main.css?v=42">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://barrelpubcannes.fr/"},
+    {"@type":"ListItem","position":2,"name":"Privatisation","item":"https://barrelpubcannes.fr/privatisation.html"}
+  ]
+}
+</script>
 <noscript><style>
   /* V2.4 §4 — sans JavaScript, rien ne retire is-locked ni n'ajoute .is-in :
      index.html restait un écran noir non défilable, préchargeur figé, et les
@@ -51,28 +61,149 @@
   <div class="head-meta">Cannes · 18h → 5h · 364 j/an</div>
   <div class="head-right">
     <a class="head-link" href="galerie.html">Galerie</a>
-    <a class="head-link" href="privatisation.html">Privatisation</a>
+    <a class="head-link" href="privatisation.html" aria-current="page">Privatisation</a>
     <a class="head-cta" href="/">Accueil</a>
   </div>
 </header>
 
 <main class="subpage">
   <div class="contact-hero" data-reveal>
-    <span class="eyebrow">Une table, une soirée, tout le bar</span>
-    <h1>On te garde<br><em>une place.</em></h1>
-    <p class="lede">Réservation, grande tablée ou privatisation complète des terrasses et de la salle — dis-nous ce que tu prépares, on te répond vite.</p>
+    <span class="eyebrow">Privatisation</span>
+    <h1>Le Barrel,<br><em>rien que pour vous.</em></h1>
+    <p class="lede">Anniversaire, pot de départ, afterwork, soirée de match : du petit groupe à la privatisation complète, on adapte le lieu à votre soirée.</p>
   </div>
 
-  <div class="contact-grid">
-    <form class="barrel-form" id="form" name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
-      <input type="hidden" name="form-name" value="reservation">
+  <!-- ============ LE PLAN INTERACTIF ============
+       SVG écrit à la main, schématique, pas à l'échelle. Les noms, les textes, les
+       capacités et les photos des quatre espaces sont dans l'objet ZONES en haut du
+       bloc « plan » de js/main.js : c'est la seule source. Les noms ci-dessous ne sont
+       que le repli sans JavaScript (le JS les réécrit depuis l'objet). -->
+  <section class="plan-sec" aria-labelledby="plan-title" data-reveal>
+    <h2 class="plan-title" id="plan-title">Quatre espaces, un seul lieu.</h2>
+    <p class="plan-lede">Touchez un espace pour le découvrir, puis demandez un devis pour celui qui vous convient.</p>
+    <figure class="plan-figure">
+        <svg class="plan-svg" id="plan" viewBox="0 0 960 400" role="group" aria-label="Plan schématique du Barrel : quatre espaces, de la rue jusqu'au fond de la salle" xmlns="http://www.w3.org/2000/svg">
+          <title>Plan schématique du Barrel</title>
+          <desc>Schéma simplifié, pas à l'échelle. Le lieu est tout en longueur : le comptoir en arc de cercle à une extrémité, le coin billard au milieu, la grande salle au fond, et la terrasse couverte le long de la façade vitrée.</desc>
+
+          <!-- façade vitrée, sur toute la longueur, avec la porte -->
+          <g class="plan-facade" aria-hidden="true">
+            <line x1="20" y1="256" x2="112" y2="256"/><line x1="172" y1="256" x2="940" y2="256"/>
+          </g>
+
+          <!-- 1 · la terrasse couverte : le couloir sous le store, le long de la rue -->
+          <a class="zone" data-zone="terrasse" role="button" tabindex="0" aria-pressed="false" aria-label="La terrasse couverte">
+            <rect class="shape" x="20" y="262" width="920" height="96" rx="6"/>
+            <g class="deco" aria-hidden="true">
+              <path d="M28 272 Q 60 286 92 272 T 156 272 T 220 272 T 284 272 T 348 272 T 412 272 T 476 272 T 540 272 T 604 272 T 668 272 T 732 272 T 796 272 T 860 272 T 924 272"/>
+              <circle cx="70" cy="316" r="9"/><circle cx="150" cy="316" r="9"/><circle cx="230" cy="316" r="9"/><circle cx="310" cy="316" r="9"/>
+              <circle cx="390" cy="316" r="9"/><circle cx="470" cy="316" r="9"/><circle cx="550" cy="316" r="9"/><circle cx="630" cy="316" r="9"/>
+              <circle cx="710" cy="316" r="9"/><circle cx="790" cy="316" r="9"/><circle cx="870" cy="316" r="9"/>
+              <line class="bache" x1="28" y1="352" x2="932" y2="352"/>
+            </g>
+            <circle class="badge" cx="46" cy="290" r="14"/><text class="num" x="46" y="295" text-anchor="middle">1</text>
+            <text class="zlabel" data-zone-nom x="928" y="338" text-anchor="end">La terrasse couverte</text>
+          </a>
+
+          <!-- 2 · le comptoir : le bar en arc de cercle et ses tabourets, à l'entrée -->
+          <a class="zone" data-zone="comptoir" role="button" tabindex="0" aria-pressed="false" aria-label="Le comptoir">
+            <rect class="shape" x="20" y="20" width="272" height="230" rx="6"/>
+            <g class="deco" aria-hidden="true">
+              <path class="bar" d="M57 232 A175 175 0 0 1 232 57"/>
+              <circle cx="82.6" cy="218.9" r="8"/><circle cx="96.1" cy="168.6" r="8"/><circle cx="125.9" cy="125.9" r="8"/>
+              <circle cx="168.6" cy="96" r="8"/><circle cx="218.9" cy="82.6" r="8"/>
+            </g>
+            <circle class="badge" cx="46" cy="46" r="14"/><text class="num" x="46" y="51" text-anchor="middle">2</text>
+            <text class="zlabel" data-zone-nom x="280" y="238" text-anchor="end">Le comptoir</text>
+          </a>
+
+          <!-- 3 · le coin billard : le billard, les banquettes, les tables hautes -->
+          <a class="zone" data-zone="billard" role="button" tabindex="0" aria-pressed="false" aria-label="Le coin billard">
+            <rect class="shape" x="300" y="20" width="328" height="230" rx="6"/>
+            <g class="deco" aria-hidden="true">
+              <rect x="366" y="30" width="110" height="16" rx="4"/><rect x="486" y="30" width="110" height="16" rx="4"/>
+              <rect x="352" y="96" width="176" height="84" rx="6"/><rect class="felt" x="364" y="108" width="152" height="60" rx="3"/>
+              <rect class="bar" x="590" y="78" width="20" height="112" rx="4"/>
+              <circle cx="338" cy="216" r="11"/><circle cx="400" cy="216" r="11"/><circle cx="462" cy="216" r="11"/><circle cx="524" cy="216" r="11"/>
+            </g>
+            <circle class="badge" cx="326" cy="46" r="14"/><text class="num" x="326" y="51" text-anchor="middle">3</text>
+            <text class="zlabel" data-zone-nom x="616" y="238" text-anchor="end">Le coin billard</text>
+          </a>
+
+          <!-- 4 · la grande salle : le fond de salle, les tables et les écrans -->
+          <a class="zone" data-zone="salle" role="button" tabindex="0" aria-pressed="false" aria-label="La grande salle">
+            <rect class="shape" x="636" y="20" width="304" height="230" rx="6"/>
+            <g class="deco" aria-hidden="true">
+              <rect class="screen" x="704" y="26" width="60" height="8"/><rect class="screen" x="784" y="26" width="60" height="8"/><rect class="screen" x="864" y="26" width="60" height="8"/>
+              <rect x="668" y="86" width="108" height="28" rx="4"/><rect x="800" y="86" width="108" height="28" rx="4"/>
+              <rect x="668" y="140" width="108" height="28" rx="4"/><rect x="800" y="140" width="108" height="28" rx="4"/>
+              <rect x="668" y="192" width="26" height="20" rx="3"/><rect x="716" y="192" width="26" height="20" rx="3"/><rect x="764" y="192" width="26" height="20" rx="3"/>
+              <rect x="812" y="192" width="26" height="20" rx="3"/><rect x="860" y="192" width="26" height="20" rx="3"/>
+            </g>
+            <circle class="badge" cx="662" cy="46" r="14"/><text class="num" x="662" y="51" text-anchor="middle">4</text>
+            <text class="zlabel" data-zone-nom x="928" y="238" text-anchor="end">La grande salle</text>
+          </a>
+
+          <text class="plan-side" x="480" y="388" text-anchor="middle">côté rue piétonne</text>
+        </svg>
+    </figure>
+    <div class="plan-list" role="group" aria-label="Les espaces du Barrel">
+      <button type="button" class="plan-btn" data-zone="terrasse" aria-pressed="false"><span class="n">1</span><span data-zone-nom>La terrasse couverte</span></button>
+      <button type="button" class="plan-btn" data-zone="comptoir" aria-pressed="false"><span class="n">2</span><span data-zone-nom>Le comptoir</span></button>
+      <button type="button" class="plan-btn" data-zone="billard" aria-pressed="false"><span class="n">3</span><span data-zone-nom>Le coin billard</span></button>
+      <button type="button" class="plan-btn" data-zone="salle" aria-pressed="false"><span class="n">4</span><span data-zone-nom>La grande salle</span></button>
+    </div>
+    <div class="plan-panel" id="planPanel" aria-live="polite">
+      <h3>Le comptoir</h3>
+      <p>Le bar en arc de cercle, avec ses tabourets, juste à l'entrée.</p>
+    </div>
+  </section>
+
+  <section class="occ" aria-labelledby="occ-title" data-reveal>
+    <h2 class="plan-title" id="occ-title">Pour quelle occasion ?</h2>
+    <div class="occ-grid">
+      <article class="occ-card">
+        <h3>Anniversaire</h3>
+        <p>Vous venez avec vos invités, on s'occupe du bar. Le billard, les écrans et la musique font le reste. Dites-nous la date et le nombre, on s'organise.</p>
+      </article>
+      <article class="occ-card">
+        <h3>Entreprise</h3>
+        <p>Un pot de départ, un afterwork, une belle fin de semaine à fêter. Le bar est à vous, avec la carte des cocktails et de la cuisine.</p>
+      </article>
+      <article class="occ-card">
+        <h3>Soirée de match</h3>
+        <p>Dix écrans pour le sport et une salle faite pour se regrouper. Dites-nous quel match et combien vous serez.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="compris" aria-labelledby="compris-title" data-reveal>
+    <h2 class="plan-title" id="compris-title">Ce qui est compris.</h2>
+    <ul class="compris-list">
+      <li>La carte du bar et des cocktails</li>
+      <li>Les écrans</li>
+      <li>Le billard</li>
+      <li>La sono et le DJ, selon les soirs</li>
+      <li>Une équipe dédiée à votre soirée</li>
+    </ul>
+  </section>
+
+  <div class="contact-grid" id="devis">
+    <form class="barrel-form" id="form" name="privatisation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
+      <input type="hidden" name="form-name" value="privatisation">
       <p class="hp"><label>Ne remplissez pas ceci : <input name="bot-field"></label></p>
+
+      <div class="field">
+        <label for="nom">Nom et prénom <span class="req">*</span></label>
+        <input id="nom" name="nom" type="text" required autocomplete="name" placeholder="Votre nom">
+        <span class="err">Indiquez votre nom.</span>
+      </div>
 
       <div class="field-row">
         <div class="field">
-          <label for="nom">Nom <span class="req">*</span></label>
-          <input id="nom" name="nom" type="text" required autocomplete="name" placeholder="Ton nom">
-          <span class="err">Indique ton nom.</span>
+          <label for="email">Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required autocomplete="email" placeholder="vous@email.com">
+          <span class="err">Adresse email valide requise.</span>
         </div>
         <div class="field">
           <label for="tel">Téléphone <span class="req">*</span></label>
@@ -81,10 +212,28 @@
         </div>
       </div>
 
-      <div class="field">
-        <label for="email">Email <span class="req">*</span></label>
-        <input id="email" name="email" type="email" required autocomplete="email" placeholder="toi@email.com">
-        <span class="err">Adresse email valide requise.</span>
+      <div class="field-row">
+        <div class="field">
+          <label for="type">Type d'événement <span class="req">*</span></label>
+          <select id="type" name="type" required>
+            <option value="" selected disabled>Choisir…</option>
+            <option value="anniversaire">Anniversaire</option>
+            <option value="entreprise">Entreprise</option>
+            <option value="match">Soirée de match</option>
+            <option value="autre">Autre</option>
+          </select>
+          <span class="err">Choisissez un type d'événement.</span>
+        </div>
+        <div class="field">
+          <label for="espace">Espace souhaité</label>
+          <select id="espace" name="espace">
+            <option value="terrasse" data-zone-nom>La terrasse couverte</option>
+            <option value="comptoir" data-zone-nom>Le comptoir</option>
+            <option value="billard" data-zone-nom>Le coin billard</option>
+            <option value="salle" data-zone-nom>La grande salle</option>
+            <option value="inconnu" selected>Je ne sais pas encore</option>
+          </select>
+        </div>
       </div>
 
       <div class="field-row">
@@ -93,20 +242,10 @@
           <input id="date" name="date" type="date">
         </div>
         <div class="field">
-          <label for="pers">Nombre de personnes</label>
-          <input id="pers" name="personnes" type="number" min="1" max="600" inputmode="numeric" placeholder="Ex. 8">
+          <label for="pers">Nombre de personnes <span class="req">*</span></label>
+          <input id="pers" name="personnes" type="number" min="1" required inputmode="numeric" placeholder="Ex. 40">
+          <span class="err">Indiquez un nombre de personnes.</span>
         </div>
-      </div>
-
-      <div class="field">
-        <label for="type">Type de demande</label>
-        <select id="type" name="type">
-          <option value="table">Réserver une table</option>
-          <option value="groupe">Grande tablée / groupe</option>
-          <option value="privatisation">Privatisation</option>
-          <option value="anniversaire">Anniversaire / événement</option>
-          <option value="retour">Retour d'expérience</option>
-        </select>
       </div>
 
       <div class="field">
@@ -114,21 +253,17 @@
         <textarea id="msg" name="message" placeholder="Occasion, horaire, envies…"></textarea>
       </div>
 
-      <button class="btn" type="submit">Envoyer la demande</button>
+      <button class="btn" type="submit">Demander un devis</button>
       <p class="form-note">* champs obligatoires — réponse par téléphone ou email.</p>
     </form>
 
     <aside class="contact-side">
-      <div class="priv-card" data-reveal>
-        <h2>Privatiser le Barrel ?</h2>
-        <p>Trois terrasses, 170 places dehors, 60 dedans, 600+ de capacité — 1000+ avec la rue. On adapte le lieu à ta soirée.</p>
-        <p style="color:var(--or);font-family:var(--mono);font-size:13px;letter-spacing:.06em;margin-top:14px">Privatisation partielle ou intégrale — de 10 à 600 personnes.</p>
-      </div>
       <div class="info-card" data-reveal>
         17 rue du Docteur Gérard Monod<br>
         06400 CANNES<br>
         <span class="k">43.5513°N / 7.0128°E</span><br><br>
-        364 JOURS PAR AN — 18H00 → 05H00<br>
+        364 JOURS PAR AN — FERMÉ LE 25 DÉCEMBRE<br>
+        18H00 → 05H00<br>
         <a href="tel:+33687361110">06 87 36 11 10</a><br>
         <a href="mailto:lebarrelpubcannes@gmail.com">lebarrelpubcannes@gmail.com</a><br>
         <a href="https://www.instagram.com/barrelcannespub" target="_blank" rel="noopener">@barrelcannespub</a><br><br>
@@ -144,10 +279,10 @@
     <nav class="foot-links" aria-label="Pied de page">
       <a href="/">Accueil</a>
       <a href="galerie.html">Galerie</a>
-      <a href="privatisation.html">Privatisation</a>
+      <a href="privatisation.html" aria-current="page">Privatisation</a>
       <a href="tel:+33687361110">06 87 36 11 10</a>
       <a href="https://www.instagram.com/barrelcannespub" target="_blank" rel="noopener">Instagram</a>
-      <a href="#form">Réserver</a>
+      <a href="#form">Demander un devis</a>
     </nav>
     <div class="foot-legal">364 jours par an, 18h → 5h · Site <a href="https://azzagency.fr" target="_blank" rel="noopener">AZZAGENCY</a></div>
   </footer>

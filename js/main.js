@@ -1079,6 +1079,105 @@
   })();
 
   /* =====================================================================
+     V5.0 — LE PLAN INTERACTIF DE LA PRIVATISATION (privatisation.html)
+     · Le SVG est écrit à la main dans la page ; ici, seulement le comportement.
+     · ZONES est la SEULE source des noms, des textes, des capacités et des photos.
+       Le JS réécrit tous les [data-zone-nom] depuis cet objet (le HTML n'a que le
+       repli sans JavaScript). Changer un nom = changer une ligne ci-dessous.
+     · capacite et photo sont VIDES tant que la cliente ne les a pas donnés : une
+       ligne sans donnée n'est pas affichée du tout (ni « à confirmer », ni tiret).
+     · Deux commandes pilotent le même panneau : les zones du SVG (<a role=button>,
+       Entrée et Espace) et les boutons de secours sous le plan (téléphone).
+     · Le formulaire n'est pré-rempli que sur une action de l'utilisateur, pas par
+       la zone affichée par défaut.
+     ===================================================================== */
+  (function () {
+    var plan = q("#plan"), panel = q("#planPanel");
+    if (!plan || !panel) return;
+
+    var ZONES = {
+      terrasse: {
+        nom: "La terrasse couverte",
+        texte: "Le couloir sous le store, le long de la rue piétonne. Il est chauffé et fermé par les bâches quand la soirée se rafraîchit.",
+        capacite: "", photo: ""
+      },
+      comptoir: {
+        nom: "Le comptoir",
+        texte: "Le bar en arc de cercle, avec ses tabourets, juste à l'entrée. C'est là que la soirée démarre.",
+        capacite: "", photo: ""
+      },
+      billard: {
+        nom: "Le coin billard",
+        texte: "Le billard, les banquettes et les tables hautes tout autour. Un coin pour jouer et rester en groupe.",
+        capacite: "", photo: ""
+      },
+      salle: {
+        nom: "La grande salle",
+        texte: "Le fond de salle, avec ses tables et ses écrans. Pour les grandes tablées et les soirées de match.",
+        capacite: "", photo: ""
+      }
+    };
+    var DEFAUT = "comptoir";
+
+    var hooks = qa("[data-zone]");
+    var espace = q("#espace");
+
+    // les noms viennent de l'objet, pas du HTML
+    qa("[data-zone-nom]").forEach(function (el) {
+      var host = el.closest("[data-zone]") || el;
+      var id = host.getAttribute("data-zone") || el.getAttribute("value");
+      if (ZONES[id]) el.textContent = ZONES[id].nom;
+    });
+    hooks.forEach(function (el) {
+      var id = el.getAttribute("data-zone");
+      if (ZONES[id] && el.getAttribute("role") === "button") el.setAttribute("aria-label", ZONES[id].nom);
+    });
+
+    function paintPanel(id) {
+      var z = ZONES[id];
+      panel.textContent = "";
+      var h = document.createElement("h3"); h.textContent = z.nom; panel.appendChild(h);
+      var p = document.createElement("p"); p.textContent = z.texte; panel.appendChild(p);
+      if (z.capacite) {
+        var c = document.createElement("p"); c.className = "plan-cap"; c.textContent = z.capacite; panel.appendChild(c);
+      }
+      if (z.photo) {
+        var f = document.createElement("figure"); f.className = "plan-photo";
+        var im = document.createElement("img"); im.src = z.photo; im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+        f.appendChild(im); panel.appendChild(f);
+      }
+      var a = document.createElement("a");
+      a.className = "btn ghost"; a.href = "#form"; a.textContent = "Demander un devis";
+      panel.appendChild(a);
+    }
+
+    function select(id, fromUser) {
+      if (!ZONES[id]) return;
+      hooks.forEach(function (el) {
+        el.setAttribute("aria-pressed", String(el.getAttribute("data-zone") === id));
+      });
+      paintPanel(id);
+      if (fromUser && espace) espace.value = id;
+    }
+
+    hooks.forEach(function (el) {
+      var id = el.getAttribute("data-zone");
+      el.addEventListener("click", function () { select(id, true); });
+      if (el.tagName.toLowerCase() === "a") {
+        // <a role="button"> : Entrée et Espace, comme un vrai bouton
+        el.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+            e.preventDefault();
+            select(id, true);
+          }
+        });
+      }
+    });
+
+    select(DEFAUT, false);
+  })();
+
+  /* =====================================================================
      ANCRES — smooth via Lenis si présent
      ===================================================================== */
   document.addEventListener("click", function (e) {

@@ -13,3 +13,6 @@ _to_delete/
 # V4.7 — sauvegarde locale des anciennes frames, jamais commitée
 frames-old/
 frames-old-fin/
+
+# V5.0 — références de géométrie, jamais publiées ni commitées
+_REF-*
