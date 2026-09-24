@@ -14,7 +14,11 @@
 <meta property="og:description" content="Anniversaire, entreprise, soirée de match : le Barrel Pub, rien que pour vous, dans le Carré d'Or à Cannes.">
 <meta property="og:image" content="https://barrelpubcannes.fr/assets/photos/facade-nuit.webp">
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=42">
+<link rel="preload" as="image" type="image/webp" href="assets/photos/terrasse-nuit-couloir.webp" fetchpriority="low">
+<link rel="preload" as="image" type="image/webp" href="assets/photos/foule-bar-bleue.webp" fetchpriority="low">
+<link rel="preload" as="image" type="image/webp" href="assets/photos/salle-billard-bleue.webp" fetchpriority="low">
+<link rel="preload" as="image" type="image/webp" href="assets/photos/interieur-bleu.webp" fetchpriority="low">
+<link rel="stylesheet" href="css/main.css?v=43">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,17 +77,26 @@
     <p class="lede">Anniversaire, pot de départ, afterwork, soirée de match : du petit groupe à la privatisation complète, on adapte le lieu à votre soirée.</p>
   </div>
 
-  <!-- ============ LE PLAN INTERACTIF ============
-       SVG écrit à la main, schématique, pas à l'échelle. Les noms, les textes, les
-       capacités et les photos des quatre espaces sont dans l'objet ZONES en haut du
-       bloc « plan » de js/main.js : c'est la seule source. Les noms ci-dessous ne sont
-       que le repli sans JavaScript (le JS les réécrit depuis l'objet). -->
-  <section class="plan-sec" aria-labelledby="plan-title" data-reveal>
-    <h2 class="plan-title" id="plan-title">Quatre espaces, un seul lieu.</h2>
-    <p class="plan-lede">Touchez un espace pour le découvrir, puis demandez un devis pour celui qui vous convient.</p>
-    <figure class="plan-figure">
+  <!-- ============ LE PARCOURS (V5.1) ============
+       Le plan devient une traversée au défilement : un trait se dessine de la rue au fond
+       de la salle, un repère avance dessus, chaque espace s'allume à son tour et sa photo
+       s'installe avec son texte. Sur ordinateur (≥ 760 px, mouvement normal) la section est
+       épinglée sur 400 vh ; sur téléphone et en mouvement réduit, ou sans JavaScript, ce sont
+       quatre blocs empilés (photo, texte, bouton) sous un plan fixe.
+       Les noms et les capacités sont dans l'objet ZONES de js/main.js ; les quatre positions
+       de progression (STOPS) aussi. Les textes et les photos sont ici, en clair, pour que la
+       section reste lisible sans JavaScript. PAS de data-reveal ni de transform sur cette
+       section ou sur un de ses ancêtres : ils casseraient l'épinglage (position:fixed). -->
+  <section class="parcours" id="parcours" aria-labelledby="plan-title">
+    <div class="parcours-head">
+      <h2 class="plan-title" id="plan-title">Quatre espaces, un seul lieu.</h2>
+      <p class="plan-lede">Suivez le trait, de la rue jusqu'au fond de la salle, puis demandez un devis pour l'espace qui vous convient.</p>
+    </div>
+    <div class="parcours-stage">
+      <figure class="plan-figure parcours-plan">
         <svg class="plan-svg" id="plan" viewBox="0 0 960 400" role="group" aria-label="Plan schématique du Barrel : quatre espaces, de la rue jusqu'au fond de la salle" xmlns="http://www.w3.org/2000/svg">
           <title>Plan schématique du Barrel</title>
+          <defs><filter id="planGlowBlur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.2"/></filter></defs>
           <desc>Schéma simplifié, pas à l'échelle. Le lieu est tout en longueur : le comptoir en arc de cercle à une extrémité, le coin billard au milieu, la grande salle au fond, et la terrasse couverte le long de la façade vitrée.</desc>
 
           <!-- façade vitrée, sur toute la longueur, avec la porte -->
@@ -144,18 +157,77 @@
             <text class="zlabel" data-zone-nom x="928" y="238" text-anchor="end">La grande salle</text>
           </a>
 
+          <!-- le parcours : un seul <path>, du bas à gauche (la rue) jusqu'au fond de la salle.
+               Fantôme (trajet à venir), lueur floutée dessous, trait par-dessus. Les trois
+               copies partagent la même géométrie ; le JS ne touche qu'au stroke-dashoffset. -->
+          <path class="route route-ghost" d="M24 340 L96 340 C112 340 125 332 125 314 L125 246 L121 202 A115 115 0 0 1 280.6 127.8 C292 122 300 96 320 78 C330 68 340 66 356 66 L880 66 C908 66 922 78 922 106 L922 190" aria-hidden="true"/>
+          <path class="route route-glow" id="planGlow" d="M24 340 L96 340 C112 340 125 332 125 314 L125 246 L121 202 A115 115 0 0 1 280.6 127.8 C292 122 300 96 320 78 C330 68 340 66 356 66 L880 66 C908 66 922 78 922 106 L922 190" aria-hidden="true" filter="url(#planGlowBlur)"/>
+          <path class="route route-line" id="planPath" d="M24 340 L96 340 C112 340 125 332 125 314 L125 246 L121 202 A115 115 0 0 1 280.6 127.8 C292 122 300 96 320 78 C330 68 340 66 356 66 L880 66 C908 66 922 78 922 106 L922 190" aria-hidden="true"/>
+          <g class="pmark" id="planMark" transform="translate(24 340)" aria-hidden="true"><circle class="pring" r="7"/><circle class="pdot" r="6"/></g>
+
           <text class="plan-side" x="480" y="388" text-anchor="middle">côté rue piétonne</text>
         </svg>
-    </figure>
-    <div class="plan-list" role="group" aria-label="Les espaces du Barrel">
-      <button type="button" class="plan-btn" data-zone="terrasse" aria-pressed="false"><span class="n">1</span><span data-zone-nom>La terrasse couverte</span></button>
-      <button type="button" class="plan-btn" data-zone="comptoir" aria-pressed="false"><span class="n">2</span><span data-zone-nom>Le comptoir</span></button>
-      <button type="button" class="plan-btn" data-zone="billard" aria-pressed="false"><span class="n">3</span><span data-zone-nom>Le coin billard</span></button>
-      <button type="button" class="plan-btn" data-zone="salle" aria-pressed="false"><span class="n">4</span><span data-zone-nom>La grande salle</span></button>
-    </div>
-    <div class="plan-panel" id="planPanel" aria-live="polite">
-      <h3>Le comptoir</h3>
-      <p>Le bar en arc de cercle, avec ses tabourets, juste à l'entrée.</p>
+      </figure>
+      <div class="steps" id="steps">
+        <article class="step is-active" id="step-terrasse" data-step="terrasse">
+          <figure class="step-photo">
+            <img class="on" src="assets/photos/terrasse-nuit-couloir.webp" width="1240" height="1600" alt="La terrasse couverte de nuit, sous le store, avec ses tonneaux et ses tabourets hauts" decoding="async" fetchpriority="low">
+            <img src="assets/photos/terrasse-couverte-logo.webp" width="1200" height="1600" alt="Le couloir de la terrasse couverte vu de dessous, le logo du Barrel sur la toile" loading="lazy" decoding="async">
+            <img src="assets/photos/terrasse-heure-bleue.webp" width="1205" height="1389" alt="La terrasse à l'heure bleue, tonneaux et tabourets sur la rue piétonne" loading="lazy" decoding="async">
+          </figure>
+          <div class="step-body">
+            <p class="step-num">1 / 4</p>
+            <h3 data-zone-nom>La terrasse couverte</h3>
+            <p class="step-text">Le couloir sous le store, le long de la rue piétonne. Il est chauffé et fermé par les bâches quand la soirée se rafraîchit.</p>
+            <a class="btn" href="#form" data-espace="terrasse">Demander un devis</a>
+          </div>
+        </article>
+        <article class="step" id="step-comptoir" data-step="comptoir">
+          <figure class="step-photo">
+            <img class="on" src="assets/photos/foule-bar-bleue.webp" width="1199" height="1600" alt="Des clients au comptoir sous les lumières bleues" decoding="async" fetchpriority="low">
+            <img src="assets/photos/barman-flair.webp" width="1600" height="1067" alt="Le barman verse plusieurs bouteilles à la fois derrière le comptoir" loading="lazy" decoding="async">
+            <img src="assets/photos/cocktails-bleus-trinque.webp" width="1200" height="1600" alt="Des cocktails bleus que l'on trinque au-dessus du comptoir" loading="lazy" decoding="async">
+          </figure>
+          <div class="step-body">
+            <p class="step-num">2 / 4</p>
+            <h3 data-zone-nom>Le comptoir</h3>
+            <p class="step-text">Le bar en arc de cercle, avec ses tabourets, juste à l'entrée. C'est là que la soirée démarre.</p>
+            <a class="btn" href="#form" data-espace="comptoir">Demander un devis</a>
+          </div>
+        </article>
+        <article class="step" id="step-billard" data-step="billard">
+          <figure class="step-photo">
+            <img class="on" src="assets/photos/salle-billard-bleue.webp" width="1200" height="1600" alt="Le coin billard éclairé en bleu, sa table au fond de la salle" decoding="async" fetchpriority="low">
+            <img src="assets/photos/foule-billard.webp" width="1067" height="1600" alt="Des clients qui rient à côté du billard" loading="lazy" decoding="async">
+            <img src="assets/photos/fille-leopard-billard.webp" width="1440" height="1440" alt="Une cliente assise sur le billard au tapis léopard" loading="lazy" decoding="async">
+          </figure>
+          <div class="step-body">
+            <p class="step-num">3 / 4</p>
+            <h3 data-zone-nom>Le coin billard</h3>
+            <p class="step-text">Le billard, les banquettes et les tables hautes tout autour. Un coin pour jouer et rester en groupe.</p>
+            <a class="btn" href="#form" data-espace="billard">Demander un devis</a>
+          </div>
+        </article>
+        <article class="step" id="step-salle" data-step="salle">
+          <figure class="step-photo">
+            <img class="on" src="assets/photos/interieur-bleu.webp" width="1199" height="1600" alt="La salle dans la lumière bleue, pleine de monde" decoding="async" fetchpriority="low">
+            <img src="assets/photos/ecrans-sport.webp" width="1600" height="1067" alt="Un barman devant les écrans de sport de la salle" loading="lazy" decoding="async">
+            <img src="assets/photos/foule-bras-leves.webp" width="1600" height="1067" alt="La foule, bras levés, dans la salle" loading="lazy" decoding="async">
+          </figure>
+          <div class="step-body">
+            <p class="step-num">4 / 4</p>
+            <h3 data-zone-nom>La grande salle</h3>
+            <p class="step-text">Le fond de salle, avec ses tables et ses écrans. Pour les grandes tablées et les soirées de match.</p>
+            <a class="btn" href="#form" data-espace="salle">Demander un devis</a>
+          </div>
+        </article>
+      </div>
+      <div class="plan-list" role="group" aria-label="Aller directement à un espace">
+        <button type="button" class="plan-btn" data-zone="terrasse" aria-pressed="false"><span class="n">1</span><span data-zone-nom>La terrasse couverte</span></button>
+        <button type="button" class="plan-btn" data-zone="comptoir" aria-pressed="false"><span class="n">2</span><span data-zone-nom>Le comptoir</span></button>
+        <button type="button" class="plan-btn" data-zone="billard" aria-pressed="false"><span class="n">3</span><span data-zone-nom>Le coin billard</span></button>
+        <button type="button" class="plan-btn" data-zone="salle" aria-pressed="false"><span class="n">4</span><span data-zone-nom>La grande salle</span></button>
+      </div>
     </div>
   </section>
 
@@ -288,6 +360,9 @@
   </footer>
 </main>
 
-<script src="js/main.js?v=24"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="js/main.js?v=25"></script>
 </body>
 </html>

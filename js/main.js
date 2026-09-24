@@ -2,7 +2,9 @@
    BARREL PUB — main.js (v2.1)
    Toutes les animations sous le hero. RÈGLES :
    · hero.js n'est jamais touché ; il possède le rAF (gsap.ticker + Lenis).
-   · Aucun ScrollTrigger ici. IntersectionObserver ou le ticker global.
+   · Aucun ScrollTrigger ici, SAUF le parcours de privatisation.html (V5.1) : page
+     sans hero ni épinglage concurrent. Partout ailleurs, IntersectionObserver ou le
+     ticker global.
    · Une seule boucle continue : on s'abonne au gsap.ticker, sinon rien.
    · Chaque effet a sa porte de sortie (reduced-motion, coarse, document.hidden).
    ===================================================================== */
@@ -15,6 +17,16 @@
   var FINE   = mm("(min-width: 1024px)");
   var G = window.gsap || null;
   var lenis = window.__barrelLenis || null;
+  // V5.1 — privatisation.html n'a pas de hero.js : le parcours a besoin de Lenis et de
+  // ScrollTrigger. Même montage que hero.js (Lenis dans le gsap.ticker, aucune seconde
+  // boucle rAF), seulement sur la page qui porte #parcours et hors mouvement réduit.
+  if (!lenis && G && window.Lenis && window.ScrollTrigger && !REDUCE && document.getElementById("parcours")) {
+    G.registerPlugin(window.ScrollTrigger);
+    lenis = new window.Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.4 });
+    lenis.on("scroll", window.ScrollTrigger.update);
+    G.ticker.add(function (t) { lenis.raf(t * 1000); });
+    window.__barrelLenis = lenis;
+  }
 
   var q  = function (s, r) { return (r || document).querySelector(s); };
   var qa = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
@@ -1079,102 +1091,210 @@
   })();
 
   /* =====================================================================
-     V5.0 — LE PLAN INTERACTIF DE LA PRIVATISATION (privatisation.html)
-     · Le SVG est écrit à la main dans la page ; ici, seulement le comportement.
-     · ZONES est la SEULE source des noms, des textes, des capacités et des photos.
-       Le JS réécrit tous les [data-zone-nom] depuis cet objet (le HTML n'a que le
-       repli sans JavaScript). Changer un nom = changer une ligne ci-dessous.
-     · capacite et photo sont VIDES tant que la cliente ne les a pas donnés : une
-       ligne sans donnée n'est pas affichée du tout (ni « à confirmer », ni tiret).
-     · Deux commandes pilotent le même panneau : les zones du SVG (<a role=button>,
-       Entrée et Espace) et les boutons de secours sous le plan (téléphone).
-     · Le formulaire n'est pré-rempli que sur une action de l'utilisateur, pas par
-       la zone affichée par défaut.
+     V5.1 — LE PARCOURS DE LA PRIVATISATION (privatisation.html, #parcours)
+     Le plan devient une traversée : on défile, un trait se dessine de la rue au fond
+     de la salle, un repère avance dessus, chaque espace s'allume quand le repère y
+     entre, et sa photo arrive avec son texte.
+     · Le SVG, les textes et les photos sont dans la page (lisible sans JavaScript).
+       Ici : le comportement, les noms (ZONES) et les quatre positions (STOPS).
+     · STOPS est la SEULE source des quatre positions : elle place le repère, décide
+       de l'espace actif, du panneau, de la photo interne et de l'atterrissage des
+       raccourcis. Ne jamais les recopier ailleurs.
+     · Ordinateur (≥ 760 px, mouvement normal) : section épinglée 400 vh, ScrollTrigger
+       en onUpdate direct (pas d'animation autonome : le trait suit le doigt, sans
+       retard). Téléphone / mouvement réduit : blocs empilés, aucun épinglage.
+       gsap.matchMedia rebascule proprement au redimensionnement.
+     · Aucune boucle rAF ici : Lenis tourne dans le gsap.ticker (créé en tête de
+       fichier pour cette page, comme hero.js le fait sur l'accueil).
      ===================================================================== */
   (function () {
-    var plan = q("#plan"), panel = q("#planPanel");
-    if (!plan || !panel) return;
+    var root = q("#parcours");
+    var path = q("#planPath");
+    if (!root || !path || !G || !window.ScrollTrigger || !G.matchMedia) return;
+    G.registerPlugin(window.ScrollTrigger);
 
     var ZONES = {
-      terrasse: {
-        nom: "La terrasse couverte",
-        texte: "Le couloir sous le store, le long de la rue piétonne. Il est chauffé et fermé par les bâches quand la soirée se rafraîchit.",
-        capacite: "", photo: ""
-      },
-      comptoir: {
-        nom: "Le comptoir",
-        texte: "Le bar en arc de cercle, avec ses tabourets, juste à l'entrée. C'est là que la soirée démarre.",
-        capacite: "", photo: ""
-      },
-      billard: {
-        nom: "Le coin billard",
-        texte: "Le billard, les banquettes et les tables hautes tout autour. Un coin pour jouer et rester en groupe.",
-        capacite: "", photo: ""
-      },
-      salle: {
-        nom: "La grande salle",
-        texte: "Le fond de salle, avec ses tables et ses écrans. Pour les grandes tablées et les soirées de match.",
-        capacite: "", photo: ""
-      }
+      terrasse: { nom: "La terrasse couverte", capacite: "" },
+      comptoir: { nom: "Le comptoir",          capacite: "" },
+      billard:  { nom: "Le coin billard",      capacite: "" },
+      salle:    { nom: "La grande salle",      capacite: "" }
     };
-    var DEFAUT = "comptoir";
+    var ORDER = ["terrasse", "comptoir", "billard", "salle"];
 
-    var hooks = qa("[data-zone]");
+    // Progression le long du trait (0 → 1) à laquelle le repère ENTRE dans chaque espace.
+    // Mesurées sur la géométrie de #planPath (longueur 1206,7 ; premier point à
+    // l'intérieur du rectangle de la zone) : 0 · 0,1494 · 0,3818 · 0,6729, arrondies
+    // vers le haut à 4 décimales pour que le changement tombe juste APRÈS l'entrée,
+    // jamais avant. Si le tracé du <path> change, ces quatre valeurs se remesurent.
+    var STOPS = [0, 0.1495, 0.3819, 0.673];
+
+    var glow = q("#planGlow"), mark = q("#planMark");
+    var steps = qa(".step", root);
+    var zones = qa("#plan [data-zone]");
+    var btns = qa(".plan-btn", root);
     var espace = q("#espace");
+    var LEN = path.getTotalLength();
+    var active = -1, pinST = null, pinned = false;
 
-    // les noms viennent de l'objet, pas du HTML
+    // noms et capacités viennent de l'objet, pas du HTML
     qa("[data-zone-nom]").forEach(function (el) {
-      var host = el.closest("[data-zone]") || el;
-      var id = host.getAttribute("data-zone") || el.getAttribute("value");
+      var host = el.closest("[data-zone]") || el.closest("[data-step]") || el;
+      var id = host.getAttribute("data-zone") || host.getAttribute("data-step") || el.getAttribute("value");
       if (ZONES[id]) el.textContent = ZONES[id].nom;
     });
-    hooks.forEach(function (el) {
+    zones.forEach(function (el) {
       var id = el.getAttribute("data-zone");
       if (ZONES[id] && el.getAttribute("role") === "button") el.setAttribute("aria-label", ZONES[id].nom);
     });
+    // une ligne sans donnée n'existe pas : la capacité n'est écrite que si elle est remplie
+    ORDER.forEach(function (id) {
+      if (!ZONES[id].capacite) return;
+      var body = q("#step-" + id + " .step-body .step-text");
+      if (!body) return;
+      var c = document.createElement("p");
+      c.className = "plan-cap"; c.textContent = ZONES[id].capacite;
+      body.parentNode.insertBefore(c, body.nextSibling);
+    });
 
-    function paintPanel(id) {
-      var z = ZONES[id];
-      panel.textContent = "";
-      var h = document.createElement("h3"); h.textContent = z.nom; panel.appendChild(h);
-      var p = document.createElement("p"); p.textContent = z.texte; panel.appendChild(p);
-      if (z.capacite) {
-        var c = document.createElement("p"); c.className = "plan-cap"; c.textContent = z.capacite; panel.appendChild(c);
-      }
-      if (z.photo) {
-        var f = document.createElement("figure"); f.className = "plan-photo";
-        var im = document.createElement("img"); im.src = z.photo; im.alt = ""; im.loading = "lazy"; im.decoding = "async";
-        f.appendChild(im); panel.appendChild(f);
-      }
-      var a = document.createElement("a");
-      a.className = "btn ghost"; a.href = "#form"; a.textContent = "Demander un devis";
-      panel.appendChild(a);
+    function indexFor(p) {
+      for (var i = STOPS.length - 1; i > 0; i--) if (p >= STOPS[i]) return i;
+      return 0;
     }
 
-    function select(id, fromUser) {
-      if (!ZONES[id]) return;
-      hooks.forEach(function (el) {
-        el.setAttribute("aria-pressed", String(el.getAttribute("data-zone") === id));
+    function setActive(i) {
+      if (i === active) return;
+      active = i;
+      var id = ORDER[i];
+      steps.forEach(function (s) { s.classList.toggle("is-active", s.getAttribute("data-step") === id); });
+      zones.forEach(function (el) {
+        var on = el.getAttribute("data-zone") === id;
+        el.classList.toggle("is-active", on);
+        el.setAttribute("aria-pressed", String(on));
       });
-      paintPanel(id);
-      if (fromUser && espace) espace.value = id;
+      btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-zone") === id)); });
     }
 
-    hooks.forEach(function (el) {
-      var id = el.getAttribute("data-zone");
-      el.addEventListener("click", function () { select(id, true); });
+    // photo interne : le segment de l'espace est découpé en autant de parts que de photos
+    function paintPhoto(p, i) {
+      var step = steps[i]; if (!step) return;
+      var imgs = qa(".step-photo img", step);
+      var from = STOPS[i], to = i + 1 < STOPS.length ? STOPS[i + 1] : 1;
+      var t = clamp((p - from) / (to - from), 0, 0.9999);
+      var j = Math.floor(t * imgs.length);
+      imgs.forEach(function (im, k) { im.classList.toggle("on", k === j); });
+    }
+
+    // L'unique fonction qui dessine : trait, repère, espace actif, panneau, photo.
+    function render(p) {
+      p = clamp(p, 0, 1);
+      var s = p * LEN;
+      var off = String(LEN - s);
+      path.style.strokeDashoffset = off;
+      if (glow) glow.style.strokeDashoffset = off;
+      var pt = path.getPointAtLength(s);
+      if (mark) mark.setAttribute("transform", "translate(" + pt.x.toFixed(2) + " " + pt.y.toFixed(2) + ")");
+      var i = indexFor(p);
+      setActive(i);
+      if (pinned) paintPhoto(p, i);
+    }
+
+    function drawFull() {
+      path.style.strokeDasharray = "none"; path.style.strokeDashoffset = "0";
+      if (glow) { glow.style.strokeDasharray = "none"; glow.style.strokeDashoffset = "0"; }
+    }
+    function armDash() {
+      path.style.strokeDasharray = LEN + " " + LEN;
+      if (glow) glow.style.strokeDasharray = LEN + " " + LEN;
+    }
+
+    // raccourcis : boutons et zones du plan amènent le défilement à l'étape
+    function goTo(i) {
+      var id = ORDER[i], y;
+      if (pinned && pinST) {
+        y = pinST.start + (STOPS[i] + 0.003) * (pinST.end - pinST.start);
+      } else {
+        var el = q("#step-" + id);
+        if (!el) return;
+        y = el.getBoundingClientRect().top + window.pageYOffset - 96;
+      }
+      if (lenis) lenis.scrollTo(y, { duration: pinned ? 1.6 : 1.1 });
+      else window.scrollTo({ top: y, behavior: REDUCE ? "auto" : "smooth" });
+    }
+    zones.concat(btns).forEach(function (el) {
+      var i = ORDER.indexOf(el.getAttribute("data-zone"));
+      el.addEventListener("click", function () { goTo(i); });
       if (el.tagName.toLowerCase() === "a") {
         // <a role="button"> : Entrée et Espace, comme un vrai bouton
         el.addEventListener("keydown", function (e) {
-          if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
-            e.preventDefault();
-            select(id, true);
-          }
+          if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); goTo(i); }
         });
       }
     });
 
-    select(DEFAUT, false);
+    // le bouton de devis renseigne le select avec l'espace affiché ; le select reste sur
+    // « Je ne sais pas encore » tant que personne n'a rien choisi. L'ancre #form fait le reste.
+    qa("[data-espace]", root).forEach(function (a) {
+      a.addEventListener("click", function () {
+        if (espace) espace.value = a.getAttribute("data-espace");
+      });
+    });
+
+    root.classList.add("is-live");
+    var mm = G.matchMedia();
+    mm.add({
+      desk: "(min-width: 760px) and (prefers-reduced-motion: no-preference)",
+      flat: "(max-width: 759px), (prefers-reduced-motion: reduce)"
+    }, function (ctx) {
+      active = -1;
+      if (ctx.conditions.desk) {
+        pinned = true;
+        root.classList.add("is-pinned");
+        root.classList.remove("is-flat");
+        armDash();
+        steps.forEach(function (s) { s.removeAttribute("hidden"); });
+        q("#steps").setAttribute("aria-live", "polite");
+        pinST = ScrollTrigger.create({
+          trigger: root,
+          start: "top top",
+          end: function () { return "+=" + Math.round(window.innerHeight * 3); },
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: function (self) { render(self.progress); }
+        });
+        render(pinST.progress);
+        return function () {
+          pinned = false; pinST = null;
+          root.classList.remove("is-pinned");
+          q("#steps").removeAttribute("aria-live");
+          qa(".step-photo img", root).forEach(function (im) { im.classList.toggle("on", !im.previousElementSibling); });
+        };
+      }
+      // téléphone / mouvement réduit : blocs empilés, plan affiché une fois au-dessus,
+      // l'espace surligné au fil de l'apparition des blocs (aucun épinglage, aucun scrub)
+      pinned = false;
+      root.classList.add("is-flat");
+      drawFull();
+      var io = null;
+      function flatMark(i) {
+        setActive(i);
+        var pt = path.getPointAtLength(clamp(STOPS[i] + 0.004, 0, 1) * LEN);
+        if (mark) mark.setAttribute("transform", "translate(" + pt.x.toFixed(2) + " " + pt.y.toFixed(2) + ")");
+      }
+      flatMark(0);
+      if ("IntersectionObserver" in window) {
+        io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) flatMark(ORDER.indexOf(e.target.getAttribute("data-step")));
+          });
+        }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+        steps.forEach(function (s) { io.observe(s); });
+      }
+      return function () {
+        root.classList.remove("is-flat");
+        if (io) io.disconnect();
+      };
+    });
   })();
 
   /* =====================================================================

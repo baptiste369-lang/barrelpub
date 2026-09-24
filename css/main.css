@@ -1860,7 +1860,7 @@ body::before{
 /* =====================================================================
    V5.0 — PAGE PRIVATISATION ET PLAN INTERACTIF
    ===================================================================== */
-.plan-sec,.occ,.compris{max-width:1320px;margin:0 auto;padding:0 var(--pad) clamp(60px,9vh,110px)}
+.parcours,.occ,.compris{max-width:1320px;margin:0 auto;padding:0 var(--pad) clamp(60px,9vh,110px)}
 .plan-title{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,3vw,38px);line-height:1;letter-spacing:-.01em;margin:0 0 14px}
 .plan-lede{max-width:52ch;color:var(--gris);margin:0 0 clamp(22px,3vh,34px)}
 .plan-figure{margin:0;border:1px solid rgba(237,232,224,.10);background:var(--noir-2);padding:clamp(10px,2vw,26px)}
@@ -1879,32 +1879,22 @@ body::before{
 .plan-svg .zlabel{font-family:var(--mono);font-size:13px;letter-spacing:.04em;fill:var(--gris);pointer-events:none;
   transition:fill .6s cubic-bezier(.625,.05,0,1)}
 .plan-svg .plan-side{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;fill:var(--gris);opacity:.7}
-.plan-svg .zone:hover .shape,.plan-svg .zone:focus-visible .shape,.plan-svg .zone[aria-pressed="true"] .shape{
+.plan-svg .zone:hover .shape,.plan-svg .zone:focus-visible .shape,.plan-svg .zone.is-active .shape{
   fill:rgba(0,163,255,.16);stroke:var(--bleu-clair);stroke-width:2}
-.plan-svg .zone:hover .deco *,.plan-svg .zone:focus-visible .deco *,.plan-svg .zone[aria-pressed="true"] .deco *{stroke:var(--blanc)}
-.plan-svg .zone:hover .badge,.plan-svg .zone:focus-visible .badge,.plan-svg .zone[aria-pressed="true"] .badge{stroke:var(--bleu-clair)}
-.plan-svg .zone:hover .zlabel,.plan-svg .zone:focus-visible .zlabel,.plan-svg .zone[aria-pressed="true"] .zlabel{fill:var(--blanc)}
+.plan-svg .zone:hover .deco *,.plan-svg .zone:focus-visible .deco *,.plan-svg .zone.is-active .deco *{stroke:var(--blanc)}
+.plan-svg .zone:hover .badge,.plan-svg .zone:focus-visible .badge,.plan-svg .zone.is-active .badge{stroke:var(--bleu-clair)}
+.plan-svg .zone:hover .zlabel,.plan-svg .zone:focus-visible .zlabel,.plan-svg .zone.is-active .zlabel{fill:var(--blanc)}
 .plan-svg .zone:focus-visible{outline:2px solid var(--or);outline-offset:2px}
 @media (max-width:700px){.plan-svg .zlabel,.plan-svg .plan-side{display:none}}
 
 /* les quatre boutons doublent les zones là où une zone SVG est trop petite pour le doigt */
-.plan-list{display:none;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 0}
-@media (max-width:760px),(pointer:coarse){.plan-list{display:grid}}
+.plan-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
 .plan-btn{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 14px;text-align:left;
   border:1px solid rgba(237,232,224,.16);background:transparent;color:var(--blanc);font-size:15px;
   transition:border-color .6s cubic-bezier(.625,.05,0,1),background .6s cubic-bezier(.625,.05,0,1)}
 .plan-btn .n{font-family:var(--mono);font-size:12px;color:var(--bleu-clair)}
 .plan-btn[aria-pressed="true"]{border-color:var(--bleu-clair);background:rgba(0,163,255,.12)}
 @media (max-width:420px){.plan-list{grid-template-columns:1fr}}
-
-.plan-panel{margin-top:clamp(16px,2.4vw,26px);border:1px solid rgba(237,232,224,.12);border-left:3px solid var(--bleu-clair);
-  padding:clamp(22px,3vw,34px);max-width:70ch}
-.plan-panel h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.15;margin:0 0 10px}
-.plan-panel p{color:rgba(237,232,224,.86);margin:0 0 12px;font-size:16px;line-height:1.6}
-.plan-panel .plan-cap{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--or)}
-.plan-panel .plan-photo{margin:14px 0}
-.plan-panel .plan-photo img{display:block;width:100%;height:auto}
-.plan-panel .btn{margin-top:8px}
 
 .occ-grid{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:1fr}
 @media (min-width:820px){.occ-grid{grid-template-columns:repeat(3,1fr)}}
@@ -1918,4 +1908,80 @@ body::before{
 .field select:user-invalid~.err{display:block}
 @media (prefers-reduced-motion:reduce){
   .plan-svg .shape,.plan-svg .deco *,.plan-svg .badge,.plan-svg .zlabel,.plan-btn{transition:none}
+}
+
+/* =====================================================================
+   V5.1 — LE PARCOURS : le plan devient une traversée au défilement
+   Par défaut (sans JS, téléphone, mouvement réduit) : le plan puis quatre blocs
+   empilés (photo, texte, bouton). L'épinglage n'existe que sous .is-pinned, posé
+   par le JS. Aucun ancêtre du parcours n'a de transform ni d'overflow.
+   ===================================================================== */
+.parcours-head{margin-bottom:clamp(18px,3vh,30px)}
+.parcours-stage{display:grid;gap:clamp(16px,2.4vw,28px);grid-template-columns:minmax(0,1fr);
+  grid-template-areas:"plan" "list" "steps"}
+.parcours-plan{grid-area:plan}
+.plan-list{grid-area:list}
+.steps{grid-area:steps;display:grid;gap:clamp(34px,6vh,56px)}
+.step{display:grid;gap:16px}
+.step-photo{position:relative;margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--noir-2)}
+.step-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;
+  opacity:0;transition:opacity .6s cubic-bezier(.625,.05,0,1)}
+.step-photo img.on{opacity:1}
+.step-photo img:not(:first-child){display:none}
+.step-num{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bleu-clair);margin:0 0 8px}
+.step-body h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,3vw,36px);line-height:1.12;margin:0 0 10px}
+.step-text{color:rgba(237,232,224,.86);font-size:16px;line-height:1.6;margin:0 0 14px;max-width:52ch}
+.step-body .plan-cap{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--or);margin:0 0 14px}
+@media (min-width:760px){
+  .step{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(20px,3vw,40px)}
+}
+
+/* le trait, son fantôme et sa lueur ; le repère et sa pulsation */
+.route{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.route-ghost{stroke:rgba(237,232,224,.16);stroke-width:1.5;stroke-dasharray:2 7}
+.route-glow{stroke:var(--bleu-clair);stroke-width:7;opacity:.4}
+.route-line{stroke:var(--bleu-clair);stroke-width:2.2}
+.pmark{pointer-events:none;display:none}
+.parcours.is-live .pmark{display:block}
+.pdot{fill:var(--bleu-clair);stroke:var(--noir);stroke-width:2}
+.pring{fill:none;stroke:var(--bleu-clair);stroke-width:1.5;opacity:.55;transform-box:fill-box;transform-origin:center;
+  animation:pring 3.6s ease-in-out infinite}
+@keyframes pring{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(2.6);opacity:0}}
+.parcours:not(.is-live) .route-line{stroke-dasharray:none}
+
+/* les espaces : l'actif à pleine opacité, les autres à ~35 %, bascule douce de .35 s */
+.parcours.is-live .plan-svg .zone{opacity:.35;transition:opacity .35s ease}
+.parcours.is-live .plan-svg .zone.is-active,.parcours.is-live .plan-svg .zone:hover,.parcours.is-live .plan-svg .zone:focus-visible{opacity:1}
+
+/* ordinateur : la section est épinglée sur 400 vh (posé par le JS), deux colonnes */
+.parcours.is-pinned{height:100vh;box-sizing:border-box;display:flex;flex-direction:column;
+  padding-top:clamp(96px,12vh,124px);padding-bottom:clamp(14px,2.4vh,26px)}
+.parcours.is-pinned .parcours-head{margin-bottom:clamp(8px,1.6vh,16px)}
+.parcours.is-pinned .plan-lede{margin-bottom:0}
+.parcours.is-pinned .parcours-stage{flex:1;min-height:0;align-content:center;align-items:center;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
+  grid-template-areas:"plan steps" "plan list";grid-template-rows:auto auto}
+.parcours.is-pinned .steps{display:grid;gap:0}
+.parcours.is-pinned .step{grid-area:1/1;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start;
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s .3s}
+.parcours.is-pinned .step.is-active{opacity:1;visibility:visible;transition:opacity .6s cubic-bezier(.625,.05,0,1),visibility 0s}
+.parcours.is-pinned .step-photo{aspect-ratio:auto;height:clamp(140px,27vh,320px)}
+.parcours.is-pinned .step-body .step-text{font-size:15px;margin-bottom:12px}
+.parcours.is-pinned .plan-btn{min-height:40px;padding:6px 12px;font-size:14px}
+.parcours.is-pinned .plan-list{gap:8px}
+.parcours.is-pinned .step-photo img:not(:first-child){display:block}
+.parcours.is-pinned .plan-list{align-self:start}
+@media (prefers-reduced-motion:reduce){
+  .pring{animation:none;opacity:0}
+  .parcours.is-live .plan-svg .zone,.step-photo img{transition:none}
+}
+/* écrans bas : le panneau épinglé doit tenir dans la fenêtre, boutons compris */
+@media (min-width:760px) and (max-height:780px){
+  .parcours.is-pinned{padding-top:clamp(86px,11vh,104px)}
+  .parcours.is-pinned .step{gap:9px}
+  .parcours.is-pinned .step-photo{height:clamp(100px,21vh,190px)}
+  .parcours.is-pinned .step-num{margin-bottom:4px}
+  .parcours.is-pinned .step-body h3{font-size:24px;margin-bottom:6px}
+  .parcours.is-pinned .step-body .step-text{font-size:14px;line-height:1.5;margin-bottom:8px}
+  .parcours.is-pinned .plan-btn{min-height:36px;padding:4px 10px}
 }
