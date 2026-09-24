@@ -1833,11 +1833,13 @@ body::before{
    Les prix n'ont pas la classe .p (main.js y brouille les chiffres).
    ===================================================================== */
 .menu-note{
-  display:none;margin:-14px 0 clamp(22px,3.2vh,34px);
+  margin:8px 0 14px;
   font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--gris);
 }
-.menu-tabs:has(.menu-tab[data-cat="cocktails"][aria-selected="true"]) + .menu-note,
-.menu-tabs:has(.menu-tab[data-cat="softs"][aria-selected="true"]) + .menu-note{display:block}
+/* V4.9b — la mono donne une pleine chasse (.6 em) à chaque espace : resserre celles
+   qui entourent la barre oblique. L'espace fine (U+202F) avant € n'est pas touchée
+   par word-spacing. */
+.grp-price,.drink .dp{word-spacing:-.28em}
 
 .grp-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px 16px;flex-wrap:wrap}
 .grp-head--sub{justify-content:flex-start;margin-top:8px}
