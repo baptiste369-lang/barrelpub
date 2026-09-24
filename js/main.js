@@ -909,7 +909,8 @@
 
     function paint() {
       for (var i = 0; i < cats.length; i++) {
-        var on = current === "tout" || cats[i].getAttribute("data-cat") === current;
+        // data-solo : bloc absent de « Tout », visible sur son propre onglet (V4.9)
+        var on = current === "tout" ? !cats[i].hasAttribute("data-solo") : cats[i].getAttribute("data-cat") === current;
         if (on === !cats[i].hidden) continue;
         cats[i].hidden = !on;
       }

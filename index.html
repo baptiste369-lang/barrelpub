@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=39">
+<link rel="stylesheet" href="css/main.css?v=40">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -158,6 +158,7 @@
   .dn-frame{--x:0%!important}
   .dn-range,.dn-line,.dn-cap{display:none!important}
   .menu-cat[hidden]{display:block!important}
+  .menu-note{display:block!important}
   /* les lignes sont décalées de 112% dans un conteneur en overflow:hidden :
      sans le JS qui pose .on / .is-in, elles restent hors cadre. */
   .ov-line>span,.wall .l span{transform:none!important;opacity:1!important}
@@ -594,7 +595,13 @@
         <button type="button" role="tab" class="menu-tab" data-cat="tapas"    aria-selected="false" aria-controls="menuCols" tabindex="-1">Tapas</button>
         <button type="button" role="tab" class="menu-tab" data-cat="planches" aria-selected="false" aria-controls="menuCols" tabindex="-1">Planches</button>
         <button type="button" role="tab" class="menu-tab" data-cat="buckets"  aria-selected="false" aria-controls="menuCols" tabindex="-1">Buckets</button>
+        <button type="button" role="tab" class="menu-tab" data-cat="cocktails" aria-selected="false" aria-controls="menuCols" tabindex="-1">Cocktails</button>
+        <button type="button" role="tab" class="menu-tab" data-cat="softs"    aria-selected="false" aria-controls="menuCols" tabindex="-1">Softs</button>
       </div>
+      <!-- V4.9 — une seule fois, pas répétée par boisson : si la cliente corrige la
+           lecture des deux prix, seule cette ligne change. Visible seulement sur les
+           onglets Cocktails et Softs (CSS :has), et sans JS (voir le <noscript>). -->
+      <p class="menu-note">Deux prix : happy hour, puis tarif de la soirée.</p>
 
       <div class="menu-cols" id="menuCols" role="tabpanel" tabindex="0" data-reveal>
         <div class="menu-cat" data-cat="burgers">
@@ -630,6 +637,97 @@
           <div class="sub">le seau, à plusieurs</div>
           <div class="menu-item"><span class="n">Pour 2</span><span class="dots"></span><span class="p">17€</span></div>
           <div class="menu-item"><span class="n">Pour 4</span><span class="dots"></span><span class="p">30€</span></div>
+        </div>
+
+        <!-- ============ V4.9 — LA CARTE DES BOISSONS ============
+             Même composant d'onglets que les burgers : les blocs sont lus dans le DOM.
+             data-solo = absent de l'onglet « Tout » (46 lignes de plus l'allongeraient
+             de près de trois écrans) ; visible sur son propre onglet, et sans JS.
+             Les prix ne portent PAS la classe .p : main.js y fait un effet de
+             brouillage de chiffres qui abîmerait « 12 € / 14 € ».
+             Pas de photos (aucune n'est arrivée), pas de bières (non fournies). -->
+        <div class="menu-cat menu-cat--feat" data-cat="cocktails" data-solo>
+          <div class="grp-head"><h3>Les signatures</h3><span class="grp-price">12&nbsp;€ / 14&nbsp;€</span></div>
+          <div class="sub">Oui, oui, on fait le Sex on the Beach. Mais tu veux pas plutôt essayer ça ?</div>
+          <div class="drink"><div class="drink-top"><span class="n">Boss Final</span></div><span class="c">Jägermeister, citrons verts, liqueur de framboises, ginger beer</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Hot Paloma</span></div><span class="c">Tequila El Jimador infusée au piment oiseau, triple sec, sour mix, sirop de pamplemousse, soda, Tajín</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">The White Linen</span></div><span class="c">Gin Bombay Original, concombre, liqueur de fleurs de sureau, sour mix, soda</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Screaming Orgasm</span></div><span class="c">Vodka Żubrówka Biała, Bailey's, Kahlúa, amaretto</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Jack &amp; Stormy</span></div><span class="c">Jack Daniel's Blackberry, sour mix, ginger ale</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Sidecar</span></div><span class="c">Cognac, triple sec, sour mix</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Raspberry Spicy Marg</span></div><span class="c">Tequila El Jimador infusée au piment oiseau, purée de framboises, triple sec, sour mix, Tajín</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Strawberry Piña Colada</span></div><span class="c">3 Rivières blanc, 3 Rivières ambré, crème de coco, purée de fraises, jus d'ananas</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Barrel Macchiato</span></div><span class="c">Captain Morgan, Bailey's, lait concentré, café, sirop de vanille, nappage caramel</span></div>
+        </div>
+
+        <div class="menu-cat menu-cat--feat" data-cat="cocktails" data-solo>
+          <div class="grp-head"><h3>Les incontournables citernes</h3><span class="grp-price">15&nbsp;€ / 17&nbsp;€</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Long Island</span></div><span class="c">Rhum Bacardí Carta Blanca, tequila El Jimador, gin Bombay Original, vodka Żubrówka Biała, triple sec, sour mix, Coca-Cola</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Miami Ice</span></div><span class="c">Rhum Bacardí Carta Blanca, tequila El Jimador, gin Bombay Original, vodka Żubrówka Biała, curaçao bleu, sour mix, limonade</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Irish Fire</span></div><span class="c">Jack Daniel's Fire, citrons verts, sirop de vanille, Magners</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Skoll Island</span></div><span class="c">Vodka Żubrówka Biała, demi-fruit de la passion, sirop de vanille, citron vert, Skoll</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Demon Sweet</span></div><span class="c">Vodka Żubrówka Biała, liqueur de fleur de sureau, sour mix, Bière du Démon</span></div>
+        </div>
+
+        <div class="menu-cat" data-cat="cocktails" data-solo>
+          <div class="grp-head"><h3>Tequila</h3></div>
+          <div class="drink"><div class="drink-top"><span class="n">Margarita</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Tequila El Jimador, triple sec, sour mix</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Tequila Sunrise</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Tequila El Jimador, jus d'orange, sirop de grenadine</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Paloma</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Tequila El Jimador, triple sec, sour mix, sirop de pamplemousse, soda</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">El Diablo</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Tequila El Jimador, crème de cassis, citrons verts, ginger beer</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Matador</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Tequila El Jimador, sour mix, jus d'ananas</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Mexican Mule</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Tequila El Jimador, sour mix, triple sec, ginger beer, Angostura bitters</span></div>
+        </div>
+
+        <div class="menu-cat" data-cat="cocktails" data-solo>
+          <div class="grp-head"><h3>Vodka</h3></div>
+          <div class="drink"><div class="drink-top"><span class="n">Sex on the Beach</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Vodka Żubrówka Biała, crème de pêche, jus d'orange, jus de cranberry</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Lemon Drop</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Vodka Żubrówka Biała, triple sec, sour mix</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Cosmopolitan</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Vodka Żubrówka Biała, triple sec, citrons verts, jus de cranberry</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Godmother</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Vodka Żubrówka Biała, amaretto</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Espresso Martini</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Vodka Żubrówka Biała, Kahlúa, café, sirop de sucre</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Pornstar Martini</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Vodka Żubrówka Biała, liqueur de passion, sour mix, sirop de vanille, jus de maracuja</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Moscow Mule</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Vodka Żubrówka Biała, sour mix, triple sec, ginger beer, Angostura bitters</span></div>
+        </div>
+
+        <div class="menu-cat" data-cat="cocktails" data-solo>
+          <div class="grp-head"><h3>Gin</h3></div>
+          <div class="drink"><div class="drink-top"><span class="n">Gin Fizz</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Gin Bombay Original, triple sec, sour mix, soda</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">French 75</span><span class="dots"></span><span class="dp">14&nbsp;€ / 16&nbsp;€</span></div><span class="c">Gin Bombay Original, sour mix, champagne</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Southside</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Gin Bombay Original, triple sec, sour mix, menthe</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Basil Smash</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Gin Bombay Original, triple sec, sour mix, basilic</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Negroni</span><span class="dots"></span><span class="dp">14&nbsp;€ / 16&nbsp;€</span></div><span class="c">Gin Bombay Original, Campari, Martini rouge</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">London Mule</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Gin Bombay Original, sour mix, triple sec, ginger beer, Angostura bitters</span></div>
+        </div>
+
+        <div class="menu-cat" data-cat="cocktails" data-solo>
+          <div class="grp-head"><h3>Whisky</h3></div>
+          <div class="drink"><div class="drink-top"><span class="n">Lynchburg Lemonade</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Jack Daniel's, triple sec, sour mix, soda</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Whisky Sour</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Bourbon Four Roses, triple sec, sour mix, Angostura bitters</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Manhattan</span><span class="dots"></span><span class="dp">14&nbsp;€ / 16&nbsp;€</span></div><span class="c">Jack Daniel's Rye, Martini rouge</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Monkey Julep</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Whisky Monkey Shoulder, menthe, sirop de sucre</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Godfather</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Whisky Grant's, amaretto</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Boulevardier</span><span class="dots"></span><span class="dp">14&nbsp;€ / 16&nbsp;€</span></div><span class="c">Bourbon Four Roses, Campari, Martini rouge</span></div>
+        </div>
+
+        <div class="menu-cat" data-cat="cocktails" data-solo>
+          <div class="grp-head"><h3>Rhum</h3></div>
+          <div class="drink"><div class="drink-top"><span class="n">Daiquiri</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Rhum Bacardí Carta Blanca, triple sec, sour mix</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Cuba Libre</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Rhum Bacardí Carta Oro, citrons verts, Coca-Cola</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Maï Taï</span><span class="dots"></span><span class="dp">14&nbsp;€ / 16&nbsp;€</span></div><span class="c">3 Rivières blanc, 3 Rivières ambré, triple sec, sour mix, sirop d'orgeat</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Jungle Bird</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Captain Morgan, Campari, sour mix, jus d'ananas</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Piña Colada</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">3 Rivières blanc, 3 Rivières ambré, crème de coco, sirop de vanille, jus d'ananas</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Mojito</span><span class="dots"></span><span class="dp">11&nbsp;€ / 13&nbsp;€</span></div><span class="c">Rhum Bacardí Carta Blanca, citrons verts, menthe, cassonade, soda</span></div>
+          <div class="drink"><div class="drink-top"><span class="n">Caribbean Mule</span><span class="dots"></span><span class="dp">12&nbsp;€ / 14&nbsp;€</span></div><span class="c">Captain Morgan, sour mix, triple sec, ginger beer, Angostura bitters</span></div>
+        </div>
+
+        <div class="menu-cat" data-cat="softs" data-solo>
+          <div class="grp-head"><h3>Softs</h3></div>
+          <div class="grp-head grp-head--sub"><span class="grp-price">5&nbsp;€ / 6&nbsp;€</span></div>
+          <ul class="soft-list"><li>Eau</li><li>Perrier</li><li>Jus de fruits</li><li>Coca-Cola</li><li>Coca Zero</li><li>Sprite</li><li>Ice Tea</li><li>Orangina</li><li>Schweppes Tonic</li></ul>
+          <div class="grp-head grp-head--sub"><span class="grp-price">6&nbsp;€ / 7&nbsp;€</span></div>
+          <ul class="soft-list"><li>Ginger beer</li><li>Canada Dry</li><li>Red Bull</li></ul>
+          <p class="menu-foot">Supplément sirop + 0,50&nbsp;€</p>
         </div>
       </div>
     </div>
@@ -1246,7 +1344,7 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=21"></script>
+<script src="js/main.js?v=22"></script>
 <!-- V3.4 — le spectre du chapitre 03. index.html UNIQUEMENT : les quatre autres
      pages n'ont pas ce bloc. Il sort en silence s'il ne le trouve pas. -->
 <script defer src="js/dj-viz.js?v=1"></script>
