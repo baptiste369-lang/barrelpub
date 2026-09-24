@@ -1494,23 +1494,35 @@
     set(parseFloat(range.value));
   })();
 
-  /* ---- §3 · les chiffres : comptés une seule fois, à l'arrivée à l'écran ---- */
+  /* ---- §3 · les chiffres : comptés une seule fois, à l'arrivée à l'écran ----
+     Règle : une animation n'est JAMAIS la seule source d'une valeur. Les nombres sont
+     écrits en dur dans le HTML ; ici on n'y touche qu'au premier tour de boucle
+     effectivement joué (jamais avant), et un filet à durée + 600 ms remet la valeur
+     finale même si le ticker ne tourne pas (onglet masqué, page occupée). Si rien de
+     tout cela ne s'exécute, la page affiche 10, 1, 3 et 364. */
   (function () {
     var nums = qa(".fig-n[data-count]");
     if (!nums.length || REDUCE || !("IntersectionObserver" in window)) return;
+    var D = 1100;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         io.unobserve(e.target);
-        var el = e.target, to = parseInt(el.getAttribute("data-count"), 10), t0 = performance.now(), D = 1100;
-        el.textContent = "0";
+        var el = e.target;
+        var to = parseInt(el.getAttribute("data-count") || el.textContent, 10);
+        if (isNaN(to)) return;
+        var t0 = 0, done = false;
+        setTimeout(function () { done = true; el.textContent = String(to); }, D + 600);
         onFrame(function () {
-          var k = clamp((performance.now() - t0) / D, 0, 1);
+          if (done) return false;
+          var now = performance.now();
+          if (!t0) { t0 = now; el.textContent = "0"; }
+          var k = clamp((now - t0) / D, 0, 1);
           el.textContent = String(Math.round(to * (1 - Math.pow(1 - k, 3))));
-          if (k >= 1) { el.textContent = String(to); return false; }
+          if (k >= 1) { done = true; el.textContent = String(to); return false; }
         });
       });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.3 });
     nums.forEach(function (n) { io.observe(n); });
   })();
 
