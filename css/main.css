@@ -1985,3 +1985,24 @@ body::before{
   .parcours.is-pinned .step-body .step-text{font-size:14px;line-height:1.5;margin-bottom:8px}
   .parcours.is-pinned .plan-btn{min-height:36px;padding:4px 10px}
 }
+
+/* =====================================================================
+   V5.2 — EN-TÊTE SUR PETITS ÉCRANS (trois liens depuis V5.0)
+   La hauteur ne change pas (le padding vertical n'est pas touché) : les chapitres
+   réservent 148 px. On libère de la largeur, pas de la hauteur : la ligne mono
+   disparaît sous 900 px, le mot-symbole sous 600 px, puis marges latérales,
+   intervalles, interlettrage et remplissage du bouton se resserrent.
+   ===================================================================== */
+@media (max-width:900px){.head-meta{display:none}}
+@media (max-width:600px){
+  .brand-word{display:none}
+  .site-head{padding-left:16px;padding-right:16px}
+  .head-right{gap:8px}
+  .head-link,.head-cta{letter-spacing:.08em}
+  .head-cta{padding-left:11px;padding-right:11px}
+}
+@media (max-width:340px){
+  .head-right{gap:6px}
+  .head-link,.head-cta{letter-spacing:.03em}
+  .head-cta{padding-left:8px;padding-right:8px}
+}
