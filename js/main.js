@@ -1228,6 +1228,13 @@
       if (lenis) lenis.scrollTo(y, { duration: pinned ? 1.6 : 1.1 });
       else window.scrollTo({ top: y, behavior: REDUCE ? "auto" : "smooth" });
     }
+    // le configurateur (V5.4) peut demander d'amener le parcours sur un espace
+    document.addEventListener("barrel:zone", function (e) {
+      var i = ORDER.indexOf(e.detail && e.detail.id);
+      if (i < 0) return;
+      e.preventDefault();
+      goTo(i);
+    });
     zones.concat(btns).forEach(function (el) {
       var i = ORDER.indexOf(el.getAttribute("data-zone"));
       el.addEventListener("click", function () { goTo(i); });
@@ -1312,6 +1319,245 @@
         window.removeEventListener("resize", onResize);
         if (io) io.disconnect();
       };
+    });
+  })();
+
+  /* =====================================================================
+     V5.4 — CONFIGURATEUR, NUIT DE 18H À 5H, CHIFFRES, VISIONNEUSE
+     (privatisation.html). Aucun de ces blocs n'ouvre de boucle rAF : le compteur
+     passe par onFrame (ticker de GSAP), le reste est piloté par des événements.
+     ===================================================================== */
+
+  /* ---- §1 · le configurateur : les phrases sont ICI, jamais dans le HTML ---- */
+  (function () {
+    var root = q("#configurateur");
+    if (!root) return;
+
+    var CFG = {
+      // type d'événement → phrase, valeur du select du formulaire, espace suggéré
+      // (la cliente corrige la correspondance en changeant ces quatre lignes)
+      type: {
+        anniversaire: { phrase: "Un anniversaire",         form: "anniversaire", zone: "billard"  },
+        entreprise:   { phrase: "Une soirée d'entreprise", form: "entreprise",   zone: "comptoir" },
+        match:        { phrase: "Une soirée de match",     form: "match",        zone: "salle"    },
+        entre:        { phrase: "Une soirée entre nous",   form: "autre",        zone: "terrasse" }
+      },
+      taille: {
+        dizaine:      { phrase: "une dizaine de personnes",       n: 10 },
+        vingtaine:    { phrase: "une vingtaine de personnes",     n: 20 },
+        quarantaine:  { phrase: "une quarantaine de personnes",   n: 40 },
+        cinquante:    { phrase: "plus de cinquante personnes",    n: 50 },
+        inconnu:      { phrase: "on ne sait pas encore combien",  n: 0 }
+      },
+      besoin: {
+        dj: "le DJ", photobooth: "le photobooth", billard: "le billard",
+        ecrans: "les écrans", cocktails: "la carte cocktails", coin: "un coin à nous"
+      },
+      lieu: {
+        terrasse: "sur la terrasse couverte", comptoir: "au comptoir",
+        billard: "au coin billard", salle: "dans la grande salle"
+      },
+      defautType: "Une soirée",
+      vide: "Répondez aux questions : on écrit votre demande pour vous.",
+      suggestion: function (lieu) { return "On verrait bien ça " + lieu + "."; }
+    };
+
+    var recap = q("#cfgRecap"), sugg = q("#cfgSuggest"), go = q("#cfgGo");
+    var chosen = [];   // ordre de sélection des besoins : c'est l'ordre de la phrase
+
+    function val(name) {
+      var el = q('input[name="' + name + '"]:checked', root);
+      return el ? el.value : null;
+    }
+    function list(a) {
+      return a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " et " + a[a.length - 1];
+    }
+    function sentence() {
+      var t = val("cfg-type"), n = val("cfg-taille");
+      if (!t && !n && !chosen.length) return "";
+      var s = t ? CFG.type[t].phrase : CFG.defautType;
+      if (n) s += ", " + CFG.taille[n].phrase;
+      if (chosen.length) s += ", avec " + list(chosen.map(function (k) { return CFG.besoin[k]; }));
+      return s + ".";
+    }
+    function paint() {
+      var s = sentence();
+      recap.textContent = s || CFG.vide;
+      recap.classList.toggle("is-empty", !s);
+      var t = val("cfg-type"), n = val("cfg-taille");
+      if (t && n) {
+        var z = CFG.type[t].zone;
+        sugg.textContent = CFG.suggestion(CFG.lieu[z]);
+        sugg.setAttribute("data-zone", z);
+        sugg.hidden = false;
+      } else {
+        sugg.hidden = true;
+      }
+    }
+
+    root.addEventListener("change", function (e) {
+      var el = e.target;
+      if (!el || el.name !== "cfg-besoin") { paint(); return; }
+      var k = el.value, i = chosen.indexOf(k);
+      if (el.checked && i < 0) chosen.push(k);
+      if (!el.checked && i >= 0) chosen.splice(i, 1);
+      paint();
+    });
+
+    // la suggestion amène le parcours sur l'espace : le plan s'y allume
+    sugg.addEventListener("click", function () {
+      var ev = new CustomEvent("barrel:zone", { detail: { id: sugg.getAttribute("data-zone") }, cancelable: true });
+      if (document.dispatchEvent(ev)) { var p = q("#parcours"); if (p) p.scrollIntoView(); }
+    });
+
+    // « Demander un devis » remplit le formulaire, puis l'ancre #form amène jusqu'à lui
+    go.addEventListener("click", function () {
+      var type = q("#type"), pers = q("#pers"), msg = q("#msg");
+      var t = val("cfg-type"), n = val("cfg-taille"), s = sentence();
+      if (type && t) type.value = CFG.type[t].form;
+      if (pers && n && CFG.taille[n].n) pers.value = CFG.taille[n].n;
+      if (msg && s && (!msg.value || msg.value === msg.getAttribute("data-auto"))) {
+        msg.value = s; msg.setAttribute("data-auto", s);
+      }
+      // le focus va au premier champ vide, une fois le défilement amorcé
+      setTimeout(function () {
+        var order = ["#nom", "#email", "#tel", "#type", "#pers"];
+        for (var i = 0; i < order.length; i++) {
+          var f = q(order[i]);
+          if (f && !f.value) { f.focus({ preventScroll: true }); return; }
+        }
+        var m = q("#msg"); if (m) m.focus({ preventScroll: true });
+      }, 60);
+    });
+
+    paint();
+  })();
+
+  /* ---- §2 · de 18h à 5h : une variable --t (0 → 1), un vrai <input type=range> ---- */
+  (function () {
+    var root = q("#nuit");
+    var range = q("#nuitRange");
+    if (!root || !range) return;
+
+    var MOMENTS = [
+      { h: 18, texte: "L'apéro sur la terrasse, le soleil descend sur la rue piétonne." },
+      { h: 21, texte: "Le match sur les écrans, la salle se remplit." },
+      { h: 23, texte: "Le DJ prend la main, le billard tourne." },
+      { h: 26, texte: "La piste, les bras en l'air." }
+    ];
+    var H0 = 18, H1 = 29;     // 5h = 29
+    var imgs = qa(".nuit-photo img", root);
+    var time = q("#nuitTime"), text = q("#nuitText");
+    var took = false, cur = -1;
+
+    function label(v) {
+      var h = Math.floor(v) % 24;
+      return h + "h" + (v % 1 ? "30" : "");
+    }
+    function moment(v) {
+      var m = 0;
+      for (var i = 0; i < MOMENTS.length; i++) if (v >= MOMENTS[i].h) m = i;
+      return m;
+    }
+    function set(v) {
+      v = clamp(v, H0, H1);
+      range.value = v;
+      var t = (v - H0) / (H1 - H0);
+      root.style.setProperty("--t", t.toFixed(3));
+      var m = moment(v);
+      time.textContent = label(v);
+      range.setAttribute("aria-valuetext", label(v) + " — " + MOMENTS[m].texte);
+      if (m !== cur) {
+        cur = m;
+        text.textContent = MOMENTS[m].texte;
+        imgs.forEach(function (im, k) { im.classList.toggle("on", k === m); });
+      }
+    }
+
+    // dès que le visiteur touche la réglette, le défilement ne la reprend plus
+    function take() { took = true; }
+    range.addEventListener("pointerdown", take);
+    range.addEventListener("keydown", take);
+    range.addEventListener("touchstart", take, { passive: true });
+    range.addEventListener("input", function () { took = true; set(parseFloat(range.value)); });
+
+    // le défilement fait avancer la réglette (jamais en mouvement réduit)
+    if (!REDUCE) {
+      var onScroll = function () {
+        if (took) { removeEventListener("scroll", onScroll); return; }
+        var r = root.getBoundingClientRect(), vh = window.innerHeight;
+        var p = clamp((vh * 0.85 - r.top) / (r.height + vh * 0.3), 0, 1);
+        set(Math.round((H0 + p * (H1 - H0)) * 2) / 2);
+      };
+      addEventListener("scroll", onScroll, { passive: true });
+    }
+    set(parseFloat(range.value));
+  })();
+
+  /* ---- §3 · les chiffres : comptés une seule fois, à l'arrivée à l'écran ---- */
+  (function () {
+    var nums = qa(".fig-n[data-count]");
+    if (!nums.length || REDUCE || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, to = parseInt(el.getAttribute("data-count"), 10), t0 = performance.now(), D = 1100;
+        el.textContent = "0";
+        onFrame(function () {
+          var k = clamp((performance.now() - t0) / D, 0, 1);
+          el.textContent = String(Math.round(to * (1 - Math.pow(1 - k, 3))));
+          if (k >= 1) { el.textContent = String(to); return false; }
+        });
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (n) { io.observe(n); });
+  })();
+
+  /* ---- §4 · la visionneuse : un <dialog> natif, flèches, Échap, focus rendu ---- */
+  (function () {
+    var dlg = q("#viewer");
+    if (!dlg || typeof dlg.showModal !== "function") return;
+    var img = q("#viewerImg"), cap = q("#viewerCap");
+    var prev = q("#viewerPrev"), next = q("#viewerNext"), close = q("#viewerClose");
+    var list = [], idx = 0, origin = null, prevOverflow = "";
+
+    function show() {
+      var a = list[idx];
+      img.setAttribute("src", a.getAttribute("href"));
+      img.setAttribute("alt", a.getAttribute("data-alt") || "");
+      cap.textContent = a.getAttribute("data-alt") || "";
+      var many = list.length > 1;
+      prev.hidden = next.hidden = !many;
+    }
+    function step(d) { idx = (idx + d + list.length) % list.length; show(); }
+
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest("a.thumb") : null;
+      if (!a) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      list = qa("a.thumb", a.closest(".step") || document);
+      idx = list.indexOf(a);
+      origin = a;
+      show();
+      // le défilement de la page est gelé pendant que la photo est ouverte
+      prevOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = "hidden";
+      dlg.showModal();
+    });
+    prev.addEventListener("click", function () { step(-1); });
+    next.addEventListener("click", function () { step(1); });
+    close.addEventListener("click", function () { dlg.close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft")  { e.preventDefault(); step(-1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+    });
+    dlg.addEventListener("close", function () {
+      document.documentElement.style.overflow = prevOverflow;
+      img.removeAttribute("src");
+      if (origin) { origin.focus({ preventScroll: true }); origin = null; }
     });
   })();
 
