@@ -1918,9 +1918,8 @@ body::before{
    ===================================================================== */
 .parcours-head{margin-bottom:clamp(18px,3vh,30px)}
 .parcours-stage{display:grid;gap:clamp(16px,2.4vw,28px);grid-template-columns:minmax(0,1fr);
-  grid-template-areas:"plan" "list" "steps"}
-.parcours-plan{grid-area:plan}
-.plan-list{grid-area:list}
+  grid-template-areas:"nav" "steps"}
+.parcours-nav{grid-area:nav;display:grid;gap:clamp(12px,1.6vw,18px)}
 .steps{grid-area:steps;display:grid;gap:clamp(34px,6vh,56px)}
 .step{display:grid;gap:16px}
 .step-photo{position:relative;margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--noir-2)}
@@ -1958,6 +1957,9 @@ body::before{
   padding-top:clamp(96px,12vh,124px);padding-bottom:clamp(14px,2.4vh,26px)}
 .parcours.is-pinned .parcours-head{margin-bottom:clamp(8px,1.6vh,16px)}
 .parcours.is-pinned .plan-lede{margin-bottom:0}
+.parcours.is-pinned .parcours-nav{display:contents}
+.parcours.is-pinned .parcours-plan{grid-area:plan}
+.parcours.is-pinned .plan-list{grid-area:list}
 .parcours.is-pinned .parcours-stage{flex:1;min-height:0;align-content:center;align-items:center;
   grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
   grid-template-areas:"plan steps" "plan list";grid-template-rows:auto auto}
@@ -2006,3 +2008,23 @@ body::before{
   .head-link,.head-cta{letter-spacing:.03em}
   .head-cta{padding-left:8px;padding-right:8px}
 }
+
+/* =====================================================================
+   V5.3 — MODE EMPILÉ : le plan (et ses quatre boutons) restent collés sous l'en-tête
+   pendant qu'on lit les quatre blocs, pour voir toujours l'espace surligné.
+   position:sticky est neutralisé par tout ancêtre en overflow ≠ visible : la chaîne
+   .parcours-stage › #parcours › main › body › html a été relevée (body a
+   overflow-x:hidden mais html est visible, donc body est propagé au viewport et n'est
+   pas un conteneur de défilement). Le fond opaque évite toute transparence du texte.
+   `top` reprend exactement la hauteur de l'en-tête (pictogramme + 2 paddings).
+   ===================================================================== */
+.parcours.is-flat .parcours-nav{
+  position:sticky;top:calc(clamp(52px,5.4vw,72px) + 2*clamp(16px,2.4vw,26px));z-index:6;
+  background:var(--noir);margin-inline:calc(var(--pad)*-1);padding:8px var(--pad) 10px;
+  border-bottom:1px solid rgba(237,232,224,.10);gap:8px}
+.parcours.is-flat .plan-figure{padding:6px 8px}
+.parcours.is-flat .plan-svg{width:100%;height:clamp(84px,17vh,130px)}
+.parcours.is-flat .plan-list{grid-template-columns:repeat(4,1fr);gap:6px}
+.parcours.is-flat .plan-btn{justify-content:center;padding:0;min-height:44px}
+.parcours.is-flat .plan-btn .n{font-size:14px}
+.parcours.is-flat .plan-btn [data-zone-nom]{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

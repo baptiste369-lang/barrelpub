@@ -1156,6 +1156,13 @@
       body.parentNode.insertBefore(c, body.nextSibling);
     });
 
+    // bas du plan collé (mode empilé) : `top` sticky + hauteur du bloc
+    function navBottom() {
+      var n = q(".parcours-nav", root);
+      if (!n) return 96;
+      return (parseFloat(getComputedStyle(n).top) || 0) + n.offsetHeight;
+    }
+
     function indexFor(p) {
       for (var i = STOPS.length - 1; i > 0; i--) if (p >= STOPS[i]) return i;
       return 0;
@@ -1215,7 +1222,8 @@
       } else {
         var el = q("#step-" + id);
         if (!el) return;
-        y = el.getBoundingClientRect().top + window.pageYOffset - 96;
+        // mode empilé : le plan collé occupe le haut de l'écran, on s'arrête juste dessous
+        y = el.getBoundingClientRect().top + window.pageYOffset - (navBottom() + 12);
       }
       if (lenis) lenis.scrollTo(y, { duration: pinned ? 1.6 : 1.1 });
       else window.scrollTo({ top: y, behavior: REDUCE ? "auto" : "smooth" });
@@ -1275,23 +1283,33 @@
       pinned = false;
       root.classList.add("is-flat");
       drawFull();
-      var io = null;
+      var io = null, rzT = 0;
       function flatMark(i) {
         setActive(i);
         var pt = path.getPointAtLength(clamp(STOPS[i] + 0.004, 0, 1) * LEN);
         if (mark) mark.setAttribute("transform", "translate(" + pt.x.toFixed(2) + " " + pt.y.toFixed(2) + ")");
       }
       flatMark(0);
-      if ("IntersectionObserver" in window) {
+      // la bande de lecture est centrée sur la zone visible SOUS le plan collé
+      function armIO() {
+        if (!("IntersectionObserver" in window)) return;
+        if (io) io.disconnect();
+        var H = window.innerHeight, top = navBottom(), mid = top + (H - top) / 2;
+        var a = Math.max(0, Math.round(mid - 24)), b = Math.max(0, Math.round(H - (mid + 24)));
         io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
             if (e.isIntersecting) flatMark(ORDER.indexOf(e.target.getAttribute("data-step")));
           });
-        }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+        }, { rootMargin: "-" + a + "px 0px -" + b + "px 0px", threshold: 0 });
         steps.forEach(function (s) { io.observe(s); });
       }
+      function onResize() { clearTimeout(rzT); rzT = setTimeout(armIO, 150); }
+      armIO();
+      window.addEventListener("resize", onResize);
       return function () {
         root.classList.remove("is-flat");
+        clearTimeout(rzT);
+        window.removeEventListener("resize", onResize);
         if (io) io.disconnect();
       };
     });

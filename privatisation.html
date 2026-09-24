@@ -18,7 +18,7 @@
 <link rel="preload" as="image" type="image/webp" href="assets/photos/barman-flair.webp" fetchpriority="low">
 <link rel="preload" as="image" type="image/webp" href="assets/photos/salle-billard-bleue.webp" fetchpriority="low">
 <link rel="preload" as="image" type="image/webp" href="assets/photos/foule-large-bleue.webp" fetchpriority="low">
-<link rel="stylesheet" href="css/main.css?v=44">
+<link rel="stylesheet" href="css/main.css?v=45">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -93,6 +93,7 @@
       <p class="plan-lede">Suivez le trait, de la rue jusqu'au fond de la salle, puis demandez un devis pour l'espace qui vous convient.</p>
     </div>
     <div class="parcours-stage">
+      <div class="parcours-nav">
       <figure class="plan-figure parcours-plan">
         <svg class="plan-svg" id="plan" viewBox="0 0 960 400" role="group" aria-label="Plan schématique du Barrel : quatre espaces, de la rue jusqu'au fond de la salle" xmlns="http://www.w3.org/2000/svg">
           <title>Plan schématique du Barrel</title>
@@ -168,6 +169,13 @@
           <text class="plan-side" x="480" y="388" text-anchor="middle">côté rue piétonne</text>
         </svg>
       </figure>
+      <div class="plan-list" role="group" aria-label="Aller directement à un espace">
+        <button type="button" class="plan-btn" data-zone="terrasse" aria-pressed="false"><span class="n">1</span><span data-zone-nom>La terrasse couverte</span></button>
+        <button type="button" class="plan-btn" data-zone="comptoir" aria-pressed="false"><span class="n">2</span><span data-zone-nom>Le comptoir</span></button>
+        <button type="button" class="plan-btn" data-zone="billard" aria-pressed="false"><span class="n">3</span><span data-zone-nom>Le coin billard</span></button>
+        <button type="button" class="plan-btn" data-zone="salle" aria-pressed="false"><span class="n">4</span><span data-zone-nom>La grande salle</span></button>
+      </div>
+      </div>
       <div class="steps" id="steps">
         <article class="step is-active" id="step-terrasse" data-step="terrasse">
           <figure class="step-photo">
@@ -221,12 +229,6 @@
             <a class="btn" href="#form" data-espace="salle">Demander un devis</a>
           </div>
         </article>
-      </div>
-      <div class="plan-list" role="group" aria-label="Aller directement à un espace">
-        <button type="button" class="plan-btn" data-zone="terrasse" aria-pressed="false"><span class="n">1</span><span data-zone-nom>La terrasse couverte</span></button>
-        <button type="button" class="plan-btn" data-zone="comptoir" aria-pressed="false"><span class="n">2</span><span data-zone-nom>Le comptoir</span></button>
-        <button type="button" class="plan-btn" data-zone="billard" aria-pressed="false"><span class="n">3</span><span data-zone-nom>Le coin billard</span></button>
-        <button type="button" class="plan-btn" data-zone="salle" aria-pressed="false"><span class="n">4</span><span data-zone-nom>La grande salle</span></button>
       </div>
     </div>
   </section>
@@ -362,6 +364,6 @@
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script src="js/main.js?v=26"></script>
+<script src="js/main.js?v=27"></script>
 </body>
 </html>
