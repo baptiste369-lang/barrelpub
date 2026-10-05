@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Barrel Pub Cannes — Le pub américain de la Croisette · 18h → 5h</title>
-<meta name="description" content="Barrel Pub, 17 rue du Docteur Gérard Monod, Cannes. Pub américain et cuisine maison, ouvert 364 jours par an de 18h à 5h. Burgers, bières, billard, DJ, karaoké, 10 écrans sport, trois terrasses. Le chien te fait entrer.">
+<meta name="description" content="Barrel Pub, 17 rue du Docteur Gérard Monod, Cannes. Pub américain et cuisine maison, ouvert 364 jours par an de 18h à 5h. Burgers, bières, billard, DJ, 10 écrans sport, trois terrasses. Le chien te fait entrer.">
 <meta name="theme-color" content="#0A0B0E">
 <link rel="canonical" href="https://barrelpubcannes.fr/">
 <link rel="icon" href="assets/logo/barrel-logo.svg" type="image/svg+xml">
@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=47">
+<link rel="stylesheet" href="css/main.css?v=48">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -45,7 +45,7 @@
   "@context":"https://schema.org",
   "@type":["BarOrPub","Restaurant"],
   "name":"Barrel Pub Cannes",
-  "description":"Pub américain et cuisine maison à Cannes : burgers, bières, billard, fléchettes, DJ, karaoké, 10 écrans sport, trois terrasses. Ouvert 364 jours par an, de 18h à 5h.",
+  "description":"Pub américain et cuisine maison à Cannes : burgers, bières, billard, fléchettes, DJ, 10 écrans sport, trois terrasses. Ouvert 364 jours par an, de 18h à 5h.",
   "url":"https://barrelpubcannes.fr/",
   "image":"https://barrelpubcannes.fr/assets/photos/facade-nuit.webp",
   "telephone":"+33687361110",
@@ -281,7 +281,6 @@
 <main>
   <!-- ============ SCÈNE 02 — LE SEUIL / LE CHIEN ============ -->
   <section class="scene scene-seuil" id="scene-seuil" aria-labelledby="seuil-title">
-    <span class="leopard" aria-hidden="true"></span>
     <div class="scene-inner">
       <div class="marker"><span class="tag">02 / 05</span><span>Le seuil</span></div>
       <div class="seuil-grid">
@@ -373,13 +372,12 @@
 
   <!-- ============ SCÈNE 03 — LE JEU & LES SOIRÉES ============ -->
   <section class="scene scene-jeu" id="scene-jeu" aria-labelledby="jeu-title">
-    <span class="leopard strong" aria-hidden="true"></span>
     <div class="scene-inner">
       <div class="marker"><span class="tag">03 / 05</span><span>Le jeu &amp; les soirées</span></div>
       <div class="jeu-head" data-reveal>
         <span class="eyebrow">À table, ou au comptoir</span>
         <h2 id="jeu-title" data-split data-glitch><span class="ov-line"><span>On vient pour un verre.</span></span><span class="ov-line"><span>On repart à 5h.</span></span></h2>
-        <p class="lede">Pub, cuisine, terrasses, jeux, sport, nuit — tout au même endroit. Billard vintage au tapis léopard, fléchettes, babyfoot, arcade, photobooth <strong>« Ta Bobine »</strong>, DJ &amp; karaoké, 10 écrans sport.</p>
+        <p class="lede">Pub, cuisine, terrasses, jeux, sport, nuit — tout au même endroit. Billard vintage au tapis léopard, fléchettes, babyfoot, arcade, photobooth <strong>« Ta Bobine »</strong>, DJ, 10 écrans sport.</p>
         <!-- V2.3 §5 — mention « tatoueur résident » retirée ici ET de la feature-list :
              « résident » affirme une récurrence non vérifiée. À remettre uniquement
              sur confirmation écrite d'Eva (cf. tatoueur-soiree.webp, toujours inutilisée). -->
@@ -515,34 +513,10 @@
 
       <ul class="feature-list" data-reveal-stagger>
         <li><b>Billard · Fléchettes</b><span>Babyfoot, arcade, et le tapis léopard maison.</span></li>
-        <li><b>DJ &amp; Karaoké</b><span>La cabine tourne tard, le micro est à toi.</span></li>
+        <li><b>DJ</b><span>La cabine tourne tard.</span></li>
         <li><b>10 écrans sport</b><span>Toutes les retransmissions, jusqu'à la dernière minute.</span></li>
         <li><b>Ta Bobine · 4€</b><span>Quatre flashs, une bande souvenir.</span></li>
       </ul>
-
-      <!-- V3.3 §4.1 — LE PROGRAMME REVIENT ICI, VISIBLE SANS CLIC.
-           La V3.1 l'avait replié dans la FAQ (« Qu'est-ce qu'il se passe le
-           soir ? »). C'est le seul contenu de la page qui donne une raison de
-           venir CE SOIR plutôt qu'un jour indéterminé : personne n'ouvre un
-           accordéon pour savoir où sortir vendredi. Il retrouve donc sa place,
-           en fin de chapitre 03, le jour courant surligné par main.js (#program).
-           PROGRAMME TOUJOURS À CONFIRMER PAR EVA — et pour cette raison il reste
-           absent du JSON-LD FAQPage : on ne pousse pas dans les résultats de
-           recherche un programme qu'on n'a pas fait valider. -->
-      <div class="program-block" data-reveal>
-        <span class="eyebrow">Ce soir, et tous les soirs</span>
-        <h3 class="program-title">La semaine au Barrel</h3>
-        <p class="program-lede">Il y a quelque chose tous les soirs. Le jour courant est surligné.</p>
-        <ul class="program" id="program" aria-label="Programme de la semaine">
-          <li><span class="pg-day">Lundi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Karaoké</span></li>
-          <li><span class="pg-day">Mardi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Black Ball — tournoi billard</span></li>
-          <li><span class="pg-day">Mercredi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set</span></li>
-          <li><span class="pg-day">Jeudi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Live</span></li>
-          <li><span class="pg-day">Vendredi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set — jusqu'à 5h</span></li>
-          <li><span class="pg-day">Samedi</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">DJ set — jusqu'à 5h</span></li>
-          <li><span class="pg-day">Dimanche</span><span class="pg-dot" aria-hidden="true"></span><span class="pg-act">Sport sur les 10 écrans</span></li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -745,7 +719,7 @@
              passion à deux mains : un plan d'ambiance, un plan de verre. Les
              cinq autres sont en galerie, LA CUISINE. -->
         <div class="ck-duo" data-reveal-stagger>
-          <figure class="tile"><img src="assets/photos/cocktail-bleu-tonneau.webp" width="1200" height="1600" alt="Une cliente penchée sur un tonneau, cocktail bleu à deux pailles, sous l'enseigne Power &amp; Son Irish Whiskey" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Deux pailles, un tonneau</figcaption></figure>
+          <figure class="tile"><img src="assets/photos/cocktail-bleu-tonneau.webp" width="1200" height="1600" alt="Une cliente penchée sur un tonneau, cocktail bleu, une paille noire, sous l'enseigne Power &amp; Son Irish Whiskey" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Une paille, un tonneau</figcaption></figure>
           <figure class="tile"><img src="assets/photos/cocktail-passion-mains.webp" width="1200" height="1600" alt="Un cocktail passion tenu à deux mains" loading="lazy" fetchpriority="low" decoding="async"><figcaption>Passion, à deux mains</figcaption></figure>
         </div>
         <!-- EN ATTENTE D'EVA — les « cocktails citernes ».
@@ -1071,7 +1045,7 @@
       <div class="tout-dedans" data-reveal>
         <span class="eyebrow">Un des seuls endroits à Cannes à tout réunir</span>
         <h3 class="td-wall"><span class="ov-line"><span>Un seul endroit.</span></span><span class="ov-line"><span>Tout dedans.</span></span></h3>
-        <p class="td-list">Cuisine, billard, fléchettes, babyfoot, arcade, photobooth, DJ, karaoké, 10&nbsp;écrans sport, trois terrasses.</p>
+        <p class="td-list">Cuisine, billard, fléchettes, babyfoot, arcade, photobooth, DJ, 10&nbsp;écrans sport, trois terrasses.</p>
         <p class="td-prix">Des marques premium au prix du quartier.<br>Ouvert 364 jours par an, de 18h à 5h.</p>
       </div>
 
@@ -1338,7 +1312,7 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=29"></script>
+<script src="js/main.js?v=30"></script>
 <!-- V3.4 — le spectre du chapitre 03. index.html UNIQUEMENT : les quatre autres
      pages n'ont pas ce bloc. Il sort en silence s'il ne le trouve pas. -->
 <script defer src="js/dj-viz.js?v=1"></script>

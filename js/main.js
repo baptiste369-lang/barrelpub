@@ -670,35 +670,39 @@
   })();
 
   /* =====================================================================
-     V3.1 §1 — LE JOUR ET LA NUIT
-     Tout le travail est fait par un <input type="range"> réel : le clavier, le
-     tactile et le lecteur d'écran viennent avec, sans une ligne à écrire. Ce
-     bloc n'ajoute que le confort à la souris — la poignée suit le pointeur sans
-     qu'on ait à cliquer.
+     V3.1 §1 — LE JOUR ET LA NUIT      (V5.5 §4 : le tactile passe par le même chemin)
+     L'<input type="range"> reste dans le DOM : il porte le clavier et le lecteur
+     d'écran, et sa value est la source de vérité. Mais il n'est plus la surface
+     tactile : son pouce fait 2 px, et iOS ne suit le doigt que si le geste commence
+     SUR le pouce — le viser était impossible, la photo restait figée. Le range est
+     donc en pointer-events:none (CSS) et c'est .dn-frame qui reçoit les pointeurs.
 
-     POURQUOI --x N'EST PAS ÉCRIT DANS LE TICKER, contrairement à tous les
-     autres effets de ce fichier : runFrame() commence par `if (document.hidden)
-     return`, et la boucle est de toute façon suspendue quand la page ne peint
-     pas. C'est la bonne règle pour une animation continue ; c'en est une
-     mauvaise pour une commande qu'on manipule au doigt, qui doit répondre au
-     geste et pas à la frame suivante. On écrit donc directement, une fois par
-     événement, avec un garde-fou sur la valeur déjà posée. Aucun
-     requestAnimationFrame n'est créé ici : le budget du §6 est tenu.
+     · souris  : le survol seul pilote le curseur, sans clic (inchangé) ;
+     · doigt / stylet : un appui pose le curseur là où on touche, puis il suit le
+       doigt. setPointerCapture garde le geste jusqu'au relâchement.
+     touch-action:pan-y sur .dn-frame : l'horizontal est à nous, la verticale reste
+     à la page. Quand le navigateur prend un geste vertical, il envoie pointercancel :
+     on remet alors la valeur d'avant l'appui, le curseur ne bouge pas pour un scroll.
 
-     Le rectangle du cadre est mis en cache : le relire à chaque pointermove
-     juste après avoir écrit --x forcerait un recalcul de mise en page par
-     événement. Il est rafraîchi à l'entrée du pointeur, au scroll et au
-     redimensionnement — les trois seuls moments où il peut bouger.
+     POURQUOI --x N'EST PAS ÉCRIT DANS LE TICKER : une commande qu'on manipule doit
+     répondre au geste, pas à la frame suivante (et le ticker est suspendu onglet
+     masqué). On écrit donc directement, une fois par événement, aucune transition
+     sur clip-path. Aucun requestAnimationFrame n'est créé ici.
 
-     Aucune transition n'est posée sur clip-path : le curseur doit coller au
-     doigt. C'est aussi ce qui rend ce module correct en mouvement réduit —
-     c'est un geste, pas une animation.
+     Le rectangle du cadre est mis en cache (le relire à chaque pointermove après
+     avoir écrit --x forcerait une mise en page par événement) ; il est rafraîchi à
+     l'entrée du pointeur, à l'appui, et invalidé au scroll et au redimensionnement.
+
+     L'INDICE : à la première apparition, une seule fois, la poignée fait un court
+     va-et-vient (+8 points, 0,8 s, ease du site) puis revient. Il passe par
+     gsap.to, donc par le ticker existant. Jamais en mouvement réduit, et jamais
+     après que le visiteur a touché au curseur (souris, doigt ou clavier).
      ===================================================================== */
   (function () {
     var frame = q("#dnFrame"), range = q("#dnRange");
     if (!frame || !range) return;
 
-    var applied = null, box = null;
+    var applied = null, box = null, dragId = null, before = 0, touched = false, hint = null;
 
     function apply(v) {
       v = clamp(v, 0, 100);
@@ -706,28 +710,80 @@
       applied = v;
       frame.style.setProperty("--x", v.toFixed(2) + "%");
     }
-
-    range.addEventListener("input", function () {
-      apply(parseFloat(range.value) || 0);
-    });
-
-    if (!COARSE) {
-      var refresh = function () { box = frame.getBoundingClientRect(); };
-      frame.addEventListener("pointerenter", refresh);
-      addEventListener("scroll", function () { box = null; }, { passive: true });
-      addEventListener("resize", function () { box = null; });
-
-      frame.addEventListener("pointermove", function (e) {
-        if (e.pointerType !== "mouse") return;
-        if (!box) refresh();
-        if (!box.width) return;
-        var v = clamp(((e.clientX - box.left) / box.width) * 100, 0, 100);
-        range.value = String(Math.round(v));
-        apply(v);
-      }, { passive: true });
+    function refresh() { box = frame.getBoundingClientRect(); }
+    function stopHint() {
+      touched = true;
+      if (hint) { hint.kill(); hint = null; }
+    }
+    function fromEvent(e) {
+      if (!box) refresh();
+      if (!box.width) return null;
+      return clamp(((e.clientX - box.left) / box.width) * 100, 0, 100);
+    }
+    function set(v) {
+      range.value = String(Math.round(v));
+      apply(v);
     }
 
+    range.addEventListener("input", function () {
+      stopHint();
+      apply(parseFloat(range.value) || 0);
+    });
+    range.addEventListener("keydown", stopHint);
+
+    addEventListener("scroll", function () { box = null; }, { passive: true });
+    addEventListener("resize", function () { box = null; });
+
+    frame.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") refresh(); });
+
+    frame.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      stopHint();
+      refresh();
+      before = parseFloat(range.value) || 0;
+      dragId = e.pointerId;
+      try { frame.setPointerCapture(e.pointerId); } catch (err) {}
+      var v = fromEvent(e);
+      if (v !== null) set(v);
+    });
+
+    frame.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "mouse") {
+        if (dragId === null) stopHint();
+      } else if (dragId !== e.pointerId) {
+        return;
+      }
+      var v = fromEvent(e);
+      if (v !== null) set(v);
+    }, { passive: true });
+
+    function end(e) {
+      if (dragId !== e.pointerId) return;
+      dragId = null;
+      try { frame.releasePointerCapture(e.pointerId); } catch (err) {}
+      if (e.type === "pointercancel") set(before);   // le navigateur a pris le geste (scroll vertical)
+    }
+    frame.addEventListener("pointerup", end);
+    frame.addEventListener("pointercancel", end);
+    frame.addEventListener("lostpointercapture", function (e) { if (dragId === e.pointerId) dragId = null; });
+
     apply(parseFloat(range.value) || 0);
+
+    if (!REDUCE && G && "IntersectionObserver" in window) {
+      var hio = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        hio.disconnect();
+        if (touched) return;
+        var from = parseFloat(range.value) || 0, o = { v: from };
+        hint = G.to(o, {
+          v: Math.min(from + 8, 100), duration: 0.4, yoyo: true, repeat: 1,
+          ease: G.parseEase("barrel") ? "barrel" : "power2.inOut",
+          onUpdate: function () { apply(o.v); },
+          onComplete: function () { hint = null; apply(from); }
+        });
+      }, { threshold: 0.6 });
+      hio.observe(frame);
+    }
   })();
 
   /* =====================================================================
@@ -974,19 +1030,6 @@
     });
 
     paint();
-  })();
-
-  /* =====================================================================
-     PROGRAMME « CE SOIR » — surligne le jour courant
-     ===================================================================== */
-  (function () {
-    var list = q("#program");
-    if (!list) return;
-    var day = new Date().getDay(); // 0 = dimanche
-    var order = [1, 2, 3, 4, 5, 6, 0]; // lundi→dimanche pour matcher l'ordre du DOM
-    var rows = qa("li", list);
-    var idx = order.indexOf(day);
-    if (rows[idx]) rows[idx].classList.add("today");
   })();
 
   /* =====================================================================

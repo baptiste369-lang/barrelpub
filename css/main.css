@@ -377,7 +377,7 @@ main{position:relative;z-index:2;background:var(--noir)}
    IBM Plex Mono a déjà des chiffres tabulaires, mais Instrument Sans non — et
    c'est elle qui écrit les jours du programme et les libellés des statistiques. */
 .menu-item .p,.gal-filter i,.gal-status,.load-pct,.nc-count,
-.program .pg-day,.infos-data,.faq-a,.stat span{font-variant-numeric:tabular-nums}
+.infos-data,.faq-a,.stat span{font-variant-numeric:tabular-nums}
 
 /* CTA */
 .btn{
@@ -389,13 +389,6 @@ main{position:relative;z-index:2;background:var(--noir)}
 .btn:hover{background:var(--bleu);box-shadow:0 0 44px rgba(43,92,255,.45)}
 .btn.ghost{border-color:rgba(237,232,224,.28)}
 .btn.ghost:hover{background:var(--blanc);color:var(--noir);box-shadow:none}
-
-/* Léopard — vraie texture du lieu, jamais criard */
-.leopard{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'%3E%3Cg fill='none' stroke='%238A5A32' stroke-width='7'%3E%3Cpath d='M52 44c14-6 30 2 30 16 0 10-8 16-18 14M300 60c-16-2-26 10-22 24 3 10 14 12 22 6M150 100c16 0 24 12 18 24-5 10-18 10-24 2M250 150c-14 4-18 18-8 28 8 8 20 4 24-6M60 180c14-2 24 8 20 22-3 12-16 14-24 6M330 210c-10-10-26-6-30 8-3 12 8 22 20 18M120 220c14 4 18 18 8 28-8 8-22 4-24-8M200 250c16-2 26 10 20 24-5 12-20 12-26 0M40 300c12-6 28 0 28 14 0 12-12 18-22 12M280 320c-14-4-18-20-6-28 10-6 22 0 24 10' opacity='.9'/%3E%3C/g%3E%3Cg fill='%230A0B0E'%3E%3Ccircle cx='66' cy='58' r='5'/%3E%3Ccircle cx='285' cy='78' r='5'/%3E%3Ccircle cx='162' cy='118' r='5'/%3E%3Ccircle cx='238' cy='168' r='5'/%3E%3Ccircle cx='74' cy='196' r='5'/%3E%3Ccircle cx='314' cy='226' r='5'/%3E%3Ccircle cx='132' cy='240' r='5'/%3E%3Ccircle cx='210' cy='268' r='5'/%3E%3Ccircle cx='56' cy='314' r='5'/%3E%3Ccircle cx='266' cy='330' r='5'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:360px 360px;
-}
-.leopard.strong{opacity:.12}
 
 /* =====================================================================
    SCÈNE 02 — LE SEUIL / LE CHIEN
@@ -875,21 +868,6 @@ main{position:relative;z-index:2;background:var(--noir)}
 .infos-data,.infos-side{position:relative;z-index:1}
 
 /* =====================================================================
-   §5.1 — CE SOIR (programme)
-   ===================================================================== */
-.program-block{margin:clamp(50px,8vh,100px) 0 clamp(20px,4vh,50px)}
-.program-block>.eyebrow{margin-bottom:22px}
-.program{list-style:none;border-top:1px solid rgba(237,232,224,.09)}
-.program li{display:flex;align-items:center;gap:16px;padding:clamp(12px,1.8vh,20px) 0;border-bottom:1px solid rgba(237,232,224,.09);
-  font-family:var(--mono);font-size:clamp(13px,1.6vw,17px);letter-spacing:.08em;text-transform:uppercase;color:rgba(237,232,224,.35);transition:color .4s var(--ease)}
-.program .pg-day{flex:0 0 clamp(90px,12vw,150px)}
-.program .pg-dot{width:8px;height:8px;border-radius:50%;background:rgba(237,232,224,.2);flex:0 0 auto}
-.program .pg-act{color:inherit}
-.program li.today{color:var(--bleu-lien)}
-.program li.today .pg-day{color:#fff;font-weight:500}
-.program li.today .pg-dot{background:var(--bleu-clair);box-shadow:0 0 0 0 rgba(0,163,255,.6);animation:pulseDot 2s var(--ease) infinite}
-
-/* =====================================================================
    §5.2 — ILS Y ÉTAIENT (avis)
    ===================================================================== */
 /* ---------- V3.2 §1 — CE QU'ILS EN DISENT ----------
@@ -1334,7 +1312,6 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 .faq details[open] summary{color:var(--blanc)}
 .faq-a{padding:0 0 clamp(18px,2.6vh,28px);max-width:64ch;color:var(--gris);line-height:1.8}
 .faq-a p{font-size:clamp(14px,1.5vw,17px)}
-.faq-a .program{margin-top:18px;border-top:1px solid rgba(237,232,224,.09)}
 
 /* L'animation de hauteur, en CSS pur. ::details-content et interpolate-size
    sont récents : hors support, l'accordéon s'ouvre d'un coup — ce qui est le
@@ -1465,6 +1442,8 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   width:min(100%,680px);margin-inline:auto;
   aspect-ratio:1350/1590;
   touch-action:pan-y;                    /* le glissement horizontal est à nous, le scroll vertical reste à la page */
+  cursor:ew-resize;
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
 }
 .dn-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .dn-nuit{clip-path:inset(0 0 0 var(--x))}
@@ -1496,13 +1475,13 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 .dn-cap--jour{left:14px}
 .dn-cap--nuit{right:14px}
 
-/* La poignée réelle. Le pouce fait 2 px de large : la valeur du range et la
-   position de .dn-line coïncident alors sur toute la course (un pouce de 44 px
-   décalerait la valeur de 22 px aux extrémités). La zone tactile n'y perd
-   rien — c'est toute l'image qui est saisissable. */
+/* La poignée réelle : elle porte le clavier et le lecteur d'écran, plus le
+   pointeur. Son pouce de 2 px (valeur et .dn-line coïncident) est impossible à
+   viser au doigt sur iOS ; V5.5 : pointer-events:none, c'est .dn-frame qui
+   reçoit souris et doigt (voir js/main.js). */
 .dn-range{
   position:absolute;inset:0;z-index:5;width:100%;height:100%;
-  margin:0;padding:0;border:0;background:none;cursor:ew-resize;
+  margin:0;padding:0;border:0;background:none;cursor:ew-resize;pointer-events:none;
   -webkit-appearance:none;appearance:none;
 }
 .dn-range::-webkit-slider-runnable-track{height:100%;background:none;border:0}
@@ -1555,15 +1534,6 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
 .coul-lede{max-width:46ch;font-size:clamp(15px,1.5vw,18px);line-height:1.7;color:var(--gris);margin:0}
 /* la photo se recolle à sa phrase : 22px, pas un demi-écran */
 .coulisses .coul-solo{margin-top:clamp(18px,2.4vh,26px)}
-
-/* V3.3 §4.1 — le programme, remonté en fin de chapitre 03, reçoit le même
-   gabarit que les autres blocs (il n'avait qu'un eyebrow quand il vivait ici
-   en V2.1, puis une phrase d'intro quand il était dans la FAQ). */
-.program-title{
-  font-family:var(--display);text-transform:uppercase;letter-spacing:-.02em;
-  font-size:clamp(24px,3.4vw,44px);line-height:.98;margin:10px 0 12px;
-}
-.program-lede{max-width:46ch;font-size:clamp(14px,1.4vw,17px);line-height:1.7;color:var(--gris);margin:0 0 22px}
 
 /* V3.3 §2 — RESSERRAGE DU CHAPITRE 03.
    Entre le grand plan de la nuit, le bloc équipe et la moto, il y avait
@@ -1765,10 +1735,9 @@ form.barrel-form button[type=submit]{justify-self:start;margin-top:8px}
   font-family:var(--script);font-size:clamp(30px,5vw,48px);line-height:1.1;
   color:var(--blanc);margin:0 0 4px;
 }
-.program-title,.td-wall,.contact-hero h1{
+.td-wall,.contact-hero h1{
   font-family:var(--script);font-weight:400;text-transform:none;letter-spacing:0;
 }
-.program-title{font-size:clamp(30px,4.2vw,52px);line-height:1.1}
 .td-wall{font-size:clamp(32px,5vw,62px);line-height:1.1}
 .td-wall .ov-line{padding:.06em .1em .14em;margin:0 -.1em}
 .contact-hero h1{font-size:clamp(52px,9vw,112px);line-height:1.02;margin:14px 0 20px}
