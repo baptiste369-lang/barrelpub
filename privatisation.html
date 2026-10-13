@@ -18,7 +18,7 @@
 <link rel="preload" as="image" type="image/webp" href="assets/photos/barman-flair.webp" fetchpriority="low">
 <link rel="preload" as="image" type="image/webp" href="assets/photos/salle-billard-bleue.webp" fetchpriority="low">
 <link rel="preload" as="image" type="image/webp" href="assets/photos/foule-large-bleue.webp" fetchpriority="low">
-<link rel="stylesheet" href="css/main.css?v=48">
+<link rel="stylesheet" href="css/main.css?v=49">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -95,84 +95,86 @@
     <div class="parcours-stage">
       <div class="parcours-nav">
       <figure class="plan-figure parcours-plan">
-        <svg class="plan-svg" id="plan" viewBox="0 0 960 400" role="group" aria-label="Plan schématique du Barrel : quatre espaces, de la rue jusqu'au fond de la salle" xmlns="http://www.w3.org/2000/svg">
+        <svg class="plan-svg" id="plan" viewBox="0 0 960 400" role="group" aria-label="Plan schématique du Barrel : quatre espaces, des terrasses de l'entrée jusqu'au fond de la grande salle" xmlns="http://www.w3.org/2000/svg">
           <title>Plan schématique du Barrel</title>
           <defs><filter id="planGlowBlur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.2"/></filter></defs>
-          <desc>Schéma simplifié, pas à l'échelle. Le lieu est tout en longueur : le comptoir en arc de cercle à une extrémité, le coin billard au milieu, la grande salle au fond, et la terrasse couverte le long de la façade vitrée.</desc>
+          <desc>Schéma simplifié, pas à l'échelle, d'après le croquis du local. Le lieu est tout en longueur, l'entrée principale à une extrémité : les trois terrasses (celle de l'entrée, la grande le long de la rue, celle du fond), la salle billard, puis la grande salle avec son long bar, son dancefloor et la cabine DJ.</desc>
 
-          <!-- façade vitrée, sur toute la longueur, avec la porte -->
-          <g class="plan-facade" aria-hidden="true">
-            <line x1="20" y1="256" x2="112" y2="256"/><line x1="172" y1="256" x2="940" y2="256"/>
-          </g>
-
-          <!-- 1 · la terrasse couverte : le couloir sous le store, le long de la rue -->
-          <a class="zone" data-zone="terrasse" role="button" tabindex="0" aria-pressed="false" aria-label="La terrasse couverte">
-            <rect class="shape" x="20" y="262" width="920" height="96" rx="6"/>
+          <!-- 1 · les terrasses : TROIS terrasses, UNE zone. T1 en épi devant l'entrée (à gauche),
+               T2 la grande, le long de la rue (en bas), T3 au fond, côté pan coupé (à droite). -->
+          <a class="zone" data-zone="terrasse" role="button" tabindex="0" aria-pressed="false" aria-label="Les terrasses">
+            <rect class="shape" x="20" y="24" width="84" height="146" rx="6"/>
+            <rect class="shape" x="20" y="282" width="848" height="84" rx="6"/>
+            <rect class="shape" x="876" y="24" width="64" height="246" rx="6"/>
             <g class="deco" aria-hidden="true">
-              <path d="M28 272 Q 60 286 92 272 T 156 272 T 220 272 T 284 272 T 348 272 T 412 272 T 476 272 T 540 272 T 604 272 T 668 272 T 732 272 T 796 272 T 860 272 T 924 272"/>
-              <circle cx="70" cy="316" r="9"/><circle cx="150" cy="316" r="9"/><circle cx="230" cy="316" r="9"/><circle cx="310" cy="316" r="9"/>
-              <circle cx="390" cy="316" r="9"/><circle cx="470" cy="316" r="9"/><circle cx="550" cy="316" r="9"/><circle cx="630" cy="316" r="9"/>
-              <circle cx="710" cy="316" r="9"/><circle cx="790" cy="316" r="9"/><circle cx="870" cy="316" r="9"/>
-              <line class="bache" x1="28" y1="352" x2="932" y2="352"/>
+              <circle cx="46" cy="44" r="7"/><circle cx="46" cy="68" r="7"/><circle cx="46" cy="92" r="7"/><circle cx="46" cy="116" r="7"/><circle cx="46" cy="140" r="7"/><circle cx="78" cy="56" r="7"/><circle cx="78" cy="80" r="7"/><circle cx="78" cy="104" r="7"/><circle cx="78" cy="128" r="7"/><circle cx="78" cy="152" r="7"/>
+              <circle cx="124" cy="302" r="7"/><circle cx="162" cy="302" r="7"/><circle cx="200" cy="302" r="7"/><circle cx="238" cy="302" r="7"/><circle cx="276" cy="302" r="7"/><circle cx="314" cy="302" r="7"/><circle cx="352" cy="302" r="7"/><circle cx="390" cy="302" r="7"/><circle cx="428" cy="302" r="7"/><circle cx="466" cy="302" r="7"/><circle cx="504" cy="302" r="7"/><circle cx="542" cy="302" r="7"/><circle cx="580" cy="302" r="7"/><circle cx="618" cy="302" r="7"/><circle cx="656" cy="302" r="7"/><circle cx="694" cy="302" r="7"/><circle cx="732" cy="302" r="7"/><circle cx="770" cy="302" r="7"/><circle cx="808" cy="302" r="7"/><circle cx="846" cy="302" r="7"/>
+              <circle cx="143" cy="328" r="7"/><circle cx="181" cy="328" r="7"/><circle cx="219" cy="328" r="7"/><circle cx="257" cy="328" r="7"/><circle cx="295" cy="328" r="7"/><circle cx="333" cy="328" r="7"/><circle cx="371" cy="328" r="7"/><circle cx="409" cy="328" r="7"/><circle cx="447" cy="328" r="7"/><circle cx="485" cy="328" r="7"/><circle cx="523" cy="328" r="7"/><circle cx="561" cy="328" r="7"/><circle cx="599" cy="328" r="7"/><circle cx="637" cy="328" r="7"/><circle cx="675" cy="328" r="7"/><circle cx="713" cy="328" r="7"/><circle cx="751" cy="328" r="7"/><circle cx="789" cy="328" r="7"/><circle cx="827" cy="328" r="7"/>
+              <circle cx="892" cy="44" r="7"/><circle cx="892" cy="72" r="7"/><circle cx="892" cy="100" r="7"/><circle cx="892" cy="128" r="7"/><circle cx="892" cy="156" r="7"/><circle cx="892" cy="184" r="7"/><circle cx="892" cy="212" r="7"/><circle cx="892" cy="240" r="7"/><circle cx="924" cy="58" r="7"/><circle cx="924" cy="86" r="7"/><circle cx="924" cy="114" r="7"/><circle cx="924" cy="142" r="7"/><circle cx="924" cy="170" r="7"/><circle cx="924" cy="198" r="7"/><circle cx="924" cy="226" r="7"/><circle cx="924" cy="254" r="7"/>
             </g>
-            <circle class="badge" cx="46" cy="290" r="14"/><text class="num" x="46" y="295" text-anchor="middle">1</text>
-            <text class="zlabel" data-zone-nom x="928" y="338" text-anchor="end">La terrasse couverte</text>
+            <circle class="badge" cx="62" cy="324" r="14"/><text class="num" x="62" y="329" text-anchor="middle">1</text>
+            <text class="zlabel" data-zone-nom x="860" y="356" text-anchor="end">Les terrasses</text>
           </a>
 
-          <!-- 2 · le comptoir : le bar en arc de cercle et ses tabourets, à l'entrée -->
-          <a class="zone" data-zone="comptoir" role="button" tabindex="0" aria-pressed="false" aria-label="Le comptoir">
-            <rect class="shape" x="20" y="20" width="272" height="230" rx="6"/>
+          <!-- 2 · la salle billard : Salle 1, le billard au milieu, les toilettes dans l'angle -->
+          <a class="zone" data-zone="billard" role="button" tabindex="0" aria-pressed="false" aria-label="La salle billard">
+            <rect class="shape" x="112" y="24" width="312" height="250" rx="6"/>
             <g class="deco" aria-hidden="true">
-              <path class="bar" d="M57 232 A175 175 0 0 1 232 57"/>
-              <circle cx="82.6" cy="218.9" r="8"/><circle cx="96.1" cy="168.6" r="8"/><circle cx="125.9" cy="125.9" r="8"/>
-              <circle cx="168.6" cy="96" r="8"/><circle cx="218.9" cy="82.6" r="8"/>
+              <rect x="248" y="124" width="90" height="64" rx="6"/><rect class="felt" x="258" y="134" width="70" height="44" rx="3"/>
+              <rect x="262" y="24" width="38" height="30" rx="2"/><rect x="306" y="24" width="38" height="30" rx="2"/>
             </g>
-            <circle class="badge" cx="46" cy="46" r="14"/><text class="num" x="46" y="51" text-anchor="middle">2</text>
-            <text class="zlabel" data-zone-nom x="280" y="238" text-anchor="end">Le comptoir</text>
+            <text class="zsub" x="304" y="70" text-anchor="middle">toilettes</text>
+            <circle class="badge" cx="138" cy="50" r="14"/><text class="num" x="138" y="55" text-anchor="middle">2</text>
+            <text class="zlabel" data-zone-nom x="416" y="262" text-anchor="end">La salle billard</text>
           </a>
 
-          <!-- 3 · le coin billard : le billard, les banquettes, les tables hautes -->
-          <a class="zone" data-zone="billard" role="button" tabindex="0" aria-pressed="false" aria-label="Le coin billard">
-            <rect class="shape" x="300" y="20" width="328" height="230" rx="6"/>
+          <!-- 3 · le bar : le long comptoir de la Salle 2, au mur opposé à la rue, et son couloir -->
+          <a class="zone" data-zone="comptoir" role="button" tabindex="0" aria-pressed="false" aria-label="Le bar">
+            <rect class="shape" x="430" y="24" width="438" height="100" rx="6"/>
             <g class="deco" aria-hidden="true">
-              <rect x="366" y="30" width="110" height="16" rx="4"/><rect x="486" y="30" width="110" height="16" rx="4"/>
-              <rect x="352" y="96" width="176" height="84" rx="6"/><rect class="felt" x="364" y="108" width="152" height="60" rx="3"/>
-              <rect class="bar" x="590" y="78" width="20" height="112" rx="4"/>
-              <circle cx="338" cy="216" r="11"/><circle cx="400" cy="216" r="11"/><circle cx="462" cy="216" r="11"/><circle cx="524" cy="216" r="11"/>
+              <rect x="478" y="32" width="380" height="18" rx="4"/>
             </g>
-            <circle class="badge" cx="326" cy="46" r="14"/><text class="num" x="326" y="51" text-anchor="middle">3</text>
-            <text class="zlabel" data-zone-nom x="616" y="238" text-anchor="end">Le coin billard</text>
+            <circle class="badge" cx="454" cy="46" r="14"/><text class="num" x="454" y="51" text-anchor="middle">3</text>
+            <text class="zlabel" data-zone-nom x="826" y="114" text-anchor="end">Le bar</text>
           </a>
 
-          <!-- 4 · la grande salle : le fond de salle, les tables et les écrans -->
+          <!-- 4 · la grande salle : Salle 2, le dancefloor, la cabine DJ contre le mur côté rue.
+               Le pan coupé est l'angle en bas à droite. -->
           <a class="zone" data-zone="salle" role="button" tabindex="0" aria-pressed="false" aria-label="La grande salle">
-            <rect class="shape" x="636" y="20" width="304" height="230" rx="6"/>
+            <path class="shape" d="M436 130 H862 V226 L812 268 H436 Z" stroke-linejoin="round"/>
             <g class="deco" aria-hidden="true">
-              <rect class="screen" x="704" y="26" width="60" height="8"/><rect class="screen" x="784" y="26" width="60" height="8"/><rect class="screen" x="864" y="26" width="60" height="8"/>
-              <rect x="668" y="86" width="108" height="28" rx="4"/><rect x="800" y="86" width="108" height="28" rx="4"/>
-              <rect x="668" y="140" width="108" height="28" rx="4"/><rect x="800" y="140" width="108" height="28" rx="4"/>
-              <rect x="668" y="192" width="26" height="20" rx="3"/><rect x="716" y="192" width="26" height="20" rx="3"/><rect x="764" y="192" width="26" height="20" rx="3"/>
-              <rect x="812" y="192" width="26" height="20" rx="3"/><rect x="860" y="192" width="26" height="20" rx="3"/>
+              <rect x="440" y="218" width="62" height="50" rx="3"/>
             </g>
-            <circle class="badge" cx="662" cy="46" r="14"/><text class="num" x="662" y="51" text-anchor="middle">4</text>
-            <text class="zlabel" data-zone-nom x="928" y="238" text-anchor="end">La grande salle</text>
+            <text class="zsub" x="471" y="247" text-anchor="middle">DJ</text>
+            <circle class="badge" cx="460" cy="156" r="14"/><text class="num" x="460" y="161" text-anchor="middle">4</text>
+            <text class="zlabel" data-zone-nom x="796" y="258" text-anchor="end">La grande salle</text>
           </a>
 
-          <!-- le parcours : un seul <path>, du bas à gauche (la rue) jusqu'au fond de la salle.
+          <!-- les murs : le bâtiment avec son pan coupé (en bas à droite), l'ouverture de l'entrée
+               principale à gauche, et la cloison entre les deux salles avec son passage -->
+          <g class="plan-walls" aria-hidden="true">
+            <path d="M112 168 V24 H868 V226 L812 274 H112 V224"/>
+            <path d="M427 24 V94 M427 142 V274"/>
+          </g>
+          <text class="plan-note" x="104" y="244" text-anchor="end" aria-hidden="true">entrée</text>
+          <text class="plan-note" x="104" y="258" text-anchor="end" aria-hidden="true">principale</text>
+
+          <!-- le parcours : un seul <path>, de la rue (en bas à gauche) jusqu'au fond de la grande
+               salle : entrée principale, salle billard, passage, le long du bar, dancefloor.
                Fantôme (trajet à venir), lueur floutée dessous, trait par-dessus. Les trois
                copies partagent la même géométrie ; le JS ne touche qu'au stroke-dashoffset. -->
-          <path class="route route-ghost" d="M24 340 L96 340 C112 340 125 332 125 314 L125 246 L121 202 A115 115 0 0 1 280.6 127.8 C292 122 300 96 320 78 C330 68 340 66 356 66 L880 66 C908 66 922 78 922 106 L922 190" aria-hidden="true"/>
-          <path class="route route-glow" id="planGlow" d="M24 340 L96 340 C112 340 125 332 125 314 L125 246 L121 202 A115 115 0 0 1 280.6 127.8 C292 122 300 96 320 78 C330 68 340 66 356 66 L880 66 C908 66 922 78 922 106 L922 190" aria-hidden="true" filter="url(#planGlowBlur)"/>
-          <path class="route route-line" id="planPath" d="M24 340 L96 340 C112 340 125 332 125 314 L125 246 L121 202 A115 115 0 0 1 280.6 127.8 C292 122 300 96 320 78 C330 68 340 66 356 66 L880 66 C908 66 922 78 922 106 L922 190" aria-hidden="true"/>
-          <g class="pmark" id="planMark" transform="translate(24 340)" aria-hidden="true"><circle class="pring" r="7"/><circle class="pdot" r="6"/></g>
+          <path class="route route-ghost" d="M28 340 L28 218 C28 210 36 204 48 204 L352 204 C384 204 396 190 396 160 L396 134 C396 122 404 116 416 116 L470 116 C486 116 492 110 492 100 C492 94 498 90 506 90 L640 90 C664 90 672 98 672 120 L672 168 C672 184 684 190 700 190 L842 190" aria-hidden="true"/>
+          <path class="route route-glow" id="planGlow" d="M28 340 L28 218 C28 210 36 204 48 204 L352 204 C384 204 396 190 396 160 L396 134 C396 122 404 116 416 116 L470 116 C486 116 492 110 492 100 C492 94 498 90 506 90 L640 90 C664 90 672 98 672 120 L672 168 C672 184 684 190 700 190 L842 190" aria-hidden="true" filter="url(#planGlowBlur)"/>
+          <path class="route route-line" id="planPath" d="M28 340 L28 218 C28 210 36 204 48 204 L352 204 C384 204 396 190 396 160 L396 134 C396 122 404 116 416 116 L470 116 C486 116 492 110 492 100 C492 94 498 90 506 90 L640 90 C664 90 672 98 672 120 L672 168 C672 184 684 190 700 190 L842 190" aria-hidden="true"/>
+          <g class="pmark" id="planMark" transform="translate(28 340)" aria-hidden="true"><circle class="pring" r="7"/><circle class="pdot" r="6"/></g>
 
           <text class="plan-side" x="480" y="388" text-anchor="middle">côté rue piétonne</text>
         </svg>
       </figure>
       <div class="plan-list" role="group" aria-label="Aller directement à un espace">
-        <button type="button" class="plan-btn" data-zone="terrasse" aria-pressed="false"><span class="n">1</span><span data-zone-nom>La terrasse couverte</span></button>
-        <button type="button" class="plan-btn" data-zone="comptoir" aria-pressed="false"><span class="n">2</span><span data-zone-nom>Le comptoir</span></button>
-        <button type="button" class="plan-btn" data-zone="billard" aria-pressed="false"><span class="n">3</span><span data-zone-nom>Le coin billard</span></button>
+        <button type="button" class="plan-btn" data-zone="terrasse" aria-pressed="false"><span class="n">1</span><span data-zone-nom>Les terrasses</span></button>
+        <button type="button" class="plan-btn" data-zone="billard" aria-pressed="false"><span class="n">2</span><span data-zone-nom>La salle billard</span></button>
+        <button type="button" class="plan-btn" data-zone="comptoir" aria-pressed="false"><span class="n">3</span><span data-zone-nom>Le bar</span></button>
         <button type="button" class="plan-btn" data-zone="salle" aria-pressed="false"><span class="n">4</span><span data-zone-nom>La grande salle</span></button>
       </div>
       </div>
@@ -185,32 +187,14 @@
           </figure>
           <div class="step-body">
             <p class="step-num">1 / 4</p>
-            <h3 data-zone-nom>La terrasse couverte</h3>
-            <p class="step-text">Le couloir sous le store, le long de la rue piétonne. Il est chauffé et fermé par les bâches quand la soirée se rafraîchit.</p>
+            <h3 data-zone-nom>Les terrasses</h3>
+            <p class="step-text">Il y en a trois : celle de l'entrée, la grande qui longe toute la rue piétonne, et celle du fond. Sous le store, la grande est chauffée et fermée par les bâches quand la soirée se rafraîchit.</p>
             <ul class="step-thumbs" aria-label="Les photos de cet espace, en grand">
               <li><a class="thumb" href="assets/photos/terrasse-nuit-01.webp" data-alt="La terrasse couverte sous le store à la tombée de la nuit, ses tonneaux et ses tables hautes, vue depuis la rue"><img src="assets/photos/mini/terrasse-nuit-01.webp" width="300" height="400" alt="La terrasse couverte sous le store à la tombée de la nuit, ses tonneaux et ses tables hautes, vue depuis la rue" loading="lazy" decoding="async"></a></li>
               <li><a class="thumb" href="assets/photos/terrasse-heure-bleue.webp" data-alt="La terrasse à l'heure bleue, tonneaux et tabourets sur la rue piétonne"><img src="assets/photos/mini/terrasse-heure-bleue.webp" width="300" height="346" alt="La terrasse à l'heure bleue, tonneaux et tabourets sur la rue piétonne" loading="lazy" decoding="async"></a></li>
               <li><a class="thumb" href="assets/photos/terrasse-couverte-logo.webp" data-alt="Le couloir de la terrasse couverte vu de dessous, le logo du Barrel sur la toile"><img src="assets/photos/mini/terrasse-couverte-logo.webp" width="300" height="400" alt="Le couloir de la terrasse couverte vu de dessous, le logo du Barrel sur la toile" loading="lazy" decoding="async"></a></li>
             </ul>
             <a class="btn" href="#form" data-espace="terrasse">Demander un devis</a>
-          </div>
-        </article>
-        <article class="step" id="step-comptoir" data-step="comptoir">
-          <figure class="step-photo">
-            <img class="on" src="assets/photos/barman-flair.webp" width="1600" height="1067" alt="Le barman verse plusieurs bouteilles à la fois derrière le comptoir" decoding="async" fetchpriority="low">
-            <img src="assets/photos/barman-shot.webp" width="1600" height="1067" alt="Le barman boit un shot devant les bouteilles et les écrans du bar" loading="lazy" decoding="async">
-            <img src="assets/photos/cocktails-bleus-trinque.webp" width="1200" height="1600" alt="Des cocktails bleus que l'on trinque au-dessus du comptoir" loading="lazy" decoding="async">
-          </figure>
-          <div class="step-body">
-            <p class="step-num">2 / 4</p>
-            <h3 data-zone-nom>Le comptoir</h3>
-            <p class="step-text">Le bar en arc de cercle, avec ses tabourets, juste à l'entrée. C'est là que la soirée démarre.</p>
-            <ul class="step-thumbs" aria-label="Les photos de cet espace, en grand">
-              <li><a class="thumb" href="assets/photos/barman-flair.webp" data-alt="Le barman verse plusieurs bouteilles à la fois derrière le comptoir"><img src="assets/photos/mini/barman-flair.webp" width="300" height="201" alt="Le barman verse plusieurs bouteilles à la fois derrière le comptoir" loading="lazy" decoding="async"></a></li>
-              <li><a class="thumb" href="assets/photos/barman-shot.webp" data-alt="Le barman boit un shot devant les bouteilles et les écrans du bar"><img src="assets/photos/mini/barman-shot.webp" width="300" height="201" alt="Le barman boit un shot devant les bouteilles et les écrans du bar" loading="lazy" decoding="async"></a></li>
-              <li><a class="thumb" href="assets/photos/cocktails-bleus-trinque.webp" data-alt="Des cocktails bleus que l'on trinque au-dessus du comptoir"><img src="assets/photos/mini/cocktails-bleus-trinque.webp" width="300" height="400" alt="Des cocktails bleus que l'on trinque au-dessus du comptoir" loading="lazy" decoding="async"></a></li>
-            </ul>
-            <a class="btn" href="#form" data-espace="comptoir">Demander un devis</a>
           </div>
         </article>
         <article class="step" id="step-billard" data-step="billard">
@@ -220,15 +204,33 @@
             <img src="assets/photos/foule-billard.webp" width="1067" height="1600" alt="Des clients qui rient à côté du billard" loading="lazy" decoding="async">
           </figure>
           <div class="step-body">
-            <p class="step-num">3 / 4</p>
-            <h3 data-zone-nom>Le coin billard</h3>
-            <p class="step-text">Le billard, les banquettes et les tables hautes tout autour. Un coin pour jouer et rester en groupe.</p>
+            <p class="step-num">2 / 4</p>
+            <h3 data-zone-nom>La salle billard</h3>
+            <p class="step-text">La première salle en entrant : le billard au milieu, les toilettes dans l'angle. Un coin pour jouer et rester en groupe.</p>
             <ul class="step-thumbs" aria-label="Les photos de cet espace, en grand">
               <li><a class="thumb" href="assets/photos/salle-billard-bleue.webp" data-alt="Le coin billard éclairé en bleu, sa table au fond de la salle"><img src="assets/photos/mini/salle-billard-bleue.webp" width="300" height="400" alt="Le coin billard éclairé en bleu, sa table au fond de la salle" loading="lazy" decoding="async"></a></li>
               <li><a class="thumb" href="assets/photos/billard-joueur.webp" data-alt="Une personne appuyée sur le billard vert, un cocktail à la main"><img src="assets/photos/mini/billard-joueur.webp" width="300" height="400" alt="Une personne appuyée sur le billard vert, un cocktail à la main" loading="lazy" decoding="async"></a></li>
               <li><a class="thumb" href="assets/photos/foule-billard.webp" data-alt="Des clients qui rient à côté du billard"><img src="assets/photos/mini/foule-billard.webp" width="300" height="450" alt="Des clients qui rient à côté du billard" loading="lazy" decoding="async"></a></li>
             </ul>
             <a class="btn" href="#form" data-espace="billard">Demander un devis</a>
+          </div>
+        </article>
+        <article class="step" id="step-comptoir" data-step="comptoir">
+          <figure class="step-photo">
+            <img class="on" src="assets/photos/barman-flair.webp" width="1600" height="1067" alt="Le barman verse plusieurs bouteilles à la fois derrière le comptoir" decoding="async" fetchpriority="low">
+            <img src="assets/photos/barman-shot.webp" width="1600" height="1067" alt="Le barman boit un shot devant les bouteilles et les écrans du bar" loading="lazy" decoding="async">
+            <img src="assets/photos/cocktails-bleus-trinque.webp" width="1200" height="1600" alt="Des cocktails bleus que l'on trinque au-dessus du comptoir" loading="lazy" decoding="async">
+          </figure>
+          <div class="step-body">
+            <p class="step-num">3 / 4</p>
+            <h3 data-zone-nom>Le bar</h3>
+            <p class="step-text">Un long comptoir qui court sur toute la longueur de la grande salle, le long du mur opposé à la rue.</p>
+            <ul class="step-thumbs" aria-label="Les photos de cet espace, en grand">
+              <li><a class="thumb" href="assets/photos/barman-flair.webp" data-alt="Le barman verse plusieurs bouteilles à la fois derrière le comptoir"><img src="assets/photos/mini/barman-flair.webp" width="300" height="201" alt="Le barman verse plusieurs bouteilles à la fois derrière le comptoir" loading="lazy" decoding="async"></a></li>
+              <li><a class="thumb" href="assets/photos/barman-shot.webp" data-alt="Le barman boit un shot devant les bouteilles et les écrans du bar"><img src="assets/photos/mini/barman-shot.webp" width="300" height="201" alt="Le barman boit un shot devant les bouteilles et les écrans du bar" loading="lazy" decoding="async"></a></li>
+              <li><a class="thumb" href="assets/photos/cocktails-bleus-trinque.webp" data-alt="Des cocktails bleus que l'on trinque au-dessus du comptoir"><img src="assets/photos/mini/cocktails-bleus-trinque.webp" width="300" height="400" alt="Des cocktails bleus que l'on trinque au-dessus du comptoir" loading="lazy" decoding="async"></a></li>
+            </ul>
+            <a class="btn" href="#form" data-espace="comptoir">Demander un devis</a>
           </div>
         </article>
         <article class="step" id="step-salle" data-step="salle">
@@ -240,7 +242,7 @@
           <div class="step-body">
             <p class="step-num">4 / 4</p>
             <h3 data-zone-nom>La grande salle</h3>
-            <p class="step-text">Le fond de salle, avec ses tables et ses écrans. Pour les grandes tablées et les soirées de match.</p>
+            <p class="step-text">Le dancefloor et la cabine DJ, contre le mur côté rue, juste après la cloison. Pour les grandes tablées et les soirées de match.</p>
             <ul class="step-thumbs" aria-label="Les photos de cet espace, en grand">
               <li><a class="thumb" href="assets/photos/foule-large-bleue.webp" data-alt="La grande salle pleine de monde sous les lumières bleues, les écrans au fond"><img src="assets/photos/mini/foule-large-bleue.webp" width="300" height="401" alt="La grande salle pleine de monde sous les lumières bleues, les écrans au fond" loading="lazy" decoding="async"></a></li>
               <li><a class="thumb" href="assets/photos/foule-bras-leves.webp" data-alt="La foule, bras levés, dans la salle"><img src="assets/photos/mini/foule-bras-leves.webp" width="300" height="201" alt="La foule, bras levés, dans la salle" loading="lazy" decoding="async"></a></li>
@@ -415,9 +417,9 @@
         <div class="field">
           <label for="espace">Espace souhaité</label>
           <select id="espace" name="espace">
-            <option value="terrasse" data-zone-nom>La terrasse couverte</option>
-            <option value="comptoir" data-zone-nom>Le comptoir</option>
-            <option value="billard" data-zone-nom>Le coin billard</option>
+            <option value="terrasse" data-zone-nom>Les terrasses</option>
+            <option value="billard" data-zone-nom>La salle billard</option>
+            <option value="comptoir" data-zone-nom>Le bar</option>
             <option value="salle" data-zone-nom>La grande salle</option>
             <option value="inconnu" selected>Je ne sais pas encore</option>
           </select>
@@ -489,6 +491,6 @@
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script src="js/main.js?v=30"></script>
+<script src="js/main.js?v=31"></script>
 </body>
 </html>

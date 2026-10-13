@@ -1157,19 +1157,20 @@
     G.registerPlugin(window.ScrollTrigger);
 
     var ZONES = {
-      terrasse: { nom: "La terrasse couverte", capacite: "" },
-      comptoir: { nom: "Le comptoir",          capacite: "" },
-      billard:  { nom: "Le coin billard",      capacite: "" },
-      salle:    { nom: "La grande salle",      capacite: "" }
+      terrasse: { nom: "Les terrasses",   capacite: "" },
+      billard:  { nom: "La salle billard", capacite: "" },
+      comptoir: { nom: "Le bar",           capacite: "" },
+      salle:    { nom: "La grande salle",  capacite: "" }
     };
-    var ORDER = ["terrasse", "comptoir", "billard", "salle"];
+    // l'ordre de la traversée depuis l'entrée (V5.6) : terrasses, salle 1, bar, salle 2
+    var ORDER = ["terrasse", "billard", "comptoir", "salle"];
 
     // Progression le long du trait (0 → 1) à laquelle le repère ENTRE dans chaque espace.
-    // Mesurées sur la géométrie de #planPath (longueur 1206,7 ; premier point à
-    // l'intérieur du rectangle de la zone) : 0 · 0,1494 · 0,3818 · 0,6729, arrondies
+    // Mesurées (V5.6) sur la géométrie de #planPath (longueur 1102,2) : premier point du
+    // trait dans la zone, par pas de 1/20000 : 0 · 0,1934 · 0,5407 · 0,79995, arrondies
     // vers le haut à 4 décimales pour que le changement tombe juste APRÈS l'entrée,
     // jamais avant. Si le tracé du <path> change, ces quatre valeurs se remesurent.
-    var STOPS = [0, 0.1495, 0.3819, 0.673];
+    var STOPS = [0, 0.1935, 0.5408, 0.8];
 
     var glow = q("#planGlow"), mark = q("#planMark");
     var steps = qa(".step", root);

@@ -1834,7 +1834,9 @@ body::before{
 .plan-lede{max-width:52ch;color:var(--gris);margin:0 0 clamp(22px,3vh,34px)}
 .plan-figure{margin:0;border:1px solid rgba(237,232,224,.10);background:var(--noir-2);padding:clamp(10px,2vw,26px)}
 .plan-svg{display:block;width:100%;height:auto;overflow:visible}
-.plan-facade line{stroke:var(--bleu-clair);stroke-width:2;stroke-dasharray:6 5;opacity:.55}
+.plan-walls path{fill:none;stroke:rgba(237,232,224,.38);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.plan-svg .zsub{font-family:var(--mono);font-size:11px;letter-spacing:.06em;fill:var(--gris);pointer-events:none}
+.plan-svg .plan-note{font-family:var(--mono);font-size:11px;letter-spacing:.04em;fill:var(--gris);opacity:.7}
 .plan-svg .zone{cursor:pointer;outline:none}
 .plan-svg .shape{fill:#0d0f14;stroke:rgba(237,232,224,.16);stroke-width:1.5;
   transition:fill .6s cubic-bezier(.625,.05,0,1),stroke .6s cubic-bezier(.625,.05,0,1)}
@@ -1854,7 +1856,7 @@ body::before{
 .plan-svg .zone:hover .badge,.plan-svg .zone:focus-visible .badge,.plan-svg .zone.is-active .badge{stroke:var(--bleu-clair)}
 .plan-svg .zone:hover .zlabel,.plan-svg .zone:focus-visible .zlabel,.plan-svg .zone.is-active .zlabel{fill:var(--blanc)}
 .plan-svg .zone:focus-visible{outline:2px solid var(--or);outline-offset:2px}
-@media (max-width:700px){.plan-svg .zlabel,.plan-svg .plan-side{display:none}}
+@media (max-width:700px){.plan-svg .zlabel,.plan-svg .plan-side,.plan-svg .plan-note,.plan-svg .zsub{display:none}}
 
 /* les quatre boutons doublent les zones là où une zone SVG est trop petite pour le doigt */
 .plan-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
