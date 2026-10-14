@@ -264,7 +264,10 @@ body.has-cursor a, body.has-cursor button{cursor:none}
   font-family:var(--display);text-transform:uppercase;
   font-size:min(13vw,150px);line-height:.85;letter-spacing:-.03em;
   color:var(--blanc);text-shadow:0 2px 60px rgba(0,0,0,.7)}
-.cue--final .ov-title{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* V5.7b — le dégradé se pose sur les <span> qui portent les lettres, pas sur le paragraphe :
+   les .ov-line (overflow:hidden) et leur transform ne le laissaient pas passer, et color:transparent
+   ne laissait plus rien de peint. */
+.cue--final .ov-title .ov-line>span{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
 .ov-cta{
   display:inline-block;margin-top:30px;padding:15px 34px;pointer-events:none;
   border:1px solid rgba(237,232,224,.4);color:var(--blanc);
