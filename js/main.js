@@ -1398,8 +1398,8 @@
         ecrans: "les écrans", cocktails: "la carte cocktails", coin: "un coin à nous"
       },
       lieu: {
-        terrasse: "sur la terrasse couverte", comptoir: "au comptoir",
-        billard: "au coin billard", salle: "dans la grande salle"
+        terrasse: "sur la terrasse", comptoir: "au bar",
+        billard: "dans la salle billard", salle: "dans la grande salle"
       },
       defautType: "Une soirée",
       vide: "Répondez aux questions : on écrit votre demande pour vous.",
