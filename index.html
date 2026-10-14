@@ -30,7 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=54">
+<link rel="stylesheet" href="css/main.css?v=55">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -770,6 +770,13 @@
           <p class="menu-foot">Supplément sirop + 0,50&#8239;€</p>
         </div>
       </div>
+      <!-- V5.9 — loi Évin : la carte affiche des alcools et leurs prix, donc de la publicité.
+           Message sanitaire obligatoire + mention sur les mineurs. Hors des .menu-cat : visible
+           quel que soit l'onglet. -->
+      <div class="menu-legal">
+        <p>L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</p>
+        <p>La vente d'alcool est interdite aux mineurs de moins de 18 ans.</p>
+      </div>
     </div>
 
     <div class="scene-inner">
@@ -1302,6 +1309,7 @@
       <a href="https://www.google.com/maps/search/?api=1&query=Barrel+Pub+Cannes" target="_blank" rel="noopener">17 rue du Dr Gérard Monod, Cannes</a>
       <a href="#hero">Retour en haut</a>
     </nav>
+    <p class="foot-sante">L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</p>
     <div class="foot-legal">364 jours par an, 18h → 5h · Site <a href="https://azzagency.fr" target="_blank" rel="noopener">AZZAGENCY</a></div>
   </footer>
 </main>
@@ -1431,7 +1439,7 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=36"></script>
+<script src="js/main.js?v=37"></script>
 <!-- V3.4 — le spectre du chapitre 03. index.html UNIQUEMENT : les quatre autres
      pages n'ont pas ce bloc. Il sort en silence s'il ne le trouve pas. -->
 <script defer src="js/dj-viz.js?v=1"></script>

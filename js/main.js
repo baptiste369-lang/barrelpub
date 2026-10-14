@@ -1632,5 +1632,95 @@
     else target.scrollIntoView({ behavior: REDUCE ? "auto" : "smooth", block: "start" });
   });
 
+  /* =====================================================================
+     V5.9 — BANDEAU DE CONSENTEMENT — LIVRÉ ÉTEINT
+     Le site ne dépose aucun cookie et ne charge aucun traceur : il n'y a rien à consentir,
+     donc rien à afficher. Ce module est prêt pour le jour où l'on ajoutera une mesure
+     d'audience. UN SEUL INTERRUPTEUR : CONSENT_ENABLED, ci-dessous. Éteint, le module
+     ne fait rien du tout : aucun nœud DOM, aucune lecture, aucune écriture.
+
+     RÈGLES (CNIL) — elles ne sont pas des préférences, ne pas les « assouplir » :
+     1. Refuser est aussi simple qu'accepter : deux boutons identiques (même classe,
+        même taille, même poids visuel), au même niveau, l'un à côté de l'autre.
+     2. Rien n'est déposé ni chargé avant le consentement. Tout traceur futur passe par
+        BarrelConsent.onGranted("mesure", fonction) : la fonction ne s'exécute qu'après
+        un « Tout accepter », jamais avant, jamais sur un silence ni sur un refus.
+     3. Le choix est mémorisé (cookie « barrel_consent », 6 mois, ce cookie est exempté
+        de consentement car il ne sert qu'à retenir le choix) et modifiable à tout
+        moment : un lien « Gérer les cookies » est ajouté au pied de page.
+     Avant d'allumer : la page confidentialite.html doit être en ligne et à jour, et
+     chaque traceur ajouté doit être listé dans la section « Cookies » de cette page.
+     Sans JavaScript : aucun bandeau, et aucun traceur non plus (ils dépendent de ce module).
+     ===================================================================== */
+  (function () {
+    var CONSENT_ENABLED = false;   // ← L'UNIQUE INTERRUPTEUR
+    if (!CONSENT_ENABLED) return;
+
+    var NAME = "barrel_consent", MAXAGE = 15552000;     // 180 jours
+    var waiting = [];
+
+    function read() {
+      var m = document.cookie.match(new RegExp("(?:^|; )" + NAME + "=([^;]*)"));
+      return m ? (m[1] === "mesure:1" ? true : m[1] === "mesure:0" ? false : null) : null;
+    }
+    function write(granted) {
+      document.cookie = NAME + "=mesure:" + (granted ? "1" : "0") + "; max-age=" + MAXAGE +
+        "; path=/; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
+    }
+    function flush() {
+      if (read() !== true) return;
+      var f; while ((f = waiting.shift())) { try { f(); } catch (e) {} }
+    }
+    window.BarrelConsent = {
+      get: function () { return read(); },
+      onGranted: function (purpose, fn) { waiting.push(fn); flush(); },
+      open: function () { show(); }
+    };
+
+    var box = null;
+    function hide() { if (box) { box.remove(); box = null; } }
+    function choose(granted) {
+      var was = read();
+      write(granted); hide();
+      // retrait d'un consentement déjà donné : on recharge, pour que rien de ce qui a été
+      // chargé après l'accord ne continue de tourner
+      if (was === true && !granted) { location.reload(); return; }
+      document.dispatchEvent(new CustomEvent("barrel:consent", { detail: { mesure: granted } }));
+      flush();
+    }
+    function show() {
+      if (box) return;
+      box = document.createElement("div");
+      box.className = "consent";
+      box.setAttribute("role", "dialog");
+      box.setAttribute("aria-modal", "false");
+      box.setAttribute("aria-labelledby", "consentTitle");
+      box.innerHTML =
+        '<h2 id="consentTitle">Cookies et mesure d’audience</h2>' +
+        '<p>Ce site peut mesurer sa fréquentation avec un outil d’audience. Cet outil n’est activé qu’avec votre accord : tant que vous n’avez rien choisi, rien n’est déposé ni envoyé. ' +
+        'Refuser est aussi simple qu’accepter, et vous pouvez changer d’avis à tout moment depuis le bas de page. ' +
+        '<a href="confidentialite.html">En savoir plus</a></p>' +
+        '<div class="consent-actions">' +
+        '<button type="button" class="consent-btn" data-choice="0">Tout refuser</button>' +
+        '<button type="button" class="consent-btn" data-choice="1">Tout accepter</button>' +
+        '</div>';
+      box.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-choice]");
+        if (b) choose(b.getAttribute("data-choice") === "1");
+      });
+      document.body.appendChild(box);
+    }
+
+    // le lien « Gérer les cookies » du pied de page
+    var nav = document.querySelector(".foot-links");
+    if (nav) {
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "foot-cookies"; btn.textContent = "Gérer les cookies";
+      btn.addEventListener("click", show);
+      nav.appendChild(btn);
+    }
+    if (read() === null) show(); else flush();
+  })();
+
   startLoop();
 })();
