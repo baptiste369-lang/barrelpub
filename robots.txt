@@ -1,5 +1,29 @@
+# V5.8 — robots de recherche des IA nommés explicitement : un pare-feu ou un hébergeur
+# qui bloque par défaut les retire sinon des réponses de ChatGPT, de Perplexity, etc.
+# Un groupe nommé remplace le groupe « * » pour ce robot : le Disallow est donc répété.
+#
+# GPTBot (entraînement des modèles d'OpenAI) n'est volontairement PAS nommé ici :
+# la décision revient à la cliente. Tant qu'il n'est pas nommé, il suit le groupe « * »
+# et reste autorisé, comme avant ce lot.
+
 User-agent: *
 Allow: /
 Disallow: /merci.html
 
-Sitemap: https://barrelpubcannes.fr/sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /merci.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /merci.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /merci.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /merci.html
+
+Sitemap: https://lebarrelpubcannes.com/sitemap.xml

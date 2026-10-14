@@ -143,6 +143,14 @@
 #  avale tout le site.
 # ------------------------------------------------------------
 
+# V5.8 — un seul hôte canonique : www.lebarrelpubcannes.com redirige en permanence vers
+# lebarrelpubcannes.com, chemin conservé. Première règle : elle ne doit être masquée par rien.
+[[redirects]]
+  from = "https://www.lebarrelpubcannes.com/*"
+  to = "https://lebarrelpubcannes.com/:splat"
+  status = 301
+  force = true
+
 # URL courtes servies en réécriture (200), sans redirection :
 # /contact affiche la page, l'URL canonique reste /contact.html.
 [[redirects]]

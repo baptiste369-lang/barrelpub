@@ -6,7 +6,7 @@
 <title>Barrel Pub Cannes — Le pub américain de la Croisette · 18h → 5h</title>
 <meta name="description" content="Barrel Pub, 17 rue du Docteur Gérard Monod, Cannes. Pub américain et cuisine maison, ouvert 364 jours par an de 18h à 5h. Burgers, bières, billard, DJ, 10 écrans sport, trois terrasses. Le chien te fait entrer.">
 <meta name="theme-color" content="#0A0B0E">
-<link rel="canonical" href="https://barrelpubcannes.fr/">
+<link rel="canonical" href="https://lebarrelpubcannes.com/">
 <link rel="icon" href="assets/logo/barrel-logo.svg" type="image/svg+xml">
 <link rel="icon" href="assets/logo/barrel-logo-gold.png" sizes="any">
 <link rel="apple-touch-icon" href="assets/logo/barrel-logo-gold.png">
@@ -17,20 +17,20 @@
 <meta property="og:site_name" content="Barrel Pub Cannes">
 <meta property="og:title" content="Barrel Pub Cannes — Le chien te fait entrer">
 <meta property="og:description" content="Pub américain à Cannes, ouvert 364 jours par an 18h → 5h. Burgers maison, billard, DJ, 10 écrans sport, trois terrasses.">
-<meta property="og:url" content="https://barrelpubcannes.fr/">
-<meta property="og:image" content="https://barrelpubcannes.fr/assets/photos/facade-nuit.webp">
+<meta property="og:url" content="https://lebarrelpubcannes.com/">
+<meta property="og:image" content="https://lebarrelpubcannes.com/assets/photos/facade-nuit.webp">
 <meta property="og:image:alt" content="La façade verte du Barrel Pub, la nuit, rue du Docteur Gérard Monod à Cannes">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Barrel Pub Cannes — Le chien te fait entrer">
 <meta name="twitter:description" content="Pub américain à Cannes, 364 jours par an, 18h → 5h.">
-<meta name="twitter:image" content="https://barrelpubcannes.fr/assets/photos/facade-nuit.webp">
+<meta name="twitter:image" content="https://lebarrelpubcannes.com/assets/photos/facade-nuit.webp">
 
 <link rel="preload" as="image" type="image/webp" href="frames/desktop/f_001.webp" fetchpriority="high" media="(min-width:768px)">
 <link rel="preload" as="image" type="image/webp" href="frames/mobile/f_001.webp" fetchpriority="high" media="(max-width:767px)">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/instrument-sans-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-black-400-latin.woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/main.css?v=52">
+<link rel="stylesheet" href="css/main.css?v=53">
 
 <!-- JSON-LD — deux points de vigilance (brief V2.2) :
      · openingHoursSpecification reste sur les 7 jours : le balisage décrit une semaine
@@ -38,19 +38,28 @@
        Le texte visible, lui, ne dit jamais « 7j/7 » : il dit « 364 jours par an ».
      · Le sameAs pointe vers @barrelcannespub, compte fourni par la cliente
        le 20/08/2026. C'est le bon. L'ancien @barrelpubcannes était une erreur.
-       Ne pas confondre avec le domaine barrelpubcannes.fr ni avec l'adresse
-       lebarrelpubcannes@gmail.com, qui restent inchangés. -->
+       Le domaine du site est lebarrelpubcannes.com (V5.8). L'adresse
+       lebarrelpubcannes@gmail.com et le compte Instagram restent inchangés.
+     · V5.8 : hasMenu, acceptsReservations, currenciesAccepted et publicAccess ne disent
+       que ce que le site affirme déjà (carte en HTML avec prix en euros, formulaire de
+       réservation, bar ouvert au public). PAS de paymentAccepted, aggregateRating,
+       award, starRating ni maximumAttendeeCapacity : ces données ne sont pas connues. -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":["BarOrPub","Restaurant"],
+  "@id":"https://lebarrelpubcannes.com/#barrelpub",
   "name":"Barrel Pub Cannes",
   "description":"Pub américain et cuisine maison à Cannes : burgers, bières, billard, fléchettes, DJ, 10 écrans sport, trois terrasses. Ouvert 364 jours par an, de 18h à 5h.",
-  "url":"https://barrelpubcannes.fr/",
-  "image":"https://barrelpubcannes.fr/assets/photos/facade-nuit.webp",
+  "url":"https://lebarrelpubcannes.com/",
+  "image":"https://lebarrelpubcannes.com/assets/photos/facade-nuit.webp",
   "telephone":"+33687361110",
   "email":"lebarrelpubcannes@gmail.com",
   "priceRange":"€€",
+  "hasMenu":"https://lebarrelpubcannes.com/#scene-carte",
+  "acceptsReservations":true,
+  "currenciesAccepted":"EUR",
+  "publicAccess":true,
   "servesCuisine":["Américain","Burgers","Bar"],
   "address":{
     "@type":"PostalAddress",
@@ -135,6 +144,70 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Oui, partiellement ou intégralement, de 10 à 600 personnes. Les terrasses comme la salle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Où boire un verre à Cannes après minuit ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le Barrel Pub, 17 rue du Docteur Gérard Monod à Cannes, est ouvert de 18h à 5h du matin, 364 jours par an. Ce pub américain du Carré d'Or, à quatre minutes à pied de la Croisette, sert des burgers maison et des cocktails."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on regarder le sport au Barrel Pub ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Le Barrel Pub, à Cannes, a dix écrans pour suivre les retransmissions sportives jusqu'à la dernière minute. Le pub est ouvert de 18h à 5h, 364 jours par an."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce qu'on mange au Barrel Pub ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le Barrel Pub sert une cuisine maison dès 18h : des burgers maison au pain brioché et à la viande fraîche, de 15 € à 18 €, des tapas, des planches et des chicken buckets à plusieurs. La carte complète, avec ses prix, est en ligne sur cette page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûtent les cocktails au Barrel Pub ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les cocktails du Barrel Pub coûtent de 11 € à 17 €. Chaque cocktail a deux prix, l'un pour l'happy hour, l'autre pour le tarif de la soirée, et la carte complète est en ligne sur cette page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Y a-t-il une terrasse au Barrel Pub ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Le Barrel Pub a trois terrasses, sur une rue piétonne du Carré d'Or à Cannes, à quatre minutes à pied de la Croisette. On s'y installe dehors sans une voiture qui passe."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Y a-t-il un DJ au Barrel Pub ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Le Barrel Pub a une cabine DJ, qui tourne tard dans la nuit, dans un pub ouvert de 18h à 5h, 364 jours par an."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on réserver une table au Barrel Pub ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. On réserve une table au Barrel Pub avec le formulaire de réservation du site, ou en appelant le 06 87 36 11 10. Le même formulaire sert aux grandes tablées, aux anniversaires et aux privatisations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment demander un devis pour privatiser le Barrel Pub ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pour privatiser le Barrel Pub à Cannes, on remplit le formulaire de la page Privatisation en indiquant le type d'événement, l'espace souhaité, la date et le nombre de personnes. Les espaces proposés sont les terrasses, la salle billard, le bar et la grande salle."
       }
     }
   ]
@@ -1106,6 +1179,52 @@
           <div class="faq-a"><p>Oui, partiellement ou intégralement, de 10 à 600 personnes. Les terrasses comme la salle.</p></div>
         </details>
 
+        <!-- V5.8 §3.3 — huit questions ajoutées, à relire avec la cliente avant diffusion.
+             Chaque réponse ne dit que ce que le site affirme déjà ailleurs (horaires,
+             adresse, carte et prix, écrans, terrasses, formulaires). Règles d'écriture :
+             la réponse tient dans les deux premières phrases, le sujet est nommé en
+             entier, la précision reste dans la phrase du fait. Les mêmes textes sont dans
+             le JSON-LD FAQPage du <head> : les deux doivent rester identiques. -->
+        <details name="faq">
+          <summary>Où boire un verre à Cannes après minuit ?</summary>
+          <div class="faq-a"><p>Le Barrel Pub, 17 rue du Docteur Gérard Monod à Cannes, est ouvert de 18h à 5h du matin, 364 jours par an. Ce pub américain du Carré d'Or, à quatre minutes à pied de la Croisette, sert des burgers maison et des cocktails.</p></div>
+        </details>
+
+        <details name="faq">
+          <summary>Peut-on regarder le sport au Barrel Pub ?</summary>
+          <div class="faq-a"><p>Oui. Le Barrel Pub, à Cannes, a dix écrans pour suivre les retransmissions sportives jusqu'à la dernière minute. Le pub est ouvert de 18h à 5h, 364 jours par an.</p></div>
+        </details>
+
+        <details name="faq">
+          <summary>Qu'est-ce qu'on mange au Barrel Pub ?</summary>
+          <div class="faq-a"><p>Le Barrel Pub sert une cuisine maison dès 18h : des burgers maison au pain brioché et à la viande fraîche, de 15 € à 18 €, des tapas, des planches et des chicken buckets à plusieurs. La carte complète, avec ses prix, est en ligne sur cette page.</p></div>
+        </details>
+
+        <details name="faq">
+          <summary>Combien coûtent les cocktails au Barrel Pub ?</summary>
+          <div class="faq-a"><p>Les cocktails du Barrel Pub coûtent de 11 € à 17 €. Chaque cocktail a deux prix, l'un pour l'happy hour, l'autre pour le tarif de la soirée, et la carte complète est en ligne sur cette page.</p></div>
+        </details>
+
+        <details name="faq">
+          <summary>Y a-t-il une terrasse au Barrel Pub ?</summary>
+          <div class="faq-a"><p>Oui. Le Barrel Pub a trois terrasses, sur une rue piétonne du Carré d'Or à Cannes, à quatre minutes à pied de la Croisette. On s'y installe dehors sans une voiture qui passe.</p></div>
+        </details>
+
+        <details name="faq">
+          <summary>Y a-t-il un DJ au Barrel Pub ?</summary>
+          <div class="faq-a"><p>Oui. Le Barrel Pub a une cabine DJ, qui tourne tard dans la nuit, dans un pub ouvert de 18h à 5h, 364 jours par an.</p></div>
+        </details>
+
+        <details name="faq">
+          <summary>Peut-on réserver une table au Barrel Pub ?</summary>
+          <div class="faq-a"><p>Oui. On réserve une table au Barrel Pub avec le formulaire de réservation du site, ou en appelant le 06 87 36 11 10. Le même formulaire sert aux grandes tablées, aux anniversaires et aux privatisations.</p></div>
+        </details>
+
+        <details name="faq">
+          <summary>Comment demander un devis pour privatiser le Barrel Pub ?</summary>
+          <div class="faq-a"><p>Pour privatiser le Barrel Pub à Cannes, on remplit le formulaire de la page Privatisation en indiquant le type d'événement, l'espace souhaité, la date et le nombre de personnes. Les espaces proposés sont les terrasses, la salle billard, le bar et la grande salle.</p></div>
+        </details>
+
         <!-- EN ATTENTE D'EVA — les deux dernières questions du brief V3.1 §3.
              Décommenter telles quelles dès qu'on a les réponses, et ajouter les
              deux entrées correspondantes au JSON-LD FAQPage du <head>.
@@ -1312,7 +1431,7 @@
 <script src="vendor/CustomEase.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero.js?v=1"></script>
-<script src="js/main.js?v=34"></script>
+<script src="js/main.js?v=35"></script>
 <!-- V3.4 — le spectre du chapitre 03. index.html UNIQUEMENT : les quatre autres
      pages n'ont pas ce bloc. Il sort en silence s'il ne le trouve pas. -->
 <script defer src="js/dj-viz.js?v=1"></script>
