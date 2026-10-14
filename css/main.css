@@ -2149,3 +2149,10 @@ dialog#viewer[open]{display:grid;grid-template-columns:auto minmax(0,1fr) auto;a
 .consent-btn:hover,.consent-btn:focus-visible{background:var(--blanc);color:var(--noir)}
 .foot-cookies{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer;text-decoration:none}
 .foot-cookies:hover{color:var(--blanc)}
+
+/* V5.9b — le mot « confidentialité » en cursive fait ≈ 6,3 × la taille du titre, padding de l'<em>
+   compris : à 52 px (le plancher du clamp) il dépasse l'écran sous ≈ 385 px (22 px de trop à 320 px).
+   Sous 381 px la taille suit donc la largeur disponible (à 1/6,4 près) ; au-delà, la règle d'origine
+   (clamp 52 → 112 px) reste seule en vigueur. Réservé
+   à ce titre : les autres h1 de ce gabarit sont plus courts. */
+@media (max-width:380px){.contact-hero h1.h1-long{font-size:calc((100vw - 48px) / 6.4)}}
